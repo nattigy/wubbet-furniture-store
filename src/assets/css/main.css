@@ -1,0 +1,42 @@
+.bg-blue-custom {
+    background-color: #1E1F29;
+}
+
+.bg-dark-custom {
+    background-color: #15161D;
+}
+
+.nav-inline {
+    display: inline-block !important;
+}
+
+.logo-img {
+    width: 200px;
+    height: 50px;
+}
+
+.d-initial{
+    display: initial;
+}
+
+a {
+    color: white;
+}
+
+a:hover {
+    color: #D10024;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.bg-red{
+    background-color: #D10024;
+}
+
+body{
+    overflow-x: hidden;
+}
+
+input, button, select, svg {
+    outline: none !important;
+}
