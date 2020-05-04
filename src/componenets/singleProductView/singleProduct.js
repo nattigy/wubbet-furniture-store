@@ -1,6 +1,6 @@
 import React from "react";
 import product4 from "./../../assets/img/product05.png"
-import {faShoppingCart, faHeart, faExchangeAlt, faEye, faStar} from "@fortawesome/free-solid-svg-icons";
+import {faExchangeAlt, faEye, faHeart, faShoppingCart, faStar} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 const SingleProduct = () => {

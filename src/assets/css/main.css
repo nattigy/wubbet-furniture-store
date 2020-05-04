@@ -15,7 +15,7 @@
     height: 50px;
 }
 
-.d-initial{
+.d-initial {
     display: initial;
 }
 
@@ -29,12 +29,12 @@ a:hover {
     transition: 0.3s;
 }
 
-.bg-red{
+.bg-red {
     background-color: #D10024;
 }
 
-body{
-    overflow-x: hidden;
+body {
+    overflow-x: hidden !important;
 }
 
 input, button, select, svg {

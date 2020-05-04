@@ -1,9 +1,8 @@
 import React, {Fragment} from "react";
 import {CopyRight} from "./copyRight";
 import {Subscribe} from "./subscription";
-import {faMapMarker, faPhone} from "@fortawesome/free-solid-svg-icons";
+import {faEnvelope, faMapMarker, faPhone} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faGooglePlusG} from "@fortawesome/free-brands-svg-icons";
 
 export const Footer = () => {
     return (
@@ -19,11 +18,13 @@ export const Footer = () => {
                                         adipisicing elit, sed do eiusmod tempor
                                         incididunt ut.</p>
                                     <ul className="footer-links navbar-nav">
-                                        <li><a href="/"><FontAwesomeIcon icon={faMapMarker} size="sm" color="#D10024"/> 1734
+                                        <li><a href="/"><FontAwesomeIcon icon={faMapMarker} size="sm"
+                                                                         color="#D10024"/> 1734
                                             Stonecoal Road</a></li>
-                                        <li><a href="/"><FontAwesomeIcon icon={faPhone} size="sm" color="#D10024"/> +021-95-51-84</a>
+                                        <li><a href="/"><FontAwesomeIcon icon={faPhone} size="sm"
+                                                                         color="#D10024"/> +021-95-51-84</a>
                                         </li>
-                                        <li><a href="/"><FontAwesomeIcon icon={faGooglePlusG} size="sm"
+                                        <li><a href="/"><FontAwesomeIcon icon={faEnvelope} size="sm"
                                                                          color="#D10024"/> email@email.com</a></li>
                                     </ul>
                                 </div>

@@ -1,12 +1,17 @@
 import React from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faCopyright, faPhone, faLocationArrow, faMapMarker, faDollarSign, faUser, faSignInAlt, faSignOutAlt} from "@fortawesome/free-solid-svg-icons";
-import {faGooglePlusG, faLinkedinIn, faTelegramPlane, faTwitter,} from "@fortawesome/free-brands-svg-icons"
-// import {f} from "@fortawesome/fontawesome-svg-core";
-
+import {
+    faDollarSign,
+    faEnvelope,
+    faMapMarker,
+    faPhone,
+    faSignInAlt,
+    faSignOutAlt,
+    faUser
+} from "@fortawesome/free-solid-svg-icons";
 
 const ContactSection = () => {
-    return(
+    return (
         <div className="container-fluid bg-blue-custom py-1">
             <nav className="navbar navbar-expand-md">
                 <div className="container-lg justify-content-between">
@@ -16,7 +21,7 @@ const ContactSection = () => {
                             <a className="text-decoration-none small ml-2" href="/">+9456468454</a>
                         </li>
                         <li className="nav-item nav-inline mx-2">
-                            <FontAwesomeIcon icon={faGooglePlusG} size="sm" color="#D10024"/>
+                            <FontAwesomeIcon icon={faEnvelope} size="sm" color="#D10024"/>
                             <a className="text-decoration-none small ml-2" href="/">email@email.com</a>
                         </li>
                         <li className="nav-item nav-inline mx-2">

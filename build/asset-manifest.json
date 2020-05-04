@@ -1,29 +1,30 @@
 {
   "files": {
-    "main.css": "/static/css/main.3da3a6a3.chunk.css",
-    "main.js": "/static/js/main.27cb6899.chunk.js",
-    "main.js.map": "/static/js/main.27cb6899.chunk.js.map",
+    "main.css": "/static/css/main.0b6e9c7a.chunk.css",
+    "main.js": "/static/js/main.2d5ad1d6.chunk.js",
+    "main.js.map": "/static/js/main.2d5ad1d6.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.1643be1a.js",
     "runtime-main.js.map": "/static/js/runtime-main.1643be1a.js.map",
     "static/css/2.69121389.chunk.css": "/static/css/2.69121389.chunk.css",
-    "static/js/2.5cef1c07.chunk.js": "/static/js/2.5cef1c07.chunk.js",
-    "static/js/2.5cef1c07.chunk.js.map": "/static/js/2.5cef1c07.chunk.js.map",
+    "static/js/2.21420336.chunk.js": "/static/js/2.21420336.chunk.js",
+    "static/js/2.21420336.chunk.js.map": "/static/js/2.21420336.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.6bbfdc6c40be1f898e09c6fb3c12f84d.js": "/precache-manifest.6bbfdc6c40be1f898e09c6fb3c12f84d.js",
+    "precache-manifest.1b9b53597622314ed408c677e57f6e2c.js": "/precache-manifest.1b9b53597622314ed408c677e57f6e2c.js",
     "service-worker.js": "/service-worker.js",
     "static/css/2.69121389.chunk.css.map": "/static/css/2.69121389.chunk.css.map",
-    "static/css/main.3da3a6a3.chunk.css.map": "/static/css/main.3da3a6a3.chunk.css.map",
-    "static/js/2.5cef1c07.chunk.js.LICENSE.txt": "/static/js/2.5cef1c07.chunk.js.LICENSE.txt",
+    "static/css/main.0b6e9c7a.chunk.css.map": "/static/css/main.0b6e9c7a.chunk.css.map",
+    "static/js/2.21420336.chunk.js.LICENSE.txt": "/static/js/2.21420336.chunk.js.LICENSE.txt",
     "static/media/commercialFurnitures.jpg": "/static/media/commercialFurnitures.b1fbdb95.jpg",
     "static/media/decorationAndFinishing.jpg": "/static/media/decorationAndFinishing.3ab8202c.jpg",
-    "static/media/homeFurniture.jpg": "/static/media/homeFurniture.a759e9e6.jpg",
-    "static/media/mainLogo.jpg": "/static/media/mainLogo.8f0e6744.jpg"
+    "static/media/homeFurniture.jpg": "/static/media/homeFurniture.d2703b1f.jpg",
+    "static/media/mainLogo.jpg": "/static/media/mainLogo.8f0e6744.jpg",
+    "static/media/product05.png": "/static/media/product05.a4a81a62.png"
   },
   "entrypoints": [
     "static/js/runtime-main.1643be1a.js",
     "static/css/2.69121389.chunk.css",
-    "static/js/2.5cef1c07.chunk.js",
-    "static/css/main.3da3a6a3.chunk.css",
-    "static/js/main.27cb6899.chunk.js"
+    "static/js/2.21420336.chunk.js",
+    "static/css/main.0b6e9c7a.chunk.css",
+    "static/js/main.2d5ad1d6.chunk.js"
   ]
 }

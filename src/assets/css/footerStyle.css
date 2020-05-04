@@ -1,26 +1,25 @@
-.footer-links li a{
+.footer-links li a {
     color: #6c757d;
 }
 
-.footer-links li a:hover{
+.footer-links li a:hover {
     color: #D10024;
 }
 
-.footer-links{
+.footer-links {
     margin-top: 20px;
 }
 
-.footer-links li{
+.footer-links li {
     margin: 7px 0;
 }
 
-#footer{
+#footer {
     border-top: 3px solid #D10024;
 }
 
 .newsletter form:after {
     content: "\f003";
-    font-family: FontAwesome;
     position: absolute;
     font-size: 160px;
     color: #E4E7ED;
@@ -32,7 +31,7 @@
     left: -90px;
 }
 
-.subscribe-section{
+.subscribe-section {
     border-top: 2px solid #E4E7ED;
     margin-top: 30px;
 }
@@ -52,8 +51,18 @@
     margin-right: 5px;
 }
 
-.footer-payments li a  {
+.footer-payments li a {
     color: #15161D;
     font-size: 36px;
     display: block;
+}
+
+.subscribe-btn {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.subscription-input {
+    border-top-left-radius: .25rem;
+    border-bottom-left-radius: .25rem;
 }

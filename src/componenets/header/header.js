@@ -1,4 +1,4 @@
-import React, {Fragment} from "react";
+import React from "react";
 import ContactSection from "./contactSection";
 import SearchSection from "./searchSection";
 import NavbarSection from "./navbarSection";
@@ -16,7 +16,7 @@ const Header = () => {
         document.body.style.position = "unset";
     };
 
-    return(
+    return (
         <header>
             <ContactSection/>
             <SearchSection openNav={() => openNav()}/>

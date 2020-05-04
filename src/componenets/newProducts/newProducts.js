@@ -10,18 +10,19 @@ export const NewProducts = () => {
                         <div className="section-title">
                             <h3 className="title d-inline-block">New Products</h3>
                             <div className="section-nav d-inline-block float-right">
-                                <ul className="nav nav-tabs d-inline-block" role="tablist">
-                                    <li className="d-inline-block mr-3 active text-dark">
-                                        <a className="text-dark" data-toggle="tab" href="#tab1"
+                                <ul className="nav nav-tabs d-inline-block border-bottom-0 section-tab-nav"
+                                    role="tablist">
+                                    <li className="d-inline-block mr-3 ">
+                                        <a className="nav-link-custom active" data-toggle="tab" href="#tab1"
                                            aria-controls="tab1" aria-selected="false">Laptops</a></li>
                                     <li className="d-inline-block mr-3">
-                                        <a className="text-dark" data-toggle="tab" href="#tab2"
+                                        <a className="" data-toggle="tab" href="#tab2"
                                            aria-controls="tab2" aria-selected="false">Smartphones</a></li>
                                     <li className="d-inline-block mr-3">
-                                        <a className="text-dark" data-toggle="tab" href="#tab3"
+                                        <a className="" data-toggle="tab" href="#tab3"
                                            aria-controls="tab3" aria-selected="false">Cameras</a></li>
                                     <li className="d-inline-block mr-3">
-                                        <a className="text-dark" data-toggle="tab" href="#tab4"
+                                        <a className="" data-toggle="tab" href="#tab4"
                                            aria-controls="tab4" aria-selected="false">Accessories</a></li>
                                 </ul>
                             </div>
