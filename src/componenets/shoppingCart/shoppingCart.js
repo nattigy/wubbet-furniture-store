@@ -2,6 +2,7 @@ import React, {Fragment} from "react";
 import Header from "../header/header";
 import {Footer} from "../footer/footer";
 import CartItem from "./cartItem";
+import {Link} from "react-router-dom";
 
 const ShoppingCart = () => {
     return (
@@ -9,8 +10,14 @@ const ShoppingCart = () => {
             <Header/>
             <div className="container-lg">
                 <div className="my-3 mx-3 border-bottom border-light">
-                    <h4>Shopping Cart</h4>
-                    <div className="text-muted text-right mr-5">Price</div>
+                    <div className="row">
+                        <h4 className="col-sm-6 text-nowrap">Shopping Cart</h4>
+                        <div className="col-sm-6 text-right">
+                            <Link className="checkout-btn btn-danger btn bg-red" to="/checkout">Proceed to
+                                Checkout</Link>
+                        </div>
+                    </div>
+                    <div className="text-muted text-right mr-5 mt-3">Price</div>
                 </div>
                 <div className="py-3">
                     <CartItem/>

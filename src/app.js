@@ -6,6 +6,7 @@ import SignIn from "./componenets/auth/signIn";
 import SignUp from "./componenets/auth/signUp";
 import ShoppingCart from "./componenets/shoppingCart/shoppingCart";
 import WishList from "./componenets/wishList/wishList";
+import Checkout from "./componenets/checkout/checkout";
 
 const App = () => {
     return (
@@ -17,6 +18,7 @@ const App = () => {
                     <Route exact path="/register" component={SignUp}/>
                     <Route exact path="/cart" component={ShoppingCart}/>
                     <Route exact path="/wishlist" component={WishList}/>
+                    <Route exact path="/checkout" component={Checkout}/>
                 </Switch>
             </Router>
         </Fragment>
