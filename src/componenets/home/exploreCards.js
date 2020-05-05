@@ -28,7 +28,7 @@ const ExploreCards = () => {
                             <img src={commercialFurnitures} alt=""/>
                         </div>
                         <div className="shop-body">
-                            <h3>Home<br/>Furniture</h3>
+                            <h3>Commercial<br/>Furniture</h3>
                             <a href="/" className="cta-btn">Shop now <FontAwesomeIcon icon={faArrowCircleRight}
                                                                                       color="#fff"/></a>
                         </div>
@@ -41,7 +41,7 @@ const ExploreCards = () => {
                             <img src={decorationAndFinishing} alt=""/>
                         </div>
                         <div className="shop-body">
-                            <h3>Home<br/>Furniture</h3>
+                            <h3>Decoration and<br/>Finishing</h3>
                             <a href="/" className="cta-btn">Shop now <FontAwesomeIcon icon={faArrowCircleRight}
                                                                                       color="#fff"/></a>
                         </div>

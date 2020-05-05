@@ -2,6 +2,7 @@ import React from "react";
 import logo from "../../assets/img/mainLogo.jpg"
 import {faBars, faHeart, faSearch, faShoppingCart} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {Link} from "react-router-dom";
 
 const SearchSection = props => {
     return (
@@ -9,7 +10,9 @@ const SearchSection = props => {
             <div className="container-lg pb-4">
                 <div className="row">
                     <div className="col-lg-3 text-center overflow-hidden pt-4">
-                        <img className="logo-img" src={logo} alt=""/>
+                        <Link to="/">
+                            <img className="logo-img" src={logo} alt=""/>
+                        </Link>
                     </div>
                     <div className="col-lg-6 overflow-hidden px-0 pt-4">
                         <div className="text-center pt-2 text-nowrap">
@@ -26,12 +29,12 @@ const SearchSection = props => {
                         <ul className="navbar-nav d-block text-nowrap pt-4">
                             <li className="nav-item position-relative text-center nav-inline mx-2">
                                 <FontAwesomeIcon icon={faHeart} color="#fff"/>
-                                <a className="text-white d-block small" href="/">Your Wishlist</a>
+                                <Link className="text-white d-block small" to="/wishlist">Your Wishlist</Link>
                                 <div className="qty">2</div>
                             </li>
                             <li className="nav-item position-relative text-center nav-inline mx-2">
                                 <FontAwesomeIcon icon={faShoppingCart} color="#fff"/>
-                                <a className="text-white d-block small" href="/">Your Cart</a>
+                                <Link className="text-white d-block small" to="/cart">Your Cart</Link>
                                 <div className="qty">2</div>
                             </li>
                             <li className="nav-item nav-inline mx-2">

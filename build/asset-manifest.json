@@ -1,30 +1,31 @@
 {
   "files": {
-    "main.css": "/static/css/main.573a3d65.chunk.css",
-    "main.js": "/static/js/main.78990394.chunk.js",
-    "main.js.map": "/static/js/main.78990394.chunk.js.map",
+    "main.css": "/static/css/main.441c2b3c.chunk.css",
+    "main.js": "/static/js/main.43edf8ca.chunk.js",
+    "main.js.map": "/static/js/main.43edf8ca.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.1643be1a.js",
     "runtime-main.js.map": "/static/js/runtime-main.1643be1a.js.map",
     "static/css/2.69121389.chunk.css": "/static/css/2.69121389.chunk.css",
-    "static/js/2.a97b2a89.chunk.js": "/static/js/2.a97b2a89.chunk.js",
-    "static/js/2.a97b2a89.chunk.js.map": "/static/js/2.a97b2a89.chunk.js.map",
+    "static/js/2.35069bbf.chunk.js": "/static/js/2.35069bbf.chunk.js",
+    "static/js/2.35069bbf.chunk.js.map": "/static/js/2.35069bbf.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.057862cbb2ff8dbae62a266fcc19f90e.js": "/precache-manifest.057862cbb2ff8dbae62a266fcc19f90e.js",
+    "precache-manifest.f8303c9be9bbd3097e0a78a6e5098aac.js": "/precache-manifest.f8303c9be9bbd3097e0a78a6e5098aac.js",
     "service-worker.js": "/service-worker.js",
     "static/css/2.69121389.chunk.css.map": "/static/css/2.69121389.chunk.css.map",
-    "static/css/main.573a3d65.chunk.css.map": "/static/css/main.573a3d65.chunk.css.map",
-    "static/js/2.a97b2a89.chunk.js.LICENSE.txt": "/static/js/2.a97b2a89.chunk.js.LICENSE.txt",
+    "static/css/main.441c2b3c.chunk.css.map": "/static/css/main.441c2b3c.chunk.css.map",
+    "static/js/2.35069bbf.chunk.js.LICENSE.txt": "/static/js/2.35069bbf.chunk.js.LICENSE.txt",
     "static/media/commercialFurnitures.jpg": "/static/media/commercialFurnitures.b1fbdb95.jpg",
     "static/media/decorationAndFinishing.jpg": "/static/media/decorationAndFinishing.3ab8202c.jpg",
     "static/media/homeFurniture.jpg": "/static/media/homeFurniture.d2703b1f.jpg",
     "static/media/mainLogo.jpg": "/static/media/mainLogo.8f0e6744.jpg",
-    "static/media/product05.png": "/static/media/product05.a4a81a62.png"
+    "static/media/product05.png": "/static/media/product05.a4a81a62.png",
+    "static/media/purelogo.png": "/static/media/purelogo.152ee016.png"
   },
   "entrypoints": [
     "static/js/runtime-main.1643be1a.js",
     "static/css/2.69121389.chunk.css",
-    "static/js/2.a97b2a89.chunk.js",
-    "static/css/main.573a3d65.chunk.css",
-    "static/js/main.78990394.chunk.js"
+    "static/js/2.35069bbf.chunk.js",
+    "static/css/main.441c2b3c.chunk.css",
+    "static/js/main.43edf8ca.chunk.js"
   ]
 }
