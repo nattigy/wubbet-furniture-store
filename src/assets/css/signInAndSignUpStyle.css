@@ -1,0 +1,10 @@
+.max-width {
+    width: 100%;
+    max-width: 450px;
+}
+
+.sign-up-container {
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: rgba(30, 31, 41, 0.24) 0 0 5px 0;
+}

@@ -9,6 +9,7 @@ import {
     faSignOutAlt,
     faUser
 } from "@fortawesome/free-solid-svg-icons";
+import {Link} from "react-router-dom";
 
 const ContactSection = () => {
     return (
@@ -40,7 +41,11 @@ const ContactSection = () => {
                         </li>
                         <li className="nav-item nav-inline mx-2">
                             <FontAwesomeIcon icon={faSignInAlt} size="sm" color="#D10024"/>
-                            <a className="text-decoration-none small ml-2" href="/">Sign In</a>
+                            <Link className="text-decoration-none small ml-2" to="/login">Sign In</Link>
+                        </li>
+                        <li className="nav-item nav-inline mx-2">
+                            <FontAwesomeIcon icon={faSignInAlt} size="sm" color="#D10024"/>
+                            <Link className="text-decoration-none small ml-2" to="/register">Sign Up</Link>
                         </li>
                         <li className="nav-item nav-inline mx-2">
                             <FontAwesomeIcon icon={faSignOutAlt} size="sm" color="#D10024"/>

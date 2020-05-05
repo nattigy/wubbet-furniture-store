@@ -8,6 +8,7 @@ import "./assets/css/headerStyle.css"
 import "./assets/css/exploreCard.css"
 import "./assets/css/footerStyle.css"
 import "./assets/css/productStyle.css"
+import "./assets/css/signInAndSignUpStyle.css"
 
 ReactDOM.render(
     <App/>,
