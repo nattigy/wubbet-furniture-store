@@ -37,7 +37,7 @@ const SignUp = () => {
                     </form>
 
                     <p>
-                        By creating an account, you agree to Amazon's
+                        By creating an account, you agree to Wubbet's
                         <a className="text-muted" href="/"> Conditions of Use</a> and
                         <a className="text-muted" href="/"> Privacy Notice</a>.
                     </p>

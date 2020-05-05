@@ -11,6 +11,7 @@ import "./assets/css/productStyle.css"
 import "./assets/css/signInAndSignUpStyle.css"
 import "./assets/css/cartStyle.css"
 import "./assets/css/checkoutStyle.css"
+import "./assets/css/productDetailStyle.css"
 
 ReactDOM.render(
     <App/>,
