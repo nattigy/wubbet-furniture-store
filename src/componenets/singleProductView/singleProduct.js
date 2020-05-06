@@ -2,10 +2,11 @@ import React from "react";
 import product4 from "./../../assets/img/product05.png"
 import {faExchangeAlt, faEye, faHeart, faShoppingCart, faStar} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {Link} from "react-router-dom";
 
 const SingleProduct = () => {
     return (
-        <div className="product d-inline-block mx-3">
+        <Link to="/product/ahsgdfjkhsadkjhgkjsadh" className="product d-inline-block mx-3">
             <div className="product-img">
                 <img src={product4} alt=""/>
                 <div className="product-label">
@@ -42,7 +43,7 @@ const SingleProduct = () => {
                     to cart
                 </button>
             </div>
-        </div>
+        </Link>
     )
 };
 

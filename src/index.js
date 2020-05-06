@@ -1,6 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./app";
+import {Provider, useSelector} from 'react-redux';
+import firebase from "./firebase/firebase";
+import {isLoaded, ReactReduxFirebaseProvider} from "react-redux-firebase";
+import configureStore from "./configureStore";
+import {PreLoader} from "./componenets/preLoader/preLoader";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import "./assets/css/main.css"
@@ -13,7 +18,31 @@ import "./assets/css/cartStyle.css"
 import "./assets/css/checkoutStyle.css"
 import "./assets/css/productDetailStyle.css"
 
+const store = configureStore();
+const rrfConfig = {
+    useFirestoreForProfile: false,
+    attachAuthIsReady: true
+};
+
+const rrfProps = {
+    firebase,
+    config: rrfConfig,
+    dispatch: store.dispatch
+};
+
+function AuthIsLoaded({children}) {
+    const auth = useSelector(state => state.firebase.auth);
+    if (!isLoaded(auth)) return <PreLoader/>;
+    return children
+}
+
 ReactDOM.render(
-    <App/>,
+    <Provider store={store}>
+        <ReactReduxFirebaseProvider {...rrfProps}>
+            <AuthIsLoaded>
+                <App/>
+            </AuthIsLoaded>
+        </ReactReduxFirebaseProvider>
+    </Provider>,
     document.getElementById('root')
 );
