@@ -1,6 +1,69 @@
 .module {
-    height: 300px;
+    height: 400px;
     border: 1px solid white;
     background-size: 100%;
     background-repeat: no-repeat;
+}
+
+.qty-input {
+    width: 100px;
+    display: inline-block;
+}
+
+.input-number .qty-up {
+    right: 0;
+    top: 0;
+    border-bottom: 0;
+}
+
+.input-number .qty-down {
+    right: 0;
+    bottom: 0;
+}
+
+.input-number .qty-up, .input-number .qty-down {
+    position: absolute;
+    display: block;
+    width: 20px;
+    height: 20px;
+    border: 1px solid #E4E7ED;
+    background-color: #FFF;
+    text-align: center;
+    font-weight: 700;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.rating .rating-progress {
+    position: relative;
+    display: inline-block;
+    height: 9px;
+    background-color: #E4E7ED;
+    width: 120px;
+    margin: 0 10px;
+    border-radius: 5px;
+}
+
+.rating .rating-progress > div {
+    background-color: #D10024;
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    border-radius: 5px;
+}
+
+@media screen and (min-width: 600px) {
+    .module {
+        height: 500px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .rating-stars, .rating-progress {
+        display: inline-block;
+    }
 }

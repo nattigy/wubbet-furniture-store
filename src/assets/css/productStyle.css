@@ -174,7 +174,7 @@
     transform: translateY(100%);
 }
 
-.product .add-to-cart .add-to-cart-btn {
+.add-to-cart-btn {
     position: relative;
     border: 2px solid transparent;
     height: 40px;
@@ -188,7 +188,7 @@
     transition: 0.2s all;
 }
 
-.product .add-to-cart .add-to-cart-btn > svg {
+.add-to-cart-btn > svg {
     position: absolute;
     left: 10px;
     top: 10px;
@@ -198,14 +198,14 @@
     visibility: hidden;
 }
 
-.product .add-to-cart .add-to-cart-btn:hover {
+.add-to-cart-btn:hover {
     background-color: #FFF;
     color: #D10024;
     border-color: #D10024;
     padding: 0 30px 0 50px;
 }
 
-.product .add-to-cart .add-to-cart-btn:hover > svg {
+.add-to-cart-btn:hover > svg {
     opacity: 1;
     visibility: visible;
 }

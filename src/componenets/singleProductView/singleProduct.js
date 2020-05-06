@@ -24,15 +24,17 @@ const SingleProduct = () => {
                     <FontAwesomeIcon icon={faStar} size="1x" color="#D10024"/>
                 </div>
                 <div className="product-btns">
-                    <button className="add-to-wishlist"><FontAwesomeIcon icon={faHeart} size="1x"
-                                                                         color="#475161"/><span className="tooltipp">add to wishlist</span>
+                    <button className="add-to-wishlist">
+                        <FontAwesomeIcon icon={faHeart} size="1x" color="#475161"/>
+                        <span className="tooltipp">add to wishlist</span>
                     </button>
-                    <button className="add-to-compare"><FontAwesomeIcon icon={faExchangeAlt} size="1x"
-                                                                        color="#475161"/><span className="tooltipp">add to compare</span>
+                    <button className="add-to-compare">
+                        <FontAwesomeIcon icon={faExchangeAlt} size="1x" color="#475161"/>
+                        <span className="tooltipp">add to compare</span>
                     </button>
-                    <button className="quick-view"><FontAwesomeIcon icon={faEye} size="1x"
-                                                                    color="#475161"/><span
-                        className="tooltipp">quick view</span></button>
+                    <button className="quick-view">
+                        <FontAwesomeIcon icon={faEye} size="1x" color="#475161"/>
+                        <span className="tooltipp">quick view</span></button>
                 </div>
             </div>
             <div className="add-to-cart">

@@ -9,7 +9,7 @@ const Checkout = () => {
             <div>
                 <div className="">
                     <div className="container-lg py-3">
-                        <h4>Checkout</h4>
+                        <h4 className="ml-3">Checkout</h4>
                     </div>
                 </div>
 
