@@ -71,6 +71,7 @@ const receiveSignUp = (newUser, authUser) => {
 };
 
 const SignUpError = error => {
+    console.log("error : ", error);
     return {
         type: SIGN_UP_FAILURE,
         error

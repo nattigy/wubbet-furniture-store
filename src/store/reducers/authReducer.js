@@ -64,14 +64,15 @@ export default (state = {}, action) => {
         case SIGN_UP_REQUEST:
             return {
                 ...state,
-                isLoggingIn: true,
-                loginError: false
+                isSigningUp: true,
+                signUpError: false
             };
         case SIGN_UP_SUCCESS:
             return {
                 ...state,
                 isLoggedIn: true,
                 isLoggingIn: false,
+                isSigningUp: false,
                 isAuthenticated: true,
                 newUser: action.newUser,
                 user: action.user

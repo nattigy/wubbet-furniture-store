@@ -51,10 +51,18 @@ input, button, select, svg {
     outline: none !important;
 }
 
-.preloading {
+.preloading-home {
     position: absolute;
     margin-top: 50vh;
     margin-left: 50vw;
+    left: -20px !important;
+    top: -45px !important;
+}
+
+.preloading {
+    position: absolute;
+    margin-top: 50%;
+    margin-left: 50%;
     left: -20px !important;
     top: -45px !important;
 }

@@ -142,3 +142,11 @@
         font-size: 18px;
     }
 }
+
+.logout-span {
+    color: white;
+}
+
+.logout-span:hover {
+    color: #D10024;
+}
