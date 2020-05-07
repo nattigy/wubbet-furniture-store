@@ -231,7 +231,7 @@
 }
 
 .product {
-    width: 250px !important;
+    max-width: 250px !important;
 }
 
 .section-tab-nav li a {
