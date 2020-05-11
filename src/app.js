@@ -9,6 +9,7 @@ import WishList from "./componenets/wishList/wishList";
 import Checkout from "./componenets/checkout/checkout";
 import ProductDetail from "./componenets/productDetail/productDetail";
 import Store from "./componenets/store/store";
+import AddItem from "./componenets/addItem/addItem";
 
 const App = () => {
     return (
@@ -23,6 +24,7 @@ const App = () => {
                     <Route exact path="/checkout" component={Checkout}/>
                     <Route exact path="/item/:id" component={ProductDetail}/>
                     <Route exact path="/items/:category" component={Store}/>
+                    <Route exact path="/additem" component={AddItem}/>
                 </Switch>
             </Router>
         </Fragment>

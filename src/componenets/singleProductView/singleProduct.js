@@ -38,7 +38,8 @@ const SingleProduct = () => {
                 </div>
             </div>
             <div className="add-to-cart">
-                <button className="add-to-cart-btn text-nowrap"><FontAwesomeIcon icon={faShoppingCart} size="1x" color="#fff"/> add
+                <button className="add-to-cart-btn text-nowrap"><FontAwesomeIcon icon={faShoppingCart} size="1x"
+                                                                                 color="#fff"/> add
                     to cart
                 </button>
             </div>
