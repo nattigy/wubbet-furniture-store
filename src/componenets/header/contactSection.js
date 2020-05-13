@@ -3,20 +3,11 @@ import {Link} from "react-router-dom";
 import {logoutUser} from "../../store/actions/authActions";
 import {connect} from "react-redux";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {
-    faDollarSign,
-    faEnvelope,
-    faMapMarker,
-    faPhone,
-    faSignInAlt,
-    faSignOutAlt,
-    faUser
-} from "@fortawesome/free-solid-svg-icons";
+import {faEnvelope, faMapMarker, faPhone, faSignInAlt, faSignOutAlt} from "@fortawesome/free-solid-svg-icons";
 
 const ContactSection = props => {
 
     const {isLoggedIn, user, newUser} = props;
-    console.log(!isLoggedIn);
 
     return (
         <div className="container-fluid bg-blue-custom py-1">
@@ -25,11 +16,11 @@ const ContactSection = props => {
                     <ul className="navbar-nav d-block">
                         <li className="nav-item nav-inline mx-2">
                             <FontAwesomeIcon icon={faPhone} size="sm" color="#D10024"/>
-                            <a className="text-decoration-none small ml-2" href="/">+9456468454</a>
+                            <a className="text-decoration-none small ml-2" href="/">+251946526451</a>
                         </li>
                         <li className="nav-item nav-inline mx-2">
                             <FontAwesomeIcon icon={faEnvelope} size="sm" color="#D10024"/>
-                            <a className="text-decoration-none small ml-2" href="/">email@email.com</a>
+                            <a className="text-decoration-none small ml-2" href="/">info@wubbet.com</a>
                         </li>
                         <li className="nav-item nav-inline mx-2">
                             <FontAwesomeIcon icon={faMapMarker} size="sm" color="#D10024"/>
@@ -37,16 +28,16 @@ const ContactSection = props => {
                         </li>
                     </ul>
                     <ul className="navbar-nav d-block">
-                        <li className="nav-item nav-inline mx-2">
-                            <FontAwesomeIcon icon={faDollarSign} size="sm" color="#D10024"/>
-                            <Link className="text-decoration-none small ml-2" to="/">usd</Link>
-                        </li>
+                        {/*<li className="nav-item nav-inline mx-2">*/}
+                        {/*    <FontAwesomeIcon icon={faDollarSign} size="sm" color="#D10024"/>*/}
+                        {/*    <Link className="text-decoration-none small ml-2" to="/">usd</Link>*/}
+                        {/*</li>*/}
                         {isLoggedIn ?
                             <Fragment>
-                                <li className="nav-item nav-inline mx-2">
-                                    <FontAwesomeIcon icon={faUser} size="sm" color="#D10024"/>
-                                    <Link className="text-decoration-none small ml-2" to="/">My Account</Link>
-                                </li>
+                                {/*<li className="nav-item nav-inline mx-2">*/}
+                                {/*    <FontAwesomeIcon icon={faUser} size="sm" color="#D10024"/>*/}
+                                {/*    <Link className="text-decoration-none small ml-2" to="/">My Account</Link>*/}
+                                {/*</li>*/}
                                 <li className="nav-item nav-inline mx-2">
                                     <FontAwesomeIcon icon={faSignOutAlt} size="sm" color="#D10024"/>
                                     <span onClick={() => props.signOut()}
@@ -72,7 +63,6 @@ const ContactSection = props => {
 };
 
 const mapStateToProps = state => {
-    console.log(state);
     return {
         auth: state.firebase.auth,
         isLoggedIn: state.auth.isLoggedIn,

@@ -1,9 +1,10 @@
 import React from "react";
-import homeFurnitures from "../../assets/img/homeFurniture.jpg"
-import commercialFurnitures from "../../assets/img/commercialFurnitures.jpg"
+import homeFurniture from "../../assets/img/homeFurniture.jpg"
+import commercialFurniture from "../../assets/img/commercialFurnitures.jpg"
 import decorationAndFinishing from "../../assets/img/decorationAndFinishing.jpg"
 import {faArrowCircleRight} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {Link} from "react-router-dom";
 
 const ExploreCards = () => {
     return (
@@ -12,12 +13,12 @@ const ExploreCards = () => {
                 <div className="col-md-4 col-xs-6">
                     <div className="shop">
                         <div className="shop-img">
-                            <img src={homeFurnitures} alt=""/>
+                            <img src={homeFurniture} alt=""/>
                         </div>
                         <div className="shop-body">
                             <h3>Home<br/>Furniture</h3>
-                            <a href="/" className="cta-btn">Shop now <FontAwesomeIcon icon={faArrowCircleRight}
-                                                                                      color="#fff"/></a>
+                            <Link to="/category/HOME_FURNITURE" className="cta-btn">Shop now
+                                <FontAwesomeIcon icon={faArrowCircleRight} color="#fff"/></Link>
                         </div>
                     </div>
                 </div>
@@ -25,12 +26,12 @@ const ExploreCards = () => {
                 <div className="col-md-4 col-xs-6">
                     <div className="shop">
                         <div className="shop-img">
-                            <img src={commercialFurnitures} alt=""/>
+                            <img src={commercialFurniture} alt=""/>
                         </div>
                         <div className="shop-body">
                             <h3>Commercial<br/>Furniture</h3>
-                            <a href="/" className="cta-btn">Shop now <FontAwesomeIcon icon={faArrowCircleRight}
-                                                                                      color="#fff"/></a>
+                            <Link to="/category/COMMERCIAL_FURNITURE" className="cta-btn">Shop now
+                                <FontAwesomeIcon icon={faArrowCircleRight} color="#fff"/></Link>
                         </div>
                     </div>
                 </div>
@@ -42,8 +43,8 @@ const ExploreCards = () => {
                         </div>
                         <div className="shop-body">
                             <h3>Decoration and<br/>Finishing</h3>
-                            <a href="/" className="cta-btn">Shop now <FontAwesomeIcon icon={faArrowCircleRight}
-                                                                                      color="#fff"/></a>
+                            <Link to="/category/FINISHING_MATERIALS" className="cta-btn">Shop now
+                                <FontAwesomeIcon icon={faArrowCircleRight} color="#fff"/></Link>
                         </div>
                     </div>
                 </div>

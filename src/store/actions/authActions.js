@@ -71,7 +71,7 @@ const receiveSignUp = (newUser, authUser) => {
 };
 
 const SignUpError = error => {
-    console.log("error : ", error);
+    console.log("signup error", error);
     return {
         type: SIGN_UP_FAILURE,
         error
@@ -128,19 +128,17 @@ function formatString(str) {
         .replace(/^[^ ]/g, match => (match.toUpperCase()));
 }
 
-export const registerUser = ({email, password, firstName, lastName, middleName}) => dispatch => {
+export const registerUser = ({email, password, name}) => dispatch => {
     let newUser = {};
     dispatch(requestSignUp());
     fbConfig.auth()
         .createUserWithEmailAndPassword(email, password)
         .then(res => {
             res.user.updateProfile({
-                displayName: firstName,
+                displayName: name,
             }).then(() => newUser = res);
             return fbConfig.firestore().collection("users").doc(res.user.uid).set({
-                firstName: formatString(firstName),
-                lastName: formatString(lastName),
-                middleName: formatString(middleName),
+                name: formatString(name),
                 email: email.toString().trim(),
                 isATutor: false,
                 profileUploaded: false,

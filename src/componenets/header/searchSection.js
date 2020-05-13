@@ -3,8 +3,12 @@ import logo from "../../assets/img/mainLogo.jpg"
 import {faBars, faHeart, faSearch, faShoppingCart} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {Link} from "react-router-dom";
+import {connect} from "react-redux";
 
 const SearchSection = props => {
+
+    const {isLoggedIn, newUser} = props;
+
     return (
         <div className="container-fluid bg-dark-custom">
             <div className="container-lg pb-4">
@@ -27,17 +31,19 @@ const SearchSection = props => {
                     </div>
                     <div className="col-lg-3 text-right overflow-hidden">
                         <ul className="navbar-nav d-block text-nowrap pt-4">
-                            <li className="nav-item position-relative text-center nav-inline mx-2">
+                            <li className="nav-item position-relative text-center nav-inline mx-3">
                                 <FontAwesomeIcon icon={faHeart} color="#fff"/>
-                                <Link className="text-white d-block small" to="/wishlist">Your Wishlist</Link>
-                                <div className="qty">2</div>
+                                <Link className="text-white d-block small" to={isLoggedIn ? "/wishlist" : "/login"}
+                                >Your Wishlist</Link>
+                                <div className="qty">0</div>
                             </li>
-                            <li className="nav-item position-relative text-center nav-inline mx-2">
+                            <li className="nav-item position-relative text-center nav-inline mx-3">
                                 <FontAwesomeIcon icon={faShoppingCart} color="#fff"/>
-                                <Link className="text-white d-block small" to="/cart">Your Cart</Link>
-                                <div className="qty">2</div>
+                                <Link className="text-white d-block small" to={isLoggedIn ? "/cart" : "/login"}
+                                >Your Cart</Link>
+                                <div className="qty">{newUser && newUser.cartList.length}</div>
                             </li>
-                            <li className="nav-item nav-inline mx-2">
+                            <li className="nav-item nav-inline mx-3">
                                 <button className="text-white bg-transparent border-0 closebtn"
                                         onClick={() => props.openNav()}>
                                     <FontAwesomeIcon icon={faBars} color="#fff"/>
@@ -51,4 +57,13 @@ const SearchSection = props => {
     );
 };
 
-export default SearchSection;
+const mapStateToProps = state => {
+    return {
+        auth: state.firebase.auth,
+        isLoggedIn: state.auth.isLoggedIn,
+        newUser: state.auth.newUser,
+        user: state.auth.user,
+    }
+};
+
+export default connect(mapStateToProps)(SearchSection);

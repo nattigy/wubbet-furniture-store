@@ -3,18 +3,34 @@ import Header from "../header/header";
 import {Footer} from "../footer/footer";
 import {PreLoader} from "../preLoader/preLoader";
 import Dialog from "@material-ui/core/Dialog";
+import {connect} from "react-redux";
+import {addItem} from "../../store/actions/itemActions";
 
-const AddItem = () => {
+const AddItem = props => {
 
-    const [picture1, setPicture1] = useState("");
-    const [picture2, setPicture2] = useState("");
-    const [picture3, setPicture3] = useState("");
-    const [picture4, setPicture4] = useState("");
-    const [loading, setLoading] = useState(false);
+    const [frontPic, setFrontPic] = useState("");
+    const [leftSidePic, setLeftSidePic] = useState("");
+    const [rightSidePic, setRightSidePic] = useState("");
+    const [backPic, setBackPic] = useState("");
+
+    const {isAdding, addingError, errorMessage} = props;
+
+    const handleSubmit = e => {
+        e.preventDefault();
+        const form = document.forms["addItemForm"];
+        props.addItem({
+            name: new FormData(form).get("name"),
+            price: new FormData(form).get("price"),
+            size: new FormData(form).get("size"),
+            color: new FormData(form).get("color"),
+            category: new FormData(form).get("category"),
+            description: new FormData(form).get("description"),
+        });
+    };
 
     return (
         <Fragment>
-            {loading &&
+            {isAdding &&
             <Dialog open={true}>
                 <div className="w-100 px-5 py-3 text-center overflow-hidden" color="red">
                     <PreLoader/>
@@ -27,97 +43,111 @@ const AddItem = () => {
                     <h4>Add Item</h4>
                 </div>
                 <div>
-                    <form>
+                    <form onSubmit={handleSubmit} name="addItemForm">
                         <div className="my-3">
                             <label className="" htmlFor="name">Product Name</label><br/>
-                            <input className="w-100 form-control"
-                                   type="text" id="name"/>
+                            <input className="w-100 form-control" required
+                                   type="text" id="name" name="name"/>
                         </div>
                         <div className="my-3">
                             <label className="" htmlFor="price">Price</label><br/>
-                            <input className="w-100 form-control"
-                                   type="number" id="price"/>
+                            <input className="w-100 form-control" required
+                                   type="number" id="price" name="price"/>
                         </div>
                         <div className="my-3">
                             <label className="" htmlFor="size">Add Size
                                 <span className="small"> (you can choose multiple items)</span></label><br/>
-                            <select className="w-100 form-control" name="" id="size" multiple>
-                                <option value="" selected disabled>size</option>
-                                <option value="">xsm</option>
-                                <option value="">sm</option>
-                                <option value="">md</option>
-                                <option value="">lg</option>
-                                <option value="">xl</option>
-                                <option value="">xxl</option>
+                            <select className="w-100 form-control" name="size" id="size" multiple required>
+                                <option disabled>size</option>
+                                <option value="xsm">xsm</option>
+                                <option value="sm">sm</option>
+                                <option value="md">md</option>
+                                <option value="lg">lg</option>
+                                <option value="xl">xl</option>
+                                <option value="xxl">xxl</option>
                             </select>
                         </div>
                         <div className="my-3">
                             <label className="" htmlFor="color">Add Color
                                 <span className="small"> (you can choose multiple items)</span></label><br/>
-                            <select className="w-100 form-control" name="" id="color" multiple>
-                                <option value="">Red</option>
-                                <option value="">Blue</option>
-                                <option value="">Yellow</option>
-                                <option value="">Green</option>
-                                <option value="">Blue Black</option>
+                            <select className="w-100 form-control" name="color" id="color" multiple required>
+                                <option disabled>color</option>
+                                <option value="red">Red</option>
+                                <option value="blue">Blue</option>
+                                <option value="yellow">Yellow</option>
+                                <option value="green">Green</option>
+                                <option value="blueBlack">Blue Black</option>
                             </select>
                         </div>
                         <div className="my-3">
                             <label className="" htmlFor="quantity">Add Quantity</label><br/>
-                            <input className="w-100 form-control" type="number" id="quantity"/>
+                            <input className="w-100 form-control" type="number" name="quantity" id="quantity" required/>
                         </div>
                         <div className="my-3">
                             <label className="" htmlFor="category">Choose Category</label><br/>
-                            <select className="w-100 form-control" name="" id="category">
-                                <option value="" disabled selected>Category</option>
-                                <option value="">Home furniture</option>
-                                <option value="">Commercial furniture</option>
-                                <option value="">Finishing materials</option>
+                            <select className="w-100 form-control" name="category" id="category" required>
+                                <option disabled>Category</option>
+                                <option value="HOME_FURNITURE">Home furniture</option>
+                                <option value="COMMERCIAL_FURNITURE">Commercial furniture</option>
+                                <option value="FINISHING_MATERIALS">Finishing materials</option>
                             </select>
                         </div>
                         <div className="my-3">
                             <label className="" htmlFor="description">Description</label><br/>
-                            <textarea className="w-100 form-control" name="" id="description" cols="30" rows="5"/>
+                            <textarea className="w-100 form-control" name="description" id="description" required
+                                      cols="30" rows="5"/>
                         </div>
                         <div className="my-3">
                             <p>Add Pictures</p>
-                            <div className="w-50 mt-3">
-                                <img src={picture1} alt="" className="w-100"/>
-                                <label className="pt-2" htmlFor="picture1">Picture 1</label><br/>
+                            <div className="w-100 mt-3">
+                                <div className="w-50">
+                                    <img src={frontPic} alt="" className="w-100"/>
+                                </div>
+                                <label className="pt-2" htmlFor="frontPic">Picture 1</label><br/>
                                 <input onChange={e => e.target.files[0] &&
-                                    setPicture1(URL.createObjectURL(e.target.files[0]))}
-                                       className="w-100 form-control" type="file" id="picture1"/>
+                                    setFrontPic(URL.createObjectURL(e.target.files[0]))}
+                                       className="w-100 form-control" type="file" name="frontPic" id="frontPic"/>
                             </div>
 
-                            <div className="w-50 mt-3">
-                                <img src={picture2} alt="" className="w-100"/>
-                                <label className="" htmlFor="picture2">Picture 2</label><br/>
+                            <div className="w-100 mt-3">
+                                <div className="w-50">
+                                    <img src={leftSidePic} alt="" className="w-100"/>
+                                </div>
+                                <label className="" htmlFor="leftSidePic">Picture 2</label><br/>
                                 <input onChange={e => e.target.files[0] &&
-                                    setPicture2(URL.createObjectURL(e.target.files[0]))}
-                                       className="w-100 form-control" type="file" id="picture2"/>
+                                    setLeftSidePic(URL.createObjectURL(e.target.files[0]))}
+                                       className="w-100 form-control" type="file" name="leftSidePic" id="leftSidePic"/>
                             </div>
 
-                            <div className="w-50 mt-3">
-                                <img src={picture3} alt="" className="w-100"/>
-                                <label className="" htmlFor="picture3">Picture 3</label><br/>
+                            <div className="w-100 mt-3">
+                                <div className="w-50">
+                                    <img src={rightSidePic} alt="" className="w-100"/>
+                                </div>
+                                <label className="" htmlFor="rightSidePic">Picture 3</label><br/>
                                 <input onChange={e => e.target.files[0] &&
-                                    setPicture3(URL.createObjectURL(e.target.files[0]))}
-                                       className="w-100 form-control" type="file" id="picture3"/>
+                                    setRightSidePic(URL.createObjectURL(e.target.files[0]))}
+                                       className="w-100 form-control" type="file" name="rightSidePic"
+                                       id="rightSidePic"/>
                             </div>
 
-                            <div className="w-50 mt-3">
-                                <img src={picture4} alt="" className="w-100"/>
-                                <label className="" htmlFor="picture4">Picture 4</label><br/>
+                            <div className="w-100 mt-3">
+                                <div className="w-50">
+                                    <img src={backPic} alt="" className="w-100"/>
+                                </div>
+                                <label className="" htmlFor="backPic">Picture 4</label><br/>
                                 <input onChange={e => e.target.files[0] &&
-                                    setPicture4(URL.createObjectURL(e.target.files[0]))}
-                                       className="w-100 form-control" type="file" id="picture4"/>
+                                    setBackPic(URL.createObjectURL(e.target.files[0]))}
+                                       className="w-100 form-control" type="file" name="backPic" id="backPic"/>
                             </div>
 
                         </div>
+                        {addingError &&
+                        <div className="py-3">
+                            <p className="text-danger text-center">{errorMessage}</p>
+                        </div>
+                        }
                         <div className="my-4">
-                            <button type="button" onClick={() => setLoading(true)} className="btn bg-red btn-danger">Add
-                                Item
-                            </button>
+                            <button type="submit" className="btn bg-red btn-danger">Add Item</button>
                         </div>
                     </form>
                 </div>
@@ -127,4 +157,18 @@ const AddItem = () => {
     )
 };
 
-export default AddItem;
+const mapStateToProps = state => {
+    return {
+        isAdding: state.item.isAdding,
+        addingError: state.item.addingError,
+        errorMessage: state.item.errorMessage
+    };
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        addItem: credentials => dispatch(addItem(credentials))
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddItem);

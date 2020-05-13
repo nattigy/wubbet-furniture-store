@@ -1,0 +1,15 @@
+.preloading-newProduct {
+    position: absolute;
+    margin-top: 10%;
+    margin-left: 50%;
+    left: -20px !important;
+    top: -45px !important;
+}
+
+.newProduct-progress {
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.49);
+    height: 200px;
+}

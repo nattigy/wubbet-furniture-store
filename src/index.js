@@ -17,6 +17,7 @@ import "./assets/css/signInAndSignUpStyle.css"
 import "./assets/css/cartStyle.css"
 import "./assets/css/checkoutStyle.css"
 import "./assets/css/productDetailStyle.css"
+import "./assets/css/homeStyle.css"
 
 const store = configureStore();
 const rrfConfig = {

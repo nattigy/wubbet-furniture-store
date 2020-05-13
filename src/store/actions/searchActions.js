@@ -1,92 +1,86 @@
 import fbConfig from "../../firebase/firebase";
 
-export const SEARCH_REQUEST = "SEARCH_BY_SUBJECT";
-export const SEARCH_SUCCESS = "SEARCH_BY_GRADE_LEVEL";
-export const SEARCH_ERROR = "SEARCH_ERROR";
-export const TUTOR_SEARCH_SUCCESS = "TUTOR_SEARCH_SUCCESS";
+export const NEW_PRODUCT_SEARCH_REQUEST = "NEW_PRODUCT_SEARCH_REQUEST";
+export const NEW_PRODUCT_SEARCH_SUCCESS = "NEW_PRODUCT_SEARCH_SUCCESS";
+export const NEW_PRODUCT_SEARCH_ERROR = "NEW_PRODUCT_SEARCH_ERROR";
 
-const requestSearch = () => {
+const newProductSearchRequest = () => {
     return {
-        type: SEARCH_REQUEST,
+        type: NEW_PRODUCT_SEARCH_REQUEST,
     };
 };
 
-const receiveSearch = tutors => {
+const newProductSearchSuccess = items => {
     return {
-        type: SEARCH_SUCCESS,
-        tutors
+        type: NEW_PRODUCT_SEARCH_SUCCESS,
+        items
     };
 };
 
-const tutorProfile = tutor => {
+const newProductSearchError = errorMessage => {
+    console.log("here: ", errorMessage);
     return {
-        type: TUTOR_SEARCH_SUCCESS,
-        tutor
+        type: NEW_PRODUCT_SEARCH_ERROR,
+        errorMessage
     };
 };
 
-const searchError = error => {
-    return {
-        type: SEARCH_ERROR,
-        error
-    };
-};
+// export const searchByUserId = uid => dispatch => {
+//     dispatch(requestSearch());
+//     fbConfig.firestore()
+//         .doc("tutors/" + uid)
+//         .get()
+//         .then(newUser => dispatch(tutorProfile(newUser.data())))
+//         .catch(error => dispatch(searchError(error)));
+// };
 
-export const searchByUserId = uid => dispatch => {
-    dispatch(requestSearch());
-    fbConfig.firestore()
-        .doc("tutors/" + uid)
-        .get()
-        .then(newUser => dispatch(tutorProfile(newUser.data())))
-        .catch(error => dispatch(searchError(error)));
-};
+// export const searchByAField = (fieldPath, value) => dispatch => {
+//     let tutors = [];
+//     dispatch(requestSearch());
+//     fbConfig.firestore().collection("tutors")
+//         .where(fieldPath.toString().trim(), "array-contains", value.toString().trim())
+//         .get()
+//         .then(snapshot => {
+//             snapshot.forEach(doc => {
+//                 const data = doc.data();
+//                 tutors.push(data)
+//             });
+//             dispatch(receiveSearch(tutors))
+//         })
+//         .catch(error => dispatch(searchError(error)));
+// };
 
-export const searchByAField = (fieldPath, value) => dispatch => {
-    let tutors = [];
-    dispatch(requestSearch());
-    fbConfig.firestore().collection("tutors")
-        .where(fieldPath.toString().trim(), "array-contains", value.toString().trim())
-        .get()
-        .then(snapshot => {
-            snapshot.forEach(doc => {
-                const data = doc.data();
-                tutors.push(data)
-            });
-            dispatch(receiveSearch(tutors))
-        })
-        .catch(error => dispatch(searchError(error)));
-};
-
-export const searchAll = () => dispatch => {
-    let tutors = [];
-    dispatch(requestSearch());
-    fbConfig.firestore().collection("tutors")
+export const searchNewProducts = ({category}) => dispatch => {
+    let items = [];
+    dispatch(newProductSearchRequest());
+    fbConfig.firestore().collection(category)
         .get()
         .then(snapshot => {
             snapshot.forEach(doc => {
-                const data = doc.data();
-                tutors.push(data)
+                let data = doc.data();
+                data.id = doc.id;
+                items.push(data)
             });
-            dispatch(receiveSearch(tutors))
+            dispatch(newProductSearchSuccess(items))
         })
-        .catch(error => dispatch(searchError(error)));
+        .catch(error => dispatch(newProductSearchError(error)));
 };
 
-export const searchFilter = (fieldPath, rate, value) => dispatch => {
-    let tutors = [];
-    dispatch(requestSearch());
-    console.log(fieldPath, rate, value);
-    fbConfig.firestore().collection("tutors")
-        .where(fieldPath, "array-contains", value)
-        .get()
-        .then(snapshot => {
-            snapshot.forEach(doc => {
-                const data = doc.data();
-                if (data.price <= rate)
-                    tutors.push(data)
-            });
-            dispatch(receiveSearch(tutors))
-        })
-        .catch(error => dispatch(searchError(error)));
-};
+// export const searchFilter = (fieldPath, rate, value) => dispatch => {
+//     let tutors = [];
+//     dispatch(requestSearch());
+//     console.log(fieldPath, rate, value);
+//     fbConfig.firestore().collection("tutors")
+//         .where(fieldPath, "array-contains", value)
+//         .get()
+//         .then(snapshot => {
+//             snapshot.forEach(doc => {
+//                 const data = doc.data();
+//                 if (data.price <= rate)
+//                     tutors.push(data)
+//             });
+//             dispatch(receiveSearch(tutors))
+//         })
+//         .catch(error => dispatch(searchError(error)));
+// };
 

@@ -60,9 +60,9 @@ const SignUp = props => {
                                 <input onChange={e => setPasswordMatch(e.target.value === password)}
                                        className="w-100 form-control" type="password" id="re-password"/>
                             </div>
-                            {/*{signUpError &&*/}
-                            {/*<p className="text-danger text-center">{errorMessage}</p>*/}
-                            {/*}*/}
+                            {signUpError &&
+                            <p className="text-danger text-center">{errorMessage}</p>
+                            }
                             {!passwordMatch &&
                             <p className="text-danger text-center">Password doesn't match</p>
                             }
