@@ -4,6 +4,10 @@ export const NEW_PRODUCT_SEARCH_REQUEST = "NEW_PRODUCT_SEARCH_REQUEST";
 export const NEW_PRODUCT_SEARCH_SUCCESS = "NEW_PRODUCT_SEARCH_SUCCESS";
 export const NEW_PRODUCT_SEARCH_ERROR = "NEW_PRODUCT_SEARCH_ERROR";
 
+export const SEARCH_ITEM_REQUEST = "SEARCH_ITEM_REQUEST";
+export const SEARCH_ITEM_SUCCESS = "SEARCH_ITEM_SUCCESS";
+export const SEARCH_ITEM_ERROR = "SEARCH_ITEM_ERROR";
+
 const newProductSearchRequest = () => {
     return {
         type: NEW_PRODUCT_SEARCH_REQUEST,
@@ -18,10 +22,29 @@ const newProductSearchSuccess = items => {
 };
 
 const newProductSearchError = errorMessage => {
-    console.log("here: ", errorMessage);
     return {
         type: NEW_PRODUCT_SEARCH_ERROR,
         errorMessage
+    };
+};
+
+const searchItemRequest = () => {
+    return {
+        type: SEARCH_ITEM_REQUEST
+    };
+};
+
+const searchItemSuccess = searchItems => {
+    return {
+        type: SEARCH_ITEM_SUCCESS,
+        searchItems
+    };
+};
+
+const searchItemError = error => {
+    return {
+        type: SEARCH_ITEM_ERROR,
+        error
     };
 };
 
@@ -64,6 +87,22 @@ export const searchNewProducts = ({category}) => dispatch => {
             dispatch(newProductSearchSuccess(items))
         })
         .catch(error => dispatch(newProductSearchError(error)));
+};
+
+export const searchItem = ({category, name}) => dispatch => {
+    dispatch(searchItemRequest());
+    let items = [];
+    fbConfig.firestore().collection(category)
+        .where("name", "array-contains", name)
+        .get()
+        .then(snapshot => {
+            snapshot.forEach(doc => {
+                const data = doc.data();
+                items.push(data)
+            });
+            dispatch(searchItemSuccess(items))
+        })
+        .catch(error => dispatch(searchItemError(error)));
 };
 
 // export const searchFilter = (fieldPath, rate, value) => dispatch => {

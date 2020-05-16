@@ -1,4 +1,5 @@
 import fbConfig from "../../firebase/firebase";
+import uuid from 'react-uuid'
 
 export const ADD_ITEM_REQUEST = "ADD_ITEM_REQUEST";
 export const ADD_ITEM_SUCCESS = "LOGIN_SUCCESS";
@@ -58,13 +59,22 @@ const addItemToCartError = error => {
     };
 };
 
-
 export const addItem = ({category, name, price, size, color, description}) => dispatch => {
     dispatch(addItemRequest());
-    fbConfig.firestore().collection(category).doc().set({
+    const newUuid = uuid();
+    fbConfig.firestore().collection(category).doc(newUuid).set({
         category, name, price, size, color, description
     })
-        .then(dispatch(addItemSuccess()))
+        .then(() => {
+            fbConfig.firestore().collection("items_name").doc(newUuid)
+                .set({
+                    item_id: newUuid,
+                    item_name: name,
+                    category
+                })
+                .then(() => dispatch(addItemSuccess()))
+                .catch(error => dispatch(addItemError(error)))
+        })
         .catch(error => dispatch(addItemError(error)))
 };
 

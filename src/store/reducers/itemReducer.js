@@ -13,18 +13,21 @@ export default (state = {}, action) => {
             return {
                 ...state,
                 isAdding: true,
+                addingSuccess: false,
                 addingError: false
             };
         case ADD_ITEM_SUCCESS:
             return {
                 ...state,
                 isAdding: false,
+                addingSuccess: true,
                 addingError: false
             };
         case ADD_ITEM_FAILURE:
             return {
                 ...state,
                 isAdding: false,
+                addingSuccess: false,
                 addingError: true,
                 errorMessage: action.error
             };

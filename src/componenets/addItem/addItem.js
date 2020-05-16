@@ -13,7 +13,7 @@ const AddItem = props => {
     const [rightSidePic, setRightSidePic] = useState("");
     const [backPic, setBackPic] = useState("");
 
-    const {isAdding, addingError, errorMessage} = props;
+    const {isAdding, addingError, addingSuccess, errorMessage} = props;
 
     const handleSubmit = e => {
         e.preventDefault();
@@ -141,6 +141,11 @@ const AddItem = props => {
                             </div>
 
                         </div>
+                        {addingSuccess &&
+                        <div className="py-3">
+                            <p className="text-success text-center">Successfully added</p>
+                        </div>
+                        }
                         {addingError &&
                         <div className="py-3">
                             <p className="text-danger text-center">{errorMessage}</p>
@@ -161,6 +166,7 @@ const mapStateToProps = state => {
     return {
         isAdding: state.item.isAdding,
         addingError: state.item.addingError,
+        addingSuccess: state.item.addingSuccess,
         errorMessage: state.item.errorMessage
     };
 };

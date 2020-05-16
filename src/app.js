@@ -23,7 +23,7 @@ const App = () => {
                     <Route exact path="/wishlist" component={WishList}/>
                     <Route exact path="/checkout" component={Checkout}/>
                     <Route exact path="/item/:id" component={ProductDetail}/>
-                    <Route exact path="/items/:category" component={Store}/>
+                    <Route exact path="/items/:category/:name" component={Store}/>
                     <Route exact path="/additem" component={AddItem}/>
                 </Switch>
             </Router>

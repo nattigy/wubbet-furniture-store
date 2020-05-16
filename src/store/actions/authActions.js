@@ -140,8 +140,8 @@ export const registerUser = ({email, password, name}) => dispatch => {
             return fbConfig.firestore().collection("users").doc(res.user.uid).set({
                 name: formatString(name),
                 email: email.toString().trim(),
-                isATutor: false,
-                profileUploaded: false,
+                cartList: [],
+                wishList: [],
             })
         })
         .then(() => {

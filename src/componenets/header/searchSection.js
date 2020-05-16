@@ -1,13 +1,20 @@
-import React from "react";
+import React, {useState} from "react";
 import logo from "../../assets/img/mainLogo.jpg"
 import {faBars, faHeart, faSearch, faShoppingCart} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {Link} from "react-router-dom";
-import {connect} from "react-redux";
 
 const SearchSection = props => {
 
+    const [category, setCategory] = useState("HOME_FURNITURE");
+    const [name, setName] = useState("");
+
     const {isLoggedIn, newUser} = props;
+
+    const handleSubmit = e => {
+        e.preventDefault();
+        props.searchItem({category, name});
+    };
 
     return (
         <div className="container-fluid bg-dark-custom">
@@ -20,13 +27,19 @@ const SearchSection = props => {
                     </div>
                     <div className="col-lg-6 overflow-hidden px-0 pt-4">
                         <div className="text-center pt-2 text-nowrap">
-                            <select name="" id="" className="custom-select">
-                                <option value="">All Category</option>
+                            <select name="category" id="" className="custom-select"
+                                    onChange={e => setCategory(e.target.value)}>
+                                <option disabled>All Category</option>
+                                <option value="HOME_FURNITURE">Home Furniture</option>
+                                <option value="COMMERCIAL_FURNITURE">Commercial Furniture</option>
+                                <option value="FINISHING_MATERIALS">Finishing Materials</option>
                             </select>
-                            <input className="search-input" type="search"/>
-                            <button className="bg-red btn search-btn">
+                            <input className="search-input" type="search" name="name"
+                                   onChange={e => setName(e.target.value)}/>
+                            <Link className="bg-red btn search-btn" type="submit"
+                                  to={`/items/${category}/${name}`}>
                                 <FontAwesomeIcon icon={faSearch} color="#fff"/>
-                            </button>
+                            </Link>
                         </div>
                     </div>
                     <div className="col-lg-3 text-right overflow-hidden">
@@ -57,13 +70,4 @@ const SearchSection = props => {
     );
 };
 
-const mapStateToProps = state => {
-    return {
-        auth: state.firebase.auth,
-        isLoggedIn: state.auth.isLoggedIn,
-        newUser: state.auth.newUser,
-        user: state.auth.user,
-    }
-};
-
-export default connect(mapStateToProps)(SearchSection);
+export default SearchSection;

@@ -4,7 +4,7 @@
 }
 
 .search-input {
-    width: calc(100% - 180px);
+    width: calc(100% - 210px);
 }
 
 @media screen and (max-width: 991px) {
@@ -60,7 +60,7 @@
 }
 
 .custom-select {
-    width: 110px;
+    width: 160px;
     border-bottom-right-radius: 0;
     border-top-right-radius: 0;
 }

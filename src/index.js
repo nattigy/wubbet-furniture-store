@@ -18,6 +18,7 @@ import "./assets/css/cartStyle.css"
 import "./assets/css/checkoutStyle.css"
 import "./assets/css/productDetailStyle.css"
 import "./assets/css/homeStyle.css"
+import "./assets/css/storeStyle.css"
 
 const store = configureStore();
 const rrfConfig = {

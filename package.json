@@ -24,6 +24,7 @@
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.1",
     "react-service-worker": "^0.1.1",
+    "react-uuid": "^1.0.2",
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.8",
     "redux-firestore": "^0.12.0",

@@ -2,6 +2,9 @@ import {
     NEW_PRODUCT_SEARCH_ERROR,
     NEW_PRODUCT_SEARCH_REQUEST,
     NEW_PRODUCT_SEARCH_SUCCESS,
+    SEARCH_ITEM_REQUEST,
+    SEARCH_ITEM_SUCCESS,
+    SEARCH_ITEM_ERROR,
 } from "./../actions/searchActions";
 
 export default (state = {}, action) => {
@@ -25,6 +28,25 @@ export default (state = {}, action) => {
                 isSearchingNewProducts: false,
                 isSearchingNewProductsError: true,
                 errorMessage: action.errorMessage
+            };
+        case SEARCH_ITEM_REQUEST:
+            return {
+                ...state,
+                isSearching: true,
+                isSearchError: false,
+            };
+        case SEARCH_ITEM_SUCCESS:
+            return {
+                ...state,
+                isSearching: false,
+                isSearchError: false,
+                searchItems: action.searchItems
+            };
+        case SEARCH_ITEM_ERROR:
+            return {
+                ...state,
+                isSearching: false,
+                isSearchError: true,
             };
         default:
             return state;
