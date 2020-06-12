@@ -3,6 +3,7 @@ import {CopyRight} from "./copyRight";
 import {Subscribe} from "./subscription";
 import {faEnvelope, faMapMarker, faPhone} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {Link} from "react-router-dom";
 
 export const Footer = () => {
     return (
@@ -18,13 +19,13 @@ export const Footer = () => {
                                         adipisicing elit, sed do eiusmod tempor
                                         incididunt ut.</p>
                                     <ul className="footer-links navbar-nav">
-                                        <li><a href="/"><FontAwesomeIcon icon={faMapMarker} size="sm"
+                                        <li><a href="/" target="_blank"><FontAwesomeIcon icon={faMapMarker} size="sm"
                                                                          color="#D10024"/> 1734
                                             Stonecoal Road</a></li>
-                                        <li><a href="/"><FontAwesomeIcon icon={faPhone} size="sm"
+                                        <li><a href="/" target="_blank"><FontAwesomeIcon icon={faPhone} size="sm"
                                                                          color="#D10024"/> +021-95-51-84</a>
                                         </li>
-                                        <li><a href="/"><FontAwesomeIcon icon={faEnvelope} size="sm"
+                                        <li><a href="/" target="_blank"><FontAwesomeIcon icon={faEnvelope} size="sm"
                                                                          color="#D10024"/> email@email.com</a></li>
                                     </ul>
                                 </div>
@@ -34,11 +35,11 @@ export const Footer = () => {
                                 <div className="footer">
                                     <h3 className="footer-title text-white">Categories</h3>
                                     <ul className="footer-links navbar-nav">
-                                        <li><a href="/">Hot deals</a></li>
-                                        <li><a href="/">Laptops</a></li>
-                                        <li><a href="/">Smartphones</a></li>
-                                        <li><a href="/">Cameras</a></li>
-                                        <li><a href="/">Accessories</a></li>
+                                        <li><Link to="/">Hot deals</Link></li>
+                                        <li><Link to="/new_items">New Items</Link></li>
+                                        <li><Link to="/category/HOME_FURNITURE">Home Furniture</Link></li>
+                                        <li><Link to="/category/COMMERCIAL_FURNITURE">Commercial Furniture</Link></li>
+                                        <li><Link to="/category/FINISHING_MATERIALS">Finishing Materials</Link></li>
                                     </ul>
                                 </div>
                             </div>
@@ -49,11 +50,11 @@ export const Footer = () => {
                                 <div className="footer">
                                     <h3 className="footer-title text-white">Information</h3>
                                     <ul className="footer-links navbar-nav">
-                                        <li><a href="/">About Us</a></li>
-                                        <li><a href="/">Contact Us</a></li>
-                                        <li><a href="/">Privacy Policy</a></li>
-                                        <li><a href="/">Orders and Returns</a></li>
-                                        <li><a href="/">Terms & Conditions</a></li>
+                                        <li><Link to="/">About Us</Link></li>
+                                        <li><Link to="/">Contact Us</Link></li>
+                                        <li><Link to="/privacy_policy">Privacy Policy</Link></li>
+                                        <li><Link to="/return_policy">Orders and Returns</Link></li>
+                                        <li><Link to="/terms_and_conditions">Terms & Conditions</Link></li>
                                     </ul>
                                 </div>
                             </div>
@@ -62,11 +63,11 @@ export const Footer = () => {
                                 <div className="footer">
                                     <h3 className="footer-title text-white">Service</h3>
                                     <ul className="footer-links navbar-nav">
-                                        <li><a href="/">My Account</a></li>
-                                        <li><a href="/">View Cart</a></li>
-                                        <li><a href="/">Wishlist</a></li>
-                                        <li><a href="/">Track My Order</a></li>
-                                        <li><a href="/">Help</a></li>
+                                        <li><Link to="/">My Account</Link></li>
+                                        <li><Link to="/cart">View Cart</Link></li>
+                                        <li><Link to="/whishlist">Wishlist</Link></li>
+                                        <li><Link to="/">Track My Order</Link></li>
+                                        <li><Link to="/">Help</Link></li>
                                     </ul>
                                 </div>
                             </div>

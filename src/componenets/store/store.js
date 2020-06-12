@@ -1,7 +1,6 @@
-import React, {Fragment, useEffect, useState} from "react";
+import React, {Fragment, useEffect} from "react";
 import Header from "../header/header";
 import {Footer} from "../footer/footer";
-import SingleProduct from "../singleProductView/singleProduct";
 import Filter from "./filters";
 import {searchItem} from "../../store/actions/searchActions";
 import {connect} from "react-redux";
@@ -46,11 +45,11 @@ const Store = props => {
 
                             <div className="row">
                                 {true ?
-                                <div className="position-relative preloader-cont">
-                                    <div className="preloading-store overflow-hidden-y">
-                                        <PreLoader/>
-                                    </div>
-                                </div> :
+                                    <div className="position-relative preloader-cont">
+                                        <div className="preloading-store overflow-hidden-y">
+                                            <PreLoader/>
+                                        </div>
+                                    </div> :
                                     <div className="col-sm-4 px-0">
                                         <h1>here</h1>ere
                                         {/*<SingleProduct/>*/}

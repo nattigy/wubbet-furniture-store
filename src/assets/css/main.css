@@ -6,6 +6,10 @@
     background-color: #15161D;
 }
 
+.bg-grey{
+    background: linear-gradient(to bottom, #e3e4e6, #bdbfc2);
+}
+
 .border-light-custom {
     border-color: #e6e7e8 !important
 }

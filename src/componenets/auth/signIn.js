@@ -59,8 +59,8 @@ const SignIn = props => {
 
                         <p>
                             By continuing an account, you agree to Wubbet's
-                            <a className="text-muted" href="/"> Conditions of Use</a> and
-                            <a className="text-muted" href="/"> Privacy Notice</a>.
+                            <Link className="text-muted" to="/terms_and_conditions"> Conditions of Use</Link> and
+                            <Link className="text-muted" to="/privacy_policy"> Privacy Notice</Link>.
                         </p>
 
                     </div>

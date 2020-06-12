@@ -2,9 +2,9 @@ import {
     NEW_PRODUCT_SEARCH_ERROR,
     NEW_PRODUCT_SEARCH_REQUEST,
     NEW_PRODUCT_SEARCH_SUCCESS,
+    SEARCH_ITEM_ERROR,
     SEARCH_ITEM_REQUEST,
     SEARCH_ITEM_SUCCESS,
-    SEARCH_ITEM_ERROR,
 } from "./../actions/searchActions";
 
 export default (state = {}, action) => {

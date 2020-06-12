@@ -29,8 +29,8 @@ const SingleProduct = props => {
             <div className="product-body">
                 <p className="product-category">{item.category}</p>
                 <h3 className="product-name"><a className="text-dark" href="/">{item.name}</a></h3>
-                <h4 className="product-price">{item.price}
-                    <del className="product-old-price">{item.oldPrice && item.oldPrice}</del>
+                <h4 className="product-price">{item.price} birr
+                    <del className="product-old-price">{item.oldPrice && `${item.oldPrice} birr`}</del>
                 </h4>
                 <div className="product-rating">
                     <FontAwesomeIcon icon={faStar} size="1x" color="#D10024"/>

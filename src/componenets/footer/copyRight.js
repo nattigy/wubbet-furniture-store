@@ -10,18 +10,18 @@ export const CopyRight = () => {
                 <div className="row">
                     <div className="col-md-12 py-4 text-center">
                         <ul className="footer-payments px-0">
-                            <li className="mx-2 d-inline-block"><a href="/"><FontAwesomeIcon icon={faCcVisa} size="sm"
-                                                                                             color="#D10024"/></a></li>
-                            <li className="mx-2 d-inline-block"><a href="/"><FontAwesomeIcon icon={faCcPaypal} size="sm"
-                                                                                             color="#D10024"/></a></li>
-                            <li className="mx-2 d-inline-block"><a href="/"><FontAwesomeIcon icon={faCcMastercard}
-                                                                                             size="sm" color="#D10024"/></a>
+                            <li className="mx-2 d-inline-block">
+                                <a href="/"><FontAwesomeIcon icon={faCcVisa} size="sm" color="#D10024"/></a></li>
+                            <li className="mx-2 d-inline-block">
+                                <a href="/"><FontAwesomeIcon icon={faCcPaypal} size="sm" color="#D10024"/></a></li>
+                            <li className="mx-2 d-inline-block">
+                                <a href="/"><FontAwesomeIcon icon={faCcMastercard} size="sm" color="#D10024"/></a>
                             </li>
-                            <li className="mx-2 d-inline-block"><a href="/"><FontAwesomeIcon icon={faCcDiscover}
-                                                                                             size="sm" color="#D10024"/></a>
+                            <li className="mx-2 d-inline-block">
+                                <a href="/"><FontAwesomeIcon icon={faCcDiscover} size="sm" color="#D10024"/></a>
                             </li>
-                            <li className="mx-2 d-inline-block"><a href="/"><FontAwesomeIcon icon={faCcAmex} size="sm"
-                                                                                             color="#D10024"/></a></li>
+                            <li className="mx-2 d-inline-block">
+                                <a href="/"><FontAwesomeIcon icon={faCcAmex} size="sm" color="#D10024"/></a></li>
                         </ul>
                         <span className="copyright text-muted">
                             Copyright &copy; {`${fullYear}`} All rights reserved

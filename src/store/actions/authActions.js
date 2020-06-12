@@ -152,6 +152,20 @@ export const registerUser = ({email, password, name}) => dispatch => {
         }).catch(error => dispatch(SignUpError(error)));
 };
 
+export const registerUserWithPhone = ({phoneNumber, appVerifier}) => dispatch => {
+    console.log(phoneNumber, appVerifier)
+    fbConfig.auth().signInWithPhoneNumber(phoneNumber, appVerifier)
+        .then(confirmationResult => {
+            // SMS sent. Prompt user to type the code from the message, then sign the
+            // user in with confirmationResult.confirm(code).
+            window.confirmationResult = confirmationResult;
+            console.log(confirmationResult)
+        }).catch(error => {
+        console.log("here error", error)
+        // Error; SMS not sent
+    });
+};
+
 export const verifyAuth = () => dispatch => {
     dispatch(verifyRequest());
     fbConfig.auth()
