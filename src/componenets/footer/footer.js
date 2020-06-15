@@ -20,13 +20,14 @@ export const Footer = () => {
                                         incididunt ut.</p>
                                     <ul className="footer-links navbar-nav">
                                         <li><a href="/" target="_blank"><FontAwesomeIcon icon={faMapMarker} size="sm"
-                                                                         color="#D10024"/> 1734
+                                                                                         color="#D10024"/> 1734
                                             Stonecoal Road</a></li>
                                         <li><a href="/" target="_blank"><FontAwesomeIcon icon={faPhone} size="sm"
-                                                                         color="#D10024"/> +021-95-51-84</a>
+                                                                                         color="#D10024"/> +021-95-51-84</a>
                                         </li>
                                         <li><a href="/" target="_blank"><FontAwesomeIcon icon={faEnvelope} size="sm"
-                                                                         color="#D10024"/> email@email.com</a></li>
+                                                                                         color="#D10024"/> email@email.com</a>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>

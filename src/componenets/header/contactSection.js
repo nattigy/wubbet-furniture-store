@@ -3,11 +3,11 @@ import {Link} from "react-router-dom";
 import {logoutUser} from "../../store/actions/authActions";
 import {connect} from "react-redux";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faEnvelope, faMapMarker, faPhone, faSignInAlt, faSignOutAlt} from "@fortawesome/free-solid-svg-icons";
+import {faEnvelope, faMapMarker, faPhone, faSignInAlt, faSignOutAlt, faUser} from "@fortawesome/free-solid-svg-icons";
 
 const ContactSection = props => {
 
-    const {isLoggedIn, user, newUser} = props;
+    const {isLoggedIn, user, newUser, isAnonymous} = props;
 
     return (
         <div className="container-fluid bg-blue-custom py-1">
@@ -33,17 +33,28 @@ const ContactSection = props => {
                         {/*    <Link className="text-decoration-none small ml-2" to="/">usd</Link>*/}
                         {/*</li>*/}
                         {isLoggedIn ?
-                            <Fragment>
-                                {/*<li className="nav-item nav-inline mx-2">*/}
-                                {/*    <FontAwesomeIcon icon={faUser} size="sm" color="#D10024"/>*/}
-                                {/*    <Link className="text-decoration-none small ml-2" to="/">My Account</Link>*/}
-                                {/*</li>*/}
-                                <li className="nav-item nav-inline mx-2">
-                                    <FontAwesomeIcon icon={faSignOutAlt} size="sm" color="#D10024"/>
-                                    <span onClick={() => props.signOut()}
-                                          className="logout-span small ml-2">Logout</span>
-                                </li>
-                            </Fragment> :
+                            isAnonymous ?
+                                <Fragment>
+                                    <li className="nav-item nav-inline mx-2">
+                                        <FontAwesomeIcon icon={faSignInAlt} size="sm" color="#D10024"/>
+                                        <Link className="text-decoration-none small ml-2" to="/login">Sign In</Link>
+                                    </li>
+                                    <li className="nav-item nav-inline mx-2">
+                                        <FontAwesomeIcon icon={faSignInAlt} size="sm" color="#D10024"/>
+                                        <Link className="text-decoration-none small ml-2" to="/register">Sign Up</Link>
+                                    </li>
+                                </Fragment> :
+                                <Fragment>
+                                    <li className="nav-item nav-inline mx-2">
+                                        <FontAwesomeIcon icon={faUser} size="sm" color="#D10024"/>
+                                        <Link className="text-decoration-none small ml-2" to="/">My Account</Link>
+                                    </li>
+                                    <li className="nav-item nav-inline mx-2">
+                                        <FontAwesomeIcon icon={faSignOutAlt} size="sm" color="#D10024"/>
+                                        <span onClick={() => props.signOut()}
+                                              className="logout-span small ml-2">Logout</span>
+                                    </li>
+                                </Fragment> :
                             <Fragment>
                                 <li className="nav-item nav-inline mx-2">
                                     <FontAwesomeIcon icon={faSignInAlt} size="sm" color="#D10024"/>
@@ -66,6 +77,7 @@ const mapStateToProps = state => {
     return {
         auth: state.firebase.auth,
         isLoggedIn: state.auth.isLoggedIn,
+        isAnonymous: state.auth.isAnonymous,
         newUser: state.auth.newUser,
         user: state.auth.user,
     }

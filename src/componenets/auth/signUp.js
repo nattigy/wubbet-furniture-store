@@ -1,56 +1,25 @@
-import React, {useEffect, useState} from 'react'
+import React, {useState} from 'react'
 import logo from "../../assets/img/purelogo.png";
 import {CopyRight} from "../footer/copyRight";
 import {Link, Redirect} from "react-router-dom";
-import {registerUser, registerUserWithPhone} from "../../store/actions/authActions";
+import {registerUser} from "../../store/actions/authActions";
 import {connect} from "react-redux";
 import {PreLoader} from "../preLoader/preLoader";
-import fbConfig from "../../firebase/firebase";
 
 const SignUp = props => {
 
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
-    const [phoneNumber, setPhoneNumber] = useState(0);
     const [password, setPassword] = useState("");
     const [passwordMatch, setPasswordMatch] = useState(true);
-    const {signUpError, isAuthenticated, errorMessage, isSigningUp} = props;
-
-    let appVerifier;
-
-    useEffect(() => {
-        appVerifier = new fbConfig.auth.RecaptchaVerifier('recaptcha-container').render();
-    }, []);
+    const {signUpError, isAuthenticated, errorMessage, isSigningUp,isAnonymous} = props;
 
     const signUp = e => {
         e.preventDefault();
-        setUpRecaptcha();
-        // props.signUp({name, email, password});
-        // props.signUpWithPhoneNumber({phoneNumber, appVerifier, password});
-        var phoneNumber = "+251946625264";
-        var appVerifier = window.recaptchaVerifier;
-        fbConfig.auth().signInWithPhoneNumber(phoneNumber, appVerifier)
-            .then(function (confirmationResult) {
-                // SMS sent. Prompt user to type the code from the message, then sign the
-                // user in with confirmationResult.confirm(code).
-                window.confirmationResult = confirmationResult;
-            }).catch(function (error) {
-            // Error; SMS not sent
-            // ...
-        });
+        props.signUp({name, email, password});
     };
 
-    const setUpRecaptcha = () => {
-        window.recaptchaVerifier = new fbConfig.auth.RecaptchaVerifier('recaptcha-container', {
-            'size': 'invisible',
-            'callback': function(response) {
-                // reCAPTCHA solved, allow signInWithPhoneNumber.
-                signUp();
-            }
-        });
-    };
-
-    if (isAuthenticated) {
+    if (isAuthenticated && !isAnonymous) {
         return <Redirect to="/"/>;
     } else {
         return (
@@ -76,15 +45,10 @@ const SignUp = props => {
                                 <input onChange={e => setName(e.target.value)} className="w-100 form-control"
                                        type="text" id="name"/>
                             </div>
-                            {/*<div className="my-3">*/}
-                            {/*    <label className="" htmlFor="email">Email</label><br/>*/}
-                            {/*    <input onChange={e => setEmail(e.target.value)} className="w-100 form-control"*/}
-                            {/*           type="email" id="email"/>*/}
-                            {/*</div>*/}
                             <div className="my-3">
-                                <label className="" htmlFor="email">Phone Number</label><br/>
-                                <input onChange={e => setPhoneNumber(e.target.value)} className="w-100 form-control"
-                                       type="number" id="phonenumber"/>
+                                <label className="" htmlFor="email">Email</label><br/>
+                                <input onChange={e => setEmail(e.target.value)} className="w-100 form-control"
+                                       type="email" id="email"/>
                             </div>
                             <div className="my-3">
                                 <label className="" htmlFor="password">Password</label><br/>
@@ -108,16 +72,6 @@ const SignUp = props => {
                             </div>
                         </form>
 
-                        <div>
-                            <form onSubmit={() => {
-
-                            }}>
-                                <label htmlFor="verification">Enter Verification Code</label>
-                                <input id="verification" type="number"/>
-                                <button>Submit</button>
-                            </form>
-                        </div>
-
                         <p>
                             By creating an account, you agree to Wubbet's
                             <Link className="text-muted" to="/terms_and_conditions"> Conditions of Use</Link> and
@@ -139,6 +93,7 @@ const mapStateToProps = state => {
         signUpError: state.auth.signUpError,
         isSigningUp: state.auth.isSigningUp,
         isAuthenticated: state.auth.isAuthenticated,
+        isAnonymous: state.auth.isAnonymous,
         errorMessage: state.auth.errorMessage
     };
 };
@@ -146,7 +101,6 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         signUp: credentials => dispatch(registerUser(credentials)),
-        signUpWithPhoneNumber: credentials => dispatch(registerUserWithPhone(credentials))
     };
 };
 

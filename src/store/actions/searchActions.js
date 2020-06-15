@@ -76,7 +76,8 @@ const searchItemError = error => {
 export const searchNewProducts = ({category}) => dispatch => {
     let items = [];
     dispatch(newProductSearchRequest());
-    fbConfig.firestore().collection(category)
+    fbConfig.firestore().collection("items")
+        .where("category", "==", category)
         .get()
         .then(snapshot => {
             snapshot.forEach(doc => {
@@ -89,17 +90,35 @@ export const searchNewProducts = ({category}) => dispatch => {
         .catch(error => dispatch(newProductSearchError(error)));
 };
 
-export const searchItem = ({category, name}) => dispatch => {
+export const searchItems = ({fieldPath, opStr, value}) => dispatch => {
     dispatch(searchItemRequest());
     let items = [];
-    fbConfig.firestore().collection(category)
-        .where("name", "array-contains", name)
+    fbConfig.firestore().collection("items")
+        .where(fieldPath, opStr, value)
         .get()
         .then(snapshot => {
             snapshot.forEach(doc => {
                 const data = doc.data();
                 items.push(data)
             });
+            console.log(items);
+            dispatch(searchItemSuccess(items))
+        })
+        .catch(error => dispatch(searchItemError(error)));
+};
+
+export const searchAllItems = () => dispatch => {
+    console.log("here")
+    dispatch(searchItemRequest());
+    let items = [];
+    fbConfig.firestore().collection("items")
+        .get()
+        .then(snapshot => {
+            snapshot.forEach(doc => {
+                const data = doc.data();
+                items.push(data)
+            });
+            console.log(items);
             dispatch(searchItemSuccess(items))
         })
         .catch(error => dispatch(searchItemError(error)));

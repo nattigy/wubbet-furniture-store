@@ -1,6 +1,10 @@
 .preloading-store {
-    margin-top: 50%;
-    margin-left: 50%;
+    position: relative;
+    width: 100%;
+}
+
+.preloading-store div {
+    margin: 100px auto;
     left: -20px !important;
     top: -45px !important;
 }

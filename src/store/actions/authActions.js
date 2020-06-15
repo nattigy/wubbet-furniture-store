@@ -1,5 +1,8 @@
 import fbConfig from "../../firebase/firebase";
 
+export const ANONYMOUS_LOGIN = "ANONYMOUS_LOGIN";
+export const NOT_ANONYMOUS_LOGIN = "NOT_ANONYMOUS_LOGIN";
+
 export const LOGIN_REQUEST = "LOGIN_REQUEST";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_FAILURE = "LOGIN_FAILURE";
@@ -20,6 +23,18 @@ const requestLogin = () => {
     return {
         type: LOGIN_REQUEST
     };
+};
+
+const anonymousLogin = () => {
+  return {
+      type: ANONYMOUS_LOGIN
+  }
+};
+
+const loginNotAnonymous = () => {
+  return{
+      type: NOT_ANONYMOUS_LOGIN
+  }
 };
 
 const receiveLogin = (newUser, authUser) => {
@@ -71,7 +86,6 @@ const receiveSignUp = (newUser, authUser) => {
 };
 
 const SignUpError = error => {
-    console.log("signup error", error);
     return {
         type: SIGN_UP_FAILURE,
         error
@@ -103,15 +117,29 @@ export const loginUser = user => dispatch => {
         .then(() => {
             return fbConfig.auth().signInWithEmailAndPassword(user.email.toString().trim(), user.password)
         })
-        .then(user => {
-            authUser = user.user;
+        .then(snapShot => {
+            authUser = snapShot.user;
             return fbConfig.firestore()
-                .doc("users/" + user.user.uid)
+                .doc("users/" + snapShot.user.uid)
                 .get()
                 .then(user => user.data());
         })
-        .then(newUser => dispatch(receiveLogin(newUser, authUser)))
+        .then(newUser => {
+            dispatch(receiveLogin(newUser, authUser));
+            dispatch(loginNotAnonymous());
+        })
         .catch(error => dispatch(loginError(error)));
+};
+
+export const anonymousSignIn = () => dispatch => {
+    fbConfig.auth().signInAnonymously()
+        .then(snapShot => {
+            return fbConfig.firestore().collection("users").doc(snapShot.user.uid).set({
+                cartList: [],
+                wishList: [],
+            }).then(dispatch(anonymousLogin()))
+        })
+        .catch(error => console.log(error));
 };
 
 export const logoutUser = () => dispatch => {
@@ -148,22 +176,11 @@ export const registerUser = ({email, password, name}) => dispatch => {
             fbConfig.firestore()
                 .doc("users/" + newUser.user.uid)
                 .get()
-                .then(user => dispatch(receiveSignUp(user.data(), newUser.user)));
+                .then(user => {
+                    dispatch(receiveSignUp(user.data(), newUser.user));
+                    dispatch(loginNotAnonymous());
+                });
         }).catch(error => dispatch(SignUpError(error)));
-};
-
-export const registerUserWithPhone = ({phoneNumber, appVerifier}) => dispatch => {
-    console.log(phoneNumber, appVerifier)
-    fbConfig.auth().signInWithPhoneNumber(phoneNumber, appVerifier)
-        .then(confirmationResult => {
-            // SMS sent. Prompt user to type the code from the message, then sign the
-            // user in with confirmationResult.confirm(code).
-            window.confirmationResult = confirmationResult;
-            console.log(confirmationResult)
-        }).catch(error => {
-        console.log("here error", error)
-        // Error; SMS not sent
-    });
 };
 
 export const verifyAuth = () => dispatch => {
@@ -171,6 +188,11 @@ export const verifyAuth = () => dispatch => {
     fbConfig.auth()
         .onAuthStateChanged(user => {
             if (user !== null) {
+                if(user.isAnonymous){
+                    dispatch(anonymousLogin())
+                } else {
+                    dispatch(loginNotAnonymous())
+                }
                 fbConfig.firestore()
                     .doc("users/" + user.uid)
                     .get()

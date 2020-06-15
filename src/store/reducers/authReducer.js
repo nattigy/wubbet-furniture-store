@@ -10,11 +10,23 @@ import {
     SIGN_UP_SUCCESS,
     VERIFY_ERROR,
     VERIFY_REQUEST,
-    VERIFY_SUCCESS
+    VERIFY_SUCCESS,
+    ANONYMOUS_LOGIN,
+    NOT_ANONYMOUS_LOGIN
 } from "./../actions/authActions";
 
 export default (state = {}, action) => {
     switch (action.type) {
+        case ANONYMOUS_LOGIN:
+            return {
+              ...state,
+              isAnonymous: true,
+            };
+        case NOT_ANONYMOUS_LOGIN:
+            return {
+                ...state,
+                isAnonymous: false
+            };
         case LOGIN_REQUEST:
             return {
                 ...state,

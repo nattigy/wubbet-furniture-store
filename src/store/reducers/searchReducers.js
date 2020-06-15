@@ -13,12 +13,14 @@ export default (state = {}, action) => {
             return {
                 ...state,
                 isSearchingNewProducts: true,
+                isSearchingNewProductsDone: false,
                 isSearchingNewProductsError: false
             };
         case NEW_PRODUCT_SEARCH_SUCCESS:
             return {
                 ...state,
                 isSearchingNewProducts: false,
+                isSearchingNewProductsDone: true,
                 isSearchingNewProductsError: false,
                 newProducts: action.items
             };
@@ -26,6 +28,7 @@ export default (state = {}, action) => {
             return {
                 ...state,
                 isSearchingNewProducts: false,
+                isSearchingNewProductsDone: false,
                 isSearchingNewProductsError: true,
                 errorMessage: action.errorMessage
             };
@@ -33,12 +36,14 @@ export default (state = {}, action) => {
             return {
                 ...state,
                 isSearching: true,
+                isSearchingDone: false,
                 isSearchError: false,
             };
         case SEARCH_ITEM_SUCCESS:
             return {
                 ...state,
                 isSearching: false,
+                isSearchingDone: true,
                 isSearchError: false,
                 searchItems: action.searchItems
             };
@@ -46,6 +51,7 @@ export default (state = {}, action) => {
             return {
                 ...state,
                 isSearching: false,
+                isSearchingDone: false,
                 isSearchError: true,
             };
         default:

@@ -2,8 +2,14 @@
     max-width: 450px !important;
 }
 
-.checkout-btn, .checkout-btn:hover {
+.checkout-btn {
     color: white !important;
+    background-color: #ef233c;
+}
+
+.checkout-btn:hover {
+    color: white !important;
+    background-color: #ff233d;
 }
 
 @media screen and (max-width: 600px) {
@@ -13,6 +19,6 @@
     }
 }
 
-.qty-span{
+.qty-span {
     padding: 5px !important;
 }

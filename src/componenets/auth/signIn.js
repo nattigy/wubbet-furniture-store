@@ -1,24 +1,23 @@
 import React, {useState} from 'react'
 import logo from "../../assets/img/purelogo.png";
 import {CopyRight} from "../footer/copyRight";
-import {Link} from "react-router-dom";
+import {Link, Redirect} from "react-router-dom";
 import {loginUser} from "../../store/actions/authActions";
 import {connect} from "react-redux";
-import {Redirect} from "react-router";
 import {PreLoader} from "../preLoader/preLoader";
 
 const SignIn = props => {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const {loginError, isAuthenticated, errorMessage, isLoggingIn} = props;
+    const {loginError, isAuthenticated, errorMessage, isLoggingIn, isAnonymous} = props;
 
     const signIn = e => {
         e.preventDefault();
         props.signIn({email, password})
     };
 
-    if (isAuthenticated) {
+    if (isAuthenticated && !isAnonymous) {
         return <Redirect to="/"/>;
     } else {
         return (
@@ -50,7 +49,7 @@ const SignIn = props => {
                                        type="password" id="password"/>
                             </div>
                             {loginError &&
-                            <p className="text-danger text-center">{errorMessage}</p>
+                            <p className="text-danger text-center">{errorMessage.message}</p>
                             }
                             <div className="my-3">
                                 <button type="submit" className="w-100 btn bg-red btn-danger">Sign In</button>
@@ -80,6 +79,7 @@ const mapStateToProps = state => {
     return {
         loginError: state.auth.loginError,
         isLoggingIn: state.auth.isLoggingIn,
+        isAnonymous: state.auth.isAnonymous,
         isAuthenticated: state.auth.isAuthenticated,
         errorMessage: state.auth.errorMessage
     };

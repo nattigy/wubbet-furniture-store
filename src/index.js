@@ -5,7 +5,6 @@ import {Provider, useSelector} from 'react-redux';
 import firebase from "./firebase/firebase";
 import {isLoaded, ReactReduxFirebaseProvider} from "react-redux-firebase";
 import configureStore from "./configureStore";
-import {PreLoader} from "./componenets/preLoader/preLoader";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import "./assets/css/main.css"
@@ -20,6 +19,7 @@ import "./assets/css/productDetailStyle.css"
 import "./assets/css/homeStyle.css"
 import "./assets/css/storeStyle.css"
 import "./assets/css/text.css"
+import {PreLoader} from "./componenets/preLoader/preLoader";
 
 const store = configureStore();
 const rrfConfig = {

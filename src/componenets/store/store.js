@@ -2,17 +2,25 @@ import React, {Fragment, useEffect} from "react";
 import Header from "../header/header";
 import {Footer} from "../footer/footer";
 import Filter from "./filters";
-import {searchItem} from "../../store/actions/searchActions";
+import {searchAllItems, searchItems} from "../../store/actions/searchActions";
+import SingleProduct from "../singleProductView/singleProduct"
 import {connect} from "react-redux";
 import {PreLoader} from "../preLoader/preLoader";
 
 const Store = props => {
 
     const {name, category} = props.match.params;
-    const {isSearching} = props;
+    const {isSearching, searchItemsResult} = props;
 
     useEffect(() => {
-        props.searchItem({category, name});
+        if(category === "all" && name === "all")
+            props.searchAllItems();
+        else if(category === "all" && name !== "all")
+            props.searchItems({fieldPath: "name_array", opStr: "array-contains", value: name});
+        else if(category !== "all" && name === "all")
+            props.searchItems({fieldPath: "category", opStr: "==", value: category});
+        else
+            props.searchItems({fieldPath: "cat_name_combo", opStr: "array-contains", value: name + "_" + category});
     }, []);
 
     return (
@@ -43,17 +51,24 @@ const Store = props => {
                                 </div>
                             </div>
 
-                            <div className="row">
-                                {true ?
-                                    <div className="position-relative preloader-cont">
-                                        <div className="preloading-store overflow-hidden-y">
+                            <div className="row text-center">
+                                {isSearching ?
+                                    <div className="preloading-store">
+                                        <div className="text-center">
                                             <PreLoader/>
                                         </div>
                                     </div> :
-                                    <div className="col-sm-4 px-0">
-                                        <h1>here</h1>ere
-                                        {/*<SingleProduct/>*/}
-                                    </div>
+                                    <Fragment>
+                                        {searchItemsResult ?
+                                            <Fragment>
+                                                {searchItemsResult.map(item =>
+                                                    <SingleProduct key={item.id} margin="mx-auto" item={item}/>)}
+                                            </Fragment> :
+                                            <div>
+                                                <h6>no items</h6>
+                                            </div>
+                                        }
+                                    </Fragment>
                                 }
                             </div>
 
@@ -80,13 +95,14 @@ const mapStateToProps = state => {
     return {
         isSearching: state.search.isSearching,
         isSearchError: state.search.isSearchError,
-        searchItems: state.search.searchItems
+        searchItemsResult: state.search.searchItems
     }
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        searchItem: (credentials) => dispatch(searchItem(credentials))
+        searchItems: (credentials) => dispatch(searchItems(credentials)),
+        searchAllItems: () => dispatch(searchAllItems()),
     }
 };
 

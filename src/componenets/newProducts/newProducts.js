@@ -14,11 +14,11 @@ const NewProducts = props => {
 
     useEffect(() => {
         if (tab1) {
-            props.search({category: "HOME_FURNITURE"})
+            props.searchItems({category: "HOME_FURNITURE"})
         } else if (tab2) {
-            props.search({category: "COMMERCIAL_FURNITURE"})
+            props.searchItems({category: "COMMERCIAL_FURNITURE"})
         } else if (tab3) {
-            props.search({category: "FINISHING_MATERIALS"})
+            props.searchItems({category: "FINISHING_MATERIALS"})
         }
     }, [tab1, tab2, tab3]);
 
@@ -74,7 +74,7 @@ const NewProducts = props => {
                                                 </div>
                                             </div> :
                                             items && items.length !== 0 ? items.map(item =>
-                                                    <SingleProduct key={item.id} item={item}/>
+                                                    <SingleProduct key={item.id} margin="mx-3" item={item}/>
                                                 ) :
                                                 <div className="text-center my-5">
                                                     <h6>No Items To Display</h6>
@@ -92,7 +92,7 @@ const NewProducts = props => {
                                                 </div>
                                             </div> :
                                             items && items.length !== 0 ? items.map(item =>
-                                                    <SingleProduct key={item.id} item={item}/>
+                                                    <SingleProduct key={item.id} margin="mx-3" item={item}/>
                                                 ) :
                                                 <div className="text-center my-5">
                                                     <h6>No Items To Display</h6>
@@ -110,7 +110,7 @@ const NewProducts = props => {
                                                 </div>
                                             </div> :
                                             items && items.length !== 0 ? items.map(item =>
-                                                    <SingleProduct key={item.id} item={item}/>
+                                                    <SingleProduct key={item.id} margin="mx-3" item={item}/>
                                                 ) :
                                                 <div className="text-center my-5">
                                                     <h6>No Items To Display</h6>
@@ -138,7 +138,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        search: credentials => dispatch(searchNewProducts(credentials))
+        searchItems: credentials => dispatch(searchNewProducts(credentials))
     };
 };
 
