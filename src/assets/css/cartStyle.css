@@ -22,3 +22,11 @@
 .qty-span {
     padding: 5px !important;
 }
+
+.preloading-cart {
+    position: relative;
+    margin-top: 100px;
+    margin-left: 50vw;
+    left: -20px !important;
+    top: -45px !important;
+}

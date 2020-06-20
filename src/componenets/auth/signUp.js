@@ -12,7 +12,7 @@ const SignUp = props => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [passwordMatch, setPasswordMatch] = useState(true);
-    const {signUpError, isAuthenticated, errorMessage, isSigningUp,isAnonymous} = props;
+    const {signUpError, isAuthenticated, errorMessage, isSigningUp, isAnonymous} = props;
 
     const signUp = e => {
         e.preventDefault();

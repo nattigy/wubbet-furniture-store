@@ -1,4 +1,4 @@
-import React, {Fragment, useEffect} from "react";
+import React, {Fragment, useEffect, useState} from "react";
 import Header from "../header/header";
 import {Footer} from "../footer/footer";
 import {Link} from "react-router-dom";
@@ -7,64 +7,36 @@ import {connect} from "react-redux";
 import {PreLoader} from "../preLoader/preLoader";
 import {Redirect} from "react-router";
 import {orderFurniture} from "../../store/actions/orderActions";
-import { Form, Text } from 'informed';
-import { gapi } from 'gapi-script';
+import Dialog from "@material-ui/core/Dialog/Dialog";
 
 const Checkout = props => {
-    const {isFetchingFromError, cartItems, isAuthenticated, newUser, user, isFetchingFromCart, isFetchingFromDone} = props;
+    const {
+        isFetchingFromError, cartItems, isAuthenticated,
+        newUser, user, isFetchingFromCart,
+        isSending, sendingSuccess
+    } = props;
 
-    const SPREADSHEET_ID = '1zXjPzZzuSK6tHmbMWcKYn4DSpW6y2OjNKDfq3WNk2Bw'; //from the URL of your blank Google Sheet
-    const CLIENT_ID = '436815509266-fpkuqlmdmbj6ar7aei63eibh2n11ddqe.apps.googleusercontent.com'; //from https://console.developers.google.com/apis/credentials
-    const API_KEY = 'AIzaSyD3Z2869e3hQFppfwCgU1L4GQe001rHxrk'; //https://console.developers.google.com/apis/credentials
-    const SCOPE = 'https://www.googleapis.com/auth/spreadsheets';
+    const [fullName, setFullName] = useState("");
+    const [user_id] = useState(user.uid);
+    const [address, setAddress] = useState("");
+    const [city, setCity] = useState("");
+    const [telephone, setTelephone] = useState("");
+    const [order_notes, setOrder_notes] = useState("");
+    const [total_price] = useState(newUser.totalPriceOfCart);
+    const [ordered_items] = useState(newUser.cartList);
+    const [payment_method, setPayment_method] = useState("Direct Bank Transfer");
+    const [orderSentConfirmation, setOrderSentConfirmation] = useState(true);
+    const [direct_bank, setDirect_bank] = useState(true);
+    const [amole, setAmole] = useState(false);
+    const [agreeToTerms, setAgreeToTerms] = useState(false);
 
     useEffect(() => {
         props.fetchFromCart({uid: user.uid});
-        gapi.load('client:auth2', initClient);
     }, []);
 
     const submitCheckout = e => {
-
-        props.orderFurniture(document.forms["order-furniture"]);
-    };
-
-    const initClient =()=> { //provide the authentication credentials you set up in the Google developer console
-        gapi.client.init({
-            'apiKey': API_KEY,
-            'clientId': CLIENT_ID,
-            'scope': SCOPE,
-            'discoveryDocs': ['https://sheets.googleapis.com/$discovery/rest?version=v4'],
-        }).then(()=> {
-            gapi.auth2.getAuthInstance().isSignedIn.listen(this.updateSignInStatus); //add a function called `updateSignInStatus` if you want to do something once a user is logged in with Google
-            this.updateSignInStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
-        });
-    };
-
-    const onFormSubmit = submissionValues => {
-
-        const params = {
-            // The ID of the spreadsheet to update.
-            spreadsheetId: SPREADSHEET_ID,
-            // The A1 notation of a range to search for a logical table of data.Values will be appended after the last row of the table.
-            range: 'Sheet1', //this is the default spreadsheet name, so unless you've changed it, or are submitting to multiple sheets, you can leave this
-            // How the input data should be interpreted.
-            valueInputOption: 'RAW', //RAW = if no conversion or formatting of submitted data is needed. Otherwise USER_ENTERED
-            // How the input data should be inserted.
-            insertDataOption: 'INSERT_ROWS', //Choose OVERWRITE OR INSERT_ROWS
-        };
-
-        const valueRangeBody = {
-            'majorDimension': 'ROWS', //log each entry as a new row (vs column)
-            'values': [submissionValues] //convert the object's values to an array
-        };
-
-        let request = gapi.client.sheets.spreadsheets.values.append(params, valueRangeBody);
-        request.then(function (response) {
-            // TODO: Insert desired response behaviour on submission
-            console.log(response.result);
-        }, function (reason) {
-            console.error('error: ' + reason.result.error.message);
-        });
+        e.preventDefault();
+        props.orderFurniture(`?&fullName=${fullName}&user_id=${user_id}&address=${address}&city=${city}&telephone=${telephone}&order_notes=${order_notes}&total_price=${total_price}&ordered_items=${ordered_items}&payment_method=${payment_method}`);
     };
 
     if (isAuthenticated === undefined) {
@@ -76,191 +48,178 @@ const Checkout = props => {
     } else {
         return (
             <Fragment>
+                {isSending &&
+                <Dialog open={true}>
+                    <div className="w-100 px-5 py-3 text-center overflow-hidden" color="red">
+                        <PreLoader/>
+                    </div>
+                </Dialog>
+                }
+                {sendingSuccess &&
+                <Dialog open={orderSentConfirmation}>
+                    <div className="w-100 px-5 py-3 text-center text-success" color="red">
+                        Your order is sent!
+                    </div>
+                    <div className="text-right px-3 pb-2">
+                        <button className="btn" onClick={() => setOrderSentConfirmation(false)}>ok</button>
+                    </div>
+                </Dialog>
+                }
                 <Header/>
                 <div>
-                    <div className="">
-                        <div className="container-lg py-3">
-                            <h4 className="ml-3">Checkout</h4>
-                        </div>
+                    <div className="container-lg py-3">
+                        <h4>Checkout</h4>
                     </div>
 
-                    <div className="">
-                        <div className="container-lg">
-                            <form onSubmit={onFormSubmit} name="order-furniture">
-                                <div className="row">
-                                    <div className="col-md-7 p-4">
-                                        <div className="">
-                                            <div className="mb-4">
-                                                <h5 className="">Address</h5>
-                                            </div>
-                                            <div className="form-group">
-                                                <input className="form-control w-100" type="text" name="full-name"
-                                                       placeholder="Full Name"/>
-                                                <input type="hidden" name="user-id" value={user.uid}/>
-                                            </div>
-                                            <div className="form-group">
-                                                <input className="form-control w-100" type="text" name="address"
-                                                       placeholder="Address"/>
-                                            </div>
-                                            <div className="form-group">
-                                                <input className="form-control w-100" type="text" name="city"
-                                                       placeholder="City"/>
-                                            </div>
-                                            <div className="form-group">
-                                                <input className="form-control w-100" type="tel" name="tel"
-                                                       placeholder="(+251)9********"/>
-                                            </div>
+                    <div className="container-lg">
+                        <form onSubmit={submitCheckout} id="order_furniture" name="order_furniture">
+                            <div className="row">
+                                <div className="col-md-7">
+                                    <div className="">
+                                        <div className="mb-4">
+                                            <h5 className="">Address</h5>
                                         </div>
-
-                                        {/*<div className="">*/}
-                                        {/*    <div className="my-4">*/}
-                                        {/*        <h5 className="title">Shiping address</h5>*/}
-                                        {/*    </div>*/}
-                                        {/*    <div className="">*/}
-                                        {/*        <div className="">*/}
-                                        {/*            <div className="form-group">*/}
-                                        {/*                <input className="form-control w-100" type="text" name="first-name"*/}
-                                        {/*                       placeholder="First Name"/>*/}
-                                        {/*            </div>*/}
-                                        {/*            <div className="form-group">*/}
-                                        {/*                <input className="form-control w-100" type="text" name="last-name"*/}
-                                        {/*                       placeholder="Last Name"/>*/}
-                                        {/*            </div>*/}
-                                        {/*            <div className="form-group">*/}
-                                        {/*                <input className="form-control w-100" type="email" name="email"*/}
-                                        {/*                       placeholder="Email"/>*/}
-                                        {/*            </div>*/}
-                                        {/*            <div className="form-group">*/}
-                                        {/*                <input className="form-control w-100" type="text" name="address"*/}
-                                        {/*                       placeholder="Address"/>*/}
-                                        {/*            </div>*/}
-                                        {/*            <div className="form-group">*/}
-                                        {/*                <input className="form-control w-100" type="text" name="city"*/}
-                                        {/*                       placeholder="City"/>*/}
-                                        {/*            </div>*/}
-                                        {/*            <div className="form-group">*/}
-                                        {/*                <input className="form-control w-100" type="text" name="country"*/}
-                                        {/*                       placeholder="Country"/>*/}
-                                        {/*            </div>*/}
-                                        {/*            <div className="form-group">*/}
-                                        {/*                <input className="form-control w-100" type="text" name="zip-code"*/}
-                                        {/*                       placeholder="ZIP Code"/>*/}
-                                        {/*            </div>*/}
-                                        {/*            <div className="form-group">*/}
-                                        {/*                <input className="form-control w-100" type="tel" name="tel"*/}
-                                        {/*                       placeholder="Telephone"/>*/}
-                                        {/*            </div>*/}
-                                        {/*        </div>*/}
-                                        {/*    </div>*/}
-                                        {/*</div>*/}
-
-                                        <div className="">
-                                            <textarea className="form-control w-100" placeholder="Order Notes"/>
+                                        <div className="form-group">
+                                            <input className="form-control w-100" type="text" id="fullname"
+                                                   name="fullname"
+                                                   onChange={e => setFullName(e.target.value)}
+                                                   placeholder="Full Name"/>
+                                            <input type="hidden" name="user_id" id="user_id" value={user.uid}/>
+                                        </div>
+                                        <div className="form-group">
+                                            <input className="form-control w-100" type="text" name="address"
+                                                   id="address"
+                                                   onChange={e => setAddress(e.target.value)}
+                                                   placeholder="Address"/>
+                                        </div>
+                                        <div className="form-group">
+                                            <input className="form-control w-100" type="text" name="city" id="city"
+                                                   onChange={e => setCity(e.target.value)}
+                                                   placeholder="City"/>
+                                        </div>
+                                        <div className="form-group">
+                                            <input className="form-control w-100" type="tel" name="telephone"
+                                                   id="telephone"
+                                                   onChange={e => setTelephone(e.target.value)}
+                                                   placeholder="(+251)9********"/>
                                         </div>
                                     </div>
+                                    <div className="">
+                                            <textarea className="form-control w-100" name="order_notes" id="order_notes"
+                                                      onChange={e => setOrder_notes(e.target.value)}
+                                                      placeholder="Order Notes"/>
+                                    </div>
+                                </div>
 
-                                    <div className="col-md-5 border border-light p-4">
-                                        <div className="text-center mb-4">
-                                            <h5 className="">Your Order</h5>
+                                <div className="col-md-5 border border-light p-4">
+                                    <div className="text-center mb-4">
+                                        <h5 className="">Your Order</h5>
+                                    </div>
+                                    <div className="order-summary">
+                                        <div className="d-table w-100 my-4">
+                                            <div className="d-table-cell"><strong>PRODUCT</strong></div>
+                                            <div className="d-table-cell text-right"><strong>TOTAL</strong></div>
                                         </div>
-                                        <div className="order-summary">
-                                            <div className="d-table w-100 my-4">
-                                                <div className="d-table-cell"><strong>PRODUCT</strong></div>
-                                                <div className="d-table-cell text-right"><strong>TOTAL</strong></div>
-                                            </div>
-                                            {isFetchingFromCart ? <div className="preloading-home overflow-hidden-y">
-                                                    <PreLoader/>
-                                                </div> :
-                                                cartItems.length === 0 &&
-                                                <div className="text-center py-5">
-                                                    <h5>No Items In Your Cart!</h5>
-                                                </div>
-                                            }
-                                            {isFetchingFromError &&
+                                        {isFetchingFromCart ? <div className="preloading-home overflow-hidden-y">
+                                                <PreLoader/>
+                                            </div> :
+                                            cartItems.length === 0 &&
                                             <div className="text-center py-5">
                                                 <h5>No Items In Your Cart!</h5>
                                             </div>
-                                            }
-                                            <div className="order-products my-3">
-                                                {cartItems.map(item => <div className="d-table w-100">
-                                                    <div className="d-table-cell text-muted">{item.name}</div>
-                                                    <input type="hidden" name={`product-${item.id}`} value={item.id}/>
-                                                    <div
-                                                        className="d-table-cell text-right text-muted">{item.price} birr
-                                                    </div>
-                                                </div>)}
-                                            </div>
-                                            <div className="d-table w-100 my-3">
-                                                <div className="d-table-cell text-muted">Shiping</div>
-                                                <div className="d-table-cell text-right"><strong>FREE</strong></div>
-                                            </div>
-                                            <div className="d-table w-100 my-3">
-                                                <div className="d-table-cell"><strong>TOTAL</strong></div>
-                                                <div className="d-table-cell text-right"><strong
-                                                    className="order-total text-danger font-weight-bolder">
-                                                    {newUser.totalPriceOfCart.toString()} birr</strong>
-                                                    <input type="hidden" name="total-price"
-                                                           value={newUser.totalPriceOfCart}/>
+                                        }
+                                        {isFetchingFromError &&
+                                        <div className="text-center py-5">
+                                            <h5>No Items In Your Cart!</h5>
+                                        </div>
+                                        }
+                                        <div className="order-products my-3">
+                                            {cartItems.map(item => <div className="d-table w-100" key={item.id}>
+                                                <div className="d-table-cell text-muted">{item.name}</div>
+                                                <input type="hidden" name={`product-${item.id}`} value={item.id}/>
+                                                <div
+                                                    className="d-table-cell text-right text-muted">{item.price} birr
                                                 </div>
+                                            </div>)}
+                                        </div>
+                                        <div className="d-table w-100 my-3">
+                                            <div className="d-table-cell text-muted">Shiping</div>
+                                            <div className="d-table-cell text-right"><strong>FREE</strong></div>
+                                        </div>
+                                        <div className="d-table w-100 my-3">
+                                            <div className="d-table-cell"><strong>TOTAL</strong></div>
+                                            <div className="d-table-cell text-right"><strong
+                                                className="order-total text-danger font-weight-bolder">
+                                                {newUser.totalPriceOfCart && newUser.totalPriceOfCart.toString()} birr</strong>
+                                                <input type="hidden" name="total_price" id="total_price"
+                                                       value={newUser.totalPriceOfCart}/>
                                             </div>
                                         </div>
-                                        <div className="">
-                                            <div className="input-radio">
-                                                <div className="custom-control custom-radio">
-                                                    <input type="radio" id="customRadio1" name="customRadio"
-                                                           className="custom-control-input"/>
-                                                    <label className="custom-control-label" htmlFor="customRadio1">Direct
-                                                        Bank
-                                                        Transfer</label>
-                                                </div>
-                                                <div className="">
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                                                        eiusmod
-                                                        tempor incididunt ut labore et dolore magna aliqua.</p>
-                                                </div>
+                                    </div>
+                                    <div className="">
+                                        <div className="input-radio py-2">
+                                            <div className="custom-control custom-radio">
+                                                <input type="radio" id="customRadio1" name="customRadio"
+                                                       value="Direct Bank Transfer" className="custom-control-input"
+                                                       checked={direct_bank}
+                                                       onChange={e => {
+                                                           setPayment_method(e.target.value);
+                                                           setDirect_bank(!direct_bank);
+                                                           setAmole(!amole);
+                                                       }}
+                                                />
+                                                <label className="custom-control-label" htmlFor="customRadio1">
+                                                    Direct Bank Transfer</label>
                                             </div>
-                                            <div className="input-radio">
-                                                <div className="custom-control custom-radio">
-                                                    <input type="radio" id="customRadio2" name="customRadio"
-                                                           className="custom-control-input"/>
-                                                    <label className="custom-control-label" htmlFor="customRadio2">Cheque
-                                                        Payment</label>
-                                                </div>
-                                                <div className="">
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                                                        eiusmod
-                                                        tempor incididunt ut labore et dolore magna aliqua.</p>
-                                                </div>
-                                            </div>
-                                            {/*<div className="input-radio">*/}
-                                            {/*    <div className="custom-control custom-radio">*/}
-                                            {/*        <input type="radio" id="customRadio3" name="customRadio"*/}
-                                            {/*               className="custom-control-input"/>*/}
-                                            {/*        <label className="custom-control-label" htmlFor="customRadio3">Paypal*/}
-                                            {/*            System</label>*/}
-                                            {/*    </div>*/}
-                                            {/*    <div className="">*/}
-                                            {/*        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod*/}
-                                            {/*            tempor incididunt ut labore et dolore magna aliqua.</p>*/}
-                                            {/*    </div>*/}
-                                            {/*</div>*/}
-                                        </div>
-                                        <div className="">
-                                            <div className="custom-control custom-checkbox my-1 mr-sm-2">
-                                                <input type="checkbox" className="custom-control-input"
-                                                       id="customControlInline"/>
-                                                <label className="custom-control-label" htmlFor="customControlInline">
-                                                    I've read and accept the
-                                                    <Link className="text-muted" to="/terms_and_conditions">terms &
-                                                        conditions</Link>
-                                                </label>
+                                            <div className={`pl-4 my-2 ${direct_bank ? `d-block` : `d-none`}`}>
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                                                    eiusmod
+                                                    tempor incididunt ut labore et dolore magna aliqua.</p>
                                             </div>
                                         </div>
+                                        <div className="input-radio py-2">
+                                            <div className="custom-control custom-radio">
+                                                <input type="radio" id="customRadio2" name="customRadio"
+                                                       value="Cheque Payment"
+                                                       className="custom-control-input"
+                                                       onChange={e => {
+                                                           setPayment_method(e.target.value);
+                                                           setAmole(!amole);
+                                                           setDirect_bank(!direct_bank);
+                                                       }}
+                                                />
+                                                <label className="custom-control-label" htmlFor="customRadio2">
+                                                    Cheque Payment</label>
+                                            </div>
+                                            <div className={`pl-4 my-2 ${amole ? `d-block` : `d-none`}`}>
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                                                    eiusmod
+                                                    tempor incididunt ut labore et dolore magna aliqua.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="py-2">
+                                        <div className="custom-control custom-checkbox my-1 mr-sm-2">
+                                            <input type="checkbox" className="custom-control-input"
+                                                   id="customControlInline"
+                                                   onChange={() => setAgreeToTerms(!agreeToTerms)}
+                                            />
+                                            <label className="custom-control-label" htmlFor="customControlInline">
+                                                I've read and accept the
+                                                <Link className="text-muted" to="/terms_and_conditions"> terms &
+                                                    conditions</Link>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div className="position-relative">
+                                        {!agreeToTerms && <div className="block-submit text-center text-nowrap py-2">
+                                            <p>Agree to terms and conditions</p>
+                                        </div>}
                                         <button className="btn btn-danger bg-red w-100 my-3">Place order</button>
                                     </div>
                                 </div>
-                            </form>
-                        </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
                 <Footer/>
@@ -279,6 +238,8 @@ const mapStateToProps = state => {
         isFetchingFromCart: state.item.isFetchingFromCart,
         isFetchingFromDone: state.item.isFetchingFromDone,
         isFetchingFromError: state.item.isFetchingFromError,
+        isSending: state.order.isSending,
+        sendingSuccess: state.order.sendingSuccess,
     };
 };
 

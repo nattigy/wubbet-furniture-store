@@ -11,13 +11,13 @@ const ProductImages = () => {
             el.style.backgroundSize = "200%";
         });
 
-        el.addEventListener("mousedown", (e) => {
+        el.addEventListener("mousedown", () => {
             el.style.backgroundPositionX = "100px";
             el.style.backgroundPositionY = "100px";
             el.style.backgroundSize = "200%";
         });
 
-        el.addEventListener("mouseleave", (e) => {
+        el.addEventListener("mouseleave", () => {
             el.style.backgroundPositionX = "0px";
             el.style.backgroundPositionY = "0px";
             el.style.backgroundSize = "100%";
@@ -37,7 +37,7 @@ const ProductImages = () => {
             el.style.backgroundSize = "200%";
         });
 
-        el.addEventListener("touchend", (e) => {
+        el.addEventListener("touchend", () => {
             el.style.backgroundPositionX = "0px";
             el.style.backgroundPositionY = "0px";
             document.body.style.position = "unset";

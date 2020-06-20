@@ -22,7 +22,7 @@ const App = props => {
             <PreLoader/>
         </div>
     } else {
-        if(!props.isLoggedIn){
+        if (!props.isLoggedIn) {
             props.anonymousSignIn()
         }
         return (
@@ -37,6 +37,8 @@ const App = props => {
                         <Route exact path="/checkout" component={Checkout}/>
                         <Route exact path="/item/:id" component={ProductDetail}/>
                         <Route exact path="/items/:category/:name" component={Store}/>
+                        <Route exact path="/items/:category/:name/:sub_category" component={Store}/>
+                        <Route exact path="/items/:category/_/:sub_category" component={Store}/>
                         <Route exact path="/category/:category" component={Store}/>
                         <Route exact path="/additem" component={AddItem}/>
                         <Route exact path="/privacy_policy" component={PrivacyPolicy}/>
@@ -57,9 +59,9 @@ const mapStateToProps = state => {
 };
 
 const mapStateToDispatch = dispatch => {
-  return{
-      anonymousSignIn: () => dispatch(anonymousSignIn())
-  }
+    return {
+        anonymousSignIn: () => dispatch(anonymousSignIn())
+    }
 };
 
 export default connect(mapStateToProps, mapStateToDispatch)(App);

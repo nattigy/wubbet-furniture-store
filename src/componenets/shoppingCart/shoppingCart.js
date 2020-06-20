@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect} from "react";
 import Header from "../header/header";
 import {Footer} from "../footer/footer";
 import CartItem from "./cartItem";
@@ -8,7 +8,7 @@ import {PreLoader} from "../preLoader/preLoader";
 import {fetchFromCart} from "../../store/actions/itemActions";
 
 const ShoppingCart = props => {
-    const {isFetchingFromError, cartItems, isAuthenticated, newUser, user, isFetchingFromCart, isFetchingFromDone} = props;
+    const {isFetchingFromError, cartItems, isAuthenticated, newUser, user, isFetchingFromCart} = props;
 
     useEffect(() => {
         props.fetchFromCart({uid: user.uid})
@@ -37,7 +37,7 @@ const ShoppingCart = props => {
                         <div className="text-muted text-right mr-5 mt-3">Price</div>
                     </div>
                     <div className="py-3">
-                        {isFetchingFromCart ? <div className="preloading-home overflow-hidden-y">
+                        {isFetchingFromCart ? <div className="preloading-cart overflow-hidden-y">
                                 <PreLoader/>
                             </div> :
                             cartItems.length === 0 &&
@@ -48,13 +48,15 @@ const ShoppingCart = props => {
                         {cartItems.map(item => <CartItem key={item.id} item={item}/>)}
                         {isFetchingFromError &&
                         <div className="text-center py-5">
-                            <h5>No Items In Your Cart!</h5>
+                            <h5>No Items In Your Cartt!</h5>
                         </div>
                         }
                     </div>
                     <div className="py-3">
                         <p className="text-right mr-5">Subtotal ({cartItems.length} items):
-                            <span className="text-danger font-weight-bold"> {newUser.totalPriceOfCart.toString()} birr</span></p>
+                            <span className="text-danger font-weight-bold"> {newUser.totalPriceOfCart &&
+                            newUser.totalPriceOfCart.toString()} birr</span>
+                        </p>
                     </div>
                 </div>
                 <Footer/>

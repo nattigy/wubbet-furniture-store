@@ -26,15 +26,15 @@ const requestLogin = () => {
 };
 
 const anonymousLogin = () => {
-  return {
-      type: ANONYMOUS_LOGIN
-  }
+    return {
+        type: ANONYMOUS_LOGIN
+    }
 };
 
 const loginNotAnonymous = () => {
-  return{
-      type: NOT_ANONYMOUS_LOGIN
-  }
+    return {
+        type: NOT_ANONYMOUS_LOGIN
+    }
 };
 
 const receiveLogin = (newUser, authUser) => {
@@ -188,7 +188,7 @@ export const verifyAuth = () => dispatch => {
     fbConfig.auth()
         .onAuthStateChanged(user => {
             if (user !== null) {
-                if(user.isAnonymous){
+                if (user.isAnonymous) {
                     dispatch(anonymousLogin())
                 } else {
                     dispatch(loginNotAnonymous())

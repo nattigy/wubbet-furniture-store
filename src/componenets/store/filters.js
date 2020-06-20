@@ -10,7 +10,7 @@ const Filter = () => {
                     <div className="input-checkbox">
                         <input type="checkbox" id="category-1"/>
                         <label htmlFor="category-1">
-                            <span></span>
+                            <span/>
                             Laptops
                             <small>(120)</small>
                         </label>
@@ -19,7 +19,7 @@ const Filter = () => {
                     <div className="input-checkbox">
                         <input type="checkbox" id="category-2"/>
                         <label htmlFor="category-2">
-                            <span></span>
+                            <span/>
                             Smartphones
                             <small>(740)</small>
                         </label>
@@ -28,7 +28,7 @@ const Filter = () => {
                     <div className="input-checkbox">
                         <input type="checkbox" id="category-3"/>
                         <label htmlFor="category-3">
-                            <span></span>
+                            <span/>
                             Cameras
                             <small>(1450)</small>
                         </label>
@@ -37,7 +37,7 @@ const Filter = () => {
                     <div className="input-checkbox">
                         <input type="checkbox" id="category-4"/>
                         <label htmlFor="category-4">
-                            <span></span>
+                            <span/>
                             Accessories
                             <small>(578)</small>
                         </label>
@@ -46,7 +46,7 @@ const Filter = () => {
                     <div className="input-checkbox">
                         <input type="checkbox" id="category-5"/>
                         <label htmlFor="category-5">
-                            <span></span>
+                            <span/>
                             Laptops
                             <small>(120)</small>
                         </label>
@@ -55,7 +55,7 @@ const Filter = () => {
                     <div className="input-checkbox">
                         <input type="checkbox" id="category-6"/>
                         <label htmlFor="category-6">
-                            <span></span>
+                            <span/>
                             Smartphones
                             <small>(740)</small>
                         </label>
@@ -103,7 +103,7 @@ const Filter = () => {
                     <div className="input-checkbox">
                         <input type="checkbox" id="brand-1"/>
                         <label htmlFor="brand-1">
-                            <span></span>
+                            <span/>
                             SAMSUNG
                             <small>(578)</small>
                         </label>
@@ -111,7 +111,7 @@ const Filter = () => {
                     <div className="input-checkbox">
                         <input type="checkbox" id="brand-2"/>
                         <label htmlFor="brand-2">
-                            <span></span>
+                            <span/>
                             LG
                             <small>(125)</small>
                         </label>
@@ -119,7 +119,7 @@ const Filter = () => {
                     <div className="input-checkbox">
                         <input type="checkbox" id="brand-3"/>
                         <label htmlFor="brand-3">
-                            <span></span>
+                            <span/>
                             SONY
                             <small>(755)</small>
                         </label>
@@ -127,7 +127,7 @@ const Filter = () => {
                     <div className="input-checkbox">
                         <input type="checkbox" id="brand-4"/>
                         <label htmlFor="brand-4">
-                            <span></span>
+                            <span/>
                             SAMSUNG
                             <small>(578)</small>
                         </label>
@@ -135,7 +135,7 @@ const Filter = () => {
                     <div className="input-checkbox">
                         <input type="checkbox" id="brand-5"/>
                         <label htmlFor="brand-5">
-                            <span></span>
+                            <span/>
                             LG
                             <small>(125)</small>
                         </label>
@@ -143,7 +143,7 @@ const Filter = () => {
                     <div className="input-checkbox">
                         <input type="checkbox" id="brand-6"/>
                         <label htmlFor="brand-6">
-                            <span></span>
+                            <span/>
                             SONY
                             <small>(755)</small>
                         </label>

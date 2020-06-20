@@ -6,12 +6,23 @@ import Dialog from "@material-ui/core/Dialog";
 import {connect} from "react-redux";
 import {addItem} from "../../store/actions/itemActions";
 
+const sub_category = [
+    {category: "HOME_FURNITURE", sub_category: "Living room", value: "livingRoom"},
+    {category: "HOME_FURNITURE", sub_category: "Bed room", value: "bedRoom"},
+    {category: "HOME_FURNITURE", sub_category: "Dinning room/kitchen", value: "kitchen"},
+    {category: "COMMERCIAL_FURNITURE", sub_category: "Office", value: "office"},
+    {category: "FINISHING_MATERIALS", sub_category: "Decorations", value: "decorations"},
+    {category: "FINISHING_MATERIALS", sub_category: "Finishing materials", value: "finishingMaterials"},
+    {category: "Other", sub_category: "other", value: "other"},
+];
+
 const AddItem = props => {
 
     const [frontPic, setFrontPic] = useState("");
     const [leftSidePic, setLeftSidePic] = useState("");
     const [rightSidePic, setRightSidePic] = useState("");
     const [backPic, setBackPic] = useState("");
+    const [selected_category, setSelected_category] = useState("HOME_FURNITURE");
 
     const {isAdding, addingError, addingSuccess, errorMessage} = props;
 
@@ -21,9 +32,8 @@ const AddItem = props => {
         props.addItem({
             name: new FormData(form).get("name"),
             price: new FormData(form).get("price"),
-            size: new FormData(form).get("size"),
-            color: new FormData(form).get("color"),
             category: new FormData(form).get("category"),
+            sub_category: new FormData(form).get("sub_category"),
             description: new FormData(form).get("description"),
         });
     };
@@ -55,41 +65,28 @@ const AddItem = props => {
                                    type="number" id="price" name="price"/>
                         </div>
                         <div className="my-3">
-                            <label className="" htmlFor="size">Add Size
-                                <span className="small"> (you can choose multiple items)</span></label><br/>
-                            <select className="w-100 form-control" name="size" id="size" multiple required>
-                                <option disabled>size</option>
-                                <option value="xsm">xsm</option>
-                                <option value="sm">sm</option>
-                                <option value="md">md</option>
-                                <option value="lg">lg</option>
-                                <option value="xl">xl</option>
-                                <option value="xxl">xxl</option>
-                            </select>
-                        </div>
-                        <div className="my-3">
-                            <label className="" htmlFor="color">Add Color
-                                <span className="small"> (you can choose multiple items)</span></label><br/>
-                            <select className="w-100 form-control" name="color" id="color" multiple required>
-                                <option disabled>color</option>
-                                <option value="red">Red</option>
-                                <option value="blue">Blue</option>
-                                <option value="yellow">Yellow</option>
-                                <option value="green">Green</option>
-                                <option value="blueBlack">Blue Black</option>
-                            </select>
-                        </div>
-                        <div className="my-3">
                             <label className="" htmlFor="quantity">Add Quantity</label><br/>
                             <input className="w-100 form-control" type="number" name="quantity" id="quantity" required/>
                         </div>
                         <div className="my-3">
                             <label className="" htmlFor="category">Choose Category</label><br/>
-                            <select className="w-100 form-control" name="category" id="category" required>
+                            <select className="w-100 form-control" name="category" id="category" required
+                                    onChange={e => setSelected_category(e.target.value)}>
                                 <option disabled>Category</option>
                                 <option value="HOME_FURNITURE">Home furniture</option>
                                 <option value="COMMERCIAL_FURNITURE">Commercial furniture</option>
                                 <option value="FINISHING_MATERIALS">Finishing materials</option>
+                                <option value="OTHER">Other</option>
+                            </select>
+                        </div>
+                        <div className="my-3">
+                            <label className="" htmlFor="category">Choose Sub-Category</label><br/>
+                            <select className="w-100 form-control" name="sub_category" id="sub_category" required>
+                                {sub_category.map(cat => {
+                                    if (cat.category === selected_category)
+                                        return <option value={cat.value} key={cat.sub_category}>
+                                            {cat.sub_category}</option>
+                                })}
                             </select>
                         </div>
                         <div className="my-3">

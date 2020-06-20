@@ -1,11 +1,23 @@
-import React, {Fragment} from "react";
+import React, {Fragment, useEffect} from "react";
 import Header from "../header/header";
 import {Footer} from "../footer/footer";
 import DescriptionAndDetails from "./descriptionAndDetails";
 import ProductDescription from "./productDescription";
 import ProductImages from "./productImages";
+import {connect} from "react-redux";
+import {getItemDetail} from "../../store/actions/itemActions";
+import {PreLoader} from "../preLoader/preLoader";
 
-const ProductDetail = () => {
+const ProductDetail = props => {
+    const {
+        isGettingItemDetail, gettingItemDetailError, gettingItemDetailDone,
+        itemDetail, isAddingToCart, user, isLoggedIn
+    } = props;
+
+    useEffect(() => {
+        props.getItemDetail({id: props.match.params.id})
+    }, []);
+
     return (
         <Fragment>
             <Header/>
@@ -15,9 +27,25 @@ const ProductDetail = () => {
             <div className="">
                 <div className="container-lg">
                     <div className="row">
-                        <ProductImages/>
-                        <ProductDescription/>
-                        <DescriptionAndDetails/>
+                        {isGettingItemDetail && <div className="preloading-store">
+                            <div className="text-center">
+                                <PreLoader/>
+                            </div>
+                        </div>}
+                        {gettingItemDetailDone && <Fragment>
+                            <ProductImages item={itemDetail}/>
+                            <ProductDescription item={itemDetail} credentials={{
+                                isAddingToCart,
+                                isLoggedIn,
+                                userId: user.uid,
+                                itemId: itemDetail.id,
+                                itemPrice: parseInt(itemDetail.price)
+                            }}/>
+                            <DescriptionAndDetails item={itemDetail}/>
+                        </Fragment>}
+                        {gettingItemDetailError && <div className="w-100 text-center text-danger py-3">
+                            Unknown error, Please try again!
+                        </div>}
                     </div>
                 </div>
             </div>
@@ -26,4 +54,22 @@ const ProductDetail = () => {
     );
 };
 
-export default ProductDetail;
+const mapStateToProps = state => {
+    return {
+        user: state.auth.user,
+        isLoggedIn: state.auth.isLoggedIn,
+        isGettingItemDetail: state.item.isGettingItemDetail,
+        gettingItemDetailDone: state.item.gettingItemDetailDone,
+        gettingItemDetailError: state.item.gettingItemDetailError,
+        itemDetail: state.item.itemDetail,
+        isAddingToCart: state.item.isAddingToCart,
+    };
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        getItemDetail: credentials => dispatch(getItemDetail(credentials))
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProductDetail);

@@ -10,7 +10,7 @@ const NewProducts = props => {
     const [tab2, setTab2] = useState(false);
     const [tab3, setTab3] = useState(false);
 
-    const {isSearchingNewProducts, isSearchingNewProductsError, items, errorMessage} = props;
+    const {isSearchingNewProducts, items} = props;
 
     useEffect(() => {
         if (tab1) {

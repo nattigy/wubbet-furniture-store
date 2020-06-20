@@ -1,11 +1,30 @@
-export const orderFurniture = form => dispatch => {
-    // const scriptURL = 'https://script.google.com/macros/s/AKfycbzSm69EdSzRIqxrPXYO7ntlZ4NDa08MrnakwN039CXMazz47pkJ/exec';
-    // dispatch(orderRequest());
-    // fetch(scriptURL, {method: 'POST', body: new FormData(form)})
-        // .then(res => dispatch(orderSuccess()))
-        // .then(res => console.log(res))
-        // .catch(error => console.log(error));
-    // dispatch(orderSuccess())
+export const SEND_ORDER_REQUEST = "SEND_ORDER_REQUEST";
+export const SEND_ORDER_SUCCESS = "SEND_ORDER_SUCCESS";
+export const SEND_ORDER_FAILURE = "SEND_ORDER_FAILURE";
 
+const sendOrderRequest = () => {
+    return {
+        type: SEND_ORDER_REQUEST
+    };
+};
 
+const sendOrderSuccess = () => {
+    return {
+        type: SEND_ORDER_SUCCESS
+    }
+};
+
+const sendOrderError = error => {
+    return {
+        type: SEND_ORDER_FAILURE,
+        error: error.message
+    }
+};
+
+export const orderFurniture = formData => dispatch => {
+    dispatch(sendOrderRequest());
+    const scriptURL = `https://script.google.com/macros/s/AKfycbxip7EY32Y_lms7t0fI3tC6IqmY2PEjxdxLJD3ruMZSh8NjGco/exec?${formData}`;
+    fetch(scriptURL, {mode: 'no-cors'})
+        .then(() => dispatch(sendOrderSuccess()))
+        .catch(error => dispatch(sendOrderError(error)))
 };

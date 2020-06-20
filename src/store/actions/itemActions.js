@@ -1,8 +1,7 @@
 import fbConfig from "../../firebase/firebase";
-import {useSelector} from "react-redux";
 
 export const ADD_ITEM_REQUEST = "ADD_ITEM_REQUEST";
-export const ADD_ITEM_SUCCESS = "LOGIN_SUCCESS";
+export const ADD_ITEM_SUCCESS = "ADD_ITEM_SUCCESS";
 export const ADD_ITEM_FAILURE = "ADD_ITEM_FAILURE";
 
 export const ADD_TO_CART_REQUEST = "ADD_TO_CART_REQUEST";
@@ -25,6 +24,10 @@ export const REMOVE_FROM_CART_ERROR = "REMOVE_FROM_CART_ERROR";
 export const REMOVE_FROM_WISH_LIST_REQUEST = "REMOVE_FROM_WISH_LIST_REQUEST";
 export const REMOVE_FROM_WISH_LIST_SUCCESS = "REMOVE_FROM_WISH_LIST_SUCCESS";
 export const REMOVE_FROM_WISH_LIST_ERROR = "REMOVE_FROM_WISH_LIST_ERROR";
+
+export const GET_ITEM_DETAIL_REQUEST = "GET_ITEM_DETAIL_REQUEST";
+export const GET_ITEM_DETAIL_SUCCESS = "GET_ITEM_DETAIL_SUCCESS";
+export const GET_ITEM_DETAIL_ERROR = "GET_ITEM_DETAIL_ERROR";
 
 const addItemRequest = () => {
     return {
@@ -91,6 +94,26 @@ const fetchFromCartError = error => {
     };
 };
 
+const getItemDetailRequest = () => {
+    return {
+        type: GET_ITEM_DETAIL_REQUEST
+    }
+};
+
+const getItemDetailSuccess = item => {
+    return {
+        type: GET_ITEM_DETAIL_SUCCESS,
+        item
+    }
+};
+
+const getItemDetailError = error => {
+    return {
+        type: GET_ITEM_DETAIL_ERROR,
+        error
+    }
+};
+
 const create_name_array = name => {
     return name.split(" ");
 };
@@ -104,13 +127,13 @@ const create_cat_name_combo = (category, name) => {
     return cat_name_combo;
 };
 
-export const addItem = ({category, name, price, size, color, description}) => dispatch => {
+export const addItem = ({category, name, price, description, sub_category}) => dispatch => {
     dispatch(addItemRequest());
     const name_array = create_name_array(name);
     const cat_name_combo = create_cat_name_combo(category, name);
     fbConfig.firestore().collection("items").doc().set({
-        category, name_array, price, size, color, description, name,
-        cat_name_combo
+        category, name_array, price, description, name,
+        cat_name_combo, sub_category
     })
         .then(() => dispatch(addItemSuccess()))
         .catch(error => dispatch(addItemError(error)))
@@ -140,14 +163,18 @@ export const fetchFromCart = ({uid}) => dispatch => {
         .get()
         .then(snapShot => {
             const cartItems = snapShot.data().cartList;
-            if(cartItems.length === 0)
+            if (cartItems.length === 0) {
                 dispatch(fetchFromCartSuccess(items));
-            for(let i = 0; i < cartItems.length; i++){
+                return
+            }
+            for (let i = 0; i < cartItems.length; i++) {
                 fbConfig.firestore().collection("items").doc(cartItems[i])
                     .get()
                     .then(snapshot => {
-                        items.push(snapshot.data());
-                        if(i + 1 === cartItems.length){
+                        let data = snapshot.data();
+                        data.id = snapshot.id;
+                        items.push(data);
+                        if (i + 1 === cartItems.length) {
                             dispatch(fetchFromCartSuccess(items));
                         }
                     })
@@ -156,3 +183,14 @@ export const fetchFromCart = ({uid}) => dispatch => {
         }).catch();
 };
 
+export const getItemDetail = ({id}) => dispatch => {
+    getItemDetailRequest();
+    fbConfig.firestore().collection('items').doc(id)
+        .get()
+        .then(snapShot => {
+            let data = snapShot.data();
+            data.id = id;
+            dispatch(getItemDetailSuccess(data))
+        })
+        .catch(error => dispatch(getItemDetailError(error.message)))
+};
