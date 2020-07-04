@@ -22,6 +22,11 @@
     width: 100%;
 }
 
+.product-img img {
+    width: 100%;
+    height: auto;
+}
+
 .product .product-img .product-label {
     position: absolute;
     top: 15px;
@@ -221,10 +226,6 @@
     padding-top: 20px;
     overflow-y: hidden;
     overflow-x: auto;
-}
-
-@media screen and (min-width: 800px) {
-
 }
 
 .horizontal-scroll {

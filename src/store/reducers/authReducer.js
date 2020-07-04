@@ -15,7 +15,9 @@ import {
     VERIFY_SUCCESS
 } from "./../actions/authActions";
 
-export default (state = {}, action) => {
+export default (state = {
+    isLoggingIn: false
+}, action) => {
     switch (action.type) {
         case ANONYMOUS_LOGIN:
             return {

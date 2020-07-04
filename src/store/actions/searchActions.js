@@ -98,4 +98,25 @@ export const searchAllItems = () => dispatch => {
         .catch(error => dispatch(searchItemError(error)));
 };
 
+export const applyFilter = ({filterList}) => dispatch => {
+    dispatch(searchItemRequest());
+    let items = [];
+    fbConfig.firestore().collection("items")
+        .get()
+        .then(snapshot => {
+            snapshot.forEach(doc => {
+                let data = doc.data();
+                data.id = doc.id;
+                for (let i = 0; i < filterList.length; i++) {
+                    if (data.sub_category === filterList[i]) {
+                        items.push(data);
+                        break;
+                    }
+                }
+            });
+            dispatch(searchItemSuccess(items))
+        })
+        .catch(error => dispatch(searchItemError(error)));
+};
+
 

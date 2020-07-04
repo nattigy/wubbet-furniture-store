@@ -127,22 +127,78 @@ const create_cat_name_combo = (category, name) => {
     return cat_name_combo;
 };
 
-export const addItem = ({category, name, price, description, sub_category}) => dispatch => {
+export const addItem = (
+    {category, name, price, description, sub_category, frontPic, leftSidePic, rightSidePic, backPic}) => dispatch => {
+    const picture0 = "";
+    const picture1 = "";
+    const picture2 = "";
+    const picture3 = "";
     dispatch(addItemRequest());
     const name_array = create_name_array(name);
     const cat_name_combo = create_cat_name_combo(category, name);
-    fbConfig.firestore().collection("items").doc().set({
+    fbConfig.firestore().collection("items").add({
         category, name_array, price, description, name,
-        cat_name_combo, sub_category
+        cat_name_combo, sub_category, picture0, picture1, picture2, picture3
     })
+    // .then(() => dispatch(addItemSuccess()))
+        .then(item => uploadPicture([frontPic, leftSidePic, rightSidePic, backPic],
+            item.id, dispatch, category, sub_category))
+        .catch(error => dispatch(addItemError(error)))
+};
+
+const uploadPicture = (pictures, itemId, dispatch, category, sub_category) => {
+    let urlArray = [];
+    pictures.map((picture, i) => {
+        const pictureName = "picture" + i;
+        fbConfig.storage()
+            .ref(`item_pictures/${category}/${sub_category}/${itemId}/${pictureName}`)
+            .put(picture)
+            .on("state_changed",
+                null,
+                error => dispatch(addItemError(error)),
+                () => {
+                    fbConfig.storage()
+                        .ref("item_pictures")
+                        .child(`${category}/${sub_category}/${itemId}/${pictureName}`)
+                        .getDownloadURL()
+                        .then(url => {
+                            urlArray.push(url);
+                            if (urlArray.length === 4) {
+                                updateURL(urlArray, itemId, dispatch)
+                            }
+                        })
+                }
+            );
+    });
+};
+
+const updateURL = (urls, itemId, dispatch) => {
+    fbConfig.firestore().collection("items").doc(itemId)
+        .update({
+            picture0: urls[0],
+            picture1: urls[1],
+            picture2: urls[2],
+            picture3: urls[3],
+        })
         .then(() => dispatch(addItemSuccess()))
         .catch(error => dispatch(addItemError(error)))
 };
 
-export const addItemToCart = ({userId, itemId, itemPrice}) => dispatch => {
+export const addItemToCart = ({userId, itemId, itemPrice, type}) => dispatch => {
     dispatch(addItemToCartRequest());
+    let list;
+    switch (type) {
+        case "ADD_TO_CART":
+            list = "cartList";
+            break;
+        case "ADD_TO_WISH_LIST":
+            list = "wishList";
+            break;
+        default:
+            list = "cartList"
+    }
     fbConfig.firestore().collection("users").doc(userId).update({
-        cartList: fbConfig.firestore.FieldValue.arrayUnion(itemId),
+        [list]: fbConfig.firestore.FieldValue.arrayUnion(itemId),
         totalPriceOfCart: fbConfig.firestore.FieldValue.increment(itemPrice)
     })
         .then(() => {
@@ -156,13 +212,23 @@ export const addItemToCartOffline = ({item}) => dispatch => {
     dispatch(addItemToCartSuccessOffline(item));
 };
 
-export const fetchFromCart = ({uid}) => dispatch => {
+export const fetchFromCart = ({uid, type}) => dispatch => {
     dispatch(fetchFromCartRequest());
     let items = [];
     fbConfig.firestore().collection("users").doc(uid)
         .get()
         .then(snapShot => {
-            const cartItems = snapShot.data().cartList;
+            let cartItems;
+            switch (type) {
+                case "WISH_LIST":
+                    cartItems = snapShot.data().cartList;
+                    break;
+                case "CART_LIST":
+                    cartItems = snapShot.data().wishList;
+                    break;
+                default:
+                    cartItems = snapShot.data().cartList;
+            }
             if (cartItems.length === 0) {
                 dispatch(fetchFromCartSuccess(items));
                 return
