@@ -69,7 +69,7 @@ const Checkout = props => {
                 <div>
                     <PathIndicator path={[
                         {currentPath: false, pathName: "HOME", pathLink: "/"},
-                        {currentPath: true, pathName: "CHECKOUT", pathLink: props.match.path},
+                        {currentPath: true, pathName: "CHECKOUT", pathLink: props.match.url},
                     ]}/>
                     <div className="container-lg">
                         <form onSubmit={submitCheckout} id="order_furniture" name="order_furniture">

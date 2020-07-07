@@ -18,6 +18,7 @@ const TermsAndConditions = lazy(() => import('./components/privacyPolicyAndTerms
 const ReturnPolicy = lazy(() => import('./components/privacyPolicyAndTermsOfConditions/ReturnPolicy'));
 const Account = lazy(() => import('./components/account/account'));
 const MyItems = lazy(() => import('./components/myItems/myItems'));
+const MyItemDetail = lazy(() => import('./components/myItems/myItemDetail/myItemDetail'));
 
 const renderLoader = () => (
     <div className="preloading-home overflow-hidden-y">
@@ -47,9 +48,10 @@ const App = props => {
                     <Route exact path="/privacy_policy" component={PrivacyPolicy}/>
                     <Route exact path="/terms_and_conditions" component={TermsAndConditions}/>
                     <Route exact path="/return_policy" component={ReturnPolicy}/>
-                    <Route exact path="/my-account/:uid" component={Account}/>
-                    <Route exact path="/add-item" component={AddItem}/>
-                    <Route exact path="/my-items" component={MyItems}/>
+                    <Route exact path="/additem" component={AddItem}/>
+                    <Route exact path="/account/my-items" component={MyItems}/>
+                    <Route exact path="/account/my-items/:itemId" component={MyItemDetail}/>
+                    <Route exact path="/account/:uid" component={Account}/>
                 </Switch>
             </Suspense>
         </Router>

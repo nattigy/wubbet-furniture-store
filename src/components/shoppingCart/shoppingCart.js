@@ -27,7 +27,7 @@ const ShoppingCart = props => {
                 <Header/>
                 <PathIndicator path={[
                     {currentPath: false, pathName: "HOME", pathLink: "/"},
-                    {currentPath: true, pathName: "CART", pathLink: props.match.path},
+                    {currentPath: true, pathName: "CART", pathLink: props.match.url},
                 ]}/>
                 <div className="container-lg">
                     <div className="border-bottom border-light d-flex pb-3">

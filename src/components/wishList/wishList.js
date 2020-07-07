@@ -27,7 +27,7 @@ const WishList = props => {
                 <Header/>
                 <PathIndicator path={[
                     {currentPath: false, pathName: "HOME", pathLink: "/"},
-                    {currentPath: true, pathName: "WISHLIST", pathLink: props.match.path},
+                    {currentPath: true, pathName: "WISHLIST", pathLink: props.match.url},
                 ]}/>
                 <div className="container-lg">
                     {/*<div className="my-3 mx-3 border-bottom border-light">*/}

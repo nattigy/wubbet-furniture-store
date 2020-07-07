@@ -170,6 +170,7 @@ export const registerUser = ({email, password, name}) => dispatch => {
                 email: email.toString().trim(),
                 cartList: [],
                 wishList: [],
+                role: "USER"
             })
         })
         .then(() => {
