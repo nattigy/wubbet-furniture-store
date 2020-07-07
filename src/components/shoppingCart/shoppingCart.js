@@ -6,55 +6,58 @@ import {Link, Redirect} from "react-router-dom";
 import {connect} from "react-redux";
 import PreLoader from "../preLoader/preLoader";
 import {fetchFromCart} from "../../store/actions/itemActions";
+import PathIndicator from "../pathIndicator/pathIndicator";
 
 const ShoppingCart = props => {
-    const {isFetchingFromError, cartItems, isAuthenticated, newUser, user, isFetchingFromCart} = props;
+    const {isFetchingFromError, cartItems, isAuthenticated, newUser, user, isFetchingFromCart, isLoggedIn} = props;
 
     useEffect(() => {
-        props.fetchFromCart({uid: user.uid, type: "CART_LIST"})
+        props.fetchFromCart({uid: user ? user.uid : "0", type: "CART_LIST"})
     }, []);
 
     if (isAuthenticated === undefined) {
         return <div className="preloading-home overflow-hidden-y">
             <PreLoader/>
         </div>;
-    } else if (isAuthenticated === false) {
+    } else if (!isLoggedIn) {
         return <Redirect to="/login"/>;
     } else {
         return (
             <div>
                 <Header/>
+                <PathIndicator path={[
+                    {currentPath: false, pathName: "HOME", pathLink: "/"},
+                    {currentPath: true, pathName: "CART", pathLink: props.match.path},
+                ]}/>
                 <div className="container-lg">
-                    <div className="my-3 mx-3 border-bottom border-light">
-                        <div className="row">
-                            <h4 className="col-sm-6 text-nowrap">Shopping Cart</h4>
-                            <div className="col-sm-6 text-right">
-                                <Link className="checkout-btn btn-danger btn bg-red" to="/checkout">
-                                    Proceed to Checkout
-                                </Link>
-                            </div>
-                        </div>
-                        <div className="text-muted text-right mr-5 mt-3">Price</div>
+                    <div className="border-bottom border-light d-flex pb-3">
+                        <Link className="checkout-btn btn bg-red text-nowrap" to="/checkout">
+                            Proceed to Checkout
+                        </Link>
+                        <div className="text-muted price-tag text-right font-14 w-100 pt-3 pr-5">Price</div>
+                    </div>
+                    <div className="">
+                        {/*{isFetchingFromCart ? <div className="preloading-cart overflow-hidden-y">*/}
+                        {/*        <PreLoader/>*/}
+                        {/*    </div> :*/}
+                        {/*    cartItems.length === 0 &&*/}
+                        {/*    <div className="text-center py-5">*/}
+                        {/*        <h5 className="font-14">No Items In Your Cart!</h5>*/}
+                        {/*    </div>*/}
+                        {/*}*/}
+                        {/*{cartItems.map(item => <CartItem key={item.id} item={item}/>)}*/}
+                        <CartItem/>
+                        <CartItem/>
+                        <CartItem/>
+                        {/*{isFetchingFromError &&*/}
+                        {/*<div className="text-center py-5">*/}
+                        {/*    <h5 className="font-14">No Items In Your Cart!</h5>*/}
+                        {/*</div>*/}
+                        {/*}*/}
                     </div>
                     <div className="py-3">
-                        {isFetchingFromCart ? <div className="preloading-cart overflow-hidden-y">
-                                <PreLoader/>
-                            </div> :
-                            cartItems.length === 0 &&
-                            <div className="text-center py-5">
-                                <h5>No Items In Your Cart!</h5>
-                            </div>
-                        }
-                        {cartItems.map(item => <CartItem key={item.id} item={item}/>)}
-                        {isFetchingFromError &&
-                        <div className="text-center py-5">
-                            <h5>No Items In Your Cartt!</h5>
-                        </div>
-                        }
-                    </div>
-                    <div className="py-3">
-                        <p className="text-right mr-5">Subtotal ({cartItems.length} items):
-                            <span className="text-danger font-weight-bold"> {newUser.totalPriceOfCart &&
+                        <p className="text-right mr-5 font-16">Subtotal ({cartItems.length} items):
+                            <span className="text-danger font-weight-bold font-16"> {newUser.totalPriceOfCart &&
                             newUser.totalPriceOfCart.toString()} birr</span>
                         </p>
                     </div>

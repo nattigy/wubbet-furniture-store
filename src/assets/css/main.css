@@ -1,3 +1,28 @@
+body {
+    font-family: 'Montserrat', sans-serif;
+    overflow-x: hidden !important;
+}
+
+.font-12 {
+    font-size: 12px;
+}
+
+.font-14 {
+    font-size: 14px;
+}
+
+.font-16 {
+    font-size: 16px;
+}
+
+.font-18 {
+    font-size: 18px !important;
+}
+
+.font-24 {
+    font-size: 24px;
+}
+
 .bg-blue-custom {
     background-color: #1E1F29;
 }
@@ -8,10 +33,6 @@
 
 .bg-grey {
     background: linear-gradient(to bottom, #e3e4e6, #bdbfc2);
-}
-
-.border-light-custom {
-    border-color: #e6e7e8 !important
 }
 
 .MuiCircularProgress-colorSecondary {
@@ -37,6 +58,12 @@ h1, h2, h3, h4, h5, h6 {
     margin: 0 0 10px;
 }
 
+.title {
+    font-size: 24px;
+    color: #2B2D42;
+    font-weight: 700;
+}
+
 a {
     color: white;
 }
@@ -49,10 +76,6 @@ a:hover {
 
 .bg-red {
     background-color: #D10024;
-}
-
-body {
-    overflow-x: hidden !important;
 }
 
 input, button, select, svg {
@@ -73,4 +96,22 @@ input, button, select, svg {
     margin-left: 50%;
     left: -20px !important;
     top: -45px !important;
+}
+
+.breadcrumb {
+    border-bottom: 1px solid #E4E7ED;
+    border-top: 2px solid #E4E7ED;
+}
+
+.breadcrumb-tree {
+    list-style: none;
+    display: inline-block;
+}
+
+.breadcrumb-item {
+    display: inline-block;
+}
+
+.border-light-custom {
+    border-color: #c2c3c4
 }

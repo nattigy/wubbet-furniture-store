@@ -128,7 +128,7 @@ const create_cat_name_combo = (category, name) => {
 };
 
 export const addItem = (
-    {category, name, price, description, sub_category, frontPic, leftSidePic, rightSidePic, backPic}) => dispatch => {
+    {category, name, price, description, sub_category, frontPic, leftSidePic, rightSidePic, backPic, uid}) => dispatch => {
     const picture0 = "";
     const picture1 = "";
     const picture2 = "";
@@ -138,7 +138,8 @@ export const addItem = (
     const cat_name_combo = create_cat_name_combo(category, name);
     fbConfig.firestore().collection("items").add({
         category, name_array, price, description, name,
-        cat_name_combo, sub_category, picture0, picture1, picture2, picture3
+        cat_name_combo, sub_category, picture0, picture1, picture2, picture3,
+        owner: uid
     })
     // .then(() => dispatch(addItemSuccess()))
         .then(item => uploadPicture([frontPic, leftSidePic, rightSidePic, backPic],
@@ -246,7 +247,7 @@ export const fetchFromCart = ({uid, type}) => dispatch => {
                     })
                     .catch(error => dispatch(fetchFromCartError(error)))
             }
-        }).catch();
+        }).catch(error => dispatch(fetchFromCartError(error)));
 };
 
 export const getItemDetail = ({id}) => dispatch => {

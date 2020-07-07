@@ -6,6 +6,7 @@ import SingleProduct from "../singleProductView/singleProduct"
 import {connect} from "react-redux";
 import PreLoader from "../preLoader/preLoader";
 import Filter from "./filters";
+import PathIndicator from "../pathIndicator/pathIndicator";
 
 const Store = props => {
 
@@ -37,6 +38,11 @@ const Store = props => {
     return (
         <Fragment>
             <Header/>
+            <PathIndicator path={[
+                {currentPath: false, pathName: "HOME", pathLink: "/"},
+                {currentPath: false, pathName: "ALL CATEGORY", pathLink: "/items/all/all"},
+                {currentPath: true, pathName: "ITEM NAME", pathLink: "/item/sdhfkjhsakjhdfkjkk"},
+            ]}/>
             <div className="section py-4">
                 <div className="container-lg">
                     <div className="row">

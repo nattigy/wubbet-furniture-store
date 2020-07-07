@@ -9,7 +9,7 @@ const ProductDescription = props => {
     return (
         <div className="col-md-5">
             <div>
-                <h4>{name}</h4>
+                <h3 className="title">{name}</h3>
                 <div className="my-3">
                     <div className="d-inline-block mr-3">
                         <FontAwesomeIcon icon={faStar} size="1x" color="#D10024"/>
@@ -20,12 +20,13 @@ const ProductDescription = props => {
                     {/*<a className="text-dark" href="/">10 Review(s) | Add your review</a>*/}
                 </div>
                 <div className="my-2">
-                    <h4 className="text-danger mr-3 d-inline-block">{price} birr
+                    <h4 className="text-danger mr-3 d-inline-block">
+                        <span className="text-danger font-24">{price}</span> birr
                         {old_price && <del className="small text-muted"> {old_price} birr</del>}
                     </h4>
-                    <span className="small text-danger font-weight-bold">IN STOCK</span>
+                    <span className="small text-danger font-weight-bold font-14">IN STOCK</span>
                 </div>
-                <p className="mb-3">{description}</p>
+                <p className="mb-3 font-14">{description}</p>
 
                 <AddToCartButton credentials={credentials}/>
 
@@ -40,7 +41,7 @@ const ProductDescription = props => {
                 {/*                             color="rgb(30, 31, 41, 0.9)"/> add to compare</a></li>*/}
                 {/*</ul>*/}
 
-                <ul className="list-unstyled my-4 text-muted">
+                <ul className="list-unstyled my-4 text-muted font-14">
                     <li className="d-inline-block mr-2">Category:</li>
                     <li className="d-inline-block mr-2">
                         <a className="text-dark" href={`/items/${category}`}>{category} </a></li>

@@ -42,7 +42,7 @@ const ProductDetail = props => {
                             }}/>
                             {/*<DescriptionAndDetails item={itemDetail}/>*/}
                         </Fragment>}
-                        {gettingItemDetailError && <div className="w-100 text-center text-danger py-3">
+                        {gettingItemDetailError && <div className="w-100 text-center text-danger py-3 font-14">
                             Unknown error, Please try again!
                         </div>}
                     </div>

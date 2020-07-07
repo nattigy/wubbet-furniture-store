@@ -1,16 +1,26 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import logo from "../../assets/img/mainLogo.jpg"
 import {faBars, faHeart, faSearch, faShoppingCart} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {Link} from "react-router-dom";
 import {connect} from "react-redux";
+import ShoppingCartMini from "../shoppingCart/shoppingCartMini";
 
 const SearchSection = props => {
 
     const [category, setCategory] = useState("all");
     const [name, setName] = useState("all");
+    const [openCart, setOpenCart] = useState(false);
 
     const {newUser} = props;
+
+    useEffect(() => {
+        window.onclick = function (event) {
+            if (!event.target.matches('.mini-cart') && !event.target.matches('.your-cart')) {
+                setOpenCart(false)
+            }
+        }
+    }, []);
 
     return (
         <div className="container-fluid bg-dark-custom">
@@ -39,19 +49,22 @@ const SearchSection = props => {
                             </form>
                         </div>
                     </div>
-                    <div className="col-lg-3 text-right overflow-hidden">
+                    <div className="col-lg-3 text-right">
                         <ul className="navbar-nav d-block text-nowrap pt-4">
-                            <li className="nav-item position-relative text-center nav-inline mx-3">
+                            <li className="contact-link nav-item position-relative text-center nav-inline mx-3">
                                 <FontAwesomeIcon icon={faHeart} color="#fff"/>
                                 <Link className="text-white d-block small" to="/wishlist">Your Wishlist</Link>
                                 {newUser !== {} || newUser !== undefined &&
                                 <div className="qty">{newUser.wishList.length}</div>}
                             </li>
-                            <li className="nav-item position-relative text-center nav-inline mx-3">
+                            <li className="contact-link nav-item position-relative text-center nav-inline mx-3">
                                 <FontAwesomeIcon icon={faShoppingCart} color="#fff"/>
-                                <Link className="text-white d-block small" to="/cart">Your Cart</Link>
+                                <span onClick={() => setOpenCart(!openCart)}
+                                      className="text-white d-block small your-cart">Your Cart</span>
                                 {newUser !== {} || newUser !== undefined &&
                                 <div className="qty">{newUser.cartList.length}</div>}
+                                <ShoppingCartMini openCart={openCart}
+                                                  cart={newUser !== {} || newUser !== undefined && newUser.cartList}/>
                             </li>
                             <li className="nav-item nav-inline mx-3">
                                 <button className="text-white bg-transparent border-0 closebtn"

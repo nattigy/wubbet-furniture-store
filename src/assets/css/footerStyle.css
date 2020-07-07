@@ -1,5 +1,6 @@
-.footer-links li a {
-    color: #6c757d;
+.footer-links li a, .footer p {
+    color: #B9BABC;
+    font-size: 14px;
 }
 
 .footer-links li a:hover {
@@ -65,4 +66,9 @@
 .subscription-input {
     border-top-left-radius: .25rem;
     border-bottom-left-radius: .25rem;
+}
+
+.copyright {
+    color: #B9BABC;
+    font-size: 12px;
 }

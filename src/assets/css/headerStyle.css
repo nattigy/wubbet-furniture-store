@@ -7,6 +7,14 @@
     width: calc(100% - 210px);
 }
 
+.nav-item-custom a {
+    font: 14px 'Montserrat', sans-serif
+}
+
+.contact-link a, .contact-link span {
+    font-size: 12px;
+}
+
 @media screen and (max-width: 991px) {
     .sidenav {
         height: 100%;
@@ -45,6 +53,10 @@
         right: 25px;
         font-size: 36px;
         margin-left: 50px;
+    }
+
+    .sidenav ul li {
+        margin: 15px 0;
     }
 }
 
@@ -131,6 +143,10 @@
     .nav-link-custom {
         color: black;
     }
+}
+
+.navbar-link {
+    padding-left: 20px !important;
 }
 
 @media screen and (max-height: 450px) {

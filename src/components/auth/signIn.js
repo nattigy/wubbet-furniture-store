@@ -22,7 +22,7 @@ const SignIn = props => {
     } else {
         return (
             <div className="">
-                <div className="container-sm max-width">
+                <div className="container-sm max-width mb-5 pb-5">
                     <div className="my-5 mx-auto" style={{width: "200px"}}>
                         <Link to="/">
                             <img src={logo} className="mx-auto w-100" style={{height: "50px"}} alt=""/>
@@ -36,7 +36,7 @@ const SignIn = props => {
                             </div>
                         </div>
                         }
-                        <h1>Sign In</h1>
+                        <h3 className="title">Sign In</h3>
                         <form onSubmit={signIn}>
                             <div className="my-3">
                                 <label className="" htmlFor="email">Email</label><br/>
@@ -56,7 +56,7 @@ const SignIn = props => {
                             </div>
                         </form>
 
-                        <p>
+                        <p className="font-14">
                             By continuing an account, you agree to Wubbet's
                             <Link className="text-muted" to="/terms_and_conditions"> Conditions of Use</Link> and
                             <Link className="text-muted" to="/privacy_policy"> Privacy Notice</Link>.
@@ -64,7 +64,7 @@ const SignIn = props => {
 
                     </div>
 
-                    <div className="text-center" style={{maxWidth: "400px", margin: "20px auto"}}>
+                    <div className="text-center font-14" style={{maxWidth: "400px", margin: "20px auto"}}>
                         <p>New to Wubbet?</p>
                         <Link to="/register" className="w-100 btn btn-secondary">Create Account</Link>
                     </div>

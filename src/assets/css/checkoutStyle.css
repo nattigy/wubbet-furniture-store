@@ -8,6 +8,10 @@ input:checked ~ .custom-control-label::before {
     color: transparent;
 }
 
+.border-light-custom {
+    border-color: #e6e7e8 !important
+}
+
 .block-submit {
     position: absolute;
     top: 15px;

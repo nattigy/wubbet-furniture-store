@@ -1,13 +1,13 @@
 import React, {Fragment, useEffect, useState} from "react";
 import Header from "../header/header";
 import Footer from "../footer/footer";
-import {Link} from "react-router-dom";
+import {Link, Redirect} from "react-router-dom";
 import {fetchFromCart} from "../../store/actions/itemActions";
 import {connect} from "react-redux";
 import PreLoader from "../preLoader/preLoader";
-import {Redirect} from "react-router";
 import {orderFurniture} from "../../store/actions/orderActions";
 import Dialog from "@material-ui/core/Dialog/Dialog";
+import PathIndicator from "../pathIndicator/pathIndicator";
 
 const Checkout = props => {
     const {
@@ -17,13 +17,13 @@ const Checkout = props => {
     } = props;
 
     const [fullName, setFullName] = useState("");
-    const [user_id] = useState(user.uid);
+    const [user_id] = useState(user ? user.uid : 0);
     const [address, setAddress] = useState("");
     const [city, setCity] = useState("");
     const [telephone, setTelephone] = useState("");
     const [order_notes, setOrder_notes] = useState("");
-    const [total_price] = useState(newUser.totalPriceOfCart);
-    const [ordered_items] = useState(newUser.cartList);
+    const [total_price] = useState(newUser ? newUser.totalPriceOfCart : 0);
+    const [ordered_items] = useState(newUser && newUser.cartList);
     const [payment_method, setPayment_method] = useState("Direct Bank Transfer");
     const [orderSentConfirmation, setOrderSentConfirmation] = useState(true);
     const [direct_bank, setDirect_bank] = useState(true);
@@ -31,7 +31,7 @@ const Checkout = props => {
     const [agreeToTerms, setAgreeToTerms] = useState(false);
 
     useEffect(() => {
-        props.fetchFromCart({uid: user.uid});
+        props.fetchFromCart({uid: user ? user.uid : "0"});
     }, []);
 
     const submitCheckout = e => {
@@ -67,17 +67,17 @@ const Checkout = props => {
                 }
                 <Header/>
                 <div>
-                    <div className="container-lg py-3">
-                        <h4>Checkout</h4>
-                    </div>
-
+                    <PathIndicator path={[
+                        {currentPath: false, pathName: "HOME", pathLink: "/"},
+                        {currentPath: true, pathName: "CHECKOUT", pathLink: props.match.path},
+                    ]}/>
                     <div className="container-lg">
                         <form onSubmit={submitCheckout} id="order_furniture" name="order_furniture">
                             <div className="row">
-                                <div className="col-md-7">
-                                    <div className="">
-                                        <div className="mb-4">
-                                            <h5 className="">Address</h5>
+                                <div className="col-md-7 mb-5">
+                                    <div className="py-4">
+                                        <div className="mb-5">
+                                            <h3 className="title">ADDRESS</h3>
                                         </div>
                                         <div className="form-group">
                                             <input className="form-control w-100" type="text" id="fullname"
@@ -111,26 +111,27 @@ const Checkout = props => {
                                     </div>
                                 </div>
 
-                                <div className="col-md-5 border border-light p-4">
-                                    <div className="text-center mb-4">
-                                        <h5 className="">Your Order</h5>
+                                <div className="col-md-5 mb-5 border-light-custom p-4">
+                                    <div className="text-center mb-5">
+                                        <h5 className="title">YOUR ORDER</h5>
                                     </div>
                                     <div className="order-summary">
                                         <div className="d-table w-100 my-4">
-                                            <div className="d-table-cell"><strong>PRODUCT</strong></div>
-                                            <div className="d-table-cell text-right"><strong>TOTAL</strong></div>
+                                            <div className="d-table-cell font-14"><strong>PRODUCT</strong></div>
+                                            <div className="d-table-cell font-14 text-right"><strong>TOTAL</strong>
+                                            </div>
                                         </div>
                                         {isFetchingFromCart ? <div className="preloading-home overflow-hidden-y">
                                                 <PreLoader/>
                                             </div> :
                                             cartItems.length === 0 &&
                                             <div className="text-center py-5">
-                                                <h5>No Items In Your Cart!</h5>
+                                                <h5 className="font-14">No Items In Your Cart!</h5>
                                             </div>
                                         }
                                         {isFetchingFromError &&
                                         <div className="text-center py-5">
-                                            <h5>No Items In Your Cart!</h5>
+                                            <h5 className="font-14">No Items In Your Cart!</h5>
                                         </div>
                                         }
                                         <div className="order-products my-3">
@@ -143,14 +144,15 @@ const Checkout = props => {
                                             </div>)}
                                         </div>
                                         <div className="d-table w-100 my-3">
-                                            <div className="d-table-cell text-muted">Shiping</div>
-                                            <div className="d-table-cell text-right"><strong>FREE</strong></div>
+                                            <div className="d-table-cell text-muted font-14">Shiping</div>
+                                            <div className="d-table-cell text-right font-14"><strong>FREE</strong></div>
                                         </div>
                                         <div className="d-table w-100 my-3">
-                                            <div className="d-table-cell"><strong>TOTAL</strong></div>
+                                            <div className="d-table-cell font-14"><strong>TOTAL</strong></div>
                                             <div className="d-table-cell text-right"><strong
-                                                className="order-total text-danger font-weight-bolder">
-                                                {newUser.totalPriceOfCart && newUser.totalPriceOfCart.toString()} birr</strong>
+                                                className="order-total font-24 text-danger font-weight-bolder">
+                                                {newUser.totalPriceOfCart && newUser.totalPriceOfCart.toString()}545</strong>
+                                                <span className="text-danger font-weight-bolder"> birr</span>
                                                 <input type="hidden" name="total_price" id="total_price"
                                                        value={newUser.totalPriceOfCart}/>
                                             </div>
@@ -168,13 +170,13 @@ const Checkout = props => {
                                                            setAmole(!amole);
                                                        }}
                                                 />
-                                                <label className="custom-control-label" htmlFor="customRadio1">
+                                                <label className="custom-control-label font-14" htmlFor="customRadio1">
                                                     Direct Bank Transfer</label>
                                             </div>
                                             <div className={`pl-4 my-2 ${direct_bank ? `d-block` : `d-none`}`}>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                                                    eiusmod
-                                                    tempor incididunt ut labore et dolore magna aliqua.</p>
+                                                <p className="font-14">Lorem ipsum dolor sit amet, consectetur
+                                                    adipisicing elit, sed do eiusmod tempor incididunt ut labore
+                                                    et dolore magna aliqua.</p>
                                             </div>
                                         </div>
                                         <div className="input-radio py-2">
@@ -188,13 +190,13 @@ const Checkout = props => {
                                                            setDirect_bank(!direct_bank);
                                                        }}
                                                 />
-                                                <label className="custom-control-label" htmlFor="customRadio2">
+                                                <label className="custom-control-label font-14" htmlFor="customRadio2">
                                                     Cheque Payment</label>
                                             </div>
                                             <div className={`pl-4 my-2 ${amole ? `d-block` : `d-none`}`}>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                                                    eiusmod
-                                                    tempor incididunt ut labore et dolore magna aliqua.</p>
+                                                <p className="font-14">Lorem ipsum dolor sit amet, consectetur
+                                                    adipisicing elit, sed do eiusmod tempor incididunt ut labore
+                                                    et dolore magna aliqua.</p>
                                             </div>
                                         </div>
                                     </div>
@@ -204,7 +206,8 @@ const Checkout = props => {
                                                    id="customControlInline"
                                                    onChange={() => setAgreeToTerms(!agreeToTerms)}
                                             />
-                                            <label className="custom-control-label" htmlFor="customControlInline">
+                                            <label className="custom-control-label font-14"
+                                                   htmlFor="customControlInline">
                                                 I've read and accept the
                                                 <Link className="text-muted" to="/terms_and_conditions"> terms &
                                                     conditions</Link>

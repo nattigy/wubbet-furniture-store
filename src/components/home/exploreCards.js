@@ -8,7 +8,7 @@ import {Link} from "react-router-dom";
 
 const ExploreCards = () => {
     return (
-        <div className="container-lg my-3">
+        <div className="container-lg my-5">
             <div className="row">
                 <div className="col-md-4 col-xs-6">
                     <div className="shop">

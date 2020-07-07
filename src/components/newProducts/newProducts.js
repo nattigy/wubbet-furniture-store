@@ -28,12 +28,12 @@ const NewProducts = props => {
                 <div className="row">
                     <div className="col-md-12">
                         <div className="section-title">
-                            <h3 className="title d-inline-block">New Products</h3>
+                            <h3 className="title d-inline-block">NEW PRODUCTS</h3>
                             <div className="section-nav d-inline-block float-right">
                                 <ul className="nav nav-tabs d-inline-block border-bottom-0 section-tab-nav"
                                     role="tablist">
                                     <li className="d-inline-block mr-3 ">
-                                        <a className="nav-link-custom active" data-toggle="tab" href="#tab1"
+                                        <a className="nav-link-custom active font-14" data-toggle="tab" href="#tab1"
                                            onClick={() => {
                                                setTab1(true);
                                                setTab2(false);
@@ -41,7 +41,7 @@ const NewProducts = props => {
                                            }}
                                            aria-controls="tab1" aria-selected="false">Home</a></li>
                                     <li className="d-inline-block mr-3">
-                                        <a className="" data-toggle="tab" href="#tab2"
+                                        <a className="font-14" data-toggle="tab" href="#tab2"
                                            onClick={() => {
                                                setTab1(false);
                                                setTab2(true);
@@ -49,7 +49,7 @@ const NewProducts = props => {
                                            }}
                                            aria-controls="tab2" aria-selected="false">Commercial</a></li>
                                     <li className="d-inline-block mr-3">
-                                        <a className="" data-toggle="tab" href="#tab3"
+                                        <a className="font-14" data-toggle="tab" href="#tab3"
                                            onClick={() => {
                                                setTab1(false);
                                                setTab2(false);

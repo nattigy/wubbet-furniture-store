@@ -19,6 +19,7 @@ import "./assets/css/productDetailStyle.css"
 import "./assets/css/homeStyle.css"
 import "./assets/css/storeStyle.css"
 import "./assets/css/text.css"
+import "./assets/css/addItemStyle.css"
 
 const store = configureStore();
 const rrfConfig = {

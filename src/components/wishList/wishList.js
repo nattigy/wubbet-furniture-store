@@ -6,31 +6,35 @@ import {connect} from "react-redux";
 import PreLoader from "../preLoader/preLoader";
 import {fetchFromCart} from "../../store/actions/itemActions";
 import WishListItem from "./wishListItem";
+import PathIndicator from "../pathIndicator/pathIndicator";
 
 const WishList = props => {
-    const {isFetchingFromError, cartItems, isAuthenticated, newUser} = props;
+    const {isFetchingFromError, cartItems, isAuthenticated, newUser, user, isLoggedIn} = props;
 
     useEffect(() => {
-        isAuthenticated && props.fetchFromCart({itemsId: newUser.wishList, type: "WISH_LIST"})
+        isAuthenticated && props.fetchFromCart({uid: user ? user.uid : "0", type: "WISH_LIST"})
     }, []);
 
     if (isAuthenticated === undefined) {
         return <div className="preloading-home overflow-hidden-y">
             <PreLoader/>
         </div>;
-    } else if (isAuthenticated === false) {
+    } else if (!isLoggedIn) {
         return <Redirect to="/login"/>;
     } else {
         return (
             <div>
                 <Header/>
+                <PathIndicator path={[
+                    {currentPath: false, pathName: "HOME", pathLink: "/"},
+                    {currentPath: true, pathName: "WISHLIST", pathLink: props.match.path},
+                ]}/>
                 <div className="container-lg">
-                    <div className="my-3 mx-3 border-bottom border-light">
-                        <div className="row">
-                            <h4 className="col-sm-6 text-nowrap">Wish List</h4>
-                        </div>
-                        <div className="text-muted text-right mr-5 mt-3">Price</div>
-                    </div>
+                    {/*<div className="my-3 mx-3 border-bottom border-light">*/}
+                    {/*    <div className="row">*/}
+                    {/*        <h4 className="col-sm-6 text-nowrap">Wish List</h4>*/}
+                    {/*    </div>*/}
+                    {/*</div>*/}
                     <div className="py-3">
                         {/*{cartItems.map(item => <WishListItem key={item.id} item={item}/>)}*/}
                         <WishListItem/>
@@ -56,6 +60,7 @@ const mapStateToProps = state => {
         isLoggedIn: state.auth.isLoggedIn,
         isAuthenticated: state.auth.isAuthenticated,
         newUser: state.auth.newUser,
+        user: state.auth.user,
         cartItems: state.item.cartItems,
         isFetchingFromError: state.item.isFetchingFromError,
     };

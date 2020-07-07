@@ -16,7 +16,8 @@ import {
 } from "./../actions/authActions";
 
 export default (state = {
-    isLoggingIn: false
+    isLoggingIn: false,
+    isLoggedIn: false
 }, action) => {
     switch (action.type) {
         case ANONYMOUS_LOGIN:

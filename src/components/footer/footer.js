@@ -10,31 +10,33 @@ const Footer = () => {
         <Fragment>
             <Subscribe/>
             <footer id="footer">
-                <div className="bg-dark-custom py-5">
+                <div className="bg-dark-custom pt-5">
                     <div className="container-lg">
                         <div className="row">
-                            <div className="col-md-3 col-sm-6">
-                                <div className="footer"><h3 className="footer-title text-white">About Us</h3>
-                                    <p className="text-muted footer-links">Lorem ipsum dolor sit amet, consectetur
+                            <div className="col-md-3 col-sm-6 mb-5">
+                                <div className="footer"><h3 className="title font-18 mb-3 text-white">ABOUT US</h3>
+                                    <p className="footer-links">Lorem ipsum dolor sit amet, consectetur
                                         adipisicing elit, sed do eiusmod tempor
                                         incididunt ut.</p>
                                     <ul className="footer-links navbar-nav">
-                                        <li><a href="/" target="_blank"><FontAwesomeIcon icon={faMapMarker} size="sm"
-                                                                                         color="#D10024"/> 1734
-                                            Stonecoal Road</a></li>
-                                        <li><a href="/" target="_blank"><FontAwesomeIcon icon={faPhone} size="sm"
-                                                                                         color="#D10024"/> +021-95-51-84</a>
+                                        <li><a href="/" target="_blank">
+                                            <FontAwesomeIcon icon={faMapMarker}
+                                                             size="sm" color="#D10024"/> 1734 Stonecoal Road</a></li>
+                                        <li><a href="/" target="_blank">
+                                            <FontAwesomeIcon icon={faPhone}
+                                                             size="sm" color="#D10024"/> +021-95-51-84</a>
                                         </li>
-                                        <li><a href="/" target="_blank"><FontAwesomeIcon icon={faEnvelope} size="sm"
-                                                                                         color="#D10024"/> email@email.com</a>
+                                        <li><a href="/" target="_blank">
+                                            <FontAwesomeIcon icon={faEnvelope}
+                                                             size="sm" color="#D10024"/> email@email.com</a>
                                         </li>
                                     </ul>
                                 </div>
                             </div>
 
-                            <div className="col-md-3 col-sm-6">
+                            <div className="col-md-3 col-sm-6 mb-5">
                                 <div className="footer">
-                                    <h3 className="footer-title text-white">Categories</h3>
+                                    <h3 className="title font-18 text-white">CATEGORIES</h3>
                                     <ul className="footer-links navbar-nav">
                                         <li><Link to="/">Hot deals</Link></li>
                                         <li><Link to="/new_items">New Items</Link></li>
@@ -47,9 +49,9 @@ const Footer = () => {
 
                             <div className="clearfix visible-xs"/>
 
-                            <div className="col-md-3 col-sm-6">
+                            <div className="col-md-3 col-sm-6 mb-5">
                                 <div className="footer">
-                                    <h3 className="footer-title text-white">Information</h3>
+                                    <h3 className="title font-18 text-white">INFORMATION</h3>
                                     <ul className="footer-links navbar-nav">
                                         <li><Link to="/">About Us</Link></li>
                                         <li><Link to="/">Contact Us</Link></li>
@@ -60,13 +62,13 @@ const Footer = () => {
                                 </div>
                             </div>
 
-                            <div className="col-md-3 col-sm-6">
+                            <div className="col-md-3 col-sm-6 mb-5">
                                 <div className="footer">
-                                    <h3 className="footer-title text-white">Service</h3>
+                                    <h3 className="title font-18 text-white">SERVICE</h3>
                                     <ul className="footer-links navbar-nav">
                                         <li><Link to="/">My Account</Link></li>
                                         <li><Link to="/cart">View Cart</Link></li>
-                                        <li><Link to="/whishlist">Wishlist</Link></li>
+                                        <li><Link to="/whishlist">Wish List</Link></li>
                                         <li><Link to="/">Help</Link></li>
                                     </ul>
                                 </div>

@@ -1,0 +1,10 @@
+.image-preview {
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+    border: 1px solid #e6e7e8;
+}
+
+form label {
+    font-size: 14px;
+}

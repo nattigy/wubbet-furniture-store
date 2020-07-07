@@ -6,7 +6,7 @@ const PrivacyPolicy = () => {
     return (
         <Fragment>
             <Header/>
-            <div className="container-lg paragraphs my-5">
+            <div className="container-lg paragraphs my-5 text-justify">
                 <h4>Wubbet.com Privacy Policy</h4>
 
                 <p>
@@ -27,20 +27,24 @@ const PrivacyPolicy = () => {
                     You may provide the following information to us:
                     <ul>
                         <li>
-                            Personal and contact information, such as name, date of birth, email address,
+                            <strong>Personal and contact information,</strong> such as name, date of birth, email
+                            address,
                             mobile/landline telephone number, home address and location, age, and gender.
                         </li>
                         <li>
-                            Payment information, such as bank account information or credit card information and billing
+                            <strong>Payment information,</strong> such as bank account information or credit card
+                            information and billing
                             address, however we will not view, share or store any password or other financial
                             information not affiliated with Wubbet services that is protected by your bank or other
                             financial service providers.
                         </li>
                         <li>
-                            Purchasing activity, product preferences and reasons for purchasing a product.
+                            <strong>Purchasing activity,</strong> product preferences and reasons for purchasing a
+                            product.
                         </li>
                         <li>
-                            Information you post: If you comment or otherwise provide information in a public space on
+                            <strong>Information you post:</strong> If you comment or otherwise provide information in a
+                            public space on
                             one of our websites, we collect a record of it and any personal information included in the
                             comment. For example, this may include posting a review of a product.
                         </li>

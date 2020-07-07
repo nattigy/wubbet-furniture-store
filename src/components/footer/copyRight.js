@@ -23,7 +23,7 @@ export const CopyRight = () => {
                             <li className="mx-2 d-inline-block">
                                 <a href="/"><FontAwesomeIcon icon={faCcAmex} size="sm" color="#D10024"/></a></li>
                         </ul>
-                        <span className="copyright text-muted">
+                        <span className="copyright">
                             Copyright &copy; {`${fullYear}`} All rights reserved
                         </span>
                     </div>
