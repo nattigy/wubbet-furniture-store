@@ -219,7 +219,8 @@
 }
 
 .products-slick {
-    width: 100vw;
+    max-width: 1140px;
+    width: 97vw;
     height: 500%;
     padding-left: 5px;
     padding-right: 5px;
@@ -259,5 +260,35 @@
 
 .section-tab-nav li a:hover:after, .section-tab-nav li a:focus:after, .section-tab-nav li a.active:after {
     width: 100%;
+}
+
+@media screen and (min-width: 1000px) {
+    .products-slick {
+        width: 93vw;
+    }
+}
+
+@media screen and (min-width: 1050px) {
+    .products-slick {
+        width: 90vw;
+    }
+}
+
+@media screen and (min-width: 1100px) {
+    .products-slick {
+        width: 87vw;
+    }
+}
+
+@media screen and (min-width: 1160px) {
+    .products-slick {
+        width: 80vw;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .products-slick {
+        width: 95vw;
+    }
 }
 

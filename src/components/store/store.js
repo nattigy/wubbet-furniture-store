@@ -46,13 +46,13 @@ const Store = props => {
             <div className="section py-4">
                 <div className="container-lg">
                     <div className="row">
-                        <div className="col-md-3">
+                        <div className="col-md-2">
                             <Filter appplyFilter={newFilterList => {
                                 setFilterList(newFilterList);
                                 setRerender(!rerender)
                             }}/>
                         </div>
-                        <div id="store" className="col-md-9">
+                        <div id="store" className="col-md-10">
                             <div className="row text-center">
                                 {isSearching ?
                                     <div className="preloading-store">

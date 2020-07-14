@@ -19,7 +19,7 @@ const SingleProduct = props => {
                 <p className="product-category">{item.category}</p>
                 <h3 className="product-name"><a className="text-dark"
                                                 href="/">{item.name}</a></h3>
-                <h4 className="product-price">{item.price} birr
+                <h4 className="product-price">{item.price} ETB
                     <del className="product-old-price">{item.oldPrice && `${item.oldPrice} birr`}</del>
                 </h4>
                 <div className="product-rating">
@@ -30,14 +30,14 @@ const SingleProduct = props => {
                     <FontAwesomeIcon icon={faStar} size="1x" color="#D10024"/>
                 </div>
                 <div className="product-btns">
-                    <span className="add-to-wishlist">
+                    <Link to="" className="add-to-wishlist">
                         <FontAwesomeIcon onClick={() => props.addToCart({
                             userId: user.uid,
                             itemId: item.id,
                             type: "ADD_TO_WISH_LIST"
                         })} icon={faHeart} size="1x" color="#475161"/>
                         <span className="tooltipp">add to wishlist</span>
-                    </span>
+                    </Link>
                     <Link to={`/item/${item.id}`} className="quick-view">
                         <FontAwesomeIcon icon={faEye} size="1x" color="#475161"/>
                         <span className="tooltipp">quick view</span>
@@ -47,7 +47,7 @@ const SingleProduct = props => {
             <AddToCartButton credentials={{
                 isAddingToCart,
                 isLoggedIn,
-                userId: user.uid,
+                userId: user ? user.uid : "0",
                 itemId: item.id,
                 itemPrice: parseInt(item.price)
             }}/>

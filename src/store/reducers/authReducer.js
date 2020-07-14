@@ -17,7 +17,6 @@ import {
 
 export default (state = {
     isLoggingIn: false,
-    isLoggedIn: false
 }, action) => {
     switch (action.type) {
         case ANONYMOUS_LOGIN:

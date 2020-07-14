@@ -13,7 +13,7 @@ const ShoppingCart = props => {
 
     useEffect(() => {
         props.fetchFromCart({uid: user ? user.uid : "0", type: "CART_LIST"})
-    }, []);
+    }, [user]);
 
     if (isAuthenticated === undefined) {
         return <div className="preloading-home overflow-hidden-y">
@@ -37,28 +37,25 @@ const ShoppingCart = props => {
                         <div className="text-muted price-tag text-right font-14 w-100 pt-3 pr-5">Price</div>
                     </div>
                     <div className="">
-                        {/*{isFetchingFromCart ? <div className="preloading-cart overflow-hidden-y">*/}
-                        {/*        <PreLoader/>*/}
-                        {/*    </div> :*/}
-                        {/*    cartItems.length === 0 &&*/}
-                        {/*    <div className="text-center py-5">*/}
-                        {/*        <h5 className="font-14">No Items In Your Cart!</h5>*/}
-                        {/*    </div>*/}
-                        {/*}*/}
-                        {/*{cartItems.map(item => <CartItem key={item.id} item={item}/>)}*/}
-                        <CartItem/>
-                        <CartItem/>
-                        <CartItem/>
-                        {/*{isFetchingFromError &&*/}
-                        {/*<div className="text-center py-5">*/}
-                        {/*    <h5 className="font-14">No Items In Your Cart!</h5>*/}
-                        {/*</div>*/}
-                        {/*}*/}
+                        {isFetchingFromCart ? <div className="preloading-cart overflow-hidden-y">
+                                <PreLoader/>
+                            </div> :
+                            cartItems.length === 0 &&
+                            <div className="text-center py-5">
+                                <h5 className="font-14">No Items In Your Cart!</h5>
+                            </div>
+                        }
+                        {cartItems.map(item => <CartItem key={item.id} item={item}/>)}
+                        {isFetchingFromError &&
+                        <div className="text-center py-5">
+                            <h5 className="font-14">No Items In Your Cart!</h5>
+                        </div>
+                        }
                     </div>
                     <div className="py-3">
                         <p className="text-right mr-5 font-16">Subtotal ({cartItems.length} items):
                             <span className="text-danger font-weight-bold font-16"> {newUser.totalPriceOfCart &&
-                            newUser.totalPriceOfCart.toString()} birr</span>
+                            newUser.totalPriceOfCart.toString()} ETB</span>
                         </p>
                     </div>
                 </div>

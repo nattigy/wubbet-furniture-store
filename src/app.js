@@ -18,7 +18,6 @@ const TermsAndConditions = lazy(() => import('./components/privacyPolicyAndTerms
 const ReturnPolicy = lazy(() => import('./components/privacyPolicyAndTermsOfConditions/ReturnPolicy'));
 const Account = lazy(() => import('./components/account/account'));
 const MyItems = lazy(() => import('./components/myItems/myItems'));
-const MyItemDetail = lazy(() => import('./components/myItems/myItemDetail/myItemDetail'));
 
 const renderLoader = () => (
     <div className="preloading-home overflow-hidden-y">
@@ -27,35 +26,40 @@ const renderLoader = () => (
 );
 
 const App = props => {
-    if (!props.isLoggedIn) {
-        props.anonymousSignIn()
+    if (props.isLoggedIn === undefined) {
+        return <div className="preloading-home overflow-hidden-y">
+            <PreLoader/>
+        </div>
+    } else {
+        if (!props.isLoggedIn) {
+            props.anonymousSignIn();
+        }
+        return (
+            <Router>
+                <Suspense fallback={renderLoader()}>
+                    <Switch>
+                        <Route exact path="/" component={Home}/>
+                        <Route exact path="/login" component={SignIn}/>
+                        <Route exact path="/register" component={SignUp}/>
+                        <Route exact path="/cart" component={ShoppingCart}/>
+                        <Route exact path="/wishlist" component={WishList}/>
+                        <Route exact path="/checkout" component={Checkout}/>
+                        <Route exact path="/item/:id" component={ProductDetail}/>
+                        <Route exact path="/items/:category/:name" component={Store}/>
+                        <Route exact path="/items/:category/:name/:sub_category" component={Store}/>
+                        <Route exact path="/items/:category/_/:sub_category" component={Store}/>
+                        <Route exact path="/category/:category" component={Store}/>
+                        <Route exact path="/privacy_policy" component={PrivacyPolicy}/>
+                        <Route exact path="/terms_and_conditions" component={TermsAndConditions}/>
+                        <Route exact path="/return_policy" component={ReturnPolicy}/>
+                        <Route exact path="/additem" component={AddItem}/>
+                        <Route exact path="/account/my-items" component={MyItems}/>
+                        <Route exact path="/account/:uid" component={Account}/>
+                    </Switch>
+                </Suspense>
+            </Router>
+        );
     }
-    return (
-        <Router>
-            <Suspense fallback={renderLoader()}>
-                <Switch>
-                    <Route exact path="/" component={Home}/>
-                    <Route exact path="/login" component={SignIn}/>
-                    <Route exact path="/register" component={SignUp}/>
-                    <Route exact path="/cart" component={ShoppingCart}/>
-                    <Route exact path="/wishlist" component={WishList}/>
-                    <Route exact path="/checkout" component={Checkout}/>
-                    <Route exact path="/item/:id" component={ProductDetail}/>
-                    <Route exact path="/items/:category/:name" component={Store}/>
-                    <Route exact path="/items/:category/:name/:sub_category" component={Store}/>
-                    <Route exact path="/items/:category/_/:sub_category" component={Store}/>
-                    <Route exact path="/category/:category" component={Store}/>
-                    <Route exact path="/privacy_policy" component={PrivacyPolicy}/>
-                    <Route exact path="/terms_and_conditions" component={TermsAndConditions}/>
-                    <Route exact path="/return_policy" component={ReturnPolicy}/>
-                    <Route exact path="/additem" component={AddItem}/>
-                    <Route exact path="/account/my-items" component={MyItems}/>
-                    <Route exact path="/account/my-items/:itemId" component={MyItemDetail}/>
-                    <Route exact path="/account/:uid" component={Account}/>
-                </Switch>
-            </Suspense>
-        </Router>
-    );
 };
 
 const mapStateToProps = state => {

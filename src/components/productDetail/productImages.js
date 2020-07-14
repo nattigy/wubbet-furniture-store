@@ -1,12 +1,10 @@
 import React, {useEffect, useState} from "react"
-import product4 from "../../assets/img/product05.png"
-import commercialFurnitures from "../../assets/img/commercialFurnitures.jpg"
 
 const ProductImages = props => {
 
     const {item} = props;
 
-    const [currentImage, setCurrentImage] = useState(product4);
+    const [currentImage, setCurrentImage] = useState(item.picture0);
 
     useEffect(() => {
         const el = document.querySelector("#module");
@@ -65,24 +63,23 @@ const ProductImages = props => {
                 <div className="mb-4">
                     <div className="d-flex">
                         <div className="image-detail-preview border border-light-custom overflow-hidden">
-                            {/*<img className="w-100" src={item.picture0} alt=""/>*/}
-                            <img className="w-100" src={product4} alt="" onClick={() => setCurrentImage(product4)}/>
+                            <img className="w-100" src={item.picture0} alt=""
+                                 onClick={() => setCurrentImage(item.picture0)}/>
                         </div>
 
                         <div className="image-detail-preview border border-light-custom overflow-hidden">
-                            {/*<img className="w-100" src={item.picture1} alt=""/>*/}
-                            <img className="w-100" src={product4} alt="" onClick={() => setCurrentImage(product4)}/>
+                            <img className="w-100" src={item.picture1} alt=""
+                                 onClick={() => setCurrentImage(item.picture1)}/>
                         </div>
 
                         <div className="image-detail-preview border border-light-custom overflow-hidden">
-                            {/*<img className="w-100" src={item.picture2} alt=""/>*/}
-                            <img className="w-100" src={commercialFurnitures} alt=""
-                                 onClick={() => setCurrentImage(commercialFurnitures)}/>
+                            <img className="w-100" src={item.picture2} alt=""
+                                 onClick={() => setCurrentImage(item.picture2)}/>
                         </div>
 
                         <div className="image-detail-preview border border-light-custom overflow-hidden">
-                            {/*<img className="w-100" src={item.picture3} alt=""/>*/}
-                            <img className="w-100" src={product4} alt="" onClick={() => setCurrentImage(product4)}/>
+                            <img className="w-100" src={item.picture3} alt=""
+                                 onClick={() => setCurrentImage(item.picture3)}/>
                         </div>
                     </div>
                 </div>

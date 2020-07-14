@@ -6,16 +6,19 @@ export const ADD_ITEM_FAILURE = "ADD_ITEM_FAILURE";
 
 export const ADD_TO_CART_REQUEST = "ADD_TO_CART_REQUEST";
 export const ADD_TO_CART_SUCCESS = "ADD_TO_CART_SUCCESS";
-export const ADD_TO_CART_SUCCESS_OFFLINE = "ADD_TO_CART_SUCCESS_OFFLINE";
 export const ADD_TO_CART_FAILURE = "ADD_TO_CART_FAILURE";
+
+export const ADD_TO_WISH_LIST_REQUEST = "ADD_TO_WISH_LIST_REQUEST";
+export const ADD_TO_WISH_LIST_SUCCESS = "ADD_TO_WISH_LIST_SUCCESS";
+export const ADD_TO_WISH_LIST_FAILURE = "ADD_TO_WISH_LIST_FAILURE";
 
 export const FETCH_ITEM_FROM_CART_REQUEST = "FETCH_ITEM_FROM_CART_REQUEST";
 export const FETCH_ITEM_FROM_CART_SUCCESS = "FETCH_ITEM_FROM_CART_SUCCESS";
 export const FETCH_ITEM_FROM_CART_ERROR = "FETCH_ITEM_FROM_CART_ERROR";
 
-export const ADD_TO_WISH_LIST_REQUEST = "ADD_TO_WISH_LIST_REQUEST";
-export const ADD_TO_WISH_LIST_SUCCESS = "ADD_TO_WISH_LIST_SUCCESS";
-export const ADD_TO_WISH_LIST_FAILURE = "ADD_TO_WISH_LIST_FAILURE";
+export const FETCH_ITEM_FROM_WISH_LIST_REQUEST = "FETCH_ITEM_FROM_WISH_LIST_REQUEST";
+export const FETCH_ITEM_FROM_WISH_LIST_SUCCESS = "FETCH_ITEM_FROM_WISH_LIST_SUCCESS";
+export const FETCH_ITEM_FROM_WISH_LIST_ERROR = "FETCH_ITEM_FROM_WISH_LIST_ERROR";
 
 export const REMOVE_FROM_CART_REQUEST = "REMOVE_FROM_CART_REQUEST";
 export const REMOVE_FROM_CART_SUCCESS = "REMOVE_FROM_CART_SUCCESS";
@@ -60,16 +63,28 @@ const addItemToCartSuccess = () => {
     };
 };
 
-const addItemToCartSuccessOffline = cartItem => {
-    return {
-        type: ADD_TO_CART_SUCCESS_OFFLINE,
-        cartItem
-    };
-};
-
 const addItemToCartError = error => {
     return {
         type: ADD_TO_CART_FAILURE,
+        error
+    };
+};
+
+const addItemToWishListRequest = () => {
+    return {
+        type: ADD_TO_WISH_LIST_REQUEST
+    };
+};
+
+const addItemToWishListSuccess = () => {
+    return {
+        type: ADD_TO_WISH_LIST_SUCCESS,
+    };
+};
+
+const addItemToWishListError = error => {
+    return {
+        type: ADD_TO_WISH_LIST_FAILURE,
         error
     };
 };
@@ -88,6 +103,26 @@ const fetchFromCartSuccess = cartItems => {
 };
 
 const fetchFromCartError = error => {
+    return {
+        type: FETCH_ITEM_FROM_CART_ERROR,
+        error
+    };
+};
+
+const fetchFromWishListRequest = () => {
+    return {
+        type: FETCH_ITEM_FROM_CART_REQUEST,
+    };
+};
+
+const fetchFromWishListSuccess = cartItems => {
+    return {
+        type: FETCH_ITEM_FROM_CART_SUCCESS,
+        cartItems
+    };
+};
+
+const fetchFromWishListError = error => {
     return {
         type: FETCH_ITEM_FROM_CART_ERROR,
         error
@@ -141,7 +176,6 @@ export const addItem = (
         cat_name_combo, sub_category, picture0, picture1, picture2, picture3,
         owner: uid
     })
-    // .then(() => dispatch(addItemSuccess()))
         .then(item => uploadPicture([frontPic, leftSidePic, rightSidePic, backPic],
             item.id, dispatch, category, sub_category))
         .catch(error => dispatch(addItemError(error)))
@@ -186,13 +220,14 @@ const updateURL = (urls, itemId, dispatch) => {
 };
 
 export const addItemToCart = ({userId, itemId, itemPrice, type}) => dispatch => {
-    dispatch(addItemToCartRequest());
     let list;
     switch (type) {
         case "ADD_TO_CART":
+            dispatch(addItemToCartRequest());
             list = "cartList";
             break;
         case "ADD_TO_WISH_LIST":
+            dispatch(addItemToWishListRequest());
             list = "wishList";
             break;
         default:
@@ -200,17 +235,13 @@ export const addItemToCart = ({userId, itemId, itemPrice, type}) => dispatch => 
     }
     fbConfig.firestore().collection("users").doc(userId).update({
         [list]: fbConfig.firestore.FieldValue.arrayUnion(itemId),
-        totalPriceOfCart: fbConfig.firestore.FieldValue.increment(itemPrice)
+        totalPriceOfCart: fbConfig.firestore.FieldValue.increment(list === "cartList" ? itemPrice : 0)
     })
         .then(() => {
-            dispatch(addItemToCartSuccess())
+            list === "cartList" ? dispatch(addItemToCartSuccess()) : dispatch(addItemToWishListSuccess())
         })
-        .catch(error => dispatch(addItemToCartError(error)));
-};
-
-export const addItemToCartOffline = ({item}) => dispatch => {
-    dispatch(addItemToCartRequest());
-    dispatch(addItemToCartSuccessOffline(item));
+        .catch(error => dispatch(list === "cartList" ? addItemToCartError(error) :
+            dispatch(addItemToWishListError(error))));
 };
 
 export const fetchFromCart = ({uid, type}) => dispatch => {
@@ -222,10 +253,10 @@ export const fetchFromCart = ({uid, type}) => dispatch => {
             let cartItems;
             switch (type) {
                 case "WISH_LIST":
-                    cartItems = snapShot.data().cartList;
+                    cartItems = snapShot.data().wishList;
                     break;
                 case "CART_LIST":
-                    cartItems = snapShot.data().wishList;
+                    cartItems = snapShot.data().cartList;
                     break;
                 default:
                     cartItems = snapShot.data().cartList;
@@ -251,7 +282,7 @@ export const fetchFromCart = ({uid, type}) => dispatch => {
 };
 
 export const getItemDetail = ({id}) => dispatch => {
-    getItemDetailRequest();
+    dispatch(getItemDetailRequest());
     fbConfig.firestore().collection('items').doc(id)
         .get()
         .then(snapShot => {

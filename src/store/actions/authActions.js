@@ -198,6 +198,7 @@ export const verifyAuth = () => dispatch => {
                     .doc("users/" + user.uid)
                     .get()
                     .then(newUser => dispatch(receiveLogin(newUser.data(), user)));
+                // .then(newUser => console.log("here : newuser : ", newUser.data(), " user : ", user));
             } else {
                 dispatch(verifyError())
             }

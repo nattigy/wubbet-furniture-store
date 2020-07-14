@@ -4,7 +4,7 @@ import Footer from "../footer/footer";
 import ProductDescription from "./productDescription";
 import ProductImages from "./productImages";
 import {connect} from "react-redux";
-import {getItemDetail} from "../../store/actions/itemActions";
+import {addItemToCart, getItemDetail} from "../../store/actions/itemActions";
 import PreLoader from "../preLoader/preLoader";
 import PathIndicator from "../pathIndicator/pathIndicator";
 import Switch from "@material-ui/core/Switch";
@@ -12,10 +12,10 @@ import Switch from "@material-ui/core/Switch";
 const ProductDetail = props => {
     const {
         isGettingItemDetail, gettingItemDetailError, gettingItemDetailDone,
-        itemDetail, isAddingToCart, user, isLoggedIn
+        itemDetail, isAddingToCart, user, isLoggedIn, isAddingToWishList
     } = props;
 
-    const [editMode, setEditMode] = useState(true);
+    const [editMode, setEditMode] = useState(false);
 
     useEffect(() => {
         props.getItemDetail({id: props.match.params.id})
@@ -41,22 +41,21 @@ const ProductDetail = props => {
                             <PreLoader/>
                         </div>
                     </div>}
-                    <ProductImages item={itemDetail}/>
-                    <ProductDescription item={itemDetail} editMode={editMode}/>
                     {gettingItemDetailDone && <Fragment>
                         <ProductImages item={itemDetail}/>
                         <ProductDescription item={itemDetail} credentials={{
                             isAddingToCart,
+                            isAddingToWishList,
                             isLoggedIn,
-                            userId: user.uid,
+                            userId: user ? user.uid : "0",
                             itemId: itemDetail.id,
                             itemPrice: parseInt(itemDetail.price)
-                        }}/>
+                        }} editMode={editMode} addToWishList={props.addItemToCart}/>
                         {/*<DescriptionAndDetails item={itemDetail}/>*/}
                     </Fragment>}
-                    {/*{gettingItemDetailError && <div className="w-100 text-center text-danger py-3 font-14">*/}
-                    {/*    Unknown error, Please refresh the page!*/}
-                    {/*</div>}*/}
+                    {gettingItemDetailError && <div className="w-100 text-center text-danger py-3 font-14">
+                        Unknown error, Please refresh the page!
+                    </div>}
                 </div>
             </div>
             <Footer/>
@@ -73,12 +72,16 @@ const mapStateToProps = state => {
         gettingItemDetailError: state.item.gettingItemDetailError,
         itemDetail: state.item.itemDetail,
         isAddingToCart: state.item.isAddingToCart,
+        isAddingToWishList: state.item.isAddingToWishList,
+        isAddingToWishListDone: state.item.isAddingToWishListDone,
+        isAddingToWishListError: state.item.isAddingToWishListError,
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        getItemDetail: credentials => dispatch(getItemDetail(credentials))
+        getItemDetail: credentials => dispatch(getItemDetail(credentials)),
+        addItemToCart: credentials => dispatch(addItemToCart(credentials))
     };
 };
 

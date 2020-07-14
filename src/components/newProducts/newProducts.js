@@ -24,7 +24,7 @@ const NewProducts = props => {
 
     return (
         <div className="section">
-            <div className="container-lg">
+            <div className="container-lg overflow-hidden">
                 <div className="row">
                     <div className="col-md-12">
                         <div className="section-title">

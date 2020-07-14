@@ -5,6 +5,9 @@ import {
     ADD_TO_CART_FAILURE,
     ADD_TO_CART_REQUEST,
     ADD_TO_CART_SUCCESS,
+    ADD_TO_WISH_LIST_FAILURE,
+    ADD_TO_WISH_LIST_REQUEST,
+    ADD_TO_WISH_LIST_SUCCESS,
     FETCH_ITEM_FROM_CART_ERROR,
     FETCH_ITEM_FROM_CART_REQUEST,
     FETCH_ITEM_FROM_CART_SUCCESS,
@@ -57,6 +60,27 @@ export default (state = {cartItems: [], cartItemOffline: []}, action) => {
                 isAddingToCart: false,
                 isAddingToCartDone: false,
                 isAddingToCartError: true,
+            };
+        case ADD_TO_WISH_LIST_REQUEST:
+            return {
+                ...state,
+                isAddingToWishList: true,
+                isAddingToWishListDone: false,
+                isAddingToWishListError: false,
+            };
+        case ADD_TO_WISH_LIST_SUCCESS:
+            return {
+                ...state,
+                isAddingToWishList: false,
+                isAddingToWishListDone: true,
+                isAddingToWishListError: false,
+            };
+        case ADD_TO_WISH_LIST_FAILURE:
+            return {
+                ...state,
+                isAddingToWishList: false,
+                isAddingToWishListDone: false,
+                isAddingToWishListError: true,
             };
         case FETCH_ITEM_FROM_CART_REQUEST:
             return {

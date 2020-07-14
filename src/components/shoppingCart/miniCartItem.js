@@ -10,7 +10,7 @@ const MiniCartItem = props => {
             <div className="position-relative">
                 <img className="w-100 mini-cart" style={{maxWidth: "80px", minWidth: "30px"}} src={product4}
                      alt="image preview"/>
-                <div className="delete-from-cart-btn">
+                <div className="delete-from-cart-btn mini-cart">
                     <FontAwesomeIcon icon={faWindowClose} className="mini-cart" color="#15161D"/>
                 </div>
             </div>
