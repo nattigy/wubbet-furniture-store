@@ -53,7 +53,7 @@ const ProductImages = props => {
         <div className="col-md-7">
             <div>
                 <div className="cont">
-                    <div className="module"
+                    <div className="module border border-light-custom"
                          style={{
                              backgroundImage: `url(${currentImage})`,
                          }}

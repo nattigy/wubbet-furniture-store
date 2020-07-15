@@ -139,7 +139,7 @@ const Checkout = props => {
                                                 <div className="d-table-cell text-muted">{item.name}</div>
                                                 <input type="hidden" name={`product-${item.id}`} value={item.id}/>
                                                 <div
-                                                    className="d-table-cell text-right text-muted">{item.price} birr
+                                                    className="d-table-cell text-right text-muted">{item.price} ETB
                                                 </div>
                                             </div>)}
                                         </div>
@@ -151,8 +151,8 @@ const Checkout = props => {
                                             <div className="d-table-cell font-14"><strong>TOTAL</strong></div>
                                             <div className="d-table-cell text-right"><strong
                                                 className="order-total font-24 text-danger font-weight-bolder">
-                                                {newUser.totalPriceOfCart && newUser.totalPriceOfCart.toString()}545</strong>
-                                                <span className="text-danger font-weight-bolder"> birr</span>
+                                                {newUser.totalPriceOfCart && newUser.totalPriceOfCart.toString()}</strong>
+                                                <span className="text-danger font-weight-bolder"> ETB</span>
                                                 <input type="hidden" name="total_price" id="total_price"
                                                        value={newUser.totalPriceOfCart}/>
                                             </div>

@@ -12,7 +12,7 @@ const SearchSection = props => {
     const [name, setName] = useState("all");
     const [openCart, setOpenCart] = useState(false);
 
-    const {newUser} = props;
+    const {newUser, user} = props;
 
     useEffect(() => {
         window.onclick = function (event) {
@@ -59,12 +59,13 @@ const SearchSection = props => {
                             </li>
                             <li className="contact-link nav-item position-relative text-center nav-inline mx-3">
                                 <FontAwesomeIcon icon={faShoppingCart} color="#fff"/>
-                                <span onClick={() => setOpenCart(!openCart)}
-                                      className="text-white d-block small your-cart">Your Cart</span>
+                                <button onClick={() => setOpenCart(!openCart)}
+                                        className="btn p-0 bg-transparent text-white d-block small your-cart font-12">
+                                    Your Cart
+                                </button>
                                 {newUser !== {} || newUser !== undefined &&
                                 <div className="qty">{newUser.cartList.length}</div>}
-                                <ShoppingCartMini openCart={openCart}
-                                                  cart={newUser !== {} || newUser !== undefined && newUser.cartList}/>
+                                {openCart && <ShoppingCartMini user={user}/>}
                             </li>
                             <li className="nav-item nav-inline mx-3">
                                 <button className="text-white bg-transparent border-0 closebtn"
@@ -82,7 +83,8 @@ const SearchSection = props => {
 
 const mapStateToProps = state => {
     return {
-        newUser: state.auth.newUser
+        newUser: state.auth.newUser,
+        user: state.auth.user,
     };
 };
 

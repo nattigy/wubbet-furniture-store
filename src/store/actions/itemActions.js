@@ -70,6 +70,25 @@ const addItemToCartError = error => {
     };
 };
 
+const removeFromCartRequest = () => {
+    return {
+        type: REMOVE_FROM_CART_REQUEST
+    };
+};
+
+const removeFromCartSuccess = () => {
+    return {
+        type: REMOVE_FROM_CART_SUCCESS,
+    };
+};
+
+const removeFromCartError = error => {
+    return {
+        type: REMOVE_FROM_CART_ERROR,
+        error
+    };
+};
+
 const addItemToWishListRequest = () => {
     return {
         type: ADD_TO_WISH_LIST_REQUEST
@@ -279,6 +298,16 @@ export const fetchFromCart = ({uid, type}) => dispatch => {
                     .catch(error => dispatch(fetchFromCartError(error)))
             }
         }).catch(error => dispatch(fetchFromCartError(error)));
+};
+
+export const deleteFromCart = ({userId, itemId}) => dispatch => {
+    dispatch(removeFromCartRequest());
+    fbConfig.firestore().collection('users').doc(userId)
+        .update({
+            cartList: fbConfig.firestore.FieldValue.arrayRemove(itemId)
+        })
+        .then(() => dispatch(removeFromCartSuccess()))
+        .catch(error => dispatch(removeFromCartError(error.message)))
 };
 
 export const getItemDetail = ({id}) => dispatch => {

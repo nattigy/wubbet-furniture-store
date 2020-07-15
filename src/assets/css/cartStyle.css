@@ -56,7 +56,10 @@
 }
 
 .cart-mini {
+    min-height: 50px;
     max-height: 250px;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .delete-from-cart-btn {

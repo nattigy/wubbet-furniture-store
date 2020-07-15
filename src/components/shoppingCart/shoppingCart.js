@@ -5,15 +5,26 @@ import CartItem from "./cartItem";
 import {Link, Redirect} from "react-router-dom";
 import {connect} from "react-redux";
 import PreLoader from "../preLoader/preLoader";
-import {fetchFromCart} from "../../store/actions/itemActions";
+import {addItemToCart, deleteFromCart, fetchFromCart} from "../../store/actions/itemActions";
 import PathIndicator from "../pathIndicator/pathIndicator";
 
 const ShoppingCart = props => {
-    const {isFetchingFromError, cartItems, isAuthenticated, newUser, user, isFetchingFromCart, isLoggedIn} = props;
+
+    const {
+        isFetchingFromError, cartItems, isAuthenticated,
+        newUser, user, isFetchingFromCart, isLoggedIn, removingFromCartDone
+    } = props;
+
+    const delEvent = (e, index) => {
+        props.deleteFromCart(e);
+        if (removingFromCartDone) {
+            cartItems.splice(index, 1)
+        }
+    };
 
     useEffect(() => {
         props.fetchFromCart({uid: user ? user.uid : "0", type: "CART_LIST"})
-    }, [user]);
+    }, []);
 
     if (isAuthenticated === undefined) {
         return <div className="preloading-home overflow-hidden-y">
@@ -45,7 +56,14 @@ const ShoppingCart = props => {
                                 <h5 className="font-14">No Items In Your Cart!</h5>
                             </div>
                         }
-                        {cartItems.map(item => <CartItem key={item.id} item={item}/>)}
+                        {cartItems.map((item, index) =>
+                            <CartItem
+                                key={item.id}
+                                item={item}
+                                user={user}
+                                addToCart={props.addToCart}
+                                deleteFromCart={(e) => delEvent(e, index)}
+                            />)}
                         {isFetchingFromError &&
                         <div className="text-center py-5">
                             <h5 className="font-14">No Items In Your Cart!</h5>
@@ -75,12 +93,15 @@ const mapStateToProps = state => {
         isFetchingFromCart: state.item.isFetchingFromCart,
         isFetchingFromDone: state.item.isFetchingFromDone,
         isFetchingFromError: state.item.isFetchingFromError,
+        removingFromCartDone: state.item.removingFromCartDone,
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        fetchFromCart: credentials => dispatch(fetchFromCart(credentials))
+        fetchFromCart: credentials => dispatch(fetchFromCart(credentials)),
+        addToCart: credentials => dispatch(addItemToCart(credentials)),
+        deleteFromCart: credentials => dispatch(deleteFromCart(credentials))
     };
 };
 

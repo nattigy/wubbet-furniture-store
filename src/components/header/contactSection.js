@@ -48,7 +48,7 @@ const ContactSection = props => {
                                     <li className="contact-link nav-item nav-inline mx-2">
                                         <FontAwesomeIcon icon={faUser} size="sm" color="#D10024"/>
                                         <Link className="text-decoration-none small ml-2"
-                                              to={`/my-account/${user.uid}`}>
+                                              to={`/account/${user.uid}`}>
                                             My Account</Link>
                                     </li>
                                     <li className="contact-link nav-item nav-inline mx-2">

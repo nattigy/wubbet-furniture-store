@@ -13,7 +13,10 @@ import {
     FETCH_ITEM_FROM_CART_SUCCESS,
     GET_ITEM_DETAIL_ERROR,
     GET_ITEM_DETAIL_REQUEST,
-    GET_ITEM_DETAIL_SUCCESS
+    GET_ITEM_DETAIL_SUCCESS,
+    REMOVE_FROM_CART_ERROR,
+    REMOVE_FROM_CART_REQUEST,
+    REMOVE_FROM_CART_SUCCESS
 } from "./../actions/itemActions";
 
 export default (state = {cartItems: [], cartItemOffline: []}, action) => {
@@ -60,6 +63,27 @@ export default (state = {cartItems: [], cartItemOffline: []}, action) => {
                 isAddingToCart: false,
                 isAddingToCartDone: false,
                 isAddingToCartError: true,
+            };
+        case REMOVE_FROM_CART_REQUEST:
+            return {
+                ...state,
+                isRemovingFromCart: true,
+                removingFromCartDone: false,
+                removingFromCartError: false,
+            };
+        case REMOVE_FROM_CART_SUCCESS:
+            return {
+                ...state,
+                isRemovingFromCart: false,
+                removingFromCartDone: true,
+                removingFromCartError: false,
+            };
+        case REMOVE_FROM_CART_ERROR:
+            return {
+                ...state,
+                isRemovingFromCart: false,
+                removingFromCartDone: false,
+                removingFromCartError: true,
             };
         case ADD_TO_WISH_LIST_REQUEST:
             return {
