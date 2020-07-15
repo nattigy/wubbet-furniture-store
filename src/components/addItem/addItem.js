@@ -50,7 +50,7 @@ const AddItem = props => {
                 <PreLoader/>
             </div>
         );
-    } else if (!isLoggedIn || !isAnonymous) {
+    } else if (!isLoggedIn || isAnonymous) {
         return <Redirect to="/login"/>
     } else {
         return (

@@ -11,15 +11,18 @@ import {
     FETCH_ITEM_FROM_CART_ERROR,
     FETCH_ITEM_FROM_CART_REQUEST,
     FETCH_ITEM_FROM_CART_SUCCESS,
+    FETCH_MY_ITEM_ERROR,
+    FETCH_MY_ITEM_REQUEST,
+    FETCH_MY_ITEM_SUCCESS,
     GET_ITEM_DETAIL_ERROR,
     GET_ITEM_DETAIL_REQUEST,
     GET_ITEM_DETAIL_SUCCESS,
     REMOVE_FROM_CART_ERROR,
     REMOVE_FROM_CART_REQUEST,
-    REMOVE_FROM_CART_SUCCESS
+    REMOVE_FROM_CART_SUCCESS,
 } from "./../actions/itemActions";
 
-export default (state = {cartItems: [], cartItemOffline: []}, action) => {
+export default (state = {cartItems: [], cartItemOffline: [], myItems: []}, action) => {
     switch (action.type) {
         case ADD_ITEM_REQUEST:
             return {
@@ -63,27 +66,6 @@ export default (state = {cartItems: [], cartItemOffline: []}, action) => {
                 isAddingToCart: false,
                 isAddingToCartDone: false,
                 isAddingToCartError: true,
-            };
-        case REMOVE_FROM_CART_REQUEST:
-            return {
-                ...state,
-                isRemovingFromCart: true,
-                removingFromCartDone: false,
-                removingFromCartError: false,
-            };
-        case REMOVE_FROM_CART_SUCCESS:
-            return {
-                ...state,
-                isRemovingFromCart: false,
-                removingFromCartDone: true,
-                removingFromCartError: false,
-            };
-        case REMOVE_FROM_CART_ERROR:
-            return {
-                ...state,
-                isRemovingFromCart: false,
-                removingFromCartDone: false,
-                removingFromCartError: true,
             };
         case ADD_TO_WISH_LIST_REQUEST:
             return {
@@ -130,6 +112,27 @@ export default (state = {cartItems: [], cartItemOffline: []}, action) => {
                 isFetchingFromError: true,
                 cartItems: []
             };
+        case REMOVE_FROM_CART_REQUEST:
+            return {
+                ...state,
+                isRemovingFromCart: true,
+                removingFromCartDone: false,
+                removingFromCartError: false,
+            };
+        case REMOVE_FROM_CART_SUCCESS:
+            return {
+                ...state,
+                isRemovingFromCart: false,
+                removingFromCartDone: true,
+                removingFromCartError: false,
+            };
+        case REMOVE_FROM_CART_ERROR:
+            return {
+                ...state,
+                isRemovingFromCart: false,
+                removingFromCartDone: false,
+                removingFromCartError: true,
+            };
         case GET_ITEM_DETAIL_REQUEST:
             return {
                 ...state,
@@ -152,6 +155,29 @@ export default (state = {cartItems: [], cartItemOffline: []}, action) => {
                 gettingItemDetailDone: false,
                 gettingItemDetailError: true,
                 errorMessage: action.error
+            };
+        case FETCH_MY_ITEM_REQUEST:
+            return {
+                ...state,
+                isFetchingMyItems: true,
+                fetchingMyItemsDone: false,
+                fetchingMyItemsError: false,
+            };
+        case FETCH_MY_ITEM_SUCCESS:
+            return {
+                ...state,
+                isFetchingMyItems: false,
+                fetchingMyItemsDone: true,
+                fetchingMyItemsError: false,
+                myItems: action.myItems
+            };
+        case FETCH_MY_ITEM_ERROR:
+            return {
+                ...state,
+                isFetchingMyItems: false,
+                fetchingMyItemsDone: false,
+                fetchingMyItemsError: true,
+                error: action.error
             };
         default:
             return state;

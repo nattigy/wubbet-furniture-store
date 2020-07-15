@@ -3,6 +3,7 @@ import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import {connect} from "react-redux";
 import {anonymousSignIn} from "./store/actions/authActions";
 import PreLoader from "./components/preLoader/preLoader";
+import EditItem from "./components/editItem/editItem";
 
 const Home = lazy(() => import('./components/home/home'));
 const SignIn = lazy(() => import('./components/auth/signIn'));
@@ -54,6 +55,7 @@ const App = props => {
                         <Route exact path="/return_policy" component={ReturnPolicy}/>
                         <Route exact path="/additem" component={AddItem}/>
                         <Route exact path="/account/my-items" component={MyItems}/>
+                        <Route exact path="/account/myitem/:id" component={EditItem}/>
                         <Route exact path="/account/:uid" component={Account}/>
                     </Switch>
                 </Suspense>

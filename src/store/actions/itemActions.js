@@ -32,6 +32,10 @@ export const GET_ITEM_DETAIL_REQUEST = "GET_ITEM_DETAIL_REQUEST";
 export const GET_ITEM_DETAIL_SUCCESS = "GET_ITEM_DETAIL_SUCCESS";
 export const GET_ITEM_DETAIL_ERROR = "GET_ITEM_DETAIL_ERROR";
 
+export const FETCH_MY_ITEM_REQUEST = "FETCH_MY_ITEM_REQUEST";
+export const FETCH_MY_ITEM_SUCCESS = "FETCH_MY_ITEM_SUCCESS";
+export const FETCH_MY_ITEM_ERROR = "FETCH_MY_ITEM_ERROR";
+
 const addItemRequest = () => {
     return {
         type: ADD_ITEM_REQUEST
@@ -66,25 +70,6 @@ const addItemToCartSuccess = () => {
 const addItemToCartError = error => {
     return {
         type: ADD_TO_CART_FAILURE,
-        error
-    };
-};
-
-const removeFromCartRequest = () => {
-    return {
-        type: REMOVE_FROM_CART_REQUEST
-    };
-};
-
-const removeFromCartSuccess = () => {
-    return {
-        type: REMOVE_FROM_CART_SUCCESS,
-    };
-};
-
-const removeFromCartError = error => {
-    return {
-        type: REMOVE_FROM_CART_ERROR,
         error
     };
 };
@@ -130,20 +115,39 @@ const fetchFromCartError = error => {
 
 const fetchFromWishListRequest = () => {
     return {
-        type: FETCH_ITEM_FROM_CART_REQUEST,
+        type: FETCH_ITEM_FROM_WISH_LIST_REQUEST,
     };
 };
 
 const fetchFromWishListSuccess = cartItems => {
     return {
-        type: FETCH_ITEM_FROM_CART_SUCCESS,
+        type: FETCH_ITEM_FROM_WISH_LIST_SUCCESS,
         cartItems
     };
 };
 
 const fetchFromWishListError = error => {
     return {
-        type: FETCH_ITEM_FROM_CART_ERROR,
+        type: FETCH_ITEM_FROM_WISH_LIST_ERROR,
+        error
+    };
+};
+
+const removeFromCartRequest = () => {
+    return {
+        type: REMOVE_FROM_CART_REQUEST
+    };
+};
+
+const removeFromCartSuccess = () => {
+    return {
+        type: REMOVE_FROM_CART_SUCCESS,
+    };
+};
+
+const removeFromCartError = error => {
+    return {
+        type: REMOVE_FROM_CART_ERROR,
         error
     };
 };
@@ -164,6 +168,26 @@ const getItemDetailSuccess = item => {
 const getItemDetailError = error => {
     return {
         type: GET_ITEM_DETAIL_ERROR,
+        error
+    }
+};
+
+const fetchMyItemsRequest = () => {
+    return {
+        type: FETCH_MY_ITEM_REQUEST
+    }
+};
+
+const fetchMyItemsSuccess = myItems => {
+    return {
+        type: FETCH_MY_ITEM_SUCCESS,
+        myItems
+    }
+};
+
+const fetchMyItemsError = error => {
+    return {
+        type: FETCH_MY_ITEM_ERROR,
         error
     }
 };
@@ -308,6 +332,23 @@ export const deleteFromCart = ({userId, itemId}) => dispatch => {
         })
         .then(() => dispatch(removeFromCartSuccess()))
         .catch(error => dispatch(removeFromCartError(error.message)))
+};
+
+export const fetchMyItems = ({uid}) => dispatch => {
+    dispatch(fetchMyItemsRequest());
+    let items = [];
+    fbConfig.firestore().collection('items')
+        .where("owner", "==", uid)
+        .get()
+        .then(snapshot => {
+            snapshot.forEach(doc => {
+                let data = doc.data();
+                data.id = doc.id;
+                items.push(data)
+            });
+            dispatch(fetchMyItemsSuccess(items))
+        })
+        .catch(error => dispatch(fetchMyItemsError(error.message)))
 };
 
 export const getItemDetail = ({id}) => dispatch => {
