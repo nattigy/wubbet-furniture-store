@@ -15,9 +15,7 @@ import {
     VERIFY_SUCCESS
 } from "./../actions/authActions";
 
-export default (state = {
-    isLoggingIn: false,
-}, action) => {
+export default (state = {}, action) => {
     switch (action.type) {
         case ANONYMOUS_LOGIN:
             return {
@@ -33,6 +31,7 @@ export default (state = {
             return {
                 ...state,
                 isLoggingIn: true,
+                isLoggedIn: false,
                 loginError: false
             };
         case LOGIN_SUCCESS:
@@ -40,6 +39,8 @@ export default (state = {
                 ...state,
                 isLoggedIn: true,
                 isLoggingIn: false,
+                loginError: false,
+                isAnonymous: false,
                 isAuthenticated: true,
                 newUser: action.newUser,
                 user: action.user
