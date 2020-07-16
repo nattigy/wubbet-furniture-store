@@ -156,6 +156,25 @@ const removeFromCartError = error => {
     };
 };
 
+const removeFromWishListRequest = () => {
+    return {
+        type: REMOVE_FROM_WISH_LIST_REQUEST
+    };
+};
+
+const removeFromWishListSuccess = () => {
+    return {
+        type: REMOVE_FROM_WISH_LIST_SUCCESS,
+    };
+};
+
+const removeFromWishListError = error => {
+    return {
+        type: REMOVE_FROM_WISH_LIST_ERROR,
+        error
+    };
+};
+
 const getItemDetailRequest = () => {
     return {
         type: GET_ITEM_DETAIL_REQUEST
@@ -224,7 +243,7 @@ const create_cat_name_combo = (category, name) => {
     let name_array = name.split(" ");
     let cat_name_combo = [];
     name_array.map(name => {
-        cat_name_combo.push(name + "_" + category)
+        cat_name_combo.push(name.toLowerCase() + "_" + category)
     });
     return cat_name_combo;
 };
@@ -238,10 +257,10 @@ export const addItem = ({
     const picture2 = "";
     const picture3 = "";
     dispatch(addItemRequest());
-    const name_array = create_name_array(name);
+    const name_array = create_name_array(name).toLowerCase();
     const cat_name_combo = create_cat_name_combo(category, name);
     fbConfig.firestore().collection("items").add({
-        category, name_array, price, description, name,
+        category, name_array, price, description, name: name.toLowerCase(),
         cat_name_combo, sub_category, picture0, picture1, picture2, picture3, quantity,
         owner: uid
     })
@@ -314,7 +333,7 @@ export const addItemToCart = ({userId, itemId, itemPrice, type}) => dispatch => 
 };
 
 export const fetchFromCart = ({uid, type}) => dispatch => {
-    dispatch(fetchFromCartRequest());
+    type === "CART_LIST" ? dispatch(fetchFromCartRequest()) : dispatch(fetchFromWishListRequest());
     let items = [];
     fbConfig.firestore().collection("users").doc(uid)
         .get()
@@ -331,7 +350,7 @@ export const fetchFromCart = ({uid, type}) => dispatch => {
                     cartItems = snapShot.data().cartList;
             }
             if (cartItems.length === 0) {
-                dispatch(fetchFromCartSuccess(items));
+                type === "CART_LIST" ? dispatch(fetchFromCartSuccess(items)) : dispatch(fetchFromWishListSuccess(items));
                 return
             }
             for (let i = 0; i < cartItems.length; i++) {
@@ -343,27 +362,42 @@ export const fetchFromCart = ({uid, type}) => dispatch => {
                             data.id = snapshot.id;
                             items.push(data);
                             if (i + 1 === cartItems.length) {
-                                dispatch(fetchFromCartSuccess(items));
+                                type === "CART_LIST" ? dispatch(fetchFromCartSuccess(items)) :
+                                    dispatch(fetchFromWishListSuccess(items));
                             }
                         } else {
                             if (i + 1 === cartItems.length) {
-                                dispatch(fetchFromCartSuccess(items));
+                                type === "CART_LIST" ? dispatch(fetchFromCartSuccess(items)) :
+                                    dispatch(fetchFromWishListSuccess(items));
                             }
                         }
                     })
-                    .catch(error => fetchFromCartError(error))
+                    .catch(error => type === "CART_LIST" ? dispatch(fetchFromCartError(error)) :
+                        dispatch(fetchFromWishListError(error)))
             }
-        }).catch(error => dispatch(fetchFromCartError(error)));
+        }).catch(error => type === "CART_LIST" ? dispatch(fetchFromCartError(error)) : dispatch(fetchFromWishListError(error)));
 };
 
-export const deleteFromCart = ({userId, itemId}) => dispatch => {
-    dispatch(removeFromCartRequest());
+export const deleteFromCart = ({userId, itemId, type}) => dispatch => {
+    type === "CART_LIST" ? dispatch(removeFromCartRequest()) : dispatch(removeFromWishListRequest());
+    let cartList;
+    switch (type) {
+        case "CART_LIST":
+            cartList = "cartList";
+            break;
+        case "WISH_LIST":
+            cartList = "wishList";
+            break;
+        default:
+            cartList = "cartList";
+    }
     fbConfig.firestore().collection('users').doc(userId)
         .update({
-            cartList: fbConfig.firestore.FieldValue.arrayRemove(itemId)
+            [cartList]: fbConfig.firestore.FieldValue.arrayRemove(itemId)
         })
-        .then(() => dispatch(removeFromCartSuccess()))
-        .catch(error => dispatch(removeFromCartError(error.message)))
+        .then(() => type === "CART_LIST" ? dispatch(removeFromCartSuccess()) : dispatch(removeFromWishListSuccess()))
+        .catch(error => type === "CART_LIST" ? dispatch(removeFromCartError(error.message)) :
+            dispatch(removeFromWishListError(error.message)))
 };
 
 export const fetchMyItems = ({uid}) => dispatch => {

@@ -60,7 +60,6 @@ const mapStateToProps = state => {
         user: state.auth.user,
         isLoggedIn: state.auth.isLoggedIn,
         isAddingToCart: state.item.isAddingToCart,
-        cartItemOffline: state.item.cartItemOffline,
         isAddingToCartDone: state.item.isAddingToCartDone,
         isAddingToCartError: state.search.isAddingToCartError,
     };

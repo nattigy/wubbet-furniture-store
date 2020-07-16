@@ -75,7 +75,7 @@ export const searchItems = ({fieldPath, opStr, value}) => dispatch => {
             snapshot.forEach(doc => {
                 let data = doc.data();
                 data.id = doc.id;
-                items.push(data)
+                items.push(data);
             });
             dispatch(searchItemSuccess(items))
         })

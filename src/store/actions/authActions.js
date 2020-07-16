@@ -38,7 +38,6 @@ const loginNotAnonymous = () => {
 };
 
 const receiveLogin = (newUser, authUser) => {
-    console.log(newUser, authUser);
     return {
         type: LOGIN_SUCCESS,
         newUser,

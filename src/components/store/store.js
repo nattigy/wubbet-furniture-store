@@ -33,7 +33,7 @@ const Store = props => {
         } else {
             props.applyFilter({filterList})
         }
-    }, [rerender, filterList]);
+    }, [rerender, filterList, props.match.url]);
 
     return (
         <Fragment>

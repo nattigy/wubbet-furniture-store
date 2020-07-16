@@ -4,7 +4,7 @@ import Footer from "../footer/footer";
 import ProductDescription from "./productDescription";
 import ProductImages from "./productImages";
 import {connect} from "react-redux";
-import {addItemToCart, getItemDetail} from "../../store/actions/itemActions";
+import {getItemDetail} from "../../store/actions/itemActions";
 import PreLoader from "../preLoader/preLoader";
 import PathIndicator from "../pathIndicator/pathIndicator";
 import Switch from "@material-ui/core/Switch";
@@ -81,7 +81,6 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         getItemDetail: credentials => dispatch(getItemDetail(credentials)),
-        addItemToCart: credentials => dispatch(addItemToCart(credentials))
     };
 };
 

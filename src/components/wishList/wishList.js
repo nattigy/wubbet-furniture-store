@@ -4,16 +4,27 @@ import Footer from "../footer/footer";
 import {Redirect} from "react-router-dom";
 import {connect} from "react-redux";
 import PreLoader from "../preLoader/preLoader";
-import {fetchFromCart} from "../../store/actions/itemActions";
+import {deleteFromCart, fetchFromCart} from "../../store/actions/itemActions";
 import WishListItem from "./wishListItem";
 import PathIndicator from "../pathIndicator/pathIndicator";
 
 const WishList = props => {
-    const {isFetchingFromError, cartItems, isAuthenticated, newUser, user, isLoggedIn} = props;
+
+    const {
+        wishListItem, isAuthenticated, newUser, user, isLoggedIn, isAddingToCart,
+        isFetchingItemFromWishList, fetchingItemFromWishListError, removingFromWishListDone
+    } = props;
 
     useEffect(() => {
         isAuthenticated && props.fetchFromCart({uid: user ? user.uid : "0", type: "WISH_LIST"})
     }, []);
+
+    const delEvent = (e, index) => {
+        props.deleteFromCart(e);
+        if (removingFromWishListDone) {
+            wishListItem.splice(index, 1)
+        }
+    };
 
     if (isAuthenticated === undefined) {
         return <div className="preloading-home overflow-hidden-y">
@@ -30,21 +41,33 @@ const WishList = props => {
                     {currentPath: true, pathName: "WISHLIST", pathLink: props.match.url},
                 ]}/>
                 <div className="container-lg">
-                    {/*<div className="my-3 mx-3 border-bottom border-light">*/}
-                    {/*    <div className="row">*/}
-                    {/*        <h4 className="col-sm-6 text-nowrap">Wish List</h4>*/}
-                    {/*    </div>*/}
-                    {/*</div>*/}
                     <div className="py-3">
-                        {/*{cartItems.map(item => <WishListItem key={item.id} item={item}/>)}*/}
-                        <WishListItem/>
-                        <WishListItem/>
-                        <WishListItem/>
-                        <WishListItem/>
-                        <WishListItem/>
-                        {isFetchingFromError || newUser.wishList.length === 0 &&
+                        {isFetchingItemFromWishList ? <div className="preloading-cart overflow-hidden-y">
+                                <PreLoader/>
+                            </div> :
+                            wishListItem.length === 0 &&
+                            <div className="text-center py-5">
+                                <h5 className="font-14">No Items In Your Wishlist!</h5>
+                            </div>
+                        }
+                        {wishListItem.map((item, index) =>
+                            <WishListItem
+                                key={item.id}
+                                item={item}
+                                user={user}
+                                addToCart={props.addToCart}
+                                deleteFromCart={(e) => delEvent(e, index)}
+                                credentials={{
+                                    isAddingToCart,
+                                    isLoggedIn,
+                                    userId: user ? user.uid : "0",
+                                    itemId: item.id,
+                                    itemPrice: parseInt(item.price)
+                                }}
+                            />)}
+                        {fetchingItemFromWishListError &&
                         <div className="text-center py-5">
-                            <h5>No Items In Your Wish List!</h5>
+                            <h5 className="font-14">No Items In Your Cart!</h5>
                         </div>
                         }
                     </div>
@@ -61,14 +84,23 @@ const mapStateToProps = state => {
         isAuthenticated: state.auth.isAuthenticated,
         newUser: state.auth.newUser,
         user: state.auth.user,
-        cartItems: state.item.cartItems,
-        isFetchingFromError: state.item.isFetchingFromError,
+        wishListItem: state.item.wishListItem,
+        isAddingToCart: state.item.isAddingToCart,
+        isAddingToCartDone: state.item.isAddingToCartDone,
+        isAddingToCartError: state.search.isAddingToCartError,
+        isFetchingItemFromWishList: state.item.isFetchingItemFromWishList,
+        fetchingItemFromWishListDone: state.item.fetchingItemFromWishListDone,
+        fetchingItemFromWishListError: state.item.fetchingItemFromWishListError,
+        isRemovingFromWishList: state.item.isRemovingFromWishList,
+        removingFromWishListDone: state.item.removingFromWishListDone,
+        removingFromWishListError: state.item.removingFromWishListError,
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        fetchFromCart: credentials => dispatch(fetchFromCart(credentials))
+        fetchFromCart: credentials => dispatch(fetchFromCart(credentials)),
+        deleteFromCart: credentials => dispatch(deleteFromCart(credentials))
     };
 };
 

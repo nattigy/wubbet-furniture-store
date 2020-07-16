@@ -15,16 +15,16 @@ const ShoppingCart = props => {
         newUser, user, isFetchingFromCart, isLoggedIn, removingFromCartDone
     } = props;
 
+    useEffect(() => {
+        props.fetchFromCart({uid: user ? user.uid : "0", type: "CART_LIST"})
+    }, []);
+
     const delEvent = (e, index) => {
         props.deleteFromCart(e);
         if (removingFromCartDone) {
             cartItems.splice(index, 1)
         }
     };
-
-    useEffect(() => {
-        props.fetchFromCart({uid: user ? user.uid : "0", type: "CART_LIST"})
-    }, []);
 
     if (isAuthenticated === undefined) {
         return <div className="preloading-home overflow-hidden-y">

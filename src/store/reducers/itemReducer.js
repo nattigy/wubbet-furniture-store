@@ -14,6 +14,9 @@ import {
     FETCH_ITEM_FROM_CART_ERROR,
     FETCH_ITEM_FROM_CART_REQUEST,
     FETCH_ITEM_FROM_CART_SUCCESS,
+    FETCH_ITEM_FROM_WISH_LIST_ERROR,
+    FETCH_ITEM_FROM_WISH_LIST_REQUEST,
+    FETCH_ITEM_FROM_WISH_LIST_SUCCESS,
     FETCH_MY_ITEM_ERROR,
     FETCH_MY_ITEM_REQUEST,
     FETCH_MY_ITEM_SUCCESS,
@@ -23,9 +26,12 @@ import {
     REMOVE_FROM_CART_ERROR,
     REMOVE_FROM_CART_REQUEST,
     REMOVE_FROM_CART_SUCCESS,
+    REMOVE_FROM_WISH_LIST_ERROR,
+    REMOVE_FROM_WISH_LIST_REQUEST,
+    REMOVE_FROM_WISH_LIST_SUCCESS,
 } from "./../actions/itemActions";
 
-export default (state = {cartItems: [], cartItemOffline: [], myItems: []}, action) => {
+export default (state = {cartItems: [], wishListItem: [], myItems: []}, action) => {
     switch (action.type) {
         case ADD_ITEM_REQUEST:
             return {
@@ -115,6 +121,28 @@ export default (state = {cartItems: [], cartItemOffline: [], myItems: []}, actio
                 isFetchingFromError: true,
                 cartItems: []
             };
+        case FETCH_ITEM_FROM_WISH_LIST_REQUEST:
+            return {
+                ...state,
+                isFetchingItemFromWishList: true,
+                fetchingItemFromWishListDone: false,
+                fetchingItemFromWishListError: false,
+            };
+        case FETCH_ITEM_FROM_WISH_LIST_SUCCESS:
+            return {
+                ...state,
+                isFetchingItemFromWishList: false,
+                fetchingItemFromWishListDone: true,
+                fetchingItemFromWishListError: false,
+                wishListItem: action.cartItems
+            };
+        case FETCH_ITEM_FROM_WISH_LIST_ERROR:
+            return {
+                ...state,
+                isFetchingItemFromWishList: false,
+                fetchingItemFromWishListDone: false,
+                fetchingItemFromWishListError: true,
+            };
         case REMOVE_FROM_CART_REQUEST:
             return {
                 ...state,
@@ -135,6 +163,27 @@ export default (state = {cartItems: [], cartItemOffline: [], myItems: []}, actio
                 isRemovingFromCart: false,
                 removingFromCartDone: false,
                 removingFromCartError: true,
+            };
+        case REMOVE_FROM_WISH_LIST_REQUEST:
+            return {
+                ...state,
+                isRemovingFromWishList: true,
+                removingFromWishListDone: false,
+                removingFromWishListError: false
+            };
+        case REMOVE_FROM_WISH_LIST_SUCCESS:
+            return {
+                ...state,
+                isRemovingFromWishList: false,
+                removingFromWishListDone: true,
+                removingFromWishListError: false
+            };
+        case REMOVE_FROM_WISH_LIST_ERROR:
+            return {
+                ...state,
+                isRemovingFromWishList: false,
+                removingFromWishListDone: false,
+                removingFromWishListError: true
             };
         case GET_ITEM_DETAIL_REQUEST:
             return {
