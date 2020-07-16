@@ -3,7 +3,7 @@ import {Link} from "react-router-dom";
 import {logoutUser} from "../../store/actions/authActions";
 import {connect} from "react-redux";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faEnvelope, faMapMarker, faPhone, faSignInAlt, faSignOutAlt, faUser} from "@fortawesome/free-solid-svg-icons";
+import {faEnvelope, faMapMarker, faPhone, faSignInAlt, faSignOutAlt} from "@fortawesome/free-solid-svg-icons";
 
 const ContactSection = props => {
 
@@ -45,12 +45,12 @@ const ContactSection = props => {
                                     </li>
                                 </Fragment> :
                                 <Fragment>
-                                    <li className="contact-link nav-item nav-inline mx-2">
-                                        <FontAwesomeIcon icon={faUser} size="sm" color="#D10024"/>
-                                        <Link className="text-decoration-none small ml-2"
-                                              to={`/account/${user.uid}`}>
-                                            My Account</Link>
-                                    </li>
+                                    {/*<li className="contact-link nav-item nav-inline mx-2">*/}
+                                    {/*    <FontAwesomeIcon icon={faUser} size="sm" color="#D10024"/>*/}
+                                    {/*    <Link className="text-decoration-none small ml-2"*/}
+                                    {/*          to={`/account/${user.uid}`}>*/}
+                                    {/*        My Account</Link>*/}
+                                    {/*</li>*/}
                                     <li className="contact-link nav-item nav-inline mx-2">
                                         <FontAwesomeIcon icon={faSignOutAlt} size="sm" color="#D10024"/>
                                         <span onClick={() => props.signOut()}

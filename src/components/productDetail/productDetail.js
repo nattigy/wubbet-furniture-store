@@ -1,21 +1,18 @@
-import React, {Fragment, useEffect, useState} from "react";
+import React, {Fragment, useEffect} from "react";
 import Header from "../header/header";
 import Footer from "../footer/footer";
 import ProductDescription from "./productDescription";
 import ProductImages from "./productImages";
 import {connect} from "react-redux";
-import {getItemDetail} from "../../store/actions/itemActions";
+import {addItemToCart, getItemDetail} from "../../store/actions/itemActions";
 import PreLoader from "../preLoader/preLoader";
 import PathIndicator from "../pathIndicator/pathIndicator";
-import Switch from "@material-ui/core/Switch";
 
 const ProductDetail = props => {
     const {
         isGettingItemDetail, gettingItemDetailError, gettingItemDetailDone,
         itemDetail, isAddingToCart, user, isLoggedIn, isAddingToWishList
     } = props;
-
-    const [editMode, setEditMode] = useState(false);
 
     useEffect(() => {
         props.getItemDetail({id: props.match.params.id})
@@ -30,11 +27,7 @@ const ProductDetail = props => {
                 {currentPath: false, pathName: "MY ITEMS", pathLink: "/account/my-items"},
                 {currentPath: true, pathName: "ITEM NAME", pathLink: props.match.url},
             ]}/>
-            <div className="container-lg">
-                <div className="w-100 text-right my-3">
-                    <span className="mx-2 small">Edit Mode</span>
-                    <Switch onChange={() => setEditMode(!editMode)} checked={editMode}/>
-                </div>
+            <div className="container-lg my-5">
                 <div className="row">
                     {isGettingItemDetail && <div className="preloading-store">
                         <div className="text-center">
@@ -50,7 +43,7 @@ const ProductDetail = props => {
                             userId: user ? user.uid : "0",
                             itemId: itemDetail.id,
                             itemPrice: parseInt(itemDetail.price)
-                        }} editMode={editMode} addToWishList={props.addItemToCart}/>
+                        }} addToWishList={props.addItemToCart}/>
                         {/*<DescriptionAndDetails item={itemDetail}/>*/}
                     </Fragment>}
                     {gettingItemDetailError && <div className="w-100 text-center text-danger py-3 font-14">
@@ -81,6 +74,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         getItemDetail: credentials => dispatch(getItemDetail(credentials)),
+        addItemToCart: credentials => dispatch(addItemToCart(credentials))
     };
 };
 

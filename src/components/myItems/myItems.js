@@ -29,7 +29,7 @@ const MyItems = props => {
                             <PreLoader/>
                         </div> :
                         myItems.length === 0 &&
-                        <div className="text-center py-5">
+                        <div className="text-center py-5 w-100">
                             <h5 className="font-14">You haven't uploaded any items yet!</h5>
                         </div>
                     }

@@ -18,16 +18,19 @@ import {
 export default (state = {}, action) => {
     switch (action.type) {
         case ANONYMOUS_LOGIN:
+            console.log("ANONYMOUS_LOGIN");
             return {
                 ...state,
                 isAnonymous: true,
             };
         case NOT_ANONYMOUS_LOGIN:
+            console.log("NOT_ANONYMOUS_LOGIN");
             return {
                 ...state,
                 isAnonymous: false
             };
         case LOGIN_REQUEST:
+            console.log("LOGIN_REQUEST");
             return {
                 ...state,
                 isLoggingIn: true,
@@ -35,17 +38,18 @@ export default (state = {}, action) => {
                 loginError: false
             };
         case LOGIN_SUCCESS:
+            console.log("LOGIN_SUCCESS");
             return {
                 ...state,
                 isLoggedIn: true,
                 isLoggingIn: false,
                 loginError: false,
-                isAnonymous: false,
                 isAuthenticated: true,
                 newUser: action.newUser,
                 user: action.user
             };
         case LOGIN_FAILURE:
+            console.log("LOGIN_FAILURE");
             return {
                 ...state,
                 isLoggedIn: false,
@@ -55,6 +59,7 @@ export default (state = {}, action) => {
                 errorMessage: action.error
             };
         case LOGOUT_REQUEST:
+            console.log("LOGOUT_REQUEST");
             return {
                 ...state,
                 isLoggingIn: false,
@@ -62,6 +67,7 @@ export default (state = {}, action) => {
                 logoutError: false
             };
         case LOGOUT_SUCCESS:
+            console.log("LOGOUT_SUCCESS");
             return {
                 ...state,
                 isLoggingOut: false,
@@ -70,6 +76,7 @@ export default (state = {}, action) => {
                 newUser: {}
             };
         case LOGOUT_FAILURE:
+            console.log("LOGOUT_FAILURE");
             return {
                 ...state,
                 isLoggingOut: false,

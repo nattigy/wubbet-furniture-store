@@ -50,7 +50,8 @@ const ShoppingCartMini = props => {
             <div className="text-left p-2 mini-cart">
                 <p className="my-1 font-14 mini-cart">{cartItems.length} items(s) selected</p>
                 <p className="font-14 mb-0 mini-cart">
-                    <strong className="mini-cart">SUBTOTAL: {newUser.totalPriceOfCart.toString()} ETB</strong></p>
+                    <strong className="mini-cart">SUBTOTAL: {newUser.totalPriceOfCart &&
+                    newUser.totalPriceOfCart.toString()} ETB</strong></p>
             </div>
             <div className="btn-group w-100">
                 <Link to="/cart" className="btn rounded-0 bg-dark-custom text-white">View Cart</Link>

@@ -54,7 +54,7 @@ const SearchSection = props => {
                             <li className="contact-link nav-item position-relative text-center nav-inline mx-3">
                                 <FontAwesomeIcon icon={faHeart} color="#fff"/>
                                 <Link className="text-white d-block small" to="/wishlist">Your Wishlist</Link>
-                                {newUser !== {} || newUser !== undefined &&
+                                {newUser.wishList &&
                                 <div className="qty">{newUser.wishList.length}</div>}
                             </li>
                             <li className="contact-link nav-item position-relative text-center nav-inline mx-3">
@@ -63,7 +63,7 @@ const SearchSection = props => {
                                         className="btn p-0 bg-transparent text-white d-block small your-cart font-12">
                                     Your Cart
                                 </button>
-                                {newUser !== {} || newUser !== undefined &&
+                                {newUser.cartList &&
                                 <div className="qty">{newUser.cartList.length}</div>}
                                 {openCart && <ShoppingCartMini user={user}/>}
                             </li>
