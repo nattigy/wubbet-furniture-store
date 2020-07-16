@@ -143,83 +143,96 @@ const Checkout = props => {
                                                 </div>
                                             </div>)}
                                         </div>
-                                        <div className="d-table w-100 my-3">
-                                            <div className="d-table-cell text-muted font-14">Shiping</div>
-                                            <div className="d-table-cell text-right font-14"><strong>FREE</strong></div>
-                                        </div>
-                                        <div className="d-table w-100 my-3">
-                                            <div className="d-table-cell font-14"><strong>TOTAL</strong></div>
-                                            <div className="d-table-cell text-right"><strong
-                                                className="order-total font-24 text-danger font-weight-bolder">
-                                                {newUser.totalPriceOfCart && newUser.totalPriceOfCart.toString()}</strong>
-                                                <span className="text-danger font-weight-bolder"> ETB</span>
-                                                <input type="hidden" name="total_price" id="total_price"
-                                                       value={newUser.totalPriceOfCart}/>
+                                        {cartItems.length !== 0 &&
+                                        <Fragment>
+                                            <div className="d-table w-100 my-3">
+                                                <div className="d-table-cell text-muted font-14">Shiping</div>
+                                                <div className="d-table-cell text-right font-14"><strong>FREE</strong>
+                                                </div>
+                                            </div>
+                                            <div className="d-table w-100 my-3">
+                                                <div className="d-table-cell font-14"><strong>TOTAL</strong></div>
+                                                <div className="d-table-cell text-right"><strong
+                                                    className="order-total font-24 text-danger font-weight-bolder">
+                                                    {newUser.totalPriceOfCart && newUser.totalPriceOfCart.toString()}</strong>
+                                                    <span className="text-danger font-weight-bolder"> ETB</span>
+                                                    <input type="hidden" name="total_price" id="total_price"
+                                                           value={newUser.totalPriceOfCart}/>
+                                                </div>
+                                            </div>
+                                        </Fragment>
+                                        }
+                                    </div>
+
+                                    {cartItems.length !== 0 &&
+                                    <Fragment>
+                                        <div className="">
+                                            <div className="input-radio py-2">
+                                                <div className="custom-control custom-radio">
+                                                    <input type="radio" id="customRadio1" name="customRadio"
+                                                           value="Direct Bank Transfer" className="custom-control-input"
+                                                           checked={direct_bank}
+                                                           onChange={e => {
+                                                               setPayment_method(e.target.value);
+                                                               setDirect_bank(!direct_bank);
+                                                               setAmole(!amole);
+                                                           }}
+                                                    />
+                                                    <label className="custom-control-label font-14"
+                                                           htmlFor="customRadio1">
+                                                        Direct Bank Transfer</label>
+                                                </div>
+                                                <div className={`pl-4 my-2 ${direct_bank ? `d-block` : `d-none`}`}>
+                                                    <p className="font-14">Lorem ipsum dolor sit amet, consectetur
+                                                        adipisicing elit, sed do eiusmod tempor incididunt ut labore
+                                                        et dolore magna aliqua.</p>
+                                                </div>
+                                            </div>
+                                            <div className="input-radio py-2">
+                                                <div className="custom-control custom-radio">
+                                                    <input type="radio" id="customRadio2" name="customRadio"
+                                                           value="Cheque Payment"
+                                                           className="custom-control-input"
+                                                           onChange={e => {
+                                                               setPayment_method(e.target.value);
+                                                               setAmole(!amole);
+                                                               setDirect_bank(!direct_bank);
+                                                           }}
+                                                    />
+                                                    <label className="custom-control-label font-14"
+                                                           htmlFor="customRadio2">
+                                                        Cheque Payment</label>
+                                                </div>
+                                                <div className={`pl-4 my-2 ${amole ? `d-block` : `d-none`}`}>
+                                                    <p className="font-14">Lorem ipsum dolor sit amet, consectetur
+                                                        adipisicing elit, sed do eiusmod tempor incididunt ut labore
+                                                        et dolore magna aliqua.</p>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div className="">
-                                        <div className="input-radio py-2">
-                                            <div className="custom-control custom-radio">
-                                                <input type="radio" id="customRadio1" name="customRadio"
-                                                       value="Direct Bank Transfer" className="custom-control-input"
-                                                       checked={direct_bank}
-                                                       onChange={e => {
-                                                           setPayment_method(e.target.value);
-                                                           setDirect_bank(!direct_bank);
-                                                           setAmole(!amole);
-                                                       }}
+                                        <div className="py-2">
+                                            <div className="custom-control custom-checkbox my-1 mr-sm-2">
+                                                <input type="checkbox" className="custom-control-input"
+                                                       id="customControlInline"
+                                                       onChange={() => setAgreeToTerms(!agreeToTerms)}
                                                 />
-                                                <label className="custom-control-label font-14" htmlFor="customRadio1">
-                                                    Direct Bank Transfer</label>
-                                            </div>
-                                            <div className={`pl-4 my-2 ${direct_bank ? `d-block` : `d-none`}`}>
-                                                <p className="font-14">Lorem ipsum dolor sit amet, consectetur
-                                                    adipisicing elit, sed do eiusmod tempor incididunt ut labore
-                                                    et dolore magna aliqua.</p>
-                                            </div>
-                                        </div>
-                                        <div className="input-radio py-2">
-                                            <div className="custom-control custom-radio">
-                                                <input type="radio" id="customRadio2" name="customRadio"
-                                                       value="Cheque Payment"
-                                                       className="custom-control-input"
-                                                       onChange={e => {
-                                                           setPayment_method(e.target.value);
-                                                           setAmole(!amole);
-                                                           setDirect_bank(!direct_bank);
-                                                       }}
-                                                />
-                                                <label className="custom-control-label font-14" htmlFor="customRadio2">
-                                                    Cheque Payment</label>
-                                            </div>
-                                            <div className={`pl-4 my-2 ${amole ? `d-block` : `d-none`}`}>
-                                                <p className="font-14">Lorem ipsum dolor sit amet, consectetur
-                                                    adipisicing elit, sed do eiusmod tempor incididunt ut labore
-                                                    et dolore magna aliqua.</p>
+                                                <label className="custom-control-label font-14"
+                                                       htmlFor="customControlInline">
+                                                    I've read and accept the
+                                                    <Link className="text-muted" to="/terms_and_conditions"> terms &
+                                                        conditions</Link>
+                                                </label>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div className="py-2">
-                                        <div className="custom-control custom-checkbox my-1 mr-sm-2">
-                                            <input type="checkbox" className="custom-control-input"
-                                                   id="customControlInline"
-                                                   onChange={() => setAgreeToTerms(!agreeToTerms)}
-                                            />
-                                            <label className="custom-control-label font-14"
-                                                   htmlFor="customControlInline">
-                                                I've read and accept the
-                                                <Link className="text-muted" to="/terms_and_conditions"> terms &
-                                                    conditions</Link>
-                                            </label>
+                                        <div className="position-relative">
+                                            {!agreeToTerms &&
+                                            <div className="block-submit text-center text-nowrap py-2">
+                                                <p>Agree to terms and conditions</p>
+                                            </div>}
+                                            <button className="btn btn-danger bg-red w-100 my-3">Place order</button>
                                         </div>
-                                    </div>
-                                    <div className="position-relative">
-                                        {!agreeToTerms && <div className="block-submit text-center text-nowrap py-2">
-                                            <p>Agree to terms and conditions</p>
-                                        </div>}
-                                        <button className="btn btn-danger bg-red w-100 my-3">Place order</button>
-                                    </div>
+                                    </Fragment>
+                                    }
                                 </div>
                             </div>
                         </form>

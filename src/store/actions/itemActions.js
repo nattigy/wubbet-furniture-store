@@ -36,6 +36,10 @@ export const FETCH_MY_ITEM_REQUEST = "FETCH_MY_ITEM_REQUEST";
 export const FETCH_MY_ITEM_SUCCESS = "FETCH_MY_ITEM_SUCCESS";
 export const FETCH_MY_ITEM_ERROR = "FETCH_MY_ITEM_ERROR";
 
+export const EDIT_MY_ITEM_REQUEST = "EDIT_MY_ITEM_REQUEST";
+export const EDIT_MY_ITEM_SUCCESS = "EDIT_MY_ITEM_SUCCESS";
+export const EDIT_MY_ITEM_ERROR = "EDIT_MY_ITEM_ERROR";
+
 const addItemRequest = () => {
     return {
         type: ADD_ITEM_REQUEST
@@ -192,6 +196,26 @@ const fetchMyItemsError = error => {
     }
 };
 
+const editMyItemsRequest = () => {
+    return {
+        type: EDIT_MY_ITEM_REQUEST
+    }
+};
+
+const editMyItemsSuccess = myItems => {
+    return {
+        type: EDIT_MY_ITEM_SUCCESS,
+        myItems
+    }
+};
+
+const editMyItemsError = error => {
+    return {
+        type: EDIT_MY_ITEM_ERROR,
+        error
+    }
+};
+
 const create_name_array = name => {
     return name.split(" ");
 };
@@ -205,8 +229,10 @@ const create_cat_name_combo = (category, name) => {
     return cat_name_combo;
 };
 
-export const addItem = (
-    {category, name, price, description, sub_category, frontPic, leftSidePic, rightSidePic, backPic, uid}) => dispatch => {
+export const addItem = ({
+                            category, name, price, description, sub_category,
+                            frontPic, leftSidePic, rightSidePic, backPic, uid, quantity
+                        }) => dispatch => {
     const picture0 = "";
     const picture1 = "";
     const picture2 = "";
@@ -216,7 +242,7 @@ export const addItem = (
     const cat_name_combo = create_cat_name_combo(category, name);
     fbConfig.firestore().collection("items").add({
         category, name_array, price, description, name,
-        cat_name_combo, sub_category, picture0, picture1, picture2, picture3,
+        cat_name_combo, sub_category, picture0, picture1, picture2, picture3, quantity,
         owner: uid
     })
         .then(item => uploadPicture([frontPic, leftSidePic, rightSidePic, backPic],
@@ -312,14 +338,20 @@ export const fetchFromCart = ({uid, type}) => dispatch => {
                 fbConfig.firestore().collection("items").doc(cartItems[i])
                     .get()
                     .then(snapshot => {
-                        let data = snapshot.data();
-                        data.id = snapshot.id;
-                        items.push(data);
-                        if (i + 1 === cartItems.length) {
-                            dispatch(fetchFromCartSuccess(items));
+                        if (snapshot.exists) {
+                            let data = snapshot.data();
+                            data.id = snapshot.id;
+                            items.push(data);
+                            if (i + 1 === cartItems.length) {
+                                dispatch(fetchFromCartSuccess(items));
+                            }
+                        } else {
+                            if (i + 1 === cartItems.length) {
+                                dispatch(fetchFromCartSuccess(items));
+                            }
                         }
                     })
-                    .catch(error => dispatch(fetchFromCartError(error)))
+                    .catch(error => fetchFromCartError(error))
             }
         }).catch(error => dispatch(fetchFromCartError(error)));
 };
@@ -349,6 +381,18 @@ export const fetchMyItems = ({uid}) => dispatch => {
             dispatch(fetchMyItemsSuccess(items))
         })
         .catch(error => dispatch(fetchMyItemsError(error.message)))
+};
+
+export const editItem = ({itemId, category, name, price, description, subCategory, quantity}) => dispatch => {
+    dispatch(editMyItemsRequest());
+    const name_array = create_name_array(name);
+    const cat_name_combo = create_cat_name_combo(category, name);
+    fbConfig.firestore().collection("items").doc(itemId)
+        .update({
+            category, name, price, description, sub_category: subCategory, name_array, quantity, cat_name_combo
+        })
+        .then(() => dispatch(editMyItemsSuccess()))
+        .catch(error => dispatch(editMyItemsError(error)))
 };
 
 export const getItemDetail = ({id}) => dispatch => {

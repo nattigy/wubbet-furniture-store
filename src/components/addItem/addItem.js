@@ -34,6 +34,7 @@ const AddItem = props => {
             name: new FormData(form).get("name"),
             price: new FormData(form).get("price"),
             category: new FormData(form).get("category"),
+            quantity: new FormData(form).get("quantity"),
             sub_category: new FormData(form).get("sub_category"),
             description: new FormData(form).get("description"),
             frontPic: new FormData(form).get("frontPic"),

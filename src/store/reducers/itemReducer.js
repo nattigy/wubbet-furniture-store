@@ -8,6 +8,9 @@ import {
     ADD_TO_WISH_LIST_FAILURE,
     ADD_TO_WISH_LIST_REQUEST,
     ADD_TO_WISH_LIST_SUCCESS,
+    EDIT_MY_ITEM_ERROR,
+    EDIT_MY_ITEM_REQUEST,
+    EDIT_MY_ITEM_SUCCESS,
     FETCH_ITEM_FROM_CART_ERROR,
     FETCH_ITEM_FROM_CART_REQUEST,
     FETCH_ITEM_FROM_CART_SUCCESS,
@@ -178,6 +181,27 @@ export default (state = {cartItems: [], cartItemOffline: [], myItems: []}, actio
                 fetchingMyItemsDone: false,
                 fetchingMyItemsError: true,
                 error: action.error
+            };
+        case EDIT_MY_ITEM_REQUEST:
+            return {
+                ...state,
+                isEditing: true,
+                editingDone: false,
+                editingError: false,
+            };
+        case EDIT_MY_ITEM_SUCCESS:
+            return {
+                ...state,
+                isEditing: false,
+                editingDone: true,
+                editingError: false,
+            };
+        case EDIT_MY_ITEM_ERROR:
+            return {
+                ...state,
+                isEditing: false,
+                editingDone: false,
+                editingError: true,
             };
         default:
             return state;

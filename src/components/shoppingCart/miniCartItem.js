@@ -3,7 +3,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faWindowClose} from "@fortawesome/free-solid-svg-icons";
 
 const MiniCartItem = props => {
-    const {cartItem} = props;
+    const {cartItem, user} = props;
     return (
         <div className="row p-2 border-light-custom border-bottom overflow-hidden">
             <div className="col-sm-4">
@@ -11,7 +11,10 @@ const MiniCartItem = props => {
                     <img className="w-100 mini-cart" src={cartItem.picture0}
                          alt="image preview"/>
                     <div className="delete-from-cart-btn mini-cart">
-                        <FontAwesomeIcon icon={faWindowClose} className="mini-cart" color="#15161D"/>
+                        <FontAwesomeIcon icon={faWindowClose} className="mini-cart" color="#15161D"
+                                         onClick={() => props.deleteFromCart({
+                                             userId: user.uid, itemId: cartItem.id
+                                         })}/>
                     </div>
                 </div>
             </div>

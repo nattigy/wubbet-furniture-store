@@ -54,7 +54,7 @@ const App = props => {
                         <Route exact path="/terms_and_conditions" component={TermsAndConditions}/>
                         <Route exact path="/return_policy" component={ReturnPolicy}/>
                         <Route exact path="/additem" component={AddItem}/>
-                        <Route exact path="/account/my-items" component={MyItems}/>
+                        <Route exact path="/account/myitems" component={MyItems}/>
                         <Route exact path="/account/myitem/:id" component={EditItem}/>
                         <Route exact path="/account/:uid" component={Account}/>
                     </Switch>
