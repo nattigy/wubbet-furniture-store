@@ -21,14 +21,14 @@ const Footer = () => {
                                     <ul className="footer-links navbar-nav">
                                         <li><a href="/" target="_blank">
                                             <FontAwesomeIcon icon={faMapMarker}
-                                                             size="sm" color="#D10024"/> 1734 Stonecoal Road</a></li>
+                                                             size="sm" color="#D10024"/> Addis Ababa, Ethiopia</a></li>
                                         <li><a href="/" target="_blank">
                                             <FontAwesomeIcon icon={faPhone}
-                                                             size="sm" color="#D10024"/> +021-95-51-84</a>
+                                                             size="sm" color="#D10024"/> +251-924-61-81-31</a>
                                         </li>
                                         <li><a href="/" target="_blank">
                                             <FontAwesomeIcon icon={faEnvelope}
-                                                             size="sm" color="#D10024"/> email@email.com</a>
+                                                             size="sm" color="#D10024"/> info@wubbet.com</a>
                                         </li>
                                     </ul>
                                 </div>

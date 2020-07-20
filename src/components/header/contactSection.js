@@ -16,7 +16,7 @@ const ContactSection = props => {
                     <ul className="navbar-nav d-block">
                         <li className="contact-link nav-item nav-inline mx-2">
                             <FontAwesomeIcon icon={faPhone} size="sm" color="#D10024"/>
-                            <a className="text-decoration-none small ml-2" href="/">+251946526451</a>
+                            <a className="text-decoration-none small ml-2" href="/">+251924618131</a>
                         </li>
                         <li className="contact-link nav-item nav-inline mx-2">
                             <FontAwesomeIcon icon={faEnvelope} size="sm" color="#D10024"/>
@@ -24,7 +24,7 @@ const ContactSection = props => {
                         </li>
                         <li className="contact-link nav-item nav-inline mx-2">
                             <FontAwesomeIcon icon={faMapMarker} size="sm" color="#D10024"/>
-                            <a className="text-decoration-none small ml-2" href="/">Ethiopia</a>
+                            <a className="text-decoration-none small ml-2" href="/">Addis Ababa, Ethiopia</a>
                         </li>
                     </ul>
                     <ul className="navbar-nav d-block">
