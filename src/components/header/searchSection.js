@@ -12,7 +12,7 @@ const SearchSection = props => {
     const [name, setName] = useState("all");
     const [openCart, setOpenCart] = useState(false);
 
-    const {newUser, user} = props;
+    const {newUser, user, wishListLength, cartLength} = props;
 
     useEffect(() => {
         window.onclick = function (event) {
@@ -54,8 +54,10 @@ const SearchSection = props => {
                             <li className="contact-link nav-item position-relative text-center nav-inline mx-3">
                                 <FontAwesomeIcon icon={faHeart} color="#fff"/>
                                 <Link className="text-white d-block small" to="/wishlist">Your Wishlist</Link>
-                                {newUser.wishList &&
-                                <div className="qty">{newUser.wishList.length}</div>}
+                                {/*{newUser && newUser.wishList &&*/}
+                                {/*<div className="qty">{newUser.wishList.length}</div>}*/}
+                                {wishListLength &&
+                                <div className="qty">{wishListLength.length}</div>}
                             </li>
                             <li className="contact-link nav-item position-relative text-center nav-inline mx-3">
                                 <FontAwesomeIcon icon={faShoppingCart} color="#fff"/>
@@ -63,8 +65,10 @@ const SearchSection = props => {
                                         className="btn p-0 bg-transparent text-white d-block small your-cart font-12">
                                     Your Cart
                                 </button>
-                                {newUser.cartList &&
-                                <div className="qty">{newUser.cartList.length}</div>}
+                                {/*{newUser.cartList && newUser.cartList &&*/}
+                                {/*<div className="qty">{newUser.cartList.length}</div>}*/}
+                                {cartLength &&
+                                <div className="qty">{cartLength.length}</div>}
                                 {openCart && <ShoppingCartMini user={user}/>}
                             </li>
                             <li className="nav-item nav-inline mx-3">
@@ -85,6 +89,8 @@ const mapStateToProps = state => {
     return {
         newUser: state.auth.newUser,
         user: state.auth.user,
+        wishListLength: state.cart.wishListItems,
+        cartLength: state.cart.cartItems,
     };
 };
 

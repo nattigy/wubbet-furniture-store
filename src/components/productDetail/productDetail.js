@@ -4,7 +4,8 @@ import Footer from "../footer/footer";
 import ProductDescription from "./productDescription";
 import ProductImages from "./productImages";
 import {connect} from "react-redux";
-import {addItemToCart, getItemDetail} from "../../store/actions/itemActions";
+import {addItemToCart} from "../../store/actions/cartActions";
+import {getItemDetail} from "../../store/actions/itemActions";
 import PreLoader from "../preLoader/preLoader";
 import PathIndicator from "../pathIndicator/pathIndicator";
 
@@ -64,10 +65,10 @@ const mapStateToProps = state => {
         gettingItemDetailDone: state.item.gettingItemDetailDone,
         gettingItemDetailError: state.item.gettingItemDetailError,
         itemDetail: state.item.itemDetail,
-        isAddingToCart: state.item.isAddingToCart,
-        isAddingToWishList: state.item.isAddingToWishList,
-        isAddingToWishListDone: state.item.isAddingToWishListDone,
-        isAddingToWishListError: state.item.isAddingToWishListError,
+        isAddingToCart: state.cart.isAddingToCart,
+        isAddingToWishList: state.cart.isAddingToWishList,
+        isAddingToWishListDone: state.cart.isAddingToWishListDone,
+        isAddingToWishListError: state.cart.isAddingToWishListError,
     };
 };
 

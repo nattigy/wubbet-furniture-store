@@ -3,7 +3,7 @@ import {faEye, faHeart, faStar} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {Link} from "react-router-dom";
 import {connect} from "react-redux";
-import {addItemToCart} from "../../store/actions/itemActions";
+import {addItemToCart} from "../../store/actions/cartActions";
 import AddToCartButton from "../addToCart/addToCart"
 
 const SingleProduct = props => {
@@ -59,9 +59,9 @@ const mapStateToProps = state => {
     return {
         user: state.auth.user,
         isLoggedIn: state.auth.isLoggedIn,
-        isAddingToCart: state.item.isAddingToCart,
-        isAddingToCartDone: state.item.isAddingToCartDone,
-        isAddingToCartError: state.search.isAddingToCartError,
+        isAddingToCart: state.cart.isAddingToCart,
+        isAddingToCartDone: state.cart.isAddingToCartDone,
+        isAddingToCartError: state.cart.isAddingToCartError,
     };
 };
 

@@ -1,9 +1,9 @@
-import {addItemToCart} from "../../store/actions/itemActions";
+import React from "react";
 import {connect} from "react-redux";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faShoppingCart} from "@fortawesome/free-solid-svg-icons";
 import CircularProgress from "@material-ui/core/CircularProgress/CircularProgress";
-import React from "react";
+import {addItemToCart} from "../../store/actions/cartActions";
 
 const AddToCartButton = props => {
 

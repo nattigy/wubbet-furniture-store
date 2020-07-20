@@ -3,7 +3,7 @@ import {Link} from "react-router-dom";
 import {faArrowCircleRight} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import MiniCartItem from "./miniCartItem";
-import {deleteFromCart, fetchFromCart} from "../../store/actions/itemActions";
+import {deleteFromCart, fetchFromCart} from "../../store/actions/cartActions";
 import {connect} from "react-redux";
 import PreLoader from "../preLoader/preLoader";
 
@@ -11,7 +11,7 @@ const ShoppingCartMini = props => {
 
     const {
         isFetchingFromError, cartItems, isAuthenticated, newUser,
-        user, isFetchingFromCart, isLoggedIn, removingFromCartDone
+        user, isFetchingFromCart, isLoggedIn, removingFromCartDone, totalPrice
     } = props;
 
     useEffect(() => {
@@ -50,8 +50,7 @@ const ShoppingCartMini = props => {
             <div className="text-left p-2 mini-cart">
                 <p className="my-1 font-14 mini-cart">{cartItems.length} items(s) selected</p>
                 <p className="font-14 mb-0 mini-cart">
-                    <strong className="mini-cart">SUBTOTAL: {newUser.totalPriceOfCart &&
-                    newUser.totalPriceOfCart.toString()} ETB</strong></p>
+                    <strong className="mini-cart">SUBTOTAL: {totalPrice} ETB</strong></p>
             </div>
             <div className="btn-group w-100">
                 <Link to="/cart" className="btn rounded-0 bg-dark-custom text-white">View Cart</Link>
@@ -68,11 +67,12 @@ const mapStateToProps = state => {
         isAuthenticated: state.auth.isAuthenticated,
         newUser: state.auth.newUser,
         user: state.auth.user,
-        cartItems: state.item.cartItems,
-        isFetchingFromCart: state.item.isFetchingFromCart,
-        isFetchingFromDone: state.item.isFetchingFromDone,
-        isFetchingFromError: state.item.isFetchingFromError,
-        removingFromCartDone: state.item.removingFromCartDone,
+        cartItems: state.cart.cartItems,
+        isFetchingFromCart: state.cart.isFetchingFromCart,
+        isFetchingFromDone: state.cart.isFetchingFromDone,
+        isFetchingFromError: state.cart.isFetchingFromError,
+        removingFromCartDone: state.cart.removingFromCartDone,
+        totalPrice: state.cart.totalPrice,
     };
 };
 

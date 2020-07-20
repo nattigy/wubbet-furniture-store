@@ -1,9 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./app";
-import {Provider, useSelector} from 'react-redux';
+import {Provider} from 'react-redux';
 import firebase from "./firebase/firebase";
-import {isLoaded, ReactReduxFirebaseProvider} from "react-redux-firebase";
+import {ReactReduxFirebaseProvider} from "react-redux-firebase";
 import configureStore from "./configureStore";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
@@ -20,7 +20,6 @@ import "./assets/css/homeStyle.css"
 import "./assets/css/storeStyle.css"
 import "./assets/css/text.css"
 import "./assets/css/addItemStyle.css"
-import PreLoader from "./components/preLoader/preLoader";
 
 const store = configureStore();
 const rrfConfig = {
@@ -34,20 +33,20 @@ const rrfProps = {
     dispatch: store.dispatch
 };
 
-function AuthIsLoaded({children}) {
-    const auth = useSelector(state => state.firebase.auth);
-    if (!isLoaded(auth)) return <div className="preloading-home overflow-hidden-y">
-        <PreLoader/>
-    </div>;
-    return children
-}
+// function AuthIsLoaded({children}) {
+//     const auth = useSelector(state => state.firebase.auth);
+//     if (!isLoaded(auth)) return <div className="preloading-home overflow-hidden-y">
+//         <PreLoader/>
+//     </div>;
+//     return children
+// }
 
 ReactDOM.render(
     <Provider store={store}>
         <ReactReduxFirebaseProvider {...rrfProps}>
-            <AuthIsLoaded>
-                <App/>
-            </AuthIsLoaded>
+            <App/>
+            {/*<AuthIsLoaded>*/}
+            {/*</AuthIsLoaded>*/}
         </ReactReduxFirebaseProvider>
     </Provider>,
     document.getElementById('root')

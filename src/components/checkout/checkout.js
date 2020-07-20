@@ -2,7 +2,7 @@ import React, {Fragment, useEffect, useState} from "react";
 import Header from "../header/header";
 import Footer from "../footer/footer";
 import {Link, Redirect} from "react-router-dom";
-import {fetchFromCart} from "../../store/actions/itemActions";
+import {fetchFromCart} from "../../store/actions/cartActions";
 import {connect} from "react-redux";
 import PreLoader from "../preLoader/preLoader";
 import {orderFurniture} from "../../store/actions/orderActions";
@@ -11,9 +11,8 @@ import PathIndicator from "../pathIndicator/pathIndicator";
 
 const Checkout = props => {
     const {
-        isFetchingFromError, cartItems, isAuthenticated,
-        newUser, user, isFetchingFromCart,
-        isSending, sendingSuccess
+        isFetchingFromError, cartItems, isAuthenticated, newUser,
+        user, isFetchingFromCart, totalPrice, isSending, sendingSuccess
     } = props;
 
     const [fullName, setFullName] = useState("");
@@ -152,9 +151,10 @@ const Checkout = props => {
                                             </div>
                                             <div className="d-table w-100 my-3">
                                                 <div className="d-table-cell font-14"><strong>TOTAL</strong></div>
-                                                <div className="d-table-cell text-right"><strong
-                                                    className="order-total font-24 text-danger font-weight-bolder">
-                                                    {newUser.totalPriceOfCart && newUser.totalPriceOfCart.toString()}</strong>
+                                                <div className="d-table-cell text-right">
+                                                    <strong
+                                                        className="order-total font-24 text-danger font-weight-bolder">
+                                                        {totalPrice}</strong>
                                                     <span className="text-danger font-weight-bolder"> ETB</span>
                                                     <input type="hidden" name="total_price" id="total_price"
                                                            value={newUser.totalPriceOfCart}/>
@@ -250,10 +250,11 @@ const mapStateToProps = state => {
         isAuthenticated: state.auth.isAuthenticated,
         newUser: state.auth.newUser,
         user: state.auth.user,
-        cartItems: state.item.cartItems,
-        isFetchingFromCart: state.item.isFetchingFromCart,
-        isFetchingFromDone: state.item.isFetchingFromDone,
-        isFetchingFromError: state.item.isFetchingFromError,
+        cartItems: state.cart.cartItems,
+        isFetchingFromCart: state.cart.isFetchingFromCart,
+        isFetchingFromDone: state.cart.isFetchingFromDone,
+        isFetchingFromError: state.cart.isFetchingFromError,
+        totalPrice: state.cart.totalPrice,
         isSending: state.order.isSending,
         sendingSuccess: state.order.sendingSuccess,
     };

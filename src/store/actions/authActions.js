@@ -1,4 +1,5 @@
 import fbConfig from "../../firebase/firebase";
+import {checkCart, checkWishList} from "./cartActions";
 
 export const ANONYMOUS_LOGIN = "ANONYMOUS_LOGIN";
 export const NOT_ANONYMOUS_LOGIN = "NOT_ANONYMOUS_LOGIN";
@@ -197,8 +198,17 @@ export const verifyAuth = () => dispatch => {
                 fbConfig.firestore()
                     .doc("users/" + user.uid)
                     .get()
-                    .then(newUser => dispatch(receiveLogin(newUser.data(), user)));
-                // .then(newUser => console.log("here : newuser : ", newUser.data(), " user : ", user));
+                    .then(newUser => {
+                        dispatch(receiveLogin(newUser.data() ? newUser.data() : {}, user));
+                        return newUser.data()
+                    })
+                    .then(u => {
+                        if (u) {
+                            dispatch(checkCart(user.uid));
+                            dispatch(checkWishList(user.uid));
+                        }
+                    })
+                // .then(newUser => console.log("here : newuser : ", newUser.data()  ? newUser.data() : {}, " user : ", user));
             } else {
                 dispatch(verifyError())
             }

@@ -5,13 +5,13 @@ import CartItem from "./cartItem";
 import {Link, Redirect} from "react-router-dom";
 import {connect} from "react-redux";
 import PreLoader from "../preLoader/preLoader";
-import {addItemToCart, deleteFromCart, fetchFromCart} from "../../store/actions/itemActions";
+import {addItemToCart, deleteFromCart, fetchFromCart} from "../../store/actions/cartActions";
 import PathIndicator from "../pathIndicator/pathIndicator";
 
 const ShoppingCart = props => {
 
     const {
-        isFetchingFromError, cartItems, isAuthenticated,
+        isFetchingFromError, cartItems, isAuthenticated, totalPrice,
         newUser, user, isFetchingFromCart, isLoggedIn, removingFromCartDone
     } = props;
 
@@ -72,8 +72,7 @@ const ShoppingCart = props => {
                     </div>
                     <div className="py-3">
                         <p className="text-right mr-5 font-16">Subtotal ({cartItems.length} items):
-                            <span className="text-danger font-weight-bold font-16"> {newUser.totalPriceOfCart &&
-                            newUser.totalPriceOfCart.toString()} ETB</span>
+                            <span className="text-danger font-weight-bold font-16"> {totalPrice} ETB</span>
                         </p>
                     </div>
                 </div>
@@ -89,11 +88,12 @@ const mapStateToProps = state => {
         isAuthenticated: state.auth.isAuthenticated,
         newUser: state.auth.newUser,
         user: state.auth.user,
-        cartItems: state.item.cartItems,
-        isFetchingFromCart: state.item.isFetchingFromCart,
-        isFetchingFromDone: state.item.isFetchingFromDone,
-        isFetchingFromError: state.item.isFetchingFromError,
-        removingFromCartDone: state.item.removingFromCartDone,
+        cartItems: state.cart.cartItems,
+        isFetchingFromCart: state.cart.isFetchingFromCart,
+        isFetchingFromDone: state.cart.isFetchingFromDone,
+        isFetchingFromError: state.cart.isFetchingFromError,
+        removingFromCartDone: state.cart.removingFromCartDone,
+        totalPrice: state.cart.totalPrice,
     };
 };
 
