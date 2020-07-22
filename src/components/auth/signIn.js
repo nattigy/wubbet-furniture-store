@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import logo from "../../assets/img/purelogo.png";
 import {CopyRight} from "../footer/copyRight";
 import {Link, Redirect} from "react-router-dom";
-import {loginUser} from "../../store/actions/authActions";
+import {loginUser} from "../../store/auth/auth.utils";
 import {connect} from "react-redux";
 import PreLoader from "../preLoader/preLoader";
 
@@ -10,14 +10,14 @@ const SignIn = props => {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const {loginError, isAuthenticated, errorMessage, isLoggingIn, isAnonymous} = props;
+    const {loginError, errorMessage, isLoggingIn, isAnonymous} = props;
 
     const signIn = e => {
         e.preventDefault();
         props.signIn({email, password})
     };
 
-    if (isAuthenticated && !isAnonymous) {
+    if (isLoggingIn && !isAnonymous) {
         return <Redirect to="/"/>;
     } else {
         return (
@@ -80,7 +80,6 @@ const mapStateToProps = state => {
         loginError: state.auth.loginError,
         isLoggingIn: state.auth.isLoggingIn,
         isAnonymous: state.auth.isAnonymous,
-        isAuthenticated: state.auth.isAuthenticated,
         errorMessage: state.auth.errorMessage
     };
 };

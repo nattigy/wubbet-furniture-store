@@ -3,7 +3,7 @@ import {Link} from "react-router-dom";
 import {faArrowCircleRight} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import MiniCartItem from "./miniCartItem";
-import {deleteFromCart, fetchFromCart} from "../../store/actions/cartActions";
+import {deleteFromCart, fetchFromCart} from "../../store/cartList/cart-list.utils";
 import {connect} from "react-redux";
 import PreLoader from "../preLoader/preLoader";
 
@@ -15,7 +15,7 @@ const ShoppingCartMini = props => {
     } = props;
 
     useEffect(() => {
-        props.fetchFromCart({uid: props.user ? props.user.uid : "0", type: "CART_LIST"})
+        props.fetchFromCart({uid: props.user ? props.user.uid : "0"})
     }, []);
 
     const delEvent = (e, index) => {
@@ -67,12 +67,12 @@ const mapStateToProps = state => {
         isAuthenticated: state.auth.isAuthenticated,
         newUser: state.auth.newUser,
         user: state.auth.user,
-        cartItems: state.cart.cartItems,
-        isFetchingFromCart: state.cart.isFetchingFromCart,
-        isFetchingFromDone: state.cart.isFetchingFromDone,
-        isFetchingFromError: state.cart.isFetchingFromError,
-        removingFromCartDone: state.cart.removingFromCartDone,
-        totalPrice: state.cart.totalPrice,
+        cartItems: state.cartList.cartItems,
+        isFetchingFromCart: state.cartList.isFetchingFromCart,
+        isFetchingFromDone: state.cartList.isFetchingFromDone,
+        isFetchingFromError: state.cartList.isFetchingFromError,
+        removingFromCartDone: state.cartList.removingFromCartDone,
+        totalPrice: state.cartList.totalPrice,
     };
 };
 

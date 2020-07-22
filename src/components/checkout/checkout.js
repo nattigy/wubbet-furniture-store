@@ -2,16 +2,16 @@ import React, {Fragment, useEffect, useState} from "react";
 import Header from "../header/header";
 import Footer from "../footer/footer";
 import {Link, Redirect} from "react-router-dom";
-import {fetchFromCart} from "../../store/actions/cartActions";
+import {fetchFromCart} from "../../store/cartList/cart-list.utils";
 import {connect} from "react-redux";
 import PreLoader from "../preLoader/preLoader";
-import {orderFurniture} from "../../store/actions/orderActions";
+import {orderFurniture} from "../../store/order/order.utils";
 import Dialog from "@material-ui/core/Dialog/Dialog";
 import PathIndicator from "../pathIndicator/pathIndicator";
 
 const Checkout = props => {
     const {
-        isFetchingFromError, cartItems, isAuthenticated, newUser,
+        isFetchingFromError, cartItems, newUser, isLoggedIn,
         user, isFetchingFromCart, totalPrice, isSending, sendingSuccess
     } = props;
 
@@ -38,11 +38,7 @@ const Checkout = props => {
         props.orderFurniture(`?&fullName=${fullName}&user_id=${user_id}&address=${address}&city=${city}&telephone=${telephone}&order_notes=${order_notes}&total_price=${total_price}&ordered_items=${ordered_items}&payment_method=${payment_method}`);
     };
 
-    if (isAuthenticated === undefined) {
-        return <div className="preloading-home overflow-hidden-y">
-            <PreLoader/>
-        </div>;
-    } else if (isAuthenticated === false) {
+    if (isLoggedIn === false) {
         return <Redirect to="/login"/>;
     } else {
         return (
@@ -247,14 +243,13 @@ const Checkout = props => {
 const mapStateToProps = state => {
     return {
         isLoggedIn: state.auth.isLoggedIn,
-        isAuthenticated: state.auth.isAuthenticated,
         newUser: state.auth.newUser,
         user: state.auth.user,
-        cartItems: state.cart.cartItems,
-        isFetchingFromCart: state.cart.isFetchingFromCart,
-        isFetchingFromDone: state.cart.isFetchingFromDone,
-        isFetchingFromError: state.cart.isFetchingFromError,
-        totalPrice: state.cart.totalPrice,
+        cartItems: state.cartList.cartItems,
+        isFetchingFromCart: state.cartList.isFetchingFromCart,
+        isFetchingFromDone: state.cartList.isFetchingFromDone,
+        isFetchingFromError: state.cartList.isFetchingFromError,
+        totalPrice: state.cartList.totalPrice,
         isSending: state.order.isSending,
         sendingSuccess: state.order.sendingSuccess,
     };

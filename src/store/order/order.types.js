@@ -1,0 +1,7 @@
+const OrderTypes = {
+    SEND_ORDER_REQUEST: "SEND_ORDER_REQUEST",
+    SEND_ORDER_SUCCESS: "SEND_ORDER_SUCCESS",
+    SEND_ORDER_FAILURE: "SEND_ORDER_FAILURE"
+};
+
+export default OrderTypes;

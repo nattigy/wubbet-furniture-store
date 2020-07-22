@@ -1,7 +1,7 @@
 import React, {Fragment, useEffect, useState} from "react";
 import Header from "../header/header";
 import Footer from "../footer/footer";
-import {applyFilter, searchAllItems, searchItems} from "../../store/actions/searchActions";
+import {applyFilter, searchAllItems, searchItems} from "../../store/search/search.utils";
 import SingleProduct from "../singleProductView/singleProduct"
 import {connect} from "react-redux";
 import PreLoader from "../preLoader/preLoader";
@@ -106,7 +106,6 @@ const mapStateToProps = state => {
         isSearching: state.search.isSearching,
         isSearchError: state.search.isSearchError,
         searchItemsResult: state.search.searchItems,
-        sub_category_nav: state.nav.sub_category_nav,
     }
 };
 

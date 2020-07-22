@@ -1,22 +1,22 @@
-import {SEND_ORDER_FAILURE, SEND_ORDER_REQUEST, SEND_ORDER_SUCCESS,} from "./../actions/orderActions";
+import OrderTypes from "./order.types";
 
-export default (state = {}, action) => {
+const orderReducers = (state = {}, action) => {
     switch (action.type) {
-        case SEND_ORDER_REQUEST:
+        case OrderTypes.SEND_ORDER_REQUEST:
             return {
                 ...state,
                 isSending: true,
                 sendingSuccess: false,
                 sendingError: false
             };
-        case SEND_ORDER_SUCCESS:
+        case OrderTypes.SEND_ORDER_SUCCESS:
             return {
                 ...state,
                 isSending: false,
                 sendingSuccess: true,
                 sendingError: false
             };
-        case SEND_ORDER_FAILURE:
+        case OrderTypes.SEND_ORDER_FAILURE:
             return {
                 ...state,
                 isSending: false,
@@ -28,3 +28,5 @@ export default (state = {}, action) => {
             return state;
     }
 };
+
+export default orderReducers;

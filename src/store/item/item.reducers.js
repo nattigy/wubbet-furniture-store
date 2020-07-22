@@ -1,35 +1,22 @@
-import {
-    ADD_ITEM_FAILURE,
-    ADD_ITEM_REQUEST,
-    ADD_ITEM_SUCCESS,
-    EDIT_MY_ITEM_ERROR,
-    EDIT_MY_ITEM_REQUEST,
-    EDIT_MY_ITEM_SUCCESS,
-    FETCH_MY_ITEM_ERROR,
-    FETCH_MY_ITEM_REQUEST,
-    FETCH_MY_ITEM_SUCCESS,
-    GET_ITEM_DETAIL_ERROR,
-    GET_ITEM_DETAIL_REQUEST,
-    GET_ITEM_DETAIL_SUCCESS,
-} from "./../actions/itemActions";
+import ItemTypes from "./item.types";
 
-export default (state = {cartItems: [], wishListItem: [], myItems: []}, action) => {
+const itemReducers = (state = {cartItems: [], wishListItem: [], myItems: []}, action) => {
     switch (action.type) {
-        case ADD_ITEM_REQUEST:
+        case ItemTypes.ADD_ITEM_REQUEST:
             return {
                 ...state,
                 isAdding: true,
                 addingSuccess: false,
                 addingError: false
             };
-        case ADD_ITEM_SUCCESS:
+        case ItemTypes.ADD_ITEM_SUCCESS:
             return {
                 ...state,
                 isAdding: false,
                 addingSuccess: true,
                 addingError: false
             };
-        case ADD_ITEM_FAILURE:
+        case ItemTypes.ADD_ITEM_FAILURE:
             return {
                 ...state,
                 isAdding: false,
@@ -37,14 +24,14 @@ export default (state = {cartItems: [], wishListItem: [], myItems: []}, action) 
                 addingError: true,
                 errorMessage: action.error
             };
-        case GET_ITEM_DETAIL_REQUEST:
+        case ItemTypes.GET_ITEM_DETAIL_REQUEST:
             return {
                 ...state,
                 isGettingItemDetail: true,
                 gettingItemDetailDone: false,
                 gettingItemDetailError: false,
             };
-        case GET_ITEM_DETAIL_SUCCESS:
+        case ItemTypes.GET_ITEM_DETAIL_SUCCESS:
             return {
                 ...state,
                 isGettingItemDetail: false,
@@ -52,7 +39,7 @@ export default (state = {cartItems: [], wishListItem: [], myItems: []}, action) 
                 gettingItemDetailError: false,
                 itemDetail: action.item,
             };
-        case GET_ITEM_DETAIL_ERROR:
+        case ItemTypes.GET_ITEM_DETAIL_ERROR:
             return {
                 ...state,
                 isGettingItemDetail: false,
@@ -60,14 +47,14 @@ export default (state = {cartItems: [], wishListItem: [], myItems: []}, action) 
                 gettingItemDetailError: true,
                 errorMessage: action.error
             };
-        case FETCH_MY_ITEM_REQUEST:
+        case ItemTypes.FETCH_MY_ITEM_REQUEST:
             return {
                 ...state,
                 isFetchingMyItems: true,
                 fetchingMyItemsDone: false,
                 fetchingMyItemsError: false,
             };
-        case FETCH_MY_ITEM_SUCCESS:
+        case ItemTypes.FETCH_MY_ITEM_SUCCESS:
             return {
                 ...state,
                 isFetchingMyItems: false,
@@ -75,7 +62,7 @@ export default (state = {cartItems: [], wishListItem: [], myItems: []}, action) 
                 fetchingMyItemsError: false,
                 myItems: action.myItems
             };
-        case FETCH_MY_ITEM_ERROR:
+        case ItemTypes.FETCH_MY_ITEM_ERROR:
             return {
                 ...state,
                 isFetchingMyItems: false,
@@ -83,21 +70,21 @@ export default (state = {cartItems: [], wishListItem: [], myItems: []}, action) 
                 fetchingMyItemsError: true,
                 error: action.error
             };
-        case EDIT_MY_ITEM_REQUEST:
+        case ItemTypes.EDIT_MY_ITEM_REQUEST:
             return {
                 ...state,
                 isEditing: true,
                 editingDone: false,
                 editingError: false,
             };
-        case EDIT_MY_ITEM_SUCCESS:
+        case ItemTypes.EDIT_MY_ITEM_SUCCESS:
             return {
                 ...state,
                 isEditing: false,
                 editingDone: true,
                 editingError: false,
             };
-        case EDIT_MY_ITEM_ERROR:
+        case ItemTypes.EDIT_MY_ITEM_ERROR:
             return {
                 ...state,
                 isEditing: false,
@@ -108,3 +95,5 @@ export default (state = {cartItems: [], wishListItem: [], myItems: []}, action) 
             return state;
     }
 };
+
+export default itemReducers;

@@ -4,7 +4,7 @@ import Footer from "../footer/footer";
 import PreLoader from "../preLoader/preLoader";
 import Dialog from "@material-ui/core/Dialog";
 import {connect} from "react-redux";
-import {addItem} from "../../store/actions/itemActions";
+import {addItem} from "../../store/item/item.utils";
 import {Redirect} from "react-router-dom";
 
 const sub_category = [
@@ -25,7 +25,7 @@ const AddItem = props => {
     const [backPic, setBackPic] = useState("");
     const [selected_category, setSelected_category] = useState("HOME_FURNITURE");
 
-    const {isAdding, addingError, addingSuccess, errorMessage, isAuthenticated, isLoggedIn, isAnonymous, user} = props;
+    const {isAdding, addingError, addingSuccess, errorMessage, isLoggedIn, isAnonymous, user} = props;
 
     const handleSubmit = e => {
         e.preventDefault();
@@ -45,13 +45,7 @@ const AddItem = props => {
         });
     };
 
-    if (!isAuthenticated) {
-        return (
-            <div className="preloading-home overflow-hidden-y">
-                <PreLoader/>
-            </div>
-        );
-    } else if (!isLoggedIn || isAnonymous) {
+    if (!isLoggedIn || isAnonymous) {
         return <Redirect to="/login"/>
     } else {
         return (
@@ -185,7 +179,6 @@ const mapStateToProps = state => {
         addingError: state.item.addingError,
         addingSuccess: state.item.addingSuccess,
         errorMessage: state.item.errorMessage,
-        isAuthenticated: state.auth.isAuthenticated,
         isLoggedIn: state.auth.isLoggedIn,
         isAnonymous: state.auth.isAnonymous,
         user: state.auth.user

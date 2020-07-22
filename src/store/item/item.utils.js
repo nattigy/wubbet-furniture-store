@@ -1,99 +1,18 @@
 import fbConfig from "../../firebase/firebase";
-
-export const ADD_ITEM_REQUEST = "ADD_ITEM_REQUEST";
-export const ADD_ITEM_SUCCESS = "ADD_ITEM_SUCCESS";
-export const ADD_ITEM_FAILURE = "ADD_ITEM_FAILURE";
-
-export const GET_ITEM_DETAIL_REQUEST = "GET_ITEM_DETAIL_REQUEST";
-export const GET_ITEM_DETAIL_SUCCESS = "GET_ITEM_DETAIL_SUCCESS";
-export const GET_ITEM_DETAIL_ERROR = "GET_ITEM_DETAIL_ERROR";
-
-export const FETCH_MY_ITEM_REQUEST = "FETCH_MY_ITEM_REQUEST";
-export const FETCH_MY_ITEM_SUCCESS = "FETCH_MY_ITEM_SUCCESS";
-export const FETCH_MY_ITEM_ERROR = "FETCH_MY_ITEM_ERROR";
-
-export const EDIT_MY_ITEM_REQUEST = "EDIT_MY_ITEM_REQUEST";
-export const EDIT_MY_ITEM_SUCCESS = "EDIT_MY_ITEM_SUCCESS";
-export const EDIT_MY_ITEM_ERROR = "EDIT_MY_ITEM_ERROR";
-
-const addItemRequest = () => {
-    return {
-        type: ADD_ITEM_REQUEST
-    };
-};
-
-const addItemSuccess = () => {
-    return {
-        type: ADD_ITEM_SUCCESS,
-    };
-};
-
-const addItemError = error => {
-    return {
-        type: ADD_ITEM_FAILURE,
-        error
-    };
-};
-
-const getItemDetailRequest = () => {
-    return {
-        type: GET_ITEM_DETAIL_REQUEST
-    }
-};
-
-const getItemDetailSuccess = item => {
-    return {
-        type: GET_ITEM_DETAIL_SUCCESS,
-        item
-    }
-};
-
-const getItemDetailError = error => {
-    return {
-        type: GET_ITEM_DETAIL_ERROR,
-        error
-    }
-};
-
-const fetchMyItemsRequest = () => {
-    return {
-        type: FETCH_MY_ITEM_REQUEST
-    }
-};
-
-const fetchMyItemsSuccess = myItems => {
-    return {
-        type: FETCH_MY_ITEM_SUCCESS,
-        myItems
-    }
-};
-
-const fetchMyItemsError = error => {
-    return {
-        type: FETCH_MY_ITEM_ERROR,
-        error
-    }
-};
-
-const editMyItemsRequest = () => {
-    return {
-        type: EDIT_MY_ITEM_REQUEST
-    }
-};
-
-const editMyItemsSuccess = myItems => {
-    return {
-        type: EDIT_MY_ITEM_SUCCESS,
-        myItems
-    }
-};
-
-const editMyItemsError = error => {
-    return {
-        type: EDIT_MY_ITEM_ERROR,
-        error
-    }
-};
+import {
+    addItemError,
+    addItemRequest,
+    addItemSuccess,
+    editMyItemsError,
+    editMyItemsRequest,
+    editMyItemsSuccess,
+    fetchMyItemsError,
+    fetchMyItemsRequest,
+    fetchMyItemsSuccess,
+    getItemDetailError,
+    getItemDetailRequest,
+    getItemDetailSuccess
+} from "./item.actions";
 
 const create_name_array = name => {
     return name.split(" ");
@@ -117,7 +36,7 @@ export const addItem = ({
     const picture2 = "";
     const picture3 = "";
     dispatch(addItemRequest());
-    const name_array = create_name_array(name).toLowerCase();
+    const name_array = create_name_array(name.toLowerCase());
     const cat_name_combo = create_cat_name_combo(category, name);
     fbConfig.firestore().collection("items").add({
         category, name_array, price, description, name: name.toLowerCase(),
@@ -186,11 +105,12 @@ export const fetchMyItems = ({uid}) => dispatch => {
 
 export const editItem = ({itemId, category, name, price, description, subCategory, quantity}) => dispatch => {
     dispatch(editMyItemsRequest());
-    const name_array = create_name_array(name);
+    const name_array = create_name_array(name.toLowerCase());
     const cat_name_combo = create_cat_name_combo(category, name);
     fbConfig.firestore().collection("items").doc(itemId)
         .update({
-            category, name, price, description, sub_category: subCategory, name_array, quantity, cat_name_combo
+            category, name: name.toLowerCase(), price, description,
+            sub_category: subCategory, name_array, quantity, cat_name_combo
         })
         .then(() => dispatch(editMyItemsSuccess()))
         .catch(error => dispatch(editMyItemsError(error)))

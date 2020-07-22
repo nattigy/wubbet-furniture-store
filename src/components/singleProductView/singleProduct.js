@@ -3,8 +3,9 @@ import {faEye, faHeart, faStar} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {Link} from "react-router-dom";
 import {connect} from "react-redux";
-import {addItemToCart} from "../../store/actions/cartActions";
+import {addItemToCart} from "../../store/cartList/cart-list.utils";
 import AddToCartButton from "../addToCart/addToCart"
+import {addItemToWishList} from "../../store/wishList/wish-list.utils";
 
 const SingleProduct = props => {
 
@@ -31,10 +32,9 @@ const SingleProduct = props => {
                 </div>
                 <div className="product-btns">
                     <Link to="" className="add-to-wishlist">
-                        <FontAwesomeIcon onClick={() => props.addToCart({
+                        <FontAwesomeIcon onClick={() => props.addItemToWishList({
                             userId: user.uid,
-                            itemId: item.id,
-                            type: "ADD_TO_WISH_LIST"
+                            itemId: item.id
                         })} icon={faHeart} size="1x" color="#475161"/>
                         <span className="tooltipp">add to wishlist</span>
                     </Link>
@@ -48,8 +48,7 @@ const SingleProduct = props => {
                 isAddingToCart,
                 isLoggedIn,
                 userId: user ? user.uid : "0",
-                itemId: item.id,
-                itemPrice: parseInt(item.price)
+                itemId: item.id
             }}/>
         </div>
     )
@@ -59,15 +58,16 @@ const mapStateToProps = state => {
     return {
         user: state.auth.user,
         isLoggedIn: state.auth.isLoggedIn,
-        isAddingToCart: state.cart.isAddingToCart,
-        isAddingToCartDone: state.cart.isAddingToCartDone,
-        isAddingToCartError: state.cart.isAddingToCartError,
+        isAddingToCart: state.cartList.isAddingToCart,
+        isAddingToCartDone: state.cartList.isAddingToCartDone,
+        isAddingToCartError: state.cartList.isAddingToCartError,
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        addToCart: credentials => dispatch(addItemToCart(credentials))
+        addToCart: credentials => dispatch(addItemToCart(credentials)),
+        addItemToWishList: credentials => dispatch(addItemToWishList(credentials)),
     };
 };
 

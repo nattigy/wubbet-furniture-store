@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import logo from "../../assets/img/purelogo.png";
 import {CopyRight} from "../footer/copyRight";
 import {Link, Redirect} from "react-router-dom";
-import {registerUser} from "../../store/actions/authActions";
+import {registerUser} from "../../store/auth/auth.utils";
 import {connect} from "react-redux";
 import PreLoader from "../preLoader/preLoader";
 
@@ -12,14 +12,14 @@ const SignUp = props => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [passwordMatch, setPasswordMatch] = useState(true);
-    const {signUpError, isAuthenticated, errorMessage, isSigningUp, isAnonymous} = props;
+    const {signUpError, isLoggedIn, errorMessage, isSigningUp, isAnonymous} = props;
 
     const signUp = e => {
         e.preventDefault();
         props.signUp({name, email, password});
     };
 
-    if (isAuthenticated && !isAnonymous) {
+    if (isLoggedIn && !isAnonymous) {
         return <Redirect to="/"/>;
     } else {
         return (
@@ -90,10 +90,10 @@ const SignUp = props => {
 
 const mapStateToProps = state => {
     return {
-        signUpError: state.auth.signUpError,
+        isLoggedIn: state.auth.isLoggedIn,
         isSigningUp: state.auth.isSigningUp,
-        isAuthenticated: state.auth.isAuthenticated,
         isAnonymous: state.auth.isAnonymous,
+        signUpError: state.auth.signUpError,
         errorMessage: state.auth.errorMessage
     };
 };

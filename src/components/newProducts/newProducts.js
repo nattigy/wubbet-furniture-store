@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {connect} from "react-redux";
-import {searchNewProducts} from "../../store/actions/searchActions";
+import {searchNewProducts} from "../../store/search/search.utils";
 import PreLoader from "../preLoader/preLoader";
 import SingleProduct from "../singleProductView/singleProduct";
 

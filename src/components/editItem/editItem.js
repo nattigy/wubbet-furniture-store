@@ -2,7 +2,7 @@ import React, {Fragment, useEffect, useState} from "react";
 import Header from "../header/header";
 import PreLoader from "../preLoader/preLoader";
 import Dialog from "@material-ui/core/Dialog/Dialog";
-import {editItem, getItemDetail} from "../../store/actions/itemActions";
+import {editItem, getItemDetail} from "../../store/item/item.utils";
 import {connect} from "react-redux";
 import Footer from "../footer/footer";
 import {Link} from "react-router-dom";

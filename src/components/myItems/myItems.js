@@ -5,7 +5,7 @@ import SingleItem from "./singleItem";
 import PathIndicator from "../pathIndicator/pathIndicator";
 import {connect} from "react-redux";
 import PreLoader from "../preLoader/preLoader";
-import {fetchMyItems} from "../../store/actions/itemActions";
+import {fetchMyItems} from "../../store/item/item.utils";
 
 const MyItems = props => {
 

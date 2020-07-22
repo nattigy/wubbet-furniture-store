@@ -89,8 +89,8 @@ const mapStateToProps = state => {
     return {
         newUser: state.auth.newUser,
         user: state.auth.user,
-        wishListLength: state.cart.wishListItems,
-        cartLength: state.cart.cartItems,
+        wishListLength: state.wishList.wishListItems,
+        cartLength: state.cartList.cartItems,
     };
 };
 

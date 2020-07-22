@@ -4,9 +4,9 @@ import Footer from "../footer/footer";
 import {Redirect} from "react-router-dom";
 import {connect} from "react-redux";
 import PreLoader from "../preLoader/preLoader";
-import {deleteFromCart, fetchFromCart} from "../../store/actions/cartActions";
 import WishListItem from "./wishListItem";
 import PathIndicator from "../pathIndicator/pathIndicator";
+import {deleteFromWishList, fetchFromWishList} from "../../store/wishList/wish-list.utils";
 
 const WishList = props => {
 
@@ -16,21 +16,17 @@ const WishList = props => {
     } = props;
 
     useEffect(() => {
-        isAuthenticated && props.fetchFromCart({uid: user ? user.uid : "0", type: "WISH_LIST"})
+        isAuthenticated && props.fetchFromWishList({uid: user ? user.uid : "0"})
     }, []);
 
     const delEvent = (e, index) => {
-        props.deleteFromCart(e);
+        props.deleteFromWishList(e);
         if (removingFromWishListDone) {
             wishListItems.splice(index, 1)
         }
     };
 
-    if (isAuthenticated === undefined) {
-        return <div className="preloading-home overflow-hidden-y">
-            <PreLoader/>
-        </div>;
-    } else if (!isLoggedIn) {
+    if (!isLoggedIn) {
         return <Redirect to="/login"/>;
     } else {
         return (
@@ -56,13 +52,12 @@ const WishList = props => {
                                 item={item}
                                 user={user}
                                 addToCart={props.addToCart}
-                                deleteFromCart={(e) => delEvent(e, index)}
+                                deleteFromWishList={(e) => delEvent(e, index)}
                                 credentials={{
                                     isAddingToCart,
                                     isLoggedIn,
                                     userId: user ? user.uid : "0",
-                                    itemId: item.id,
-                                    itemPrice: parseInt(item.price)
+                                    itemId: item.id
                                 }}
                             />)}
                         {fetchingItemFromWishListError &&
@@ -81,26 +76,25 @@ const WishList = props => {
 const mapStateToProps = state => {
     return {
         isLoggedIn: state.auth.isLoggedIn,
-        isAuthenticated: state.auth.isAuthenticated,
         newUser: state.auth.newUser,
         user: state.auth.user,
-        wishListItems: state.cart.wishListItems,
-        isAddingToCart: state.cart.isAddingToCart,
-        isAddingToCartDone: state.cart.isAddingToCartDone,
-        isAddingToCartError: state.cart.isAddingToCartError,
-        isFetchingItemFromWishList: state.cart.isFetchingItemFromWishList,
-        fetchingItemFromWishListDone: state.cart.fetchingItemFromWishListDone,
-        fetchingItemFromWishListError: state.cart.fetchingItemFromWishListError,
-        isRemovingFromWishList: state.cart.isRemovingFromWishList,
-        removingFromWishListDone: state.cart.removingFromWishListDone,
-        removingFromWishListError: state.cart.removingFromWishListError,
+        wishListItems: state.wishList.wishListItems,
+        isAddingToCart: state.cartList.isAddingToCart,
+        isAddingToCartDone: state.cartList.isAddingToCartDone,
+        isAddingToCartError: state.cartList.isAddingToCartError,
+        isFetchingItemFromWishList: state.wishList.isFetchingItemFromWishList,
+        fetchingItemFromWishListDone: state.wishList.fetchingItemFromWishListDone,
+        fetchingItemFromWishListError: state.wishList.fetchingItemFromWishListError,
+        isRemovingFromWishList: state.wishList.isRemovingFromWishList,
+        removingFromWishListDone: state.wishList.removingFromWishListDone,
+        removingFromWishListError: state.wishList.removingFromWishListError,
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        fetchFromCart: credentials => dispatch(fetchFromCart(credentials)),
-        deleteFromCart: credentials => dispatch(deleteFromCart(credentials))
+        fetchFromWishList: credentials => dispatch(fetchFromWishList(credentials)),
+        deleteFromWishList: credentials => dispatch(deleteFromWishList(credentials))
     };
 };
 

@@ -64,8 +64,7 @@ const ProductDescription = props => {
                                 onClick={() => addToWishList({
                                     userId: credentials.userId,
                                     itemId: credentials.itemId,
-                                    itemPrice: credentials.itemPrice,
-                                    type: "ADD_TO_WISH_LIST"
+                                    itemPrice: credentials.itemPrice
                                 })}>
                             {credentials.isAddingToWishList && <CircularProgress size="1.5rem" color="secondary"/>}
                             <FontAwesomeIcon icon={faHeart} size="sm" color="rgb(30, 31, 41, 0.9)"/> add to wishlist

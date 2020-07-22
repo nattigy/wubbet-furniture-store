@@ -1,7 +1,5 @@
 import React from "react";
 import {Link} from "react-router-dom";
-import {connect} from "react-redux";
-import {changeSubCategoryAction} from "../../store/actions/navActions";
 
 const NavbarSection = props => {
     return (
@@ -15,61 +13,37 @@ const NavbarSection = props => {
                         <li className="nav-item nav-item-custom pl-0 pr-3">
                             <Link className="pl-0 nav-link-custom"
                                   to="/items/HOME_FURNITURE/_/livingRoom"
-                                  onClick={() => {
-                                      props.changeSubCategory({type: "LIVING_ROOM", sub_cat: "livingRoom"});
-                                      props.closeNav();
-                                  }}
+                                  onClick={() => props.closeNav()}
                             >Living Room</Link></li>
                         <li className="nav-item nav-item-custom pl-0 pr-3">
                             <Link className="pl-0 nav-link-custom"
                                   to="/items/HOME_FURNITURE/_/bedRoom"
-                                  onClick={() => {
-                                      props.changeSubCategory({type: "BED_ROOM", sub_cat: "bedRoom"});
-                                      props.closeNav();
-                                  }}
+                                  onClick={() => props.closeNav()}
                             >Bed Room</Link></li>
                         <li className="nav-item nav-item-custom pl-0 pr-3">
                             <Link className="pl-0 nav-link-custom"
                                   to="/items/HOME_FURNITURE/_/kitchen"
-                                  onClick={() => {
-                                      props.changeSubCategory({type: "KITCHEN", sub_cat: "kitchen"});
-                                      props.closeNav();
-                                  }}
+                                  onClick={() => props.closeNav()}
                             >Dinning Room/kitchen</Link></li>
                         <li className="nav-item nav-item-custom pl-0 pr-3">
                             <Link className="pl-0 nav-link-custom"
                                   to="/items/COMMERCIAL_FURNITURE/_/office"
-                                  onClick={() => {
-                                      props.changeSubCategory({type: "OFFICE", sub_cat: "office"});
-                                      props.closeNav();
-                                  }}
+                                  onClick={() => props.closeNav()}
                             >Office</Link></li>
                         <li className="nav-item nav-item-custom pl-0 pr-3">
                             <Link className="pl-0 nav-link-custom"
                                   to="/items/FINISHING_MATERIALS/_/decorations"
-                                  onClick={() => {
-                                      props.changeSubCategory({type: "DECORATIONS", sub_cat: "decorations"});
-                                      props.closeNav();
-                                  }}
+                                  onClick={() => props.closeNav()}
                             >Decorations</Link></li>
                         <li className="nav-item nav-item-custom pl-0 pr-3">
                             <Link className="pl-0 nav-link-custom"
                                   to="/items/FINISHING_MATERIALS/_/finishingMaterials"
-                                  onClick={() => {
-                                      props.changeSubCategory({
-                                          type: "FINISHING_MATERIALS",
-                                          sub_cat: "finishingMaterials"
-                                      });
-                                      props.closeNav();
-                                  }}
+                                  onClick={() => props.closeNav()}
                             >Finishing Materials</Link></li>
                         <li className="nav-item nav-item-custom pl-0 pr-3">
                             <Link className="pl-0 nav-link-custom"
                                   to="/items/OTHER/other"
-                                  onClick={() => {
-                                      props.changeSubCategory({type: "OTHER", sub_cat: "other"});
-                                      props.closeNav();
-                                  }}
+                                  onClick={() => props.closeNav()}
                             >Other</Link></li>
                     </ul>
                 </div>
@@ -78,10 +52,4 @@ const NavbarSection = props => {
     );
 };
 
-const mapDispatchToProps = dispatch => {
-    return {
-        changeSubCategory: credentials => dispatch(changeSubCategoryAction(credentials)),
-    }
-};
-
-export default connect(null, mapDispatchToProps)(NavbarSection);
+export default NavbarSection;

@@ -1,6 +1,6 @@
 import React, {Fragment} from "react";
 import {Link} from "react-router-dom";
-import {logoutUser} from "../../store/actions/authActions";
+import {logoutUser} from "../../store/auth/auth.utils";
 import {connect} from "react-redux";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faEnvelope, faMapMarker, faPhone, faSignInAlt, faSignOutAlt} from "@fortawesome/free-solid-svg-icons";

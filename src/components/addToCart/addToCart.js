@@ -3,14 +3,14 @@ import {connect} from "react-redux";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faShoppingCart} from "@fortawesome/free-solid-svg-icons";
 import CircularProgress from "@material-ui/core/CircularProgress/CircularProgress";
-import {addItemToCart} from "../../store/actions/cartActions";
+import {addItemToCart} from "../../store/cartList/cart-list.utils";
 
 const AddToCartButton = props => {
 
-    const {isAddingToCart, isLoggedIn, userId, itemId, itemPrice} = props.credentials;
+    const {isAddingToCart, isLoggedIn, userId, itemId} = props.credentials;
 
     const handleClick = () => {
-        isLoggedIn && props.addToCart({userId, itemId, itemPrice, type: "ADD_TO_CART"})
+        isLoggedIn && props.addToCart({userId, itemId})
     };
 
     return (

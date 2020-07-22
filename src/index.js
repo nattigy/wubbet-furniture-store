@@ -4,7 +4,7 @@ import App from "./app";
 import {Provider} from 'react-redux';
 import firebase from "./firebase/firebase";
 import {ReactReduxFirebaseProvider} from "react-redux-firebase";
-import configureStore from "./configureStore";
+import configureStore from "./store/store";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import "./assets/css/main.css"

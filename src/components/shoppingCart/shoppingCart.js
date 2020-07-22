@@ -5,18 +5,19 @@ import CartItem from "./cartItem";
 import {Link, Redirect} from "react-router-dom";
 import {connect} from "react-redux";
 import PreLoader from "../preLoader/preLoader";
-import {addItemToCart, deleteFromCart, fetchFromCart} from "../../store/actions/cartActions";
+import {deleteFromCart, fetchFromCart} from "../../store/cartList/cart-list.utils";
 import PathIndicator from "../pathIndicator/pathIndicator";
+import {addItemToWishList} from "../../store/wishList/wish-list.utils";
 
 const ShoppingCart = props => {
 
     const {
-        isFetchingFromError, cartItems, isAuthenticated, totalPrice,
-        newUser, user, isFetchingFromCart, isLoggedIn, removingFromCartDone
+        isFetchingFromError, cartItems, totalPrice, newUser,
+        user, isFetchingFromCart, isLoggedIn, removingFromCartDone
     } = props;
 
     useEffect(() => {
-        props.fetchFromCart({uid: user ? user.uid : "0", type: "CART_LIST"})
+        props.fetchFromCart({uid: user ? user.uid : "0"})
     }, []);
 
     const delEvent = (e, index) => {
@@ -26,11 +27,7 @@ const ShoppingCart = props => {
         }
     };
 
-    if (isAuthenticated === undefined) {
-        return <div className="preloading-home overflow-hidden-y">
-            <PreLoader/>
-        </div>;
-    } else if (!isLoggedIn) {
+    if (!isLoggedIn) {
         return <Redirect to="/login"/>;
     } else {
         return (
@@ -61,7 +58,7 @@ const ShoppingCart = props => {
                                 key={item.id}
                                 item={item}
                                 user={user}
-                                addToCart={props.addToCart}
+                                addItemToWishList={props.addItemToWishList}
                                 deleteFromCart={(e) => delEvent(e, index)}
                             />)}
                         {isFetchingFromError &&
@@ -85,22 +82,21 @@ const ShoppingCart = props => {
 const mapStateToProps = state => {
     return {
         isLoggedIn: state.auth.isLoggedIn,
-        isAuthenticated: state.auth.isAuthenticated,
         newUser: state.auth.newUser,
         user: state.auth.user,
-        cartItems: state.cart.cartItems,
-        isFetchingFromCart: state.cart.isFetchingFromCart,
-        isFetchingFromDone: state.cart.isFetchingFromDone,
-        isFetchingFromError: state.cart.isFetchingFromError,
-        removingFromCartDone: state.cart.removingFromCartDone,
-        totalPrice: state.cart.totalPrice,
+        cartItems: state.cartList.cartItems,
+        isFetchingFromCart: state.cartList.isFetchingFromCart,
+        isFetchingFromDone: state.cartList.isFetchingFromDone,
+        isFetchingFromError: state.cartList.isFetchingFromError,
+        removingFromCartDone: state.cartList.removingFromCartDone,
+        totalPrice: state.cartList.totalPrice,
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
         fetchFromCart: credentials => dispatch(fetchFromCart(credentials)),
-        addToCart: credentials => dispatch(addItemToCart(credentials)),
+        addItemToWishList: credentials => dispatch(addItemToWishList(credentials)),
         deleteFromCart: credentials => dispatch(deleteFromCart(credentials))
     };
 };

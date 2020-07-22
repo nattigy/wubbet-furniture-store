@@ -4,10 +4,10 @@ import Footer from "../footer/footer";
 import ProductDescription from "./productDescription";
 import ProductImages from "./productImages";
 import {connect} from "react-redux";
-import {addItemToCart} from "../../store/actions/cartActions";
-import {getItemDetail} from "../../store/actions/itemActions";
+import {getItemDetail} from "../../store/item/item.utils";
 import PreLoader from "../preLoader/preLoader";
 import PathIndicator from "../pathIndicator/pathIndicator";
+import {addItemToWishList} from "../../store/wishList/wish-list.utils";
 
 const ProductDetail = props => {
     const {
@@ -44,7 +44,7 @@ const ProductDetail = props => {
                             userId: user ? user.uid : "0",
                             itemId: itemDetail.id,
                             itemPrice: parseInt(itemDetail.price)
-                        }} addToWishList={props.addItemToCart}/>
+                        }} addToWishList={props.addItemToWishList}/>
                         {/*<DescriptionAndDetails item={itemDetail}/>*/}
                     </Fragment>}
                     {gettingItemDetailError && <div className="w-100 text-center text-danger py-3 font-14">
@@ -65,17 +65,17 @@ const mapStateToProps = state => {
         gettingItemDetailDone: state.item.gettingItemDetailDone,
         gettingItemDetailError: state.item.gettingItemDetailError,
         itemDetail: state.item.itemDetail,
-        isAddingToCart: state.cart.isAddingToCart,
-        isAddingToWishList: state.cart.isAddingToWishList,
-        isAddingToWishListDone: state.cart.isAddingToWishListDone,
-        isAddingToWishListError: state.cart.isAddingToWishListError,
+        isAddingToCart: state.cartList.isAddingToCart,
+        isAddingToWishList: state.wishList.isAddingToWishList,
+        isAddingToWishListDone: state.wishList.isAddingToWishListDone,
+        isAddingToWishListError: state.wishList.isAddingToWishListError,
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
         getItemDetail: credentials => dispatch(getItemDetail(credentials)),
-        addItemToCart: credentials => dispatch(addItemToCart(credentials))
+        addItemToWishList: credentials => dispatch(addItemToWishList(credentials)),
     };
 };
 

@@ -4,7 +4,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faEye, faSave, faTrash} from "@fortawesome/free-solid-svg-icons";
 
 const CartItem = props => {
-    const {item, addToCart, user} = props;
+    const {item, addItemToWishList, user} = props;
     return (
         <div className="pt-3 border-bottom border-light-custom pb-3">
             <div className="d-flex">
@@ -30,11 +30,9 @@ const CartItem = props => {
                             </span>
                             <span className="cart-item-btn">
                                 <Link onClick={() =>
-                                    addToCart({
+                                    addItemToWishList({
                                         userId: user.uid,
                                         itemId: item.id,
-                                        itemPrice: item.price,
-                                        type: "ADD_TO_WISH_LIST"
                                     })}>
                                     <FontAwesomeIcon icon={faSave} size="1x" color="#475161"/>
                                     <span className="tooltip-custom shadow-sm text-nowrap">ADD TO WISH LIST</span>

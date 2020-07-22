@@ -1,9 +1,8 @@
 import React, {lazy, Suspense} from "react";
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import {connect} from "react-redux";
-import {anonymousSignIn} from "./store/actions/authActions";
+import {anonymousSignIn} from "./store/auth/auth.utils";
 import PreLoader from "./components/preLoader/preLoader";
-import EditItem from "./components/editItem/editItem";
 
 const Home = lazy(() => import('./components/home/home'));
 const SignIn = lazy(() => import('./components/auth/signIn'));
@@ -19,6 +18,7 @@ const TermsAndConditions = lazy(() => import('./components/privacyPolicyAndTerms
 const ReturnPolicy = lazy(() => import('./components/privacyPolicyAndTermsOfConditions/ReturnPolicy'));
 const Account = lazy(() => import('./components/account/account'));
 const MyItems = lazy(() => import('./components/myItems/myItems'));
+const EditItem = lazy(() => import('./components/editItem/editItem'));
 
 const renderLoader = () => (
     <div className="preloading-home overflow-hidden-y">
@@ -57,6 +57,7 @@ const App = props => {
                         <Route exact path="/account/myitems" component={MyItems}/>
                         <Route exact path="/account/myitem/:id" component={EditItem}/>
                         <Route exact path="/account/:uid" component={Account}/>
+                        <Route render={() => <h4>Not Found</h4>}/>
                     </Switch>
                 </Suspense>
             </Router>

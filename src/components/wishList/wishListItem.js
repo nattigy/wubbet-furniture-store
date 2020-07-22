@@ -5,7 +5,7 @@ import {Link} from "react-router-dom";
 import AddToCartButton from "../addToCart/addToCart"
 
 const WishListItem = props => {
-    const {item, addToCart, user, credentials} = props;
+    const {item, deleteFromWishList, user, credentials} = props;
     return (
         <div className="pt-4 border-bottom border-light-custom">
             <div className="d-flex">
@@ -18,8 +18,8 @@ const WishListItem = props => {
                             <Link to="" className="text-dark font-18">{item.name}</Link></p>
                         <div className="my-4">
                             <span className="cart-item-btn">
-                                <Link onClick={() => props.deleteFromCart({
-                                    userId: user.uid, itemId: item.id, type: "WISH_LIST"
+                                <Link onClick={() => deleteFromWishList({
+                                    userId: user.uid, itemId: item.id
                                 })}>
                                     <FontAwesomeIcon icon={faTrash} size="1x" color="#475161"/>
                                     <span className="tooltip-custom shadow-sm text-nowrap">REMOVE FROM WISHLIST</span>
