@@ -2,34 +2,36 @@ import React, {lazy, Suspense} from "react";
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import {connect} from "react-redux";
 import {anonymousSignIn} from "./store/auth/auth.utils";
-import PreLoader from "./components/preLoader/preLoader";
+import PreLoaderComponent from "./components/pre-loader/pre-loader.component";
+import HeaderComponent from "./components/header/header.component";
+import FooterComponent from "./components/footer/footer.component";
 
-const Home = lazy(() => import('./components/home/home'));
-const SignIn = lazy(() => import('./components/auth/signIn'));
-const SignUp = lazy(() => import('./components/auth/signUp'));
-const ShoppingCart = lazy(() => import('./components/shoppingCart/shoppingCart'));
-const WishList = lazy(() => import('./components/wishList/wishList'));
+const Home = lazy(() => import('./pages/homepage/homepage'));
+const SignIn = lazy(() => import('./components/auth/sign-in'));
+const SignUp = lazy(() => import('./components/auth/sign-up'));
+const ShoppingCart = lazy(() => import('./pages/shopping-cart/shopping-cart.page'));
+const WishList = lazy(() => import('./pages/wish-list/wish-list.page'));
 const Checkout = lazy(() => import('./components/checkout/checkout'));
-const ProductDetail = lazy(() => import('./components/productDetail/productDetail'));
-const Store = lazy(() => import('./components/store/store'));
-const AddItem = lazy(() => import('./components/addItem/addItem'));
-const PrivacyPolicy = lazy(() => import('./components/privacyPolicyAndTermsOfConditions/privacyPolicy'));
-const TermsAndConditions = lazy(() => import('./components/privacyPolicyAndTermsOfConditions/TermsAndConditions'));
-const ReturnPolicy = lazy(() => import('./components/privacyPolicyAndTermsOfConditions/ReturnPolicy'));
+const ProductDetail = lazy(() => import('./pages/product-detail/product-detail.page'));
+const Store = lazy(() => import('./pages/shopping-page/shopping.page'));
+const AddItem = lazy(() => import('./pages/add-item/add-item.page'));
+const PrivacyPolicy = lazy(() => import('./pages/privacy-policy-and-terms-of-conditions/privacy-policy'));
+const TermsAndConditions = lazy(() => import('./pages/privacy-policy-and-terms-of-conditions/terms-and-conditions'));
+const ReturnPolicy = lazy(() => import('./pages/privacy-policy-and-terms-of-conditions/return-policy'));
 const Account = lazy(() => import('./components/account/account'));
-const MyItems = lazy(() => import('./components/myItems/myItems'));
-const EditItem = lazy(() => import('./components/editItem/editItem'));
+const MyItems = lazy(() => import('./pages/my-items/my-items.page'));
+const EditItem = lazy(() => import('./components/edit-item/edit-item'));
 
 const renderLoader = () => (
     <div className="preloading-home overflow-hidden-y">
-        <PreLoader/>
+        <PreLoaderComponent/>
     </div>
 );
 
 const App = props => {
     if (props.isLoggedIn === undefined) {
         return <div className="preloading-home overflow-hidden-y">
-            <PreLoader/>
+            <PreLoaderComponent/>
         </div>
     } else {
         if (!props.isLoggedIn) {
@@ -37,6 +39,7 @@ const App = props => {
         }
         return (
             <Router>
+                <HeaderComponent/>
                 <Suspense fallback={renderLoader()}>
                     <Switch>
                         <Route exact path="/" component={Home}/>
@@ -60,6 +63,7 @@ const App = props => {
                         <Route render={() => <h4>Not Found</h4>}/>
                     </Switch>
                 </Suspense>
+                <FooterComponent/>
             </Router>
         );
     }
