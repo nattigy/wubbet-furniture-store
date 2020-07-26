@@ -1,10 +1,12 @@
 import React, {Fragment, useState} from "react";
 
+import {connect} from "react-redux";
+
 import ContactSection from "./contact.component";
 import SearchSection from "./search.component";
 import NavbarSection from "./navbar.component";
 
-const HeaderComponent = ({match}) => {
+const Header = props => {
 
     const [isOpen, setIsOpen] = useState(false);
 
@@ -27,7 +29,7 @@ const HeaderComponent = ({match}) => {
     return (
         <header>
             {
-                match.path !== '/login' && match.path !== '/register' ? (
+                !props.isAuthPageOpen ? (
                     <Fragment>
                         <ContactSection/>
                         <SearchSection openNav={() => openNav()}/>
@@ -39,4 +41,10 @@ const HeaderComponent = ({match}) => {
     );
 };
 
-export default HeaderComponent;
+const mapStateToProps = state => {
+    return {
+        isAuthPageOpen: state.ui.isAuthPageOpen
+    }
+};
+
+export default connect(mapStateToProps)(Header);
