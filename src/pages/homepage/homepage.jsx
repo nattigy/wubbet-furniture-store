@@ -1,11 +1,12 @@
 import React, {Fragment} from "react";
-import ExploreCardsComponent from "../../components/explore-cards/explore-cards.component";
+
+import ExploreCards from "../../components/explore-cards/explore-cards.component";
 import NewProducts from "../../components/new-products/new-products.component";
 
 const HomePage = () => {
     return (
         <Fragment>
-            <ExploreCardsComponent/>
+            <ExploreCards/>
             <NewProducts/>
         </Fragment>
     );

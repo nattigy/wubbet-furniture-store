@@ -6,7 +6,7 @@ import {faExchangeAlt, faHeart, faStar} from "@fortawesome/free-solid-svg-icons"
 import AddToCartButton from "../add-to-cart-button/add-to-cart-button";
 import CircularProgress from "@material-ui/core/CircularProgress/CircularProgress";
 
-const ProductDescriptionComponent = props => {
+const ProductDescription = props => {
 
     const {name, price, old_price, description, category, sub_category} = props.item;
     const {credentials, addToWishList} = props;
@@ -91,4 +91,4 @@ const ProductDescriptionComponent = props => {
     );
 };
 
-export default ProductDescriptionComponent;
+export default ProductDescription;

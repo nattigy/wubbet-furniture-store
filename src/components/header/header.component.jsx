@@ -1,10 +1,12 @@
 import React, {Fragment, useState} from "react";
-
 import {connect} from "react-redux";
+import {Link} from "react-router-dom";
 
 import ContactSection from "./contact.component";
 import SearchSection from "./search.component";
 import NavbarSection from "./navbar.component";
+
+import logo from "../../assets/img/purelogo.png";
 
 const Header = props => {
 
@@ -35,7 +37,13 @@ const Header = props => {
                         <SearchSection openNav={() => openNav()}/>
                         <NavbarSection closeNav={() => closeNav()} isOpen={isOpen}/>
                     </Fragment>
-                ) : null
+                ) : (
+                    <div className="my-5 mx-auto" style={{width: "200px"}}>
+                        <Link to="/">
+                            <img src={logo} className="mx-auto w-100" style={{height: "50px"}} alt=""/>
+                        </Link>
+                    </div>
+                )
             }
         </header>
     );

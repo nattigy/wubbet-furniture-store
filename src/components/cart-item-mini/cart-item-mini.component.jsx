@@ -3,7 +3,7 @@ import React from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faWindowClose} from "@fortawesome/free-solid-svg-icons";
 
-const CartItemMiniComponent = props => {
+const CartItemMini = props => {
 
     const {cartItem, user} = props;
 
@@ -33,4 +33,4 @@ const CartItemMiniComponent = props => {
     );
 };
 
-export default CartItemMiniComponent;
+export default CartItemMini;

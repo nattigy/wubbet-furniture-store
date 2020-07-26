@@ -2,7 +2,7 @@ import React from "react";
 
 import {Link} from "react-router-dom";
 
-const PathIndicatorComponent = props => {
+const PathIndicator = props => {
     return (
         <div className="breadcrumb mb-3 rounded-0 bg-light px-0">
             <div className="container-lg">
@@ -23,4 +23,4 @@ const PathIndicatorComponent = props => {
     );
 };
 
-export default PathIndicatorComponent;
+export default PathIndicator;

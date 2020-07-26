@@ -1,10 +1,10 @@
 import React, {Fragment, useEffect} from "react";
 import {connect} from "react-redux";
 
-import ProductDescriptionComponent from "../../components/product-detail/product-description.component";
+import ProductDescription from "../../components/product-detail/product-description.component";
 import ProductImages from "../../components/product-detail/product-images.component";
-import PreLoaderComponent from "../../components/pre-loader/pre-loader.component";
-import PathIndicatorComponent from "../../components/path-indicator/path-indicator.component";
+import PreLoader from "../../components/pre-loader/pre-loader.component";
+import PathIndicator from "../../components/path-indicator/path-indicator.component";
 
 import {getItemDetail} from "../../store/item/item.utils";
 import {addItemToWishList} from "../../store/wishList/wish-list.utils";
@@ -21,7 +21,7 @@ const ProductDetail = props => {
 
     return (
         <Fragment>
-            <PathIndicatorComponent path={[
+            <PathIndicator path={[
                 {currentPath: false, pathName: "HOME", pathLink: "/"},
                 {currentPath: false, pathName: "ACCOUNT", pathLink: "/account"},
                 {currentPath: false, pathName: "MY ITEMS", pathLink: "/account/my-items"},
@@ -33,7 +33,7 @@ const ProductDetail = props => {
                         isGettingItemDetail &&
                         <div className="preloading-store">
                             <div className="text-center">
-                                <PreLoaderComponent/>
+                                <PreLoader/>
                             </div>
                         </div>
                     }
@@ -41,7 +41,7 @@ const ProductDetail = props => {
                         gettingItemDetailDone &&
                         <Fragment>
                             <ProductImages item={itemDetail}/>
-                            <ProductDescriptionComponent
+                            <ProductDescription
                                 item={itemDetail}
                                 credentials={{
                                     isAddingToCart,

@@ -2,8 +2,8 @@ import React, {Fragment, useEffect, useState} from "react";
 import {connect} from "react-redux";
 
 import SingleProduct from "../../components/single-product-view/single-product.component"
-import PathIndicatorComponent from "../../components/path-indicator/path-indicator.component";
-import PreLoaderComponent from "../../components/pre-loader/pre-loader.component";
+import PathIndicator from "../../components/path-indicator/path-indicator.component";
+import PreLoader from "../../components/pre-loader/pre-loader.component";
 import Filter from "../../components/filters/filters.component";
 
 import {applyFilter, searchAllItems, searchItems} from "../../store/search/search.utils";
@@ -37,7 +37,7 @@ const ShoppingPage = props => {
 
     return (
         <Fragment>
-            <PathIndicatorComponent path={[
+            <PathIndicator path={[
                 {currentPath: false, pathName: "HOME", pathLink: "/"},
                 {currentPath: false, pathName: "ALL CATEGORY", pathLink: "/items/all/all"},
                 {currentPath: true, pathName: "ITEM NAME", pathLink: "/item/sdhfkjhsakjhdfkjkk"},
@@ -59,7 +59,7 @@ const ShoppingPage = props => {
                                     isSearching ? (
                                         <div className="preloading-store">
                                             <div className="text-center">
-                                                <PreLoaderComponent/>
+                                                <PreLoader/>
                                             </div>
                                         </div>
                                     ) : (

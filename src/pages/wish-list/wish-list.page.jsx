@@ -2,9 +2,9 @@ import React, {useEffect} from "react";
 import {Redirect} from "react-router-dom";
 import {connect} from "react-redux";
 
-import PreLoaderComponent from "../../components/pre-loader/pre-loader.component";
-import WishListItemComponent from "../../components/wish-list-item/wish-list-item.component";
-import PathIndicatorComponent from "../../components/path-indicator/path-indicator.component";
+import PreLoader from "../../components/pre-loader/pre-loader.component";
+import WishListItem from "../../components/wish-list-item/wish-list-item.component";
+import PathIndicator from "../../components/path-indicator/path-indicator.component";
 
 import {deleteFromWishList, fetchFromWishList} from "../../store/wishList/wish-list.utils";
 
@@ -31,7 +31,7 @@ const WishList = props => {
     } else {
         return (
             <div>
-                <PathIndicatorComponent path={[
+                <PathIndicator path={[
                     {currentPath: false, pathName: "HOME", pathLink: "/"},
                     {currentPath: true, pathName: "WISH LIST", pathLink: props.match.url},
                 ]}/>
@@ -40,7 +40,7 @@ const WishList = props => {
                         {
                             isFetchingItemFromWishList ?
                                 <div className="preloading-cart overflow-hidden-y">
-                                    <PreLoaderComponent/>
+                                    <PreLoader/>
                                 </div> :
                                 wishListItems.length === 0 &&
                                 <div className="text-center py-5">
@@ -49,7 +49,7 @@ const WishList = props => {
                         }
                         {
                             wishListItems.map((item, index) =>
-                                <WishListItemComponent
+                                <WishListItem
                                     key={item.id}
                                     item={item}
                                     user={user}

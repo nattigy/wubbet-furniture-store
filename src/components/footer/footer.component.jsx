@@ -4,14 +4,14 @@ import {Link} from "react-router-dom";
 import {faEnvelope, faMapMarker, faPhone} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
-import {CopyRightComponent} from "./copy-right.component";
-import {Subscribe} from "./subscription.component";
+import {CopyRight} from "./copy-right.component";
+import {Subscription} from "./subscription.component";
+import {connect} from "react-redux";
 
-const FooterComponent = ({match}) => {
-
-    return match.path !== '/login' && match.path !== '/register' ? (
+const Footer = props => {
+    return !props.isAuthPageOpen ? (
         <Fragment>
-            <Subscribe/>
+            <Subscription/>
             <footer id="footer">
                 <div className="bg-dark-custom pt-5">
                     <div className="container-lg">
@@ -95,10 +95,16 @@ const FooterComponent = ({match}) => {
                         </div>
                     </div>
                 </div>
-                <CopyRightComponent/>
+                <CopyRight/>
             </footer>
         </Fragment>
-    ) : <CopyRightComponent/>
+    ) : <CopyRight/>
 };
 
-export default FooterComponent;
+const mapStateToProps = state => {
+    return {
+        isAuthPageOpen: state.ui.isAuthPageOpen
+    }
+};
+
+export default connect(mapStateToProps)(Footer);

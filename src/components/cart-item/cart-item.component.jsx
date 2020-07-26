@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faEye, faSave, faTrash} from "@fortawesome/free-solid-svg-icons";
 
-const CartItemComponent = props => {
+const CartItem = props => {
 
     const {item, addItemToWishList, user} = props;
 
@@ -69,4 +69,4 @@ const CartItemComponent = props => {
     );
 };
 
-export default CartItemComponent;
+export default CartItem;

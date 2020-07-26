@@ -9,7 +9,7 @@ import ShoppingCartMini from "../shopping-cart-mini/shopping-cart-mini.component
 
 import logo from "../../assets/img/mainLogo.jpg"
 
-const SearchComponent = props => {
+const SearchSection = props => {
 
     const [category, setCategory] = useState("all");
     const [name, setName] = useState("all");
@@ -19,7 +19,7 @@ const SearchComponent = props => {
 
     useEffect(() => {
         window.onclick = function (event) {
-            if (!event.target.matches('.mini-shopping-cart') && !event.target.matches('.your-shopping-cart')) {
+            if (!event.target.matches('.mini-cart') && !event.target.matches('.your-cart')) {
                 setOpenCart(false)
             }
         }
@@ -67,8 +67,9 @@ const SearchComponent = props => {
                             </li>
                             <li className="contact-link nav-item position-relative text-center nav-inline mx-3">
                                 <FontAwesomeIcon icon={faShoppingCart} color="#fff"/>
-                                <button onClick={() => setOpenCart(!openCart)}
-                                        className="btn p-0 bg-transparent text-white d-block small your-cart font-12"
+                                <button
+                                    className="btn mini-cart p-0 bg-transparent text-white d-block small your-cart font-12"
+                                    onClick={() => setOpenCart(!openCart)}
                                 >
                                     Your Cart
                                 </button>
@@ -103,4 +104,4 @@ const mapStateToProps = state => {
     };
 };
 
-export default connect(mapStateToProps)(SearchComponent);
+export default connect(mapStateToProps)(SearchSection);

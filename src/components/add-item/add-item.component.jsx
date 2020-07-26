@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 
 import Dialog from "@material-ui/core/Dialog";
 
-import PreLoaderComponent from "../pre-loader/pre-loader.component";
+import PreLoader from "../pre-loader/pre-loader.component";
 
 import {addItem} from "../../store/item/item.utils";
 
@@ -52,7 +52,7 @@ const AddItemComponent = props => {
                 isAdding &&
                 <Dialog open={true}>
                     <div className="w-100 px-5 py-3 text-center overflow-hidden" color="red">
-                        <PreLoaderComponent/>
+                        <PreLoader/>
                     </div>
                 </Dialog>
             }

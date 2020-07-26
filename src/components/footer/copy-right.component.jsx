@@ -3,7 +3,7 @@ import React from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCcAmex, faCcDiscover, faCcMastercard, faCcPaypal, faCcVisa} from "@fortawesome/free-brands-svg-icons"
 
-export const CopyRightComponent = () => {
+export const CopyRight = () => {
 
     let fullYear = new Date().getFullYear();
 

@@ -10,7 +10,7 @@ import AddToCartButton from "../add-to-cart-button/add-to-cart-button"
 import {addItemToCart} from "../../store/cartList/cart-list.utils";
 import {addItemToWishList} from "../../store/wishList/wish-list.utils";
 
-const SingleProductComponent = props => {
+const SingleProduct = props => {
 
     const {item, user, isAddingToCart, isLoggedIn, margin} = props;
 
@@ -80,4 +80,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(SingleProductComponent);
+export default connect(mapStateToProps, mapDispatchToProps)(SingleProduct);

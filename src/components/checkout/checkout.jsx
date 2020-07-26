@@ -4,8 +4,8 @@ import {connect} from "react-redux";
 
 import Dialog from "@material-ui/core/Dialog/Dialog";
 
-import PreLoaderComponent from "../pre-loader/pre-loader.component";
-import PathIndicatorComponent from "../path-indicator/path-indicator.component";
+import PreLoader from "../pre-loader/pre-loader.component";
+import PathIndicator from "../path-indicator/path-indicator.component";
 
 import {orderFurniture} from "../../store/order/order.utils";
 import {fetchFromCart} from "../../store/cartList/cart-list.utils";
@@ -48,7 +48,7 @@ const Checkout = props => {
                     isSending &&
                     <Dialog open={true}>
                         <div className="w-100 px-5 py-3 text-center overflow-hidden" color="red">
-                            <PreLoaderComponent/>
+                            <PreLoader/>
                         </div>
                     </Dialog>
                 }
@@ -65,7 +65,7 @@ const Checkout = props => {
                 }
 
                 <div>
-                    <PathIndicatorComponent path={[
+                    <PathIndicator path={[
                         {currentPath: false, pathName: "HOME", pathLink: "/"},
                         {currentPath: true, pathName: "CHECKOUT", pathLink: props.match.url},
                     ]}/>
@@ -123,7 +123,7 @@ const Checkout = props => {
                                             isFetchingFromCart ?
                                                 (
                                                     <div className="preloading-home overflow-hidden-y">
-                                                        <PreLoaderComponent/>
+                                                        <PreLoader/>
                                                     </div>
                                                 ) : (
                                                     cartItems.length === 0 &&

@@ -2,7 +2,7 @@ import React from "react";
 import {connect} from "react-redux";
 import {Redirect} from "react-router-dom";
 
-import AddItem from '../../components/add-item/add-item.component'
+import AddItem from '../../components/add-item/add-item.component';
 
 const AddItemPage = props => {
 
@@ -11,7 +11,7 @@ const AddItemPage = props => {
     if (!isLoggedIn || isAnonymous) {
         return <Redirect to="/login"/>
     } else {
-        return <AddItem/>
+        return <AddItem/>;
     }
 };
 

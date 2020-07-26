@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from "react";
 import {connect} from "react-redux";
 
-import PreLoaderComponent from "../pre-loader/pre-loader.component";
+import PreLoader from "../pre-loader/pre-loader.component";
 import SingleProduct from "../single-product-view/single-product.component";
 
 import {searchNewProducts} from "../../store/search/search.utils";
 
-const NewProductsComponent = props => {
+const NewProducts = props => {
 
     const [tab1, setTab1] = useState(true);
     const [tab2, setTab2] = useState(false);
@@ -80,7 +80,7 @@ const NewProductsComponent = props => {
                                                 (
                                                     <div className="position-relative newProduct-progress">
                                                         <div className="preloading-newProduct">
-                                                            <PreLoaderComponent/>
+                                                            <PreLoader/>
                                                         </div>
                                                     </div>
                                                 ) :
@@ -102,7 +102,7 @@ const NewProductsComponent = props => {
                                                 (
                                                     <div className="position-relative newProduct-progress">
                                                         <div className="preloading-newProduct">
-                                                            <PreLoaderComponent/>
+                                                            <PreLoader/>
                                                         </div>
                                                     </div>
                                                 ) :
@@ -123,7 +123,7 @@ const NewProductsComponent = props => {
                                             isSearchingNewProducts || isSearchingNewProducts === undefined ? (
                                                 <div className="position-relative newProduct-progress">
                                                     <div className="preloading-newProduct">
-                                                        <PreLoaderComponent/>
+                                                        <PreLoader/>
                                                     </div>
                                                 </div>
                                             ) : items && items.length !== 0 ? items.map(item =>
@@ -160,4 +160,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(NewProductsComponent);
+export default connect(mapStateToProps, mapDispatchToProps)(NewProducts);

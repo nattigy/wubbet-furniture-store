@@ -3,7 +3,7 @@ import React from "react";
 import {faEnvelope} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
-export const Subscribe = () => {
+export const Subscription = () => {
     return (
         <div id="newsletter" className="subscribe-section py-4 my-0">
             <div className="container-lg">

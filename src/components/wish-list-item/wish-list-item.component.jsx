@@ -6,7 +6,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 import AddToCartButton from "../add-to-cart-button/add-to-cart-button"
 
-const WishListItemComponent = props => {
+const WishListItem = props => {
 
     const {item, deleteFromWishList, user, credentials} = props;
 
@@ -53,4 +53,4 @@ const WishListItemComponent = props => {
     );
 };
 
-export default WishListItemComponent;
+export default WishListItem;

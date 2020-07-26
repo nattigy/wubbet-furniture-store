@@ -8,7 +8,7 @@ import homeFurniture from "../../assets/img/homeFurniture.jpg"
 import commercialFurniture from "../../assets/img/commercialFurnitures.jpg"
 import decorationAndFinishing from "../../assets/img/decorationAndFinishing.jpg"
 
-const ExploreCardsComponent = () => {
+const ExploreCards = () => {
     return (
         <div className="container-lg my-5">
             <div className="row">
@@ -67,4 +67,4 @@ const ExploreCardsComponent = () => {
     );
 };
 
-export default ExploreCardsComponent;
+export default ExploreCards;

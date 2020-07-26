@@ -5,12 +5,12 @@ import {connect} from "react-redux";
 import {faArrowCircleRight} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
-import CartItemMiniComponent from "../cart-item-mini/cart-item-mini..component";
-import PreLoaderComponent from "../pre-loader/pre-loader.component";
+import CartItemMini from "../cart-item-mini/cart-item-mini.component";
+import PreLoader from "../pre-loader/pre-loader.component";
 
 import {deleteFromCart, fetchFromCart} from "../../store/cartList/cart-list.utils";
 
-const ShoppingCartMiniComponent = props => {
+const ShoppingCartMini = props => {
 
     const {
         isFetchingFromError, cartItems, user,
@@ -29,11 +29,11 @@ const ShoppingCartMiniComponent = props => {
     };
 
     return (
-        <div className={`overflow-hidden shadow-lg cart-popup bg-white mini-cart ${!props.openCart && `d-`}`}>
+        <div className="overflow-hidden shadow-lg cart-popup bg-white mini-cart">
             <div className="w-100 cart-mini mini-cart">
                 {
                     isFetchingFromCart ?
-                        <PreLoaderComponent/> :
+                        <PreLoader/> :
                         cartItems.length === 0 &&
                         <div className="text-center">
                             <h5 className="font-12">No Items In Your Cart!</h5>
@@ -41,7 +41,7 @@ const ShoppingCartMiniComponent = props => {
                 }
                 {
                     cartItems.map((item, index) =>
-                        <CartItemMiniComponent
+                        <CartItemMini
                             key={item.id}
                             cartItem={item}
                             user={user}
@@ -91,4 +91,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ShoppingCartMiniComponent);
+export default connect(mapStateToProps, mapDispatchToProps)(ShoppingCartMini);

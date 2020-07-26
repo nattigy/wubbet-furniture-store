@@ -2,8 +2,9 @@ import React, {Fragment, useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 import {connect} from "react-redux";
 
-import PreLoaderComponent from "../pre-loader/pre-loader.component";
 import Dialog from "@material-ui/core/Dialog/Dialog";
+
+import PreLoader from "../pre-loader/pre-loader.component";
 
 import {editItem, getItemDetail} from "../../store/item/item.utils";
 
@@ -61,7 +62,7 @@ const EditItem = props => {
                 isEditing &&
                 <Dialog open={true}>
                     <div className="w-100 px-5 py-3 text-center overflow-hidden" color="red">
-                        <PreLoaderComponent/>
+                        <PreLoader/>
                     </div>
                 </Dialog>
             }
@@ -72,7 +73,7 @@ const EditItem = props => {
                 {
                     isGettingItemDetail && <div className="preloading-store">
                         <div className="text-center">
-                            <PreLoaderComponent/>
+                            <PreLoader/>
                         </div>
                     </div>
                 }

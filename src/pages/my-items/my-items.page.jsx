@@ -2,12 +2,12 @@ import React, {useEffect} from "react";
 import {connect} from "react-redux";
 
 import SingleItem from "../../components/my-items/my-item.component";
-import PathIndicatorComponent from "../../components/path-indicator/path-indicator.component";
-import PreLoaderComponent from "../../components/pre-loader/pre-loader.component";
+import PathIndicator from "../../components/path-indicator/path-indicator.component";
+import PreLoader from "../../components/pre-loader/pre-loader.component";
 
 import {fetchMyItems} from "../../store/item/item.utils";
 
-const MyItemsPage = props => {
+const MyItems = props => {
 
     const {isFetchingMyItems, myItems, fetchingMyItemsError, fetchingMyItemsDone, user} = props;
 
@@ -17,7 +17,7 @@ const MyItemsPage = props => {
 
     return (
         <div>
-            <PathIndicatorComponent path={[
+            <PathIndicator path={[
                 {currentPath: false, pathName: "HOME", pathLink: "/"},
                 {currentPath: false, pathName: "ACCOUNT", pathLink: "/"},
                 {currentPath: true, pathName: "MY ITEMS", pathLink: props.match.path},
@@ -27,7 +27,7 @@ const MyItemsPage = props => {
                     {
                         isFetchingMyItems ? (
                             <div className="preloading-cart overflow-hidden-y">
-                                <PreLoaderComponent/>
+                                <PreLoader/>
                             </div>
                         ) : (
                             myItems.length === 0 &&
@@ -67,4 +67,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(MyItemsPage);
+export default connect(mapStateToProps, mapDispatchToProps)(MyItems);

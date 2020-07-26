@@ -1,9 +1,11 @@
-import React, {useState} from 'react'
-import logo from "../../assets/img/purelogo.png";
+import React, {useEffect, useState} from 'react'
 import {Link, Redirect} from "react-router-dom";
-import {registerUser} from "../../store/auth/auth.utils";
 import {connect} from "react-redux";
-import PreLoaderComponent from "../pre-loader/pre-loader.component";
+
+import PreLoader from "../pre-loader/pre-loader.component";
+import {closeAuth, openAuth} from "../../store/ui/hide-header-and-footer";
+
+import {registerUser} from "../../store/auth/auth.utils";
 
 const SignUp = props => {
 
@@ -12,6 +14,11 @@ const SignUp = props => {
     const [password, setPassword] = useState("");
     const [passwordMatch, setPasswordMatch] = useState(true);
     const {signUpError, isLoggedIn, errorMessage, isSigningUp, isAnonymous} = props;
+
+    useEffect(() => {
+        props.openAuth();
+        return () => props.closeAuth()
+    });
 
     const signUp = e => {
         e.preventDefault();
@@ -24,16 +31,11 @@ const SignUp = props => {
         return (
             <div className="">
                 <div className="container-sm max-width mb-5 pb-5">
-                    <div className="my-5 mx-auto" style={{width: "200px"}}>
-                        <Link to="/">
-                            <img src={logo} className="mx-auto  w-100" style={{height: "50px"}} alt=""/>
-                        </Link>
-                    </div>
                     <div className="my-3 sign-up-container position-relative">
                         {isSigningUp &&
                         <div className="position-absolute sign-in-progress">
                             <div className="preloading">
-                                <PreLoaderComponent/>
+                                <PreLoader/>
                             </div>
                         </div>
                         }
@@ -99,6 +101,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         signUp: credentials => dispatch(registerUser(credentials)),
+        openAuth: () => dispatch(openAuth()),
+        closeAuth: () => dispatch(closeAuth()),
     };
 };
 

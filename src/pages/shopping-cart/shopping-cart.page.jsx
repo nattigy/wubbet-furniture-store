@@ -1,13 +1,15 @@
 import React, {useEffect} from "react";
-import CartItemComponent from "../../components/cart-item/cart-item.component";
 import {Link, Redirect} from "react-router-dom";
 import {connect} from "react-redux";
-import PreLoaderComponent from "../../components/pre-loader/pre-loader.component";
+
+import CartItem from "../../components/cart-item/cart-item.component";
+import PreLoader from "../../components/pre-loader/pre-loader.component";
+import PathIndicator from "../../components/path-indicator/path-indicator.component";
+
 import {deleteFromCart, fetchFromCart} from "../../store/cartList/cart-list.utils";
-import PathIndicatorComponent from "../../components/path-indicator/path-indicator.component";
 import {addItemToWishList} from "../../store/wishList/wish-list.utils";
 
-const ShoppingCartPage = props => {
+const ShoppingCart = props => {
 
     const {
         isFetchingFromError, cartItems, totalPrice, newUser,
@@ -30,7 +32,7 @@ const ShoppingCartPage = props => {
     } else {
         return (
             <div>
-                <PathIndicatorComponent path={[
+                <PathIndicator path={[
                     {currentPath: false, pathName: "HOME", pathLink: "/"},
                     {currentPath: true, pathName: "CART", pathLink: props.match.url},
                 ]}/>
@@ -43,7 +45,7 @@ const ShoppingCartPage = props => {
                     </div>
                     <div className="">
                         {isFetchingFromCart ? <div className="preloading-cart overflow-hidden-y">
-                                <PreLoaderComponent/>
+                                <PreLoader/>
                             </div> :
                             cartItems.length === 0 &&
                             <div className="text-center py-5">
@@ -51,7 +53,7 @@ const ShoppingCartPage = props => {
                             </div>
                         }
                         {cartItems.map((item, index) =>
-                            <CartItemComponent
+                            <CartItem
                                 key={item.id}
                                 item={item}
                                 user={user}
@@ -97,4 +99,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ShoppingCartPage);
+export default connect(mapStateToProps, mapDispatchToProps)(ShoppingCart);
