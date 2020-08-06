@@ -78,7 +78,6 @@ const Checkout = props => {
                         </div>
                     </Dialog>
                 }
-
                 <div>
                     <PathIndicator path={[
                         {currentPath: false, pathName: "HOME", pathLink: "/"},
@@ -167,7 +166,6 @@ const Checkout = props => {
                                                 <h5 className="font-14">No Items In Your Cart!</h5>
                                             </div>
                                         }
-
                                         <div className="order-products my-3">
                                             {
                                                 cartItems.map(item =>
@@ -183,7 +181,6 @@ const Checkout = props => {
                                                 )
                                             }
                                         </div>
-
                                         {
                                             cartItems.length !== 0 &&
                                             <Fragment>
@@ -209,7 +206,6 @@ const Checkout = props => {
                                             </Fragment>
                                         }
                                     </div>
-
                                     {
                                         cartItems.length !== 0 &&
                                         <Fragment>
