@@ -18,12 +18,12 @@ import {
     verifySuccess
 } from "./auth.actions";
 
-export const loginUser = user => dispatch => {
+export const loginUser = ({email, password}) => dispatch => {
     dispatch(requestLogin());
     let authUser = {};
     fbConfig.auth().setPersistence(fbConfig.auth.Auth.Persistence.SESSION)
         .then(() => {
-            return fbConfig.auth().signInWithEmailAndPassword(user.email.toString().trim(), user.password)
+            return fbConfig.auth().signInWithEmailAndPassword(email.toString().trim(), password)
         })
         .then(snapShot => {
             authUser = snapShot.user;
@@ -64,32 +64,47 @@ function formatString(str) {
         .replace(/^[^ ]/g, match => (match.toUpperCase()));
 }
 
-export const registerUser = ({email, password, name}) => dispatch => {
-    let newUser = {};
+export const registerUser = ({email, password, name, cartList, wishList}) => dispatch => {
     dispatch(requestSignUp());
     fbConfig.auth()
         .createUserWithEmailAndPassword(email, password)
         .then(res => {
             res.user.updateProfile({
                 displayName: name,
-            }).then(() => newUser = res);
-            return fbConfig.firestore().collection("users").doc(res.user.uid).set({
-                name: formatString(name),
-                email: email.toString().trim(),
-                cartList: [],
-                wishList: [],
-                role: "USER"
-            })
+            }).then(() => {
+                fbConfig.firestore().collection("users")
+                    .doc(res.user.uid)
+                    .set({
+                        name: formatString(name),
+                        email: email.toString().trim(),
+                        cartList,
+                        wishList,
+                        role: "USER"
+                    })
+                    .then(() => {
+                        dispatch(receiveSignUp(
+                            {
+                                name: formatString(name),
+                                email: email.toString().trim(),
+                                cartList,
+                                wishList,
+                                role: "USER"
+                            }, res.user
+                        ));
+                        dispatch(loginNotAnonymous());
+                    })
+                    .catch(error => dispatch(SignUpError(error)))
+            });
         })
-        .then(() => {
-            fbConfig.firestore()
-                .doc("users/" + newUser.user.uid)
-                .get()
-                .then(user => {
-                    dispatch(receiveSignUp(user.data(), newUser.user));
-                    dispatch(loginNotAnonymous());
-                });
-        }).catch(error => dispatch(SignUpError(error)));
+};
+
+export const updateUser = ({uid, address, city, telephone}) => () => {
+    fbConfig.firestore().collection("users")
+        .doc(uid)
+        .update({
+            address, city, telephone
+        })
+        .then(() => console.log("Success")).catch(error => console.log(error));
 };
 
 export const verifyAuth = () => dispatch => {

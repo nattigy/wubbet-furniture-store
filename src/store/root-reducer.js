@@ -8,9 +8,6 @@ import cartListReducers from "./cartList/cart-list.reducers";
 import wishListReducers from "./wishList/wish-list.reducers";
 import pageReducers from "./ui/hide-header-and-footer";
 
-import {firestoreReducer} from "redux-firestore"
-import {firebaseReducer} from "react-redux-firebase";
-
 export default combineReducers({
     auth: authReducers,
     item: itemReducers,
@@ -19,6 +16,4 @@ export default combineReducers({
     cartList: cartListReducers,
     wishList: wishListReducers,
     ui: pageReducers,
-    firestore: firestoreReducer,
-    firebase: firebaseReducer
 });

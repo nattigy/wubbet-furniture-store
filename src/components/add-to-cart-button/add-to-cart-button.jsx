@@ -7,12 +7,14 @@ import CircularProgress from "@material-ui/core/CircularProgress/CircularProgres
 
 import {addItemToCart} from "../../store/cartList/cart-list.utils";
 
+import "./add-to-cart-button.style.sass";
+
 const AddToCartButton = props => {
 
-    const {isAddingToCart, isLoggedIn, userId, itemId} = props.credentials;
+    const {isAddingToCart, userId, itemId} = props.credentials;
 
     const handleClick = () => {
-        isLoggedIn && props.addToCart({userId, itemId})
+        props.addToCart({userId, itemId});
     };
 
     return (
@@ -28,7 +30,7 @@ const AddToCartButton = props => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        addToCart: credentials => dispatch(addItemToCart(credentials))
+        addToCart: credentials => dispatch(addItemToCart(credentials)),
     };
 };
 

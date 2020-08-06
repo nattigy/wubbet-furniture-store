@@ -31,12 +31,17 @@ const renderLoader = () => (
 );
 
 const App = props => {
-    if (props.isLoggedIn === undefined) {
-        return <div className="preloading-home overflow-hidden-y">
-            <PreLoader/>
-        </div>
+
+    const {isLoggedIn, isVerified} = props;
+
+    if (isLoggedIn === undefined) {
+        return (
+            <div className="preloading-home overflow-hidden-y">
+                <PreLoader/>
+            </div>
+        );
     } else {
-        if (!props.isLoggedIn) {
+        if (isLoggedIn === false && isVerified === false) {
             props.anonymousSignIn();
         }
         return (

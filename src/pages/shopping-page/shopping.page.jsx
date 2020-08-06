@@ -8,6 +8,8 @@ import Filter from "../../components/filters/filters.component";
 
 import {applyFilter, searchAllItems, searchItems} from "../../store/search/search.utils";
 
+import "./store-style.sass"
+
 const ShoppingPage = props => {
 
     const [rerender, setRerender] = useState(undefined);
@@ -97,7 +99,8 @@ const ShoppingPage = props => {
                                                                         item={item}/>
                                                                 )
                                                             }
-                                                        })}
+                                                        })
+                                                    }
                                                 </Fragment>
                                             }
                                         </Fragment>

@@ -8,6 +8,8 @@ import NavbarSection from "./navbar.component";
 
 import logo from "../../assets/img/purelogo.png";
 
+import "./header.style.sass"
+
 const Header = props => {
 
     const [isOpen, setIsOpen] = useState(false);

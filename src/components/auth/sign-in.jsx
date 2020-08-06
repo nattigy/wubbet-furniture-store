@@ -7,11 +7,14 @@ import {closeAuth, openAuth} from "../../store/ui/hide-header-and-footer";
 
 import {loginUser} from "../../store/auth/auth.utils";
 
+import "./auth.style.sass"
+
 const SignIn = props => {
 
-    const [email, setEmail] = useState("");
+    const {loginError, errorMessage, isLoggingIn, isAnonymous, isLoggedIn, cartList, wishList} = props;
+
     const [password, setPassword] = useState("");
-    const {loginError, errorMessage, isLoggingIn, isAnonymous} = props;
+    const [email, setEmail] = useState("");
 
     useEffect(() => {
         props.openAuth();
@@ -20,10 +23,16 @@ const SignIn = props => {
 
     const signIn = e => {
         e.preventDefault();
-        props.signIn({email, password})
+        props.signIn({email, password, cartList: cartList.map(item => item.id), wishList})
     };
 
-    if (isLoggingIn && !isAnonymous) {
+    if (isLoggedIn === undefined) {
+        return (
+            <div className="preloading-home overflow-hidden-y">
+                <PreLoader/>
+            </div>
+        );
+    } else if (isLoggingIn && !isAnonymous) {
         return <Redirect to="/"/>;
     } else {
         return (
@@ -79,8 +88,11 @@ const mapStateToProps = state => {
     return {
         loginError: state.auth.loginError,
         isLoggingIn: state.auth.isLoggingIn,
+        isLoggedIn: state.auth.isLoggedIn,
         isAnonymous: state.auth.isAnonymous,
-        errorMessage: state.auth.errorMessage
+        errorMessage: state.auth.errorMessage,
+        cartList: state.cartList.cartItems,
+        wishList: state.wishList.wishListItems,
     };
 };
 

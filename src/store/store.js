@@ -1,6 +1,8 @@
 import thunk from "redux-thunk";
-import rootReducer from "./root-reducer";
 import {applyMiddleware, createStore} from "redux";
+
+import rootReducer from "./root-reducer";
+
 import {verifyAuth} from "./auth/auth.utils";
 
 export default function configureStore() {

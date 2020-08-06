@@ -8,7 +8,7 @@ export const CopyRight = () => {
     let fullYear = new Date().getFullYear();
 
     return (
-        <div id="bottom-footer" className="section bg-blue-custom">
+        <div id="bottom-footer" className="bg-blue-custom">
             <div className="container">
                 <div className="row">
                     <div className="col-md-12 py-4 text-center">

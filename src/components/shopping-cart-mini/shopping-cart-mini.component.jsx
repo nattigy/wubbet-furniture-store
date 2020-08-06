@@ -14,7 +14,7 @@ const ShoppingCartMini = props => {
 
     const {
         isFetchingFromError, cartItems, user,
-        isFetchingFromCart, removingFromCartDone, totalPrice
+        isFetchingFromCart, totalPrice
     } = props;
 
     useEffect(() => {
@@ -23,9 +23,7 @@ const ShoppingCartMini = props => {
 
     const delEvent = (e, index) => {
         props.deleteFromCart(e);
-        if (removingFromCartDone) {
-            cartItems.splice(index, 1)
-        }
+        cartItems.splice(index, 1);
     };
 
     return (

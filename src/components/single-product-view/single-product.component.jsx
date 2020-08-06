@@ -10,6 +10,8 @@ import AddToCartButton from "../add-to-cart-button/add-to-cart-button"
 import {addItemToCart} from "../../store/cartList/cart-list.utils";
 import {addItemToWishList} from "../../store/wishList/wish-list.utils";
 
+import "./product.style.sass"
+
 const SingleProduct = props => {
 
     const {item, user, isAddingToCart, isLoggedIn, margin} = props;

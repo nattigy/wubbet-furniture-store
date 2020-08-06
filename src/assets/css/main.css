@@ -98,20 +98,20 @@ input, button, select, svg {
     top: -45px !important;
 }
 
-.breadcrumb {
-    border-bottom: 1px solid #E4E7ED;
-    border-top: 2px solid #E4E7ED;
-}
-
-.breadcrumb-tree {
-    list-style: none;
-    display: inline-block;
-}
-
-.breadcrumb-item {
-    display: inline-block;
-}
-
 .border-light-custom {
-    border-color: #c2c3c4
+    border-color: #e6e7e8 !important
+}
+
+.paragraphs p, .paragraphs h4 {
+    max-width: 600px;
+    margin: 1rem 0;
+}
+
+.checkout-btn {
+    color: white !important;
+}
+
+.checkout-btn:hover {
+    color: white !important;
+    background-color: rgba(209, 0, 36, 0.91);
 }

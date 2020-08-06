@@ -9,6 +9,8 @@ import PathIndicator from "../../components/path-indicator/path-indicator.compon
 import {getItemDetail} from "../../store/item/item.utils";
 import {addItemToWishList} from "../../store/wishList/wish-list.utils";
 
+import "./product-detail.style.sass"
+
 const ProductDetail = props => {
     const {
         isGettingItemDetail, gettingItemDetailError, gettingItemDetailDone,

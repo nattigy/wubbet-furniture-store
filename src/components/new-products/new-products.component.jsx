@@ -6,6 +6,8 @@ import SingleProduct from "../single-product-view/single-product.component";
 
 import {searchNewProducts} from "../../store/search/search.utils";
 
+import "./new-products.style.sass"
+
 const NewProducts = props => {
 
     const [tab1, setTab1] = useState(true);

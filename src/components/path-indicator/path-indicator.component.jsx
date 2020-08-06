@@ -1,6 +1,7 @@
 import React from "react";
-
 import {Link} from "react-router-dom";
+
+import "./path-indicator.style.sass"
 
 const PathIndicator = props => {
     return (

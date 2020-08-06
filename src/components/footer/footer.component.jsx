@@ -1,12 +1,14 @@
 import React, {Fragment} from "react";
 import {Link} from "react-router-dom";
+import {connect} from "react-redux";
 
 import {faEnvelope, faMapMarker, faPhone} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 import {CopyRight} from "./copy-right.component";
 import {Subscription} from "./subscription.component";
-import {connect} from "react-redux";
+
+import "./footer.style.sass"
 
 const Footer = props => {
     return !props.isAuthPageOpen ? (

@@ -14,7 +14,8 @@ const orderReducers = (state = {}, action) => {
                 ...state,
                 isSending: false,
                 sendingSuccess: true,
-                sendingError: false
+                sendingError: false,
+                orderId: action.orderId
             };
         case OrderTypes.SEND_ORDER_FAILURE:
             return {

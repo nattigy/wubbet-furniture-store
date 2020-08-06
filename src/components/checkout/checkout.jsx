@@ -10,20 +10,24 @@ import PathIndicator from "../path-indicator/path-indicator.component";
 import {orderFurniture} from "../../store/order/order.utils";
 import {fetchFromCart} from "../../store/cartList/cart-list.utils";
 
+import "./checkout.style.sass"
+import {updateUser} from "../../store/auth/auth.utils";
+
 const Checkout = props => {
+
     const {
-        isFetchingFromError, cartItems, newUser, isLoggedIn,
+        isFetchingFromError, cartItems, newUser, isLoggedIn, isAnonymous,
         user, isFetchingFromCart, totalPrice, isSending, sendingSuccess
     } = props;
 
-    const [fullName, setFullName] = useState("");
+    const [fullName, setFullName] = useState(newUser.name);
     const [user_id] = useState(user ? user.uid : 0);
-    const [address, setAddress] = useState("");
-    const [city, setCity] = useState("");
-    const [telephone, setTelephone] = useState("");
+    const [address, setAddress] = useState(newUser.address && newUser.address);
+    const [city, setCity] = useState(newUser.city && newUser.city);
+    const [telephone, setTelephone] = useState(newUser.telephone && newUser.telephone);
     const [order_notes, setOrder_notes] = useState("");
-    const [total_price] = useState(newUser ? newUser.totalPriceOfCart : 0);
-    const [ordered_items] = useState(newUser && newUser.cartList);
+    const [total_price] = useState(0);
+    const [ordered_items] = useState([]);
     const [payment_method, setPayment_method] = useState("Direct Bank Transfer");
     const [orderSentConfirmation, setOrderSentConfirmation] = useState(true);
     const [direct_bank, setDirect_bank] = useState(true);
@@ -36,10 +40,21 @@ const Checkout = props => {
 
     const submitCheckout = e => {
         e.preventDefault();
-        props.orderFurniture(`?&fullName=${fullName}&user_id=${user_id}&address=${address}&city=${city}&telephone=${telephone}&order_notes=${order_notes}&total_price=${total_price}&ordered_items=${ordered_items}&payment_method=${payment_method}`);
+        const formData = `?&fullName=${fullName}&user_id=${user_id}&address=${address}&city=${city}&telephone=${telephone}&order_notes=${order_notes}&total_price=${total_price}&ordered_items=${ordered_items}&payment_method=${payment_method}`;
+
+        props.orderFurniture({
+            formData, user_id, fullName, address, city, telephone,
+            order_notes, total_price: totalPrice, ordered_items: cartItems, payment_method
+        });
+
+        if (!newUser.address) {
+            props.updateUser({uid: user.uid, address, city, telephone})
+        }
     };
 
     if (isLoggedIn === false) {
+        return <Redirect to="/login"/>;
+    } else if (isAnonymous) {
         return <Redirect to="/login"/>;
     } else {
         return (
@@ -58,7 +73,7 @@ const Checkout = props => {
                         <div className="w-100 px-5 py-3 text-center text-success" color="red">
                             Your order is sent!
                         </div>
-                        <div className="text-right px-3 pb-2">
+                        <div className="text-center px-3 pb-2">
                             <button className="btn" onClick={() => setOrderSentConfirmation(false)}>ok</button>
                         </div>
                     </Dialog>
@@ -81,31 +96,45 @@ const Checkout = props => {
                                             <input className="form-control w-100" type="text" id="fullname"
                                                    name="fullname"
                                                    onChange={e => setFullName(e.target.value)}
-                                                   placeholder="Full Name"/>
+                                                   defaultValue={newUser.name}
+                                                   placeholder="Full Name"
+                                                   required
+                                            />
                                             <input type="hidden" name="user_id" id="user_id" value={user.uid}/>
                                         </div>
                                         <div className="form-group">
                                             <input className="form-control w-100" type="text" name="address"
                                                    id="address"
                                                    onChange={e => setAddress(e.target.value)}
-                                                   placeholder="Address"/>
+                                                   defaultValue={newUser.address && newUser.address}
+                                                   placeholder="Address"
+                                                   required
+                                            />
                                         </div>
                                         <div className="form-group">
                                             <input className="form-control w-100" type="text" name="city" id="city"
                                                    onChange={e => setCity(e.target.value)}
-                                                   placeholder="City"/>
+                                                   defaultValue={newUser.city && newUser.city}
+                                                   placeholder="City"
+                                                   required
+                                            />
                                         </div>
                                         <div className="form-group">
                                             <input className="form-control w-100" type="tel" name="telephone"
                                                    id="telephone"
                                                    onChange={e => setTelephone(e.target.value)}
-                                                   placeholder="(+251)9********"/>
+                                                   defaultValue={newUser.telephone && newUser.telephone}
+                                                   placeholder="(+251)9********"
+                                                   required
+                                            />
                                         </div>
                                     </div>
                                     <div className="">
-                                            <textarea className="form-control w-100" name="order_notes" id="order_notes"
-                                                      onChange={e => setOrder_notes(e.target.value)}
-                                                      placeholder="Order Notes"/>
+                                        <textarea
+                                            className="form-control w-100" name="order_notes" id="order_notes"
+                                            onChange={e => setOrder_notes(e.target.value)}
+                                            placeholder="Order Notes"
+                                        />
                                     </div>
                                 </div>
 
@@ -173,7 +202,7 @@ const Checkout = props => {
                                                         </strong>
                                                         <span className="text-danger font-weight-bolder"> ETB</span>
                                                         <input type="hidden" name="total_price" id="total_price"
-                                                               value={newUser.totalPriceOfCart}
+                                                               value={totalPrice}
                                                         />
                                                     </div>
                                                 </div>
@@ -268,6 +297,7 @@ const Checkout = props => {
 const mapStateToProps = state => {
     return {
         isLoggedIn: state.auth.isLoggedIn,
+        isAnonymous: state.auth.isAnonymous,
         newUser: state.auth.newUser,
         user: state.auth.user,
         cartItems: state.cartList.cartItems,
@@ -284,6 +314,7 @@ const mapDispatchToProps = dispatch => {
     return {
         fetchFromCart: credentials => dispatch(fetchFromCart(credentials)),
         orderFurniture: credentials => dispatch(orderFurniture(credentials)),
+        updateUser: credentials => dispatch(updateUser(credentials)),
     };
 };
 

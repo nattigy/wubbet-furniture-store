@@ -7,6 +7,8 @@ import PreLoader from "../pre-loader/pre-loader.component";
 
 import {addItem} from "../../store/item/item.utils";
 
+import "./addItem.style.sass"
+
 const sub_category = [
     {category: "HOME_FURNITURE", sub_category: "Living room", value: "livingRoom"},
     {category: "HOME_FURNITURE", sub_category: "Bed room", value: "bedRoom"},

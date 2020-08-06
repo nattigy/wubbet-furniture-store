@@ -8,6 +8,8 @@ import homeFurniture from "../../assets/img/homeFurniture.jpg"
 import commercialFurniture from "../../assets/img/commercialFurnitures.jpg"
 import decorationAndFinishing from "../../assets/img/decorationAndFinishing.jpg"
 
+import "./explore-card.sass"
+
 const ExploreCards = () => {
     return (
         <div className="container-lg my-5">

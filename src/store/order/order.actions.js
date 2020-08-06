@@ -6,9 +6,10 @@ export const sendOrderRequest = () => {
     };
 };
 
-export const sendOrderSuccess = () => {
+export const sendOrderSuccess = orderId => {
     return {
-        type: OrderTypes.SEND_ORDER_SUCCESS
+        type: OrderTypes.SEND_ORDER_SUCCESS,
+        orderId
     }
 };
 
