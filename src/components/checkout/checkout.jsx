@@ -40,7 +40,8 @@ const Checkout = props => {
 
     const submitCheckout = e => {
         e.preventDefault();
-        const formData = `?&fullName=${fullName}&user_id=${user_id}&address=${address}&city=${city}&telephone=${telephone}&order_notes=${order_notes}&total_price=${total_price}&ordered_items=${ordered_items}&payment_method=${payment_method}`;
+
+        const formData = `?&fullName=${fullName}&user_id=${user_id}&address=${address}&city=${city}&telephone=${telephone}&order_notes=${order_notes}&total_price=${totalPrice}&ordered_items=${newUser.cartList}&payment_method=${payment_method}`;
 
         props.orderFurniture({
             formData, user_id, fullName, address, city, telephone,

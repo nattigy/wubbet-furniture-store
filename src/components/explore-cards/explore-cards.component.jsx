@@ -12,7 +12,7 @@ import "./explore-card.sass"
 
 const ExploreCards = () => {
     return (
-        <div className="container-lg my-5">
+        <div className="container-xl my-3">
             <div className="row">
                 <div className="col-md-4 col-xs-6">
                     <div className="shop">

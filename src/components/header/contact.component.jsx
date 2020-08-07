@@ -12,10 +12,10 @@ const ContactSection = props => {
     const {isLoggedIn, user, isAnonymous} = props;
 
     return (
-        <div className="container-fluid bg-blue-custom py-1">
-            <nav className="navbar navbar-expand-md">
-                <div className="container-lg justify-content-between">
-                    <ul className="navbar-nav d-block">
+        <div className="container-fluid bg-blue-custom py-1 px-0 mx-0">
+            <nav className="navbar navbar-expand-md px-0 mx-0 px-2">
+                <div className="container-xl justify-content-between px-0">
+                    <ul className="navbar-nav d-block px-0 mx-0">
                         <li className="contact-link nav-item nav-inline mx-2">
                             <FontAwesomeIcon icon={faPhone} size="sm" color="#D10024"/>
                             <a className="text-decoration-none small ml-2" href="/">+251924618131</a>
@@ -29,7 +29,7 @@ const ContactSection = props => {
                             <a className="text-decoration-none small ml-2" href="/">Addis Ababa, Ethiopia</a>
                         </li>
                     </ul>
-                    <ul className="navbar-nav d-block">
+                    <ul className="navbar-nav d-block px-0 mx-0">
                         {
                             isLoggedIn ?
                                 isAnonymous ?
@@ -37,13 +37,15 @@ const ContactSection = props => {
                                         <Fragment>
                                             <li className="contact-link nav-item nav-inline mx-2">
                                                 <FontAwesomeIcon icon={faSignInAlt} size="sm" color="#D10024"/>
-                                                <Link className="text-decoration-none small ml-2" to="/login">Sign
-                                                    In</Link>
+                                                <Link className="text-decoration-none small ml-2" to="/login">
+                                                    Sign In
+                                                </Link>
                                             </li>
                                             <li className="contact-link nav-item nav-inline mx-2">
                                                 <FontAwesomeIcon icon={faSignInAlt} size="sm" color="#D10024"/>
-                                                <Link className="text-decoration-none small ml-2" to="/register">Sign
-                                                    Up</Link>
+                                                <Link className="text-decoration-none small ml-2" to="/register">
+                                                    Sign Up
+                                                </Link>
                                             </li>
                                         </Fragment>
                                     ) : (

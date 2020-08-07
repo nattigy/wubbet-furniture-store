@@ -1,68 +1,8 @@
-.sidenav-cont
-  border-top: 3px solid #D10024
-  box-shadow: #6b7696 0 0 3px 0
+.logout-span
+  color: white
 
-.search-input
-  width: calc(100% - 210px)
-
-.nav-item-custom a
-    font: 14px 'Montserrat', sans-serif
-
-.contact-link a, .contact-link span
-  font-size: 12px
-
-@media screen and (max-width: 991px)
-  .sidenav
-    height: 100%
-    width: 0
-    position: fixed
-    z-index: 100
-    top: 0
-    left: 0
-    background-color: #15161D
-    overflow-x: hidden
-    padding-top: 60px
-    transition: 0.5s
-
-  #modal
-    display: none
-    position: absolute
-    top: 0
-    left: 0
-    width: 100vw
-    height: 100vh
-    z-index: 1
-    background-color: rgba(0, 0, 0, 0.4)
-
-  .sidenav a
-    padding: 8px 8px 8px 32px
-    text-decoration: none
-    display: block
-    transition: 0.3s
-
-  .sidenav .closebtn
-    position: absolute
-    top: 0
-    right: 25px
-    font-size: 36px
-    margin-left: 50px
-
-  .sidenav ul li
-    margin: 15px 0
-
-@media screen and (min-width: 991px)
-  .nav-item-custom
-    display: inline-block !important
-
-
-.nav-link-custom:hover, .nav-link-custom:active
-  -webkit-transition: 0.2s all
-  transition: 0.2s all
-
-.custom-select
-  width: 160px
-  border-bottom-right-radius: 0
-  border-top-right-radius: 0
+.logout-span:hover
+  color: #D10024
 
 .search-btn
   border-bottom-left-radius: 0
@@ -82,17 +22,8 @@
   -moz-appearance: none
   appearance: none
 
-.nav-link-custom:after
-  content: ""
-  display: block
-  width: 0
-  height: 2px
-  background-color: #D10024
-  -webkit-transition: 0.2s all
-  transition: 0.2s all
-
-.nav-link-custom:hover:after, .nav-link-custom:focus:after, .nav-item-custom.active > a:after
-  width: 100%
+.search-cont
+  border-bottom: #D10024 3px solid
 
 .qty
   position: absolute
@@ -107,33 +38,51 @@
   color: #FFF
   background-color: #D10024
 
+.sidenav
+  height: 100%
+  width: 0
+  position: fixed
+  z-index: 100
+  top: 0
+  left: 0
+  background-color: #15161D
+  overflow-x: hidden
+  padding-top: 60px
+  transition: 0.5s
+
+  a
+    padding: 8px 8px 8px 32px
+    text-decoration: none
+    display: block
+    transition: 0.3s
+
+  .closebtn
+    position: absolute
+    top: 0
+    right: 25px
+    font-size: 36px
+    margin-left: 50px
+
+  ul li
+    margin: 15px 0
+
+#modal
+  display: none
+  position: absolute
+  top: 0
+  left: 0
+  width: 100vw
+  height: 100vh
+  z-index: 1
+  background-color: rgba(0, 0, 0, 0.4)
+
 .closebtn .svg-inline--fa.fa-w-14
   width: 25px
   height: 25px
 
-@media screen and (min-width: 991px)
-  .sidenav-cont
-    padding-top: 15px !important
-    padding-bottom: 15px !important
-
-  .closebtn
-    display: none
-
-  .nav-link-custom
-    color: black
-
 .navbar-link
-  padding-left: 20px !important
+  padding-left: 50px !important
 
-@media screen and (max-height: 450px)
-  .sidenav
-    padding-top: 15px
-
-  .sidenav a
-    font-size: 18px
-
-.logout-span
-  color: white
-
-.logout-span:hover
-  color: #D10024
+@media screen and (min-width: 575px)
+  .search-input-cont
+    width: auto !important

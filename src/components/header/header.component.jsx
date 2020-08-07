@@ -16,9 +16,9 @@ const Header = props => {
 
     const openNav = () => {
         setIsOpen(true);
-        document.getElementById("mySidenav").style.width = "250px";
+        document.getElementById("mySidenav").style.width = "400px";
         document.getElementById("modal").style.display = "block";
-        document.body.style.position = "fixed";
+        document.body.style.overflow = "hidden";
     };
 
     const closeNav = () => {
@@ -26,7 +26,7 @@ const Header = props => {
             setIsOpen(false);
             document.getElementById("mySidenav").style.width = "0";
             document.getElementById("modal").style.display = "none";
-            document.body.style.position = "unset";
+            document.body.style.overflow = "unset";
         }
     };
 

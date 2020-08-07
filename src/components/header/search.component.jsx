@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 import {connect} from "react-redux";
 
-import {faBars, faHeart, faSearch, faShoppingCart} from "@fortawesome/free-solid-svg-icons";
+import {faBars, faHeart, faShoppingCart} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 import ShoppingCartMini from "../shopping-cart-mini/shopping-cart-mini.component";
@@ -26,40 +26,44 @@ const SearchSection = props => {
     }, []);
 
     return (
-        <div className="container-fluid bg-dark-custom">
-            <div className="container-lg pb-4">
-                <div className="row">
-                    <div className="col-lg-3 text-center overflow-hidden pt-4">
+        <div className="container-fluid bg-dark-custom px-0 mx-0 shadow-sm search-cont">
+            <div className="container-xl px-0">
+                <div className="d-flex flex-row flex-wrap justify-content-between align-items-center w-100 py-3 px-2">
+                    <div className="flex-shrink-0 order-2 d-block overflow-hidden px-0 mx-0">
                         <Link to="/">
                             <img className="logo-img" src={logo} alt=""/>
                         </Link>
                     </div>
-                    <div className="col-lg-6 overflow-hidden px-0 pt-4">
-                        <div className="text-center pt-2 text-nowrap">
-                            <form action={`/items/${category}/${name}`}>
-                                <select name="category" id=""
-                                        className="custom-select"
-                                        onChange={e => setCategory(e.target.value)}
-                                >
-                                    <option value="all">All Category</option>
-                                    <option value="HOME_FURNITURE">Home Furniture</option>
-                                    <option value="COMMERCIAL_FURNITURE">Commercial Furniture</option>
-                                    <option value="FINISHING_MATERIALS">Finishing Materials</option>
-                                </select>
-                                <input className="search-input" type="search" name="name"
-                                       onChange={e => setName(e.target.value)}
-                                />
-                                <button className="bg-red btn search-btn" type="submit">
-                                    <FontAwesomeIcon icon={faSearch} color="#fff"/>
-                                </button>
-                            </form>
-                        </div>
+                    <div
+                        className="search-input-cont overflow-hidden w-100 order-7 order-sm-4 flex-sm-grow-1 px-0 mx-0 my-2">
+                        <input className="w-100" type="search" name="name"
+                               onChange={e => setName(e.target.value)}
+                        />
+                        {/*<div className="text-nowrap w-100 px-0 mx-0">*/}
+                        {/*<form action={`/items/${category}/${name}`}>*/}
+                        {/*<select name="category" id=""*/}
+                        {/*        className="custom-select"*/}
+                        {/*        onChange={e => setCategory(e.target.value)}*/}
+                        {/*>*/}
+                        {/*    <option value="all">All Category</option>*/}
+                        {/*    <option value="HOME_FURNITURE">Home Furniture</option>*/}
+                        {/*    <option value="COMMERCIAL_FURNITURE">Commercial Furniture</option>*/}
+                        {/*    <option value="FINISHING_MATERIALS">Finishing Materials</option>*/}
+                        {/*</select>*/}
+                        {/*<input className="w-100" type="search" name="name"*/}
+                        {/*       onChange={e => setName(e.target.value)}*/}
+                        {/*/>*/}
+                        {/*<button className="bg-red btn search-btn" type="submit">*/}
+                        {/*    <FontAwesomeIcon icon={faSearch} color="#fff"/>*/}
+                        {/*</button>*/}
+                        {/*</form>*/}
+                        {/*</div>*/}
                     </div>
-                    <div className="col-lg-3 text-right">
-                        <ul className="navbar-nav d-block text-nowrap pt-4">
+                    <div className="order-5 d-flex flex-row px-0 mx-0">
+                        <ul className="navbar-nav d-block text-nowrap px-0 mx-0">
                             <li className="contact-link nav-item position-relative text-center nav-inline mx-3">
                                 <FontAwesomeIcon icon={faHeart} color="#fff"/>
-                                <Link className="text-white d-block small" to="/wishlist">Your Wishlist</Link>
+                                {/*<Link className="text-white d-block small" to="/wishlist">Your Wishlist</Link>*/}
                                 {
                                     wishListLength &&
                                     <div className="qty">{wishListLength.length}</div>
@@ -67,12 +71,12 @@ const SearchSection = props => {
                             </li>
                             <li className="contact-link nav-item position-relative text-center nav-inline mx-3">
                                 <FontAwesomeIcon icon={faShoppingCart} color="#fff"/>
-                                <button
-                                    className="btn mini-cart p-0 bg-transparent text-white d-block small your-cart font-12"
-                                    onClick={() => setOpenCart(!openCart)}
-                                >
-                                    Your Cart
-                                </button>
+                                {/*<button*/}
+                                {/*    className="btn mini-cart p-0 bg-transparent text-white d-block small your-cart font-12"*/}
+                                {/*    onClick={() => setOpenCart(!openCart)}*/}
+                                {/*>*/}
+                                {/*    Your Cart*/}
+                                {/*</button>*/}
                                 {
                                     cartLength &&
                                     <div className="qty">{cartLength.length}</div>
