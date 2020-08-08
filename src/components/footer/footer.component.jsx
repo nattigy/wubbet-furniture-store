@@ -1,6 +1,5 @@
 import React, {Fragment} from "react";
 import {Link} from "react-router-dom";
-import {connect} from "react-redux";
 
 import {faEnvelope, faMapMarker, faPhone} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -10,8 +9,8 @@ import {Subscription} from "./subscription.component";
 
 import "./footer.style.sass"
 
-const Footer = props => {
-    return !props.isAuthPageOpen ? (
+const Footer = () => {
+    return (
         <Fragment>
             <Subscription/>
             <footer id="footer">
@@ -99,14 +98,9 @@ const Footer = props => {
                 </div>
                 <CopyRight/>
             </footer>
+            <CopyRight/>
         </Fragment>
-    ) : <CopyRight/>
+    )
 };
 
-const mapStateToProps = state => {
-    return {
-        isAuthPageOpen: state.ui.isAuthPageOpen
-    }
-};
-
-export default connect(mapStateToProps)(Footer);
+export default Footer;

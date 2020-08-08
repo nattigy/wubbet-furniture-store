@@ -27,16 +27,18 @@ const SearchSection = props => {
 
     return (
         <div className="container-fluid bg-dark-custom px-0 mx-0 shadow-sm search-cont">
-            <div className="container-xl px-0">
-                <div className="d-flex flex-row flex-wrap justify-content-between align-items-center w-100 py-3 px-2">
+            <div className="container-xl px-3">
+                <div
+                    className="d-flex flex-row flex-wrap flex-md-nowrap justify-content-between align-items-center w-100 py-3">
                     <div className="flex-shrink-0 order-2 d-block overflow-hidden px-0 mx-0">
                         <Link to="/">
                             <img className="logo-img" src={logo} alt=""/>
                         </Link>
                     </div>
                     <div
-                        className="search-input-cont overflow-hidden w-100 order-7 order-sm-4 flex-sm-grow-1 px-0 mx-0 my-2">
-                        <input className="w-100" type="search" name="name"
+                        className="search-input-cont overflow-hidden w-100 order-7 order-md-4 flex-sm-grow-1 px-3 mx-0 my-3">
+                        <input className="w-100 search-input" type="search" name="name"
+                               placeholder="What are you looking for?"
                                onChange={e => setName(e.target.value)}
                         />
                         {/*<div className="text-nowrap w-100 px-0 mx-0">*/}

@@ -1,9 +1,12 @@
 import React, {Fragment} from "react";
+import Footer from "../../components/footer/footer.component";
+import Header from "../../components/header/header.component";
 
 const PrivacyPolicy = () => {
     return (
         <Fragment>
-            <div className="container-lg paragraphs my-5 text-justify">
+            <Header/>
+            <div className="container-xl px-3 px-md-5 paragraphs my-5 text-justify">
                 <h4>Wubbet.com Privacy Policy</h4>
 
                 <p>
@@ -286,6 +289,7 @@ const PrivacyPolicy = () => {
                     Policy as stated at the time you use them.
                 </p>
             </div>
+            <Footer/>
         </Fragment>
     );
 };

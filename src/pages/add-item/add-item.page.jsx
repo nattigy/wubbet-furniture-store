@@ -1,9 +1,11 @@
-import React from "react";
+import React, {Fragment} from "react";
 import {connect} from "react-redux";
 import {Redirect} from "react-router-dom";
 
 import AddItem from '../../components/add-item/add-item.component';
 import PreLoader from "../../components/pre-loader/pre-loader.component";
+import Header from "../../components/header/header.component";
+import Footer from "../../components/footer/footer.component";
 
 const AddItemPage = props => {
 
@@ -18,7 +20,13 @@ const AddItemPage = props => {
     } else if (!isLoggedIn || isAnonymous) {
         return <Redirect to="/login"/>
     } else {
-        return <AddItem/>;
+        return (
+            <Fragment>
+                <Header/>
+                <AddItem/>
+                <Footer/>
+            </Fragment>
+        );
     }
 };
 

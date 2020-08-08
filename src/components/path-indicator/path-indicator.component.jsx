@@ -6,7 +6,7 @@ import "./path-indicator.style.sass"
 const PathIndicator = props => {
     return (
         <div className="breadcrumb mb-3 rounded-0 bg-light px-0 mx-0">
-            <div className="container-xl px-2">
+            <div className="container-xl px-3">
                 <ul className="breadcrumb-tree my-3 p-0 font-12 px-0 mx-0">
                     {
                         props.path.map(p => (

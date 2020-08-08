@@ -18,7 +18,7 @@ const Item = () => (
 
 const RecentView = () => {
     return (
-        <div className="container-xl px-2 my-5">
+        <div className="container-xl px-3 my-5">
             <h1 className="section-title mb-5">Your recently viewed products</h1>
             <div className="d-flex overflow-auto">
                 <Item/>

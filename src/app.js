@@ -13,7 +13,6 @@ const PrivacyPolicy = lazy(() => import("./pages/privacy-policy-and-terms-of-con
 const ReturnPolicy = lazy(() => import("./pages/privacy-policy-and-terms-of-conditions/return-policy"));
 const ProductDetail = lazy(() => import("./pages/product-detail/product-detail.page"));
 const ShoppingCart = lazy(() => import("./pages/shopping-cart/shopping-cart.page"));
-const Footer = lazy(() => import("./components/footer/footer.component"));
 const ShoppingPage = lazy(() => import("./pages/shopping-page/shopping.page"));
 const AddItemPage = lazy(() => import("./pages/add-item/add-item.page"));
 const WishList = lazy(() => import("./pages/wish-list/wish-list.page"));
@@ -22,7 +21,6 @@ const Checkout = lazy(() => import("./components/checkout/checkout"));
 const MyItems = lazy(() => import("./pages/my-items/my-items.page"));
 const Account = lazy(() => import("./components/account/account"));
 const HomePage = lazy(() => import("./pages/homepage/homepage"));
-const Header = lazy(() => import("./components/header/header.component"));
 const SignIn = lazy(() => import("./components/auth/sign-in"));
 const SignUp = lazy(() => import("./components/auth/sign-up"));
 
@@ -49,7 +47,6 @@ const App = props => {
         return (
             <Router>
                 <Suspense fallback={renderLoader()}>
-                    <Header/>
                     <Switch>
                         <Route exact path="/" component={HomePage}/>
                         <Route exact path="/login" component={SignIn}/>
@@ -73,7 +70,6 @@ const App = props => {
                         <Route exact path="/account/:uid" component={Account}/>
                         <Route render={() => <h4>Not Found</h4>}/>
                     </Switch>
-                    <Footer/>
                 </Suspense>
             </Router>
         );

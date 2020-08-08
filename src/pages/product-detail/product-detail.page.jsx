@@ -10,6 +10,8 @@ import {getItemDetail} from "../../store/item/item.utils";
 import {addItemToWishList} from "../../store/wishList/wish-list.utils";
 
 import "./product-detail.style.sass"
+import Header from "../../components/header/header.component";
+import Footer from "../../components/footer/footer.component";
 
 const ProductDetail = props => {
     const {
@@ -23,6 +25,7 @@ const ProductDetail = props => {
 
     return (
         <Fragment>
+            <Header/>
             <PathIndicator path={[
                 {currentPath: false, pathName: "HOME", pathLink: "/"},
                 {currentPath: false, pathName: "ACCOUNT", pathLink: "/account"},
@@ -66,6 +69,7 @@ const ProductDetail = props => {
                     }
                 </div>
             </div>
+            <Footer/>
         </Fragment>
     );
 };

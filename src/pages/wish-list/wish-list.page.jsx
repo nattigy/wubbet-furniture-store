@@ -7,6 +7,8 @@ import WishListItem from "../../components/wish-list-item/wish-list-item.compone
 import PathIndicator from "../../components/path-indicator/path-indicator.component";
 
 import {deleteFromWishList, fetchFromWishList} from "../../store/wishList/wish-list.utils";
+import Header from "../../components/header/header.component";
+import Footer from "../../components/footer/footer.component";
 
 const WishList = props => {
 
@@ -31,6 +33,7 @@ const WishList = props => {
     } else {
         return (
             <div>
+                <Header/>
                 <PathIndicator path={[
                     {currentPath: false, pathName: "HOME", pathLink: "/"},
                     {currentPath: true, pathName: "WISH LIST", pathLink: props.match.url},
@@ -72,6 +75,7 @@ const WishList = props => {
                         }
                     </div>
                 </div>
+                <Footer/>
             </div>
         )
     }

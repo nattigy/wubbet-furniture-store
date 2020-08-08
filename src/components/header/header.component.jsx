@@ -1,16 +1,12 @@
-import React, {Fragment, useState} from "react";
-import {connect} from "react-redux";
-import {Link} from "react-router-dom";
+import React, {useState} from "react";
 
 import ContactSection from "./contact.component";
 import SearchSection from "./search.component";
 import NavbarSection from "./navbar.component";
 
-import logo from "../../assets/img/purelogo.png";
-
 import "./header.style.sass"
 
-const Header = props => {
+const Header = () => {
 
     const [isOpen, setIsOpen] = useState(false);
 
@@ -32,29 +28,11 @@ const Header = props => {
 
     return (
         <header>
-            {
-                !props.isAuthPageOpen ? (
-                    <Fragment>
-                        <ContactSection/>
-                        <SearchSection openNav={() => openNav()}/>
-                        <NavbarSection closeNav={() => closeNav()} isOpen={isOpen}/>
-                    </Fragment>
-                ) : (
-                    <div className="my-5 mx-auto" style={{width: "200px"}}>
-                        <Link to="/">
-                            <img src={logo} className="mx-auto w-100" style={{height: "50px"}} alt=""/>
-                        </Link>
-                    </div>
-                )
-            }
+            <ContactSection/>
+            <SearchSection openNav={() => openNav()}/>
+            <NavbarSection closeNav={() => closeNav()} isOpen={isOpen}/>
         </header>
     );
 };
 
-const mapStateToProps = state => {
-    return {
-        isAuthPageOpen: state.ui.isAuthPageOpen
-    }
-};
-
-export default connect(mapStateToProps)(Header);
+export default Header;

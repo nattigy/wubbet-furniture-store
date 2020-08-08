@@ -6,7 +6,6 @@ import searchReducers from "./search/search.reducers";
 import orderReducers from "./order/order.reducers";
 import cartListReducers from "./cartList/cart-list.reducers";
 import wishListReducers from "./wishList/wish-list.reducers";
-import pageReducers from "./ui/hide-header-and-footer";
 
 export default combineReducers({
     auth: authReducers,
@@ -15,5 +14,4 @@ export default combineReducers({
     order: orderReducers,
     cartList: cartListReducers,
     wishList: wishListReducers,
-    ui: pageReducers,
 });

@@ -10,7 +10,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 const CategoryGallery = () => {
     return (
-        <div className="container-xl my-3 px-2">
+        <div className="container-xl my-3 px-3">
             <h1 className="section-title">Life chills out in the sofa</h1>
             <p className="p-max-width">
                 Your sofa is where you let your guard down, put your feet up, and just relax. The perfect place for

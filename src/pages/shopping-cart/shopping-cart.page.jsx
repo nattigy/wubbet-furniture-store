@@ -8,6 +8,8 @@ import PathIndicator from "../../components/path-indicator/path-indicator.compon
 
 import {deleteFromCart, fetchFromCart} from "../../store/cartList/cart-list.utils";
 import {addItemToWishList} from "../../store/wishList/wish-list.utils";
+import Footer from "../../components/footer/footer.component";
+import Header from "../../components/header/header.component";
 
 const ShoppingCart = props => {
 
@@ -32,6 +34,7 @@ const ShoppingCart = props => {
     } else {
         return (
             <div>
+                <Header/>
                 <PathIndicator path={[
                     {currentPath: false, pathName: "HOME", pathLink: "/"},
                     {currentPath: true, pathName: "CART", pathLink: props.match.url},
@@ -72,6 +75,7 @@ const ShoppingCart = props => {
                         </p>
                     </div>
                 </div>
+                <Footer/>
             </div>
         )
     }

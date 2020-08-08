@@ -13,8 +13,8 @@ const ContactSection = props => {
 
     return (
         <div className="container-fluid bg-blue-custom py-1 px-0 mx-0">
-            <nav className="navbar navbar-expand-md px-0 mx-0 px-2">
-                <div className="container-xl justify-content-between px-0">
+            <nav className="navbar navbar-expand-md mx-0 px-0">
+                <div className="container-xl justify-content-between px-3">
                     <ul className="navbar-nav d-block px-0 mx-0">
                         <li className="contact-link nav-item nav-inline mr-2">
                             <FontAwesomeIcon icon={faPhone} size="sm" color="#D10024"/>

@@ -6,6 +6,8 @@ import PathIndicator from "../../components/path-indicator/path-indicator.compon
 import PreLoader from "../../components/pre-loader/pre-loader.component";
 
 import {fetchMyItems} from "../../store/item/item.utils";
+import Header from "../../components/header/header.component";
+import Footer from "../../components/footer/footer.component";
 
 const MyItems = props => {
 
@@ -17,6 +19,7 @@ const MyItems = props => {
 
     return (
         <div>
+            <Header/>
             <PathIndicator path={[
                 {currentPath: false, pathName: "HOME", pathLink: "/"},
                 {currentPath: false, pathName: "ACCOUNT", pathLink: "/"},
@@ -47,6 +50,7 @@ const MyItems = props => {
                     }
                 </div>
             </div>
+            <Footer/>
         </div>
     );
 };

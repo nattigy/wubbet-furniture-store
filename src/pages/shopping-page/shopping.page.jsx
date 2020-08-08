@@ -9,6 +9,8 @@ import FilterOld from "../../components/filters/filters-old.component";
 import {applyFilter, searchAllItems, searchItems} from "../../store/search/search.utils";
 
 import "./store-style.sass"
+import Header from "../../components/header/header.component";
+import Footer from "../../components/footer/footer.component";
 
 const ShoppingPage = props => {
 
@@ -39,6 +41,7 @@ const ShoppingPage = props => {
 
     return (
         <Fragment>
+            <Header/>
             <PathIndicator path={[
                 {currentPath: false, pathName: "HOME", pathLink: "/"},
                 {currentPath: false, pathName: "ALL CATEGORY", pathLink: "/items/all/all"},
@@ -117,6 +120,7 @@ const ShoppingPage = props => {
                     </div>
                 </div>
             </div>
+            <Footer/>
         </Fragment>
     );
 };

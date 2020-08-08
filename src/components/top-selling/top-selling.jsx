@@ -12,9 +12,9 @@ const TopSelling = props => {
     const {isSearchingNewProducts, items} = props;
 
     return (
-        <div className="container-xl overflow-hidden px-2">
+        <div className="container-xl overflow-hidden px-3">
             <h3 className="section-title">TOP SELLING</h3>
-            <div className="d-flex overflow-auto mt-5 px-0 mx-0">
+            <div className="d-flex overflow-auto mt-5">
                 {
                     isSearchingNewProducts || isSearchingNewProducts === undefined ?
                         (

@@ -6,15 +6,18 @@ import CategoryItem from "../../components/category-item/category-item.component
 import RecentView from "../../components/recent-view/recent-view";
 
 import "./category-page.style.sass"
+import Header from "../../components/header/header.component";
+import Footer from "../../components/footer/footer.component";
 
 const CategoryPage = props => {
     return (
         <div>
+            <Header/>
             <PathIndicator path={[
                 {currentPath: false, pathName: "Home", pathLink: "/"},
                 {currentPath: true, pathName: "Home Furniture", pathLink: props.match.url},
             ]}/>
-            <div className="container-xl px-2">
+            <div className="container-xl px-3">
                 <section>
                     <h1 className="mt-5 font-weight-bold text-break cat-title">WUBBET Home Furniture</h1>
                     <p className="my-5 p-max-width">
@@ -33,6 +36,7 @@ const CategoryPage = props => {
                 </section>
             </div>
             <RecentView/>
+            <Footer/>
         </div>
     );
 };
