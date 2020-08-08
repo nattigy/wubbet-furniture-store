@@ -3,7 +3,6 @@ import {connect} from "react-redux";
 
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faShoppingCart} from "@fortawesome/free-solid-svg-icons";
-import CircularProgress from "@material-ui/core/CircularProgress/CircularProgress";
 
 import {addItemToCart} from "../../store/cartList/cart-list.utils";
 
@@ -11,17 +10,18 @@ import "./add-to-cart-button.style.sass";
 
 const AddToCartButton = props => {
 
-    const {isAddingToCart, userId, itemId} = props.credentials;
+    // const {isAddingToCart, userId, itemId} = props.credentials;
 
     const handleClick = () => {
-        props.addToCart({userId, itemId});
+        // props.addToCart({userId, itemId});
     };
 
     return (
         <div className="add-to-cart">
-            <button className="add-to-cart-btn text-nowrap" onClick={handleClick}>
+            {/*<button className="add-to-cart-btn text-nowrap" onClick={handleClick}>*/}
+            <button className="add-to-cart-btn text-nowrap">
                 <FontAwesomeIcon icon={faShoppingCart} size="1x" color="#fff"/>
-                {isAddingToCart && <CircularProgress size="1.5rem" color="secondary"/>}
+                {/*{isAddingToCart && <CircularProgress size="1.5rem" color="secondary"/>}*/}
                 add to cart
             </button>
         </div>

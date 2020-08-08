@@ -5,6 +5,8 @@ import {connect} from "react-redux"
 import {anonymousSignIn} from "./store/auth/auth.utils"
 
 import PreLoader from "./components/pre-loader/pre-loader.component"
+import CategoryPage from "./pages/category-page/category-page";
+import SubCategory from "./pages/sub-category/sub-category.page";
 
 const TermsAndConditions = lazy(() => import("./pages/privacy-policy-and-terms-of-conditions/terms-and-conditions"));
 const PrivacyPolicy = lazy(() => import("./pages/privacy-policy-and-terms-of-conditions/privacy-policy"));
@@ -34,16 +36,16 @@ const App = props => {
 
     const {isLoggedIn, isVerified} = props;
 
-    if (isLoggedIn === undefined) {
-        return (
-            <div className="preloading-home overflow-hidden-y">
-                <PreLoader/>
-            </div>
-        );
-    } else {
-        if (isLoggedIn === false && isVerified === false) {
-            props.anonymousSignIn();
-        }
+    // if (isLoggedIn === undefined) {
+    //     return (
+    //         <div className="preloading-home overflow-hidden-y">
+    //             <PreLoader/>
+    //         </div>
+    //     );
+    // } else {
+    //     if (isLoggedIn === false && isVerified === false) {
+    //         props.anonymousSignIn();
+    //     }
         return (
             <Router>
                 <Suspense fallback={renderLoader()}>
@@ -56,10 +58,12 @@ const App = props => {
                         <Route exact path="/wishlist" component={WishList}/>
                         <Route exact path="/checkout" component={Checkout}/>
                         <Route exact path="/item/:id" component={ProductDetail}/>
+                        <Route exact path="/cat/:category" component={CategoryPage}/>
+                        <Route exact path="/cat/:category/:subCategory" component={SubCategory}/>
                         <Route exact path="/items/:category/:name" component={ShoppingPage}/>
-                        <Route exact path="/items/:category/:name/:sub_category" component={ShoppingPage}/>
-                        <Route exact path="/items/:category/_/:sub_category" component={ShoppingPage}/>
-                        <Route exact path="/category/:category" component={ShoppingPage}/>
+                        {/*<Route exact path="/items/:category/:name/:sub_category" component={ShoppingPage}/>*/}
+                        {/*<Route exact path="/items/:category/_/:sub_category" component={ShoppingPage}/>*/}
+                        {/*<Route exact path="/category/:category" component={ShoppingPage}/>*/}
                         <Route exact path="/privacy_policy" component={PrivacyPolicy}/>
                         <Route exact path="/terms_and_conditions" component={TermsAndConditions}/>
                         <Route exact path="/return_policy" component={ReturnPolicy}/>
@@ -73,7 +77,7 @@ const App = props => {
                 </Suspense>
             </Router>
         );
-    }
+    // }
 };
 
 const mapStateToProps = state => {

@@ -43,11 +43,6 @@ body {
     display: inline-block !important;
 }
 
-.logo-img {
-    width: 170px;
-    height: 45px;
-}
-
 .d-initial {
     display: initial;
 }

@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 import {connect} from "react-redux";
 
-import {faBars, faHeart, faShoppingCart} from "@fortawesome/free-solid-svg-icons";
+import {faBars, faHeart, faShoppingCart, faUser} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 import ShoppingCartMini from "../shopping-cart-mini/shopping-cart-mini.component";
@@ -61,7 +61,12 @@ const SearchSection = props => {
                     </div>
                     <div className="order-5 d-flex flex-row px-0 mx-0">
                         <ul className="navbar-nav d-block text-nowrap px-0 mx-0">
-                            <li className="contact-link nav-item position-relative text-center nav-inline mx-3">
+                            <li className="nav-item nav-inline px-0 ml-4">
+                                <Link>
+                                    <FontAwesomeIcon icon={faUser} color="#fff"/>
+                                </Link>
+                            </li>
+                            <li className="contact-link nav-item position-relative text-center nav-inline px-0 ml-4">
                                 <FontAwesomeIcon icon={faHeart} color="#fff"/>
                                 {/*<Link className="text-white d-block small" to="/wishlist">Your Wishlist</Link>*/}
                                 {
@@ -69,7 +74,7 @@ const SearchSection = props => {
                                     <div className="qty">{wishListLength.length}</div>
                                 }
                             </li>
-                            <li className="contact-link nav-item position-relative text-center nav-inline mx-3">
+                            <li className="contact-link nav-item position-relative text-center nav-inline px-0 ml-4">
                                 <FontAwesomeIcon icon={faShoppingCart} color="#fff"/>
                                 {/*<button*/}
                                 {/*    className="btn mini-cart p-0 bg-transparent text-white d-block small your-cart font-12"*/}
@@ -85,7 +90,7 @@ const SearchSection = props => {
                                     openCart && <ShoppingCartMini user={user}/>
                                 }
                             </li>
-                            <li className="nav-item nav-inline mx-3">
+                            <li className="nav-item nav-inline px-0 ml-4">
                                 <button className="text-white bg-transparent border-0 closebtn"
                                         onClick={() => props.openNav()}
                                 >
