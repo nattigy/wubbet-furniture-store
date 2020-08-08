@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 
-const Filter = props => {
+const FilterOld = props => {
 
     const [filterList, setFilterList] = useState([]);
 
@@ -82,4 +82,4 @@ const Filter = props => {
     );
 };
 
-export default Filter;
+export default FilterOld;

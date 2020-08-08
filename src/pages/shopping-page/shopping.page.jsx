@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 import SingleProduct from "../../components/single-product-view/single-product.component"
 import PathIndicator from "../../components/path-indicator/path-indicator.component";
 import PreLoader from "../../components/pre-loader/pre-loader.component";
-import Filter from "../../components/filters/filters.component";
+import FilterOld from "../../components/filters/filters-old.component";
 
 import {applyFilter, searchAllItems, searchItems} from "../../store/search/search.utils";
 
@@ -48,7 +48,7 @@ const ShoppingPage = props => {
                 <div className="container-lg">
                     <div className="row">
                         <div className="col-md-2">
-                            <Filter
+                            <FilterOld
                                 appplyFilter={newFilterList => {
                                     setFilterList(newFilterList);
                                     setRerender(!rerender)

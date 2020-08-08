@@ -12,9 +12,9 @@ import "./explore-card.sass"
 
 const ExploreCards = () => {
     return (
-        <div className="container-xl my-3">
-            <div className="row">
-                <div className="col-md-4 col-xs-6">
+        <div className="container-xl my-3 px-2">
+            <div className="row px-0 mx-0">
+                <div className="col-md-4 col-xs-6 px-0 mx-0 pr-3">
                     <div className="shop">
                         <div className="shop-img">
                             <img src={homeFurniture} alt=""/>
@@ -31,7 +31,7 @@ const ExploreCards = () => {
                     </div>
                 </div>
 
-                <div className="col-md-4 col-xs-6">
+                <div className="col-md-4 col-xs-6 px-0 mx-0 pr-3">
                     <div className="shop">
                         <div className="shop-img">
                             <img src={commercialFurniture} alt=""/>
@@ -48,7 +48,7 @@ const ExploreCards = () => {
                     </div>
                 </div>
 
-                <div className="col-md-4 col-xs-6">
+                <div className="col-md-4 col-xs-6 px-0 mx-0 pr-3">
                     <div className="shop">
                         <div className="shop-img">
                             <img src={decorationAndFinishing} alt=""/>

@@ -3,6 +3,8 @@ import React from "react";
 import PathIndicator from "../../components/path-indicator/path-indicator.component";
 import SingleItem from "../../components/single-item/single-item.component";
 import RecentView from "../../components/recent-view/recent-view";
+import Filters from "../../components/filters/filters";
+import CategoryGallery from "../../components/category-gallery/category-gallery";
 
 const SubCategory = props => {
     return (
@@ -14,8 +16,9 @@ const SubCategory = props => {
             ]}/>
             <div className="container-xl px-2">
                 <section>
-                    <h1 className="my-5 font-weight-bold text-break cat-title">Living Room</h1>
+                    <h1 className="mt-5 font-weight-bold text-break cat-title">Living Room</h1>
                 </section>
+                <Filters/>
                 <section className="row">
                     <SingleItem/>
                     <SingleItem/>
@@ -25,6 +28,7 @@ const SubCategory = props => {
                     <SingleItem/>
                 </section>
             </div>
+            <CategoryGallery/>
             <RecentView/>
         </div>
     );
