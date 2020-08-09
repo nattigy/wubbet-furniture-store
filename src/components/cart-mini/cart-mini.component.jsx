@@ -10,7 +10,9 @@ import PreLoader from "../pre-loader/pre-loader.component";
 
 import {deleteFromCart, fetchFromCart} from "../../store/cartList/cart-list.utils";
 
-const ShoppingCartMini = props => {
+import "./cart-mini.style.sass"
+
+const CartMini = props => {
 
     const {
         isFetchingFromError, cartItems, user,
@@ -32,8 +34,8 @@ const ShoppingCartMini = props => {
                 {
                     isFetchingFromCart ?
                         <PreLoader/> :
-                        cartItems.length === 0 &&
-                        <div className="text-center">
+                        (cartItems.length === 0) || isFetchingFromError &&
+                        <div className="text-center py-5">
                             <h5 className="font-12">No Items In Your Cart!</h5>
                         </div>
                 }
@@ -47,15 +49,9 @@ const ShoppingCartMini = props => {
                         />
                     )
                 }
-                {
-                    isFetchingFromError &&
-                    <div className="text-center py-5">
-                        <h5 className="font-14">No Items In Your Cart!</h5>
-                    </div>
-                }
             </div>
             <div className="text-left p-2 mini-cart">
-                <p className="my-1 font-14 mini-cart">{cartItems.length} items(s) selected</p>
+                <p className="my-1 font-14 mini-cart">{cartItems.length} item(s) selected</p>
                 <p className="font-14 mb-0 mini-cart">
                     <strong className="mini-cart">SUBTOTAL: {totalPrice} ETB</strong>
                 </p>
@@ -89,4 +85,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ShoppingCartMini);
+export default connect(mapStateToProps, mapDispatchToProps)(CartMini);

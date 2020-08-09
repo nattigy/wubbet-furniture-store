@@ -1,52 +1,44 @@
 import React from "react";
 import {Link} from "react-router-dom";
 
-import {faEye, faTrash} from "@fortawesome/free-solid-svg-icons";
+import {faTrash} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-
-import AddToCartButton from "../add-to-cart-button/add-to-cart-button"
 
 const WishListItem = props => {
 
     const {item, deleteFromWishList, user, credentials} = props;
 
     return (
-        <div className="pt-4 border-bottom border-light-custom">
-            <div className="d-flex">
-                <div className="col-md-4 w-100 overflow-hidden" style={{height: "250px"}}>
-                    <img className="w-100" style={{minWidth: "80px"}} src={item.picture0} alt=""/>
+        <div className="row mb-4 mx-0">
+            <div className="col-4 col-md-3 w-100 px-0 overflow-hidden h-auto">
+                <img className="w-100 h-auto" src={item.picture0} alt=""/>
+            </div>
+            <div className="col-8 col-md-9 row px-2">
+                <div className="col-12 row">
+                    <div className="col-12 col-md-9">
+                        <Link to={`item/${item.id}`}>
+                            <h1 className="item-name text-uppercase text-truncate">{item.name}</h1>
+                        </Link>
+                        <p>
+                            size and other information
+                        </p>
+                    </div>
+                    <div className="col-12 col-md-3 text-md-right text-nowrap small-font">
+                        <span className="font-weight-bold">{item.price} </span>
+                        <span className="small text-muted">ETB</span>
+                    </div>
                 </div>
-                <div className="row col-md-8 flex-fill ml-1 border-left border-light-custom">
-                    <div className="flex-fill">
-                        <p className="">
-                            <Link to="" className="text-dark font-18">{item.name}</Link></p>
-                        <div className="my-4">
-                            <span className="cart-item-btn">
-                                <Link
-                                    onClick={() => deleteFromWishList({
-                                        userId: user.uid, itemId: item.id
-                                    })}
-                                >
-                                    <FontAwesomeIcon icon={faTrash} size="1x" color="#475161"/>
-                                    <span className="tooltip-custom shadow-sm text-nowrap">REMOVE FROM WISHLIST</span>
-                                </Link>
-                            </span>
-                            <span className="cart-item-btn">
-                                <Link to={`item/${item.id}`}>
-                                    <FontAwesomeIcon icon={faEye} size="1x" color="#475161"/>
-                                    <span className="tooltip-custom shadow-sm text-nowrap">QUICK VIEW</span>
-                                </Link>
-                            </span>
-                        </div>
-                        <div>
-                            <AddToCartButton credentials={credentials}/>
-                        </div>
+                <div className="col-12 row py-3 order-5">
+                    <div className="col-6">
+                        <button>add-to-cart</button>
                     </div>
-                    <div className="col-sm-3">
-                        <div className="text-right text-danger font-weight-bold text-nowrap">{item.price} <span
-                            className="small text-muted">ETB</span>
-                        </div>
-                    </div>
+                    <button className="text-right small col-6 text-nowrap btn border-0 font-14"
+                            onClick={() => deleteFromWishList({
+                                userId: user.uid, itemId: item.id
+                            })}
+                    >
+                        <FontAwesomeIcon icon={faTrash} size="sm" color="#475161"/> Remove
+                    </button>
                 </div>
             </div>
         </div>

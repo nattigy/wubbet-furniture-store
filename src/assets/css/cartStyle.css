@@ -31,26 +31,7 @@
 
 .preloading-cart {
     position: relative;
-    margin-top: 100px;
-    margin-left: 50vw;
-    left: -20px !important;
-    top: -45px !important;
-}
-
-.cart-popup {
-    border: 1px solid #E4E7ED;
-    position: absolute;
-    top: 50px;
-    left: -150px;
-    z-index: 1000;
-    width: 300px;
-}
-
-.cart-mini {
-    min-height: 50px;
-    max-height: 250px;
-    overflow-y: auto;
-    overflow-x: hidden;
+    margin: 20vh 0;
 }
 
 .cart-item-btn {

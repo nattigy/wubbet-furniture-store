@@ -1,5 +1,5 @@
 import React, {useEffect} from "react";
-import {Link, Redirect} from "react-router-dom";
+import {Link} from "react-router-dom";
 import {connect} from "react-redux";
 
 import CartItem from "../../components/cart-item/cart-item.component";
@@ -15,7 +15,7 @@ const ShoppingCart = props => {
 
     const {
         isFetchingFromError, cartItems, totalPrice, newUser,
-        user, isFetchingFromCart, isLoggedIn, removingFromCartDone
+        user, isFetchingFromCart, isLoggedIn, removingFromCartDone, isFetchingFromDone
     } = props;
 
     useEffect(() => {
@@ -29,56 +29,51 @@ const ShoppingCart = props => {
         }
     };
 
-    if (!isLoggedIn) {
-        return <Redirect to="/login"/>;
-    } else {
-        return (
-            <div>
-                <Header/>
-                <PathIndicator path={[
-                    {currentPath: false, pathName: "HOME", pathLink: "/"},
-                    {currentPath: true, pathName: "CART", pathLink: props.match.url},
-                ]}/>
-                <div className="container-lg">
-                    <div className="border-bottom border-light d-flex pb-3">
-                        <Link className="checkout-btn btn bg-red text-nowrap" to="/checkout">
-                            Proceed to Checkout
-                        </Link>
-                        <div className="text-muted price-tag text-right font-14 w-100 pt-3 pr-5">Price</div>
-                    </div>
-                    <div className="">
-                        {isFetchingFromCart ? <div className="preloading-cart overflow-hidden-y">
-                                <PreLoader/>
-                            </div> :
-                            cartItems.length === 0 &&
-                            <div className="text-center py-5">
-                                <h5 className="font-14">No Items In Your Cart!</h5>
-                            </div>
-                        }
-                        {cartItems.map((item, index) =>
+    return (
+        <div>
+            <Header/>
+            <PathIndicator path={[
+                {currentPath: false, pathName: "HOME", pathLink: "/"},
+                {currentPath: true, pathName: "CART", pathLink: props.match.url},
+            ]}/>
+            <div className="container-sm px-3">
+                <Link className="checkout-btn btn bg-red text-nowrap" to="/checkout">
+                    Proceed to Checkout
+                </Link>
+                <div className="mt-5">
+                    {
+                        isFetchingFromCart &&
+                        <div className="preloading-cart text-center overflow-hidden-y">
+                            <PreLoader/>
+                        </div>
+                    }
+                    {
+                        isFetchingFromDone &&
+                        cartItems.length === 0 &&
+                        <div className="text-center py-5">
+                            <h5 className="font-14">No Items In Your Cart!</h5>
+                        </div>
+                    }
+                    {
+                        cartItems.map((item, index) =>
                             <CartItem
                                 key={item.id}
                                 item={item}
                                 user={user}
                                 addItemToWishList={props.addItemToWishList}
                                 deleteFromCart={(e) => delEvent(e, index)}
-                            />)}
-                        {isFetchingFromError &&
-                        <div className="text-center py-5">
-                            <h5 className="font-14">No Items In Your Cart!</h5>
-                        </div>
-                        }
-                    </div>
-                    <div className="py-3">
-                        <p className="text-right mr-5 font-16">Subtotal ({cartItems.length} items):
-                            <span className="text-danger font-weight-bold font-16"> {totalPrice} ETB</span>
-                        </p>
-                    </div>
+                            />)
+                    }
                 </div>
-                <Footer/>
+                <div className="py-3">
+                    <p className="text-right mr-5 font-16">Subtotal ({cartItems.length} items):
+                        <span className="text-danger font-weight-bold font-16"> {totalPrice} ETB</span>
+                    </p>
+                </div>
             </div>
-        )
-    }
+            <Footer/>
+        </div>
+    )
 };
 
 const mapStateToProps = state => {

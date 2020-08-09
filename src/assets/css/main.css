@@ -19,6 +19,10 @@ body {
     font-size: 18px !important;
 }
 
+.font-20 {
+    font-size: 20px;
+}
+
 .font-24 {
     font-size: 24px;
 }
@@ -57,6 +61,30 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 24px;
     color: #2B2D42;
     font-weight: 700;
+}
+
+.item-name {
+    font-size: 1em;
+    font-weight: 700;
+    word-break: break-word;
+}
+
+@media screen and (min-width: 640px) {
+    .item-name {
+        font-size: 1.2rem;
+    }
+}
+
+.small-font {
+    font-size: 0.9rem;
+    /*font-weight: 700;*/
+    word-break: break-word;
+}
+
+@media screen and (min-width: 640px) {
+    .small-font {
+        font-size: 1.3rem;
+    }
 }
 
 a {

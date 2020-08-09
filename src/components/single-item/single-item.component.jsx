@@ -27,7 +27,7 @@ const SingleItem = () => {
                 <p className="mb-2 font-weight-bold small">
                     <span className="font-18">64,599</span><sup>.99</sup> ETB
                 </p>
-                <p className="mb-2 d-flex w-100 flex-nowrap">
+                <div className="mb-2 d-flex w-100 flex-nowrap">
                     <div className="">
                         <FontAwesomeIcon icon={faStar} size="xs" color="#111"/>
                         <FontAwesomeIcon icon={faStar} size="xs" color="#111"/>
@@ -40,7 +40,7 @@ const SingleItem = () => {
                             <FontAwesomeIcon className="shadow-lg" icon={faCartPlus} size="1x" color="#fff"/>
                         </button>
                     </div>
-                </p>
+                </div>
             </div>
         </div>
     );

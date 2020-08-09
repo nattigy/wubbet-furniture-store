@@ -9,7 +9,9 @@ const Item = () => (
         <div className="position-relative overflow-hidden">
             <img className="w-100" src={shopcat} alt=""/>
             <div className="shop-cat-btn w-100 text-center">
-                <button className="btn btn-danger rounded-pill px-3 py-2 shadow-sm-custom">Living Room</button>
+                <button className="small btn btn-danger py-0 py-md-2 rounded-pill shadow-sm-custom">
+                    Living Room
+                </button>
             </div>
         </div>
     </div>

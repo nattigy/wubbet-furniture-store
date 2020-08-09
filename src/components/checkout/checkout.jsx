@@ -54,9 +54,9 @@ const Checkout = props => {
     };
 
     if (isLoggedIn === false) {
-        return <Redirect to="/login"/>;
+        return <Redirect to="/register"/>;
     } else if (isAnonymous) {
-        return <Redirect to="/login"/>;
+        return <Redirect to="/register"/>;
     } else {
         return (
             <Fragment>

@@ -98,7 +98,6 @@ const Footer = () => {
                 </div>
                 <CopyRight/>
             </footer>
-            <CopyRight/>
         </Fragment>
     )
 };

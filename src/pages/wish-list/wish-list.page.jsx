@@ -1,5 +1,4 @@
 import React, {useEffect} from "react";
-import {Redirect} from "react-router-dom";
 import {connect} from "react-redux";
 
 import PreLoader from "../../components/pre-loader/pre-loader.component";
@@ -13,12 +12,12 @@ import Footer from "../../components/footer/footer.component";
 const WishList = props => {
 
     const {
-        wishListItems, isAuthenticated, user, isLoggedIn, isAddingToCart,
-        isFetchingItemFromWishList, fetchingItemFromWishListError, removingFromWishListDone
+        wishListItems, user, isLoggedIn, isAddingToCart, isFetchingItemFromWishList,
+        fetchingItemFromWishListError, removingFromWishListDone, fetchingItemFromWishListDone
     } = props;
 
     useEffect(() => {
-        isAuthenticated && props.fetchFromWishList({uid: user ? user.uid : "0"})
+        props.fetchFromWishList({uid: user ? user.uid : "0"})
     }, []);
 
     const delEvent = (e, index) => {
@@ -28,57 +27,50 @@ const WishList = props => {
         }
     };
 
-    if (!isLoggedIn) {
-        return <Redirect to="/login"/>;
-    } else {
-        return (
-            <div>
-                <Header/>
-                <PathIndicator path={[
-                    {currentPath: false, pathName: "HOME", pathLink: "/"},
-                    {currentPath: true, pathName: "WISH LIST", pathLink: props.match.url},
-                ]}/>
-                <div className="container-lg">
-                    <div className="py-3">
-                        {
-                            isFetchingItemFromWishList ?
-                                <div className="preloading-cart overflow-hidden-y">
-                                    <PreLoader/>
-                                </div> :
-                                wishListItems.length === 0 &&
-                                <div className="text-center py-5">
-                                    <h5 className="font-14">No Items In Your Wishlist!</h5>
-                                </div>
-                        }
-                        {
-                            wishListItems.map((item, index) =>
-                                <WishListItem
-                                    key={item.id}
-                                    item={item}
-                                    user={user}
-                                    addToCart={props.addToCart}
-                                    deleteFromWishList={(e) => delEvent(e, index)}
-                                    credentials={{
-                                        isAddingToCart,
-                                        isLoggedIn,
-                                        userId: user ? user.uid : "0",
-                                        itemId: item.id
-                                    }}
-                                />
-                            )
-                        }
-                        {
-                            fetchingItemFromWishListError &&
-                            <div className="text-center py-5">
-                                <h5 className="font-14">No Items In Your Cart!</h5>
-                            </div>
-                        }
-                    </div>
+    return (
+        <div>
+            <Header/>
+            <PathIndicator path={[
+                {currentPath: false, pathName: "HOME", pathLink: "/"},
+                {currentPath: true, pathName: "WISH LIST", pathLink: props.match.url},
+            ]}/>
+            <div className="container-sm px-3">
+                <div className="py-3 w-100">
+                    {
+                        isFetchingItemFromWishList &&
+                        <div className="preloading-cart text-center overflow-hidden-y">
+                            <PreLoader/>
+                        </div>
+                    }
+                    {
+                        fetchingItemFromWishListDone &&
+                        wishListItems.length === 0 &&
+                        <div className="text-center py-5">
+                            <h5 className="font-14">No Items In Your Wishlist!</h5>
+                        </div>
+                    }
+                    {
+                        wishListItems.map((item, index) =>
+                            <WishListItem
+                                key={item.id}
+                                item={item}
+                                user={user}
+                                addToCart={props.addToCart}
+                                deleteFromWishList={(e) => delEvent(e, index)}
+                                credentials={{
+                                    isAddingToCart,
+                                    isLoggedIn,
+                                    userId: user ? user.uid : "0",
+                                    itemId: item.id
+                                }}
+                            />
+                        )
+                    }
                 </div>
-                <Footer/>
             </div>
-        )
-    }
+            <Footer/>
+        </div>
+    )
 };
 
 const mapStateToProps = state => {
