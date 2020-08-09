@@ -1,17 +1,20 @@
 import React, {Fragment, useEffect} from "react";
 import {connect} from "react-redux";
-
-import ProductDescription from "../../components/product-detail/product-description.component";
-import ProductImages from "../../components/product-detail/product-images.component";
 import PreLoader from "../../components/pre-loader/pre-loader.component";
 import PathIndicator from "../../components/path-indicator/path-indicator.component";
 
 import {getItemDetail} from "../../store/item/item.utils";
 import {addItemToWishList} from "../../store/wishList/wish-list.utils";
 
+import RecentView from "../../components/recent-view/recent-view";
+import SimilarItems from "../../components/similar-items/similar-items"
+
 import "./product-detail.style.sass"
 import Header from "../../components/header/header.component";
 import Footer from "../../components/footer/footer.component";
+import ProductImages from "../../components/product-detail/product-images.component";
+import ProductDescription from "../../components/product-detail/product-description.component";
+import DescriptionAndDetails from "../../components/product-detail/description-and-details.component";
 
 const ProductDetail = props => {
     const {
@@ -36,10 +39,8 @@ const ProductDetail = props => {
                 <div className="row">
                     {
                         isGettingItemDetail &&
-                        <div className="preloading-store">
-                            <div className="text-center">
-                                <PreLoader/>
-                            </div>
+                        <div className="preloading-cart w-100 text-center overflow-hidden-y">
+                            <PreLoader/>
                         </div>
                     }
                     {
@@ -58,17 +59,13 @@ const ProductDetail = props => {
                                 }}
                                 addToWishList={props.addItemToWishList}
                             />
-                            {/*<DescriptionAndDetails item={itemDetail}/>*/}
+                            <DescriptionAndDetails item={itemDetail}/>
                         </Fragment>
-                    }
-                    {
-                        gettingItemDetailError &&
-                        <div className="w-100 text-center text-danger py-3 font-14">
-                            Unknown error, Please refresh the page!
-                        </div>
                     }
                 </div>
             </div>
+            <SimilarItems/>
+            <RecentView/>
             <Footer/>
         </Fragment>
     );

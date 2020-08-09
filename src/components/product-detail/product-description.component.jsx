@@ -1,10 +1,11 @@
 import React from "react";
 
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faExchangeAlt, faHeart, faStar} from "@fortawesome/free-solid-svg-icons";
+import {faHeart, faStar} from "@fortawesome/free-solid-svg-icons";
 
 import AddToCartButton from "../add-to-cart-button/add-to-cart-button";
 import CircularProgress from "@material-ui/core/CircularProgress/CircularProgress";
+import {Link} from "react-router-dom";
 
 const ProductDescription = props => {
 
@@ -25,8 +26,8 @@ const ProductDescription = props => {
                     {/*<a className="text-dark" href="/">10 Review(s) | Add your review</a>*/}
                 </div>
                 <div className="my-2">
-                    <h4 className="text-danger mr-3 d-inline-block">
-                        <span className="text-danger font-24">{price}</span> ETB
+                    <h4 className="mr-3 d-inline-block">
+                        <span className="font-weight-bold">{price}</span> ETB
                         {
                             old_price && <del className="small text-muted"> {old_price} ETB</del>
                         }
@@ -49,14 +50,13 @@ const ProductDescription = props => {
 
                 <p className="mb-3 font-14">{description}</p>
 
-                <div className="my-4">
-                    <AddToCartButton credentials={credentials}/>
-                </div>
-
-                <ul className="list-unstyled">
-                    <li className="d-inline-block mr-2">
+                <div className="my-4 d-flex flex-row flex-nowrap">
+                    <div className="my-1">
+                        <AddToCartButton credentials={credentials}/>
+                    </div>
+                    <div className="mx-3">
                         <button
-                            className="text-dark btn"
+                            className="btn btn-lg btn-light rounded-circle"
                             onClick={() => addToWishList({
                                 userId: credentials.userId,
                                 itemId: credentials.itemId,
@@ -64,26 +64,18 @@ const ProductDescription = props => {
                             })}
                         >
                             {credentials.isAddingToWishList && <CircularProgress size="1.5rem" color="secondary"/>}
-                            <FontAwesomeIcon icon={faHeart} size="sm" color="rgb(30, 31, 41, 0.9)"/> add to wishlist
+                            <FontAwesomeIcon icon={faHeart} size="sm" color="rgb(30, 31, 41, 0.9)"/>
                         </button>
-                    </li>
-                    <li className="d-inline-block ml-2">
-                        <button className="text-dark btn">
-                            <FontAwesomeIcon icon={faExchangeAlt} size="sm" color="rgb(30, 31, 41, 0.9)"/>
-                            add to compare
-                        </button>
-                    </li>
-                </ul>
+                    </div>
+                </div>
 
-                <ul className="list-unstyled my-4 text-muted font-14">
-                    <li className="d-inline-block mr-2">Category:</li>
-                    <li className="d-inline-block mr-2">
-                        <a className="text-dark" href={`/items/`}>HOME_FURNITURE </a>
+                <ul className="list-unstyled my-4">
+                    <li className="d-inline-block">
+                        <Link className="text-dark">Home Furniture</Link>
                     </li>
-                    <br/>
-                    <li className="d-inline-block mr-2">Sub-Category:</li>
-                    <li className="d-inline-block mr-2">
-                        <a className="text-dark" href={`/items/`}> Living_Room</a>
+                    <li className="d-inline-block mx-3"> ></li>
+                    <li className="d-inline-block">
+                        <Link className="text-dark">Living Room</Link>
                     </li>
                 </ul>
             </div>
