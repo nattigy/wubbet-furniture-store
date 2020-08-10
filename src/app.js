@@ -17,7 +17,7 @@ const ShoppingPage = lazy(() => import("./pages/shopping-page/shopping.page"));
 const AddItemPage = lazy(() => import("./pages/add-item/add-item.page"));
 const WishList = lazy(() => import("./pages/wish-list/wish-list.page"));
 const EditItem = lazy(() => import("./components/edit-item/edit-item"));
-const Checkout = lazy(() => import("./components/checkout/checkout"));
+const Checkout = lazy(() => import("./pages/checkout/checkout"));
 const MyItems = lazy(() => import("./pages/my-items/my-items.page"));
 const Account = lazy(() => import("./components/account/account"));
 const HomePage = lazy(() => import("./pages/homepage/homepage"));
@@ -57,7 +57,7 @@ const App = props => {
                         <Route exact path="/item/:id" component={ProductDetail}/>
                         <Route exact path="/cat/:category" component={CategoryPage}/>
                         <Route exact path="/cat/:category/:subCategory" component={SubCategory}/>
-                        <Route exact path="/items/:category/:name" component={ShoppingPage}/>
+                        <Route exact path="/search/items/:item_name" component={ShoppingPage}/>
                         {/*<Route exact path="/items/:category/:name/:sub_category" component={ShoppingPage}/>*/}
                         {/*<Route exact path="/items/:category/_/:sub_category" component={ShoppingPage}/>*/}
                         {/*<Route exact path="/category/:category" component={ShoppingPage}/>*/}

@@ -7,6 +7,7 @@ import Filters from "../../components/filters/filters";
 import CategoryGallery from "../../components/category-gallery/category-gallery";
 import Footer from "../../components/footer/footer.component";
 import Header from "../../components/header/header.component";
+import Categories from "../../components/header/categories";
 
 const SubCategory = props => {
     return (
@@ -19,7 +20,15 @@ const SubCategory = props => {
             ]}/>
             <div className="container-xl px-3">
                 <section>
-                    <h1 className="mt-5 font-weight-bold text-break cat-title">Living Room</h1>
+                    <h1 className="mt-5 font-weight-bold text-break cat-title">
+                        {
+                            Categories.map(cat => `/${props.match.params.category}` === cat.link && (
+                                cat.subCategory.map(sub =>
+                                    `${cat.link}/${props.match.params.subCategory}` === sub.link && sub.name
+                                )
+                            ))
+                        }
+                    </h1>
                 </section>
                 <Filters/>
                 <section className="row">

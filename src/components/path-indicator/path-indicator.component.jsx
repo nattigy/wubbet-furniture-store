@@ -10,7 +10,7 @@ const PathIndicator = props => {
                 <ul className="breadcrumb-tree my-3 p-0 font-12 px-0 mx-0">
                     {
                         props.path.map(p => (
-                            <li className="breadcrumb-item">
+                            <li key={p.pathLink} className="breadcrumb-item">
                                 <Link to={p.pathLink}
                                       className={`text-uppercase ${p.currentPath ? `text-dark` : `text-muted`}`}>
                                     {p.pathName}

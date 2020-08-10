@@ -8,30 +8,40 @@ import RecentView from "../../components/recent-view/recent-view";
 import "./category-page.style.sass"
 import Header from "../../components/header/header.component";
 import Footer from "../../components/footer/footer.component";
+import Categories from "../../components/header/categories";
 
 const CategoryPage = props => {
+
     return (
         <div>
             <Header/>
             <PathIndicator path={[
                 {currentPath: false, pathName: "Home", pathLink: "/"},
-                {currentPath: true, pathName: "Home Furniture", pathLink: props.match.url},
+                {currentPath: true, pathName: props.match.pathName, pathLink: props.match.url},
             ]}/>
             <div className="container-xl px-3">
                 <section>
-                    <h1 className="mt-5 font-weight-bold text-break cat-title">WUBBET Home Furniture</h1>
+                    <h1 className="mt-5 font-weight-bold text-break cat-title">
+                        WUBBET
+                        {
+                            Categories.map(cat => `/cat${cat.link}` === props.match.url && ` ${cat.name}`)
+                        }
+                    </h1>
                     <p className="my-5 p-max-width">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid aut delectus illo inventore
-                        laborum
-                        laudantium possimus qui repudiandae sed velit.
+                        {
+                            Categories.map(cat => `/cat${cat.link}` === props.match.url && cat.description)
+                        }
                     </p>
                 </section>
                 <section>
                     <div className="row">
-                        <CategoryItem/>
-                        <CategoryItem/>
-                        <CategoryItem/>
-                        <CategoryItem/>
+                        {
+                            Categories.map(cat => `/cat${cat.link}` === props.match.url && (
+                                cat.subCategory.map(sub => (
+                                    <CategoryItem key={sub.id} item={sub}/>
+                                ))
+                            ))
+                        }
                     </div>
                 </section>
             </div>

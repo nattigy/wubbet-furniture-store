@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {Link} from "react-router-dom";
+import {Link, Redirect} from "react-router-dom";
 import {connect} from "react-redux";
 
 import {faBars, faHeart, faSearch, faShoppingCart, faUser} from "@fortawesome/free-solid-svg-icons";
@@ -26,6 +26,11 @@ const SearchSection = props => {
         document.getElementById("open-cart-btn").firstElementChild.classList.add("mini-cart")
     }, []);
 
+    const handleSubmit = e => {
+        e.preventDefault();
+        return <Redirect to={`/search/items/${name}`}/>
+    };
+
     return (
         <div className="container-fluid bg-dark-custom px-0 mx-0 shadow-sm search-cont">
             <div className="container-xl px-3 py-3">
@@ -43,7 +48,7 @@ const SearchSection = props => {
                         {/*       onChange={e => setName(e.target.value)}*/}
                         {/*/>*/}
                         <div className="text-nowrap w-100 text-center px-0 mx-0">
-                            <form action={`/items/${category}/${name}`}>
+                            <form onSubmit={handleSubmit}>
                                 {/*<select name="category" id=""*/}
                                 {/*        className="custom-select"*/}
                                 {/*        onChange={e => setCategory(e.target.value)}*/}
@@ -57,9 +62,12 @@ const SearchSection = props => {
                                        placeholder="What are you looking for?"
                                        onChange={e => setName(e.target.value)}
                                 />
-                                <button className="bg-red btn search-btn" type="submit">
+                                <Link
+                                    to={`/search/items/${name}`}
+                                    className="bg-red btn search-btn" type="submit"
+                                >
                                     <FontAwesomeIcon icon={faSearch} color="#fff"/>
-                                </button>
+                                </Link>
                             </form>
                         </div>
                     </div>

@@ -3,15 +3,19 @@ import React from "react";
 import "./shop-by-category.style.sass"
 
 import shopcat from "../../assets/img/shopcat.webp"
+import Categories from "../header/categories";
+import {Link} from "react-router-dom";
 
-const Item = () => (
+const Item = props => (
     <div className="col-6 col-md-4 col-lg-3 px-0 pr-3 mb-3">
         <div className="position-relative overflow-hidden">
             <img className="w-100" src={shopcat} alt=""/>
             <div className="shop-cat-btn w-100 text-center">
-                <button className="small btn btn-danger py-0 py-md-2 rounded-pill shadow-sm-custom">
-                    Living Room
-                </button>
+                <Link
+                    to={`/cat${props.item.link}`}
+                    className="small btn btn-danger py-0 py-md-2 rounded-pill shadow-sm-custom">
+                    {props.item.name}
+                </Link>
             </div>
         </div>
     </div>
@@ -27,13 +31,11 @@ const ShopByCategory = () => {
                 vero voluptas, voluptatibus.
             </p>
             <div className="pt-3 d-flex overflow-auto">
-                <Item/>
-                <Item/>
-                <Item/>
-                <Item/>
-                <Item/>
-                <Item/>
-                <Item/>
+                {
+                    Categories.map(cat => cat.subCategory.map(sub => (
+                        <Item key={sub.id} item={sub}/>
+                    )))
+                }
             </div>
         </div>
     );

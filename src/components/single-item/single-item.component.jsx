@@ -7,7 +7,7 @@ import pic from "../../assets/img/pic.webp"
 
 import "./single-item.style.sass"
 
-const SingleItem = () => {
+const SingleItem = ({item}) => {
     return (
         <div className="col-6 col-md-4 col-lg-3 mb-4 item-cont">
             <div className="overflow-hidden h-auto position-relative w-100">
@@ -19,13 +19,13 @@ const SingleItem = () => {
             </div>
             <div className="mt-3 w-100">
                 <p className="mb-2">
-                    Decorative Modern Wallpapers
+                    {item.name}
                 </p>
                 <p className="mb-2 small text-muted">
                     size
                 </p>
                 <p className="mb-2 font-weight-bold small">
-                    <span className="font-18">64,599</span><sup>.99</sup> ETB
+                    <span className="font-18">{item.price}</span><sup>.99</sup> ETB
                 </p>
                 <div className="mb-2 d-flex w-100 flex-nowrap">
                     <div className="">

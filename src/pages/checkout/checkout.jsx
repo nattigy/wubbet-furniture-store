@@ -4,8 +4,8 @@ import {connect} from "react-redux";
 
 import Dialog from "@material-ui/core/Dialog/Dialog";
 
-import PreLoader from "../pre-loader/pre-loader.component";
-import PathIndicator from "../path-indicator/path-indicator.component";
+import PreLoader from "../../components/pre-loader/pre-loader.component";
+import PathIndicator from "../../components/path-indicator/path-indicator.component";
 
 import {orderFurniture} from "../../store/order/order.utils";
 import {fetchFromCart} from "../../store/cartList/cart-list.utils";
