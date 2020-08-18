@@ -18,10 +18,8 @@ const TopSelling = props => {
                 {
                     isSearchingNewProducts || isSearchingNewProducts === undefined ?
                         (
-                            <div className="position-relative newProduct-progress">
-                                <div className="preloading-newProduct">
-                                    <PreLoader/>
-                                </div>
+                            <div className="position-relative text-center newProduct-progress">
+                                <PreLoader/>
                             </div>
                         ) :
                         items && items.length !== 0 ? items.map(item =>

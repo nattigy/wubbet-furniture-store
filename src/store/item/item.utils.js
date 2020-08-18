@@ -15,7 +15,7 @@ import {
 } from "./item.actions";
 
 const create_name_array = name => {
-    return name.split(" ");
+    return name.split(" ").push(name);
 };
 
 const create_cat_name_combo = (category, name) => {

@@ -12,7 +12,7 @@ const Header = () => {
 
     const openNav = () => {
         setIsOpen(true);
-        document.getElementById("mySidenav").style.width = "400px";
+        document.getElementById("mySidenav").style.width = "350px";
         document.getElementById("modal").style.display = "block";
         document.body.style.overflow = "hidden";
     };

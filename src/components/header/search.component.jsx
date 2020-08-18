@@ -73,12 +73,12 @@ const SearchSection = props => {
                     </div>
                     <div className="order-5 d-flex flex-row px-0 mx-0">
                         <ul className="navbar-nav d-block text-nowrap px-0 mx-0">
-                            <li className="nav-item nav-inline px-0 ml-4">
-                                <Link to="/user">
+                            <li className="nav-item nav-inline px-0 ml-3 ml-md-4">
+                                <Link to="/my-account">
                                     <FontAwesomeIcon icon={faUser} color="#fff"/>
                                 </Link>
                             </li>
-                            <li className="contact-link nav-item position-relative text-center nav-inline px-0 ml-4">
+                            <li className="contact-link nav-item position-relative text-center nav-inline px-0 ml-3 ml-md-4">
                                 <Link className="text-white d-block" to="/wishlist">
                                     <FontAwesomeIcon icon={faHeart} color="#fff"/>
                                 </Link>
@@ -87,7 +87,7 @@ const SearchSection = props => {
                                     <div className="qty">{wishListLength.length}</div>
                                 }
                             </li>
-                            <li className="contact-link nav-item position-relative text-center nav-inline px-0 ml-4">
+                            <li className="contact-link nav-item position-relative text-center nav-inline px-0 ml-3 ml-md-4">
                                 <button className="btn mini-cart p-0 bg-transparent d-block your-cart"
                                         onClick={() => setOpenCart(!openCart)}
                                 >
@@ -105,7 +105,7 @@ const SearchSection = props => {
                                     openCart && <ShoppingCartMini user={user}/>
                                 }
                             </li>
-                            <li className="nav-item nav-inline px-0 ml-4">
+                            <li className="nav-item nav-inline px-0 ml-3 ml-md-4">
                                 <button className="text-white bg-transparent border-0 closebtn"
                                         onClick={() => props.openNav()}
                                 >

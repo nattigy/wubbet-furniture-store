@@ -39,3 +39,43 @@ export const searchItemError = error => {
         error
     };
 };
+
+export const searchAllCatRequest = () => {
+    return {
+        type: SearchTypes.SEARCH_ALL_CAT_REQUEST
+    };
+};
+
+export const searchAllCatSuccess = searchItems => {
+    return {
+        type: SearchTypes.SEARCH_ALL_CAT_SUCCESS,
+        searchItems
+    };
+};
+
+export const searchAllCatError = error => {
+    return {
+        type: SearchTypes.SEARCH_ALL_CAT_ERROR,
+        error
+    };
+};
+
+export const searchCatRequest = () => {
+    return {
+        type: SearchTypes.SEARCH_CAT_REQUEST
+    };
+};
+
+export const searchCatSuccess = searchItems => {
+    return {
+        type: SearchTypes.SEARCH_CAT_SUCCESS,
+        searchItems
+    };
+};
+
+export const searchCatError = error => {
+    return {
+        type: SearchTypes.SEARCH_CAT_ERROR,
+        error
+    };
+};

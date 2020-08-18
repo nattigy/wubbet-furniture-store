@@ -12,7 +12,7 @@ export const Subscription = () => {
                         <div className="newsletter text-center">
                             <p className="text-center">Sign Up for the <strong
                                 className="font-weight-bolder">NEWSLETTER</strong></p>
-                            <form>
+                            <form className="d-flex text-nowrap">
                                 <input className="search-input subscription-input"
                                        type="email"
                                        placeholder="Enter Your Email"

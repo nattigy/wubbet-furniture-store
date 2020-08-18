@@ -6,17 +6,14 @@ import PathIndicator from "../../components/path-indicator/path-indicator.compon
 import {getItemDetail} from "../../store/item/item.utils";
 import {addItemToWishList} from "../../store/wishList/wish-list.utils";
 
-import RecentView from "../../components/recent-view/recent-view";
-import SimilarItems from "../../components/similar-items/similar-items"
-
 import "./product-detail.style.sass"
 import Header from "../../components/header/header.component";
 import Footer from "../../components/footer/footer.component";
 import ProductImages from "../../components/product-detail/product-images.component";
 import ProductDescription from "../../components/product-detail/product-description.component";
-import DescriptionAndDetails from "../../components/product-detail/description-and-details.component";
 
 const ProductDetail = props => {
+
     const {
         isGettingItemDetail, gettingItemDetailError, gettingItemDetailDone,
         itemDetail, isAddingToCart, user, isLoggedIn, isAddingToWishList
@@ -31,9 +28,12 @@ const ProductDetail = props => {
             <Header/>
             <PathIndicator path={[
                 {currentPath: false, pathName: "HOME", pathLink: "/"},
-                {currentPath: false, pathName: "ACCOUNT", pathLink: "/account"},
-                {currentPath: false, pathName: "MY ITEMS", pathLink: "/account/my-items"},
-                {currentPath: true, pathName: "ITEM NAME", pathLink: props.match.url},
+                {
+                    currentPath: false,
+                    pathName: "ITEM",
+                    pathLink: `/search/items/${gettingItemDetailDone && itemDetail.name}`
+                },
+                {currentPath: true, pathName: gettingItemDetailDone && itemDetail.name, pathLink: props.match.url},
             ]}/>
             <div className="container-lg my-5">
                 <div className="row">
@@ -59,13 +59,13 @@ const ProductDetail = props => {
                                 }}
                                 addToWishList={props.addItemToWishList}
                             />
-                            <DescriptionAndDetails item={itemDetail}/>
+                            {/*<DescriptionAndDetails item={itemDetail}/>*/}
                         </Fragment>
                     }
                 </div>
             </div>
-            <SimilarItems/>
-            <RecentView/>
+            {/*<SimilarItems/>*/}
+            {/*<RecentView/>*/}
             <Footer/>
         </Fragment>
     );

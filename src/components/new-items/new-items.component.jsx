@@ -17,12 +17,14 @@ const NewProducts = props => {
     const {isSearchingNewProducts, items} = props;
 
     useEffect(() => {
-        if (tab1) {
-            props.searchItems({category: "HOME_FURNITURE"})
-        } else if (tab2) {
-            props.searchItems({category: "COMMERCIAL_FURNITURE"})
-        } else if (tab3) {
-            props.searchItems({category: "FINISHING_MATERIALS"})
+        if (!items) {
+            if (tab1) {
+                props.searchItems({category: "HOME_FURNITURE"})
+            } else if (tab2) {
+                props.searchItems({category: "COMMERCIAL_FURNITURE"})
+            } else if (tab3) {
+                props.searchItems({category: "FINISHING_MATERIALS"})
+            }
         }
     }, [tab1, tab2, tab3]);
 
@@ -74,10 +76,8 @@ const NewProducts = props => {
                         {
                             isSearchingNewProducts || isSearchingNewProducts === undefined ?
                                 (
-                                    <div className="position-relative newProduct-progress">
-                                        <div className="preloading-newProduct">
-                                            <PreLoader/>
-                                        </div>
+                                    <div className="position-relative text-center newProduct-progress">
+                                        <PreLoader/>
                                     </div>
                                 ) :
                                 items && items.length !== 0 ? items.map(item =>

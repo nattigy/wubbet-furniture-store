@@ -36,7 +36,7 @@ const CartItem = props => {
                         <span className="small text-muted">ETB</span>
                     </div>
                 </div>
-                <div className="col-12 row py-3 justify-content-between order-5">
+                <div className="col-12 row py-3 justify-content-between order-5 px-0 px-md-2">
                     <div className="col-6">
                         <button
                             className="btn small px-0 text-info text-nowrap"

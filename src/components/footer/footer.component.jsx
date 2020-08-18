@@ -8,49 +8,56 @@ import {CopyRight} from "./copy-right.component";
 import {Subscription} from "./subscription.component";
 
 import "./footer.style.sass"
+import {faFacebook, faInstagram, faTwitter} from "@fortawesome/free-brands-svg-icons";
+import {faTelegram} from "@fortawesome/free-brands-svg-icons/faTelegram";
 
 const Footer = () => {
     return (
         <Fragment>
             <Subscription/>
-            <footer id="footer">
-                <div className="bg-dark-custom pt-5">
-                    <div className="container-lg">
+            <footer id="footer" className="mx-0 px-0">
+                <div className="bg-dark-custom pt-5 mx-0 px-0">
+                    <div className="container-xl px-3">
                         <div className="row">
                             <div className="col-md-3 col-sm-6 mb-5">
-                                <div className="footer"><h3 className="title font-18 mb-3 text-white">ABOUT US</h3>
-                                    <p className="footer-links">Lorem ipsum dolor sit amet, consectetur
-                                        adipisicing elit, sed do eiusmod tempor
-                                        incididunt ut.</p>
-                                    <ul className="footer-links navbar-nav">
-                                        <li>
-                                            <a href="/" target="_blank">
-                                                <FontAwesomeIcon
-                                                    icon={faMapMarker}
-                                                    size="sm"
-                                                    color="#D10024"
-                                                /> Addis Ababa, Ethiopia
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="/" target="_blank">
-                                                <FontAwesomeIcon
-                                                    icon={faPhone}
-                                                    size="sm"
-                                                    color="#D10024"
-                                                /> +251-924-61-81-31
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="/" target="_blank">
-                                                <FontAwesomeIcon
-                                                    icon={faEnvelope}
-                                                    size="sm"
-                                                    color="#D10024"
-                                                /> info@wubbet.com
-                                            </a>
-                                        </li>
-                                    </ul>
+                                <div className="footer">
+                                    <h3 className="title font-18 mb-3 text-white">ABOUT US</h3>
+                                    <div>
+                                        <p className="footer-links">
+                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                                            tempor
+                                            incididunt ut.
+                                        </p>
+                                        <ul className="footer-links navbar-nav">
+                                            <li>
+                                                <a href="/" target="_blank">
+                                                    <FontAwesomeIcon
+                                                        icon={faMapMarker}
+                                                        size="sm"
+                                                        color="#D10024"
+                                                    /> Addis Ababa, Ethiopia
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="/" target="_blank">
+                                                    <FontAwesomeIcon
+                                                        icon={faPhone}
+                                                        size="sm"
+                                                        color="#D10024"
+                                                    /> +251-924-61-81-31
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="/" target="_blank">
+                                                    <FontAwesomeIcon
+                                                        icon={faEnvelope}
+                                                        size="sm"
+                                                        color="#D10024"
+                                                    /> info@wubbet.com
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
 
@@ -92,6 +99,28 @@ const Footer = () => {
                                         <li><Link to="/">Help</Link></li>
                                     </ul>
                                 </div>
+                            </div>
+                        </div>
+                        <div className="d-flex py-3 px-0">
+                            <div className="rounded-circle p-3 mx-1 border-light-custom bg-blue-custom">
+                                <Link to="">
+                                    <FontAwesomeIcon icon={faFacebook} size="lg" color="#D10024"/>
+                                </Link>
+                            </div>
+                            <div className="rounded-circle p-3 mx-1 border-light-custom bg-blue-custom">
+                                <Link to="">
+                                    <FontAwesomeIcon icon={faTelegram} size="lg" color="#D10024"/>
+                                </Link>
+                            </div>
+                            <div className="rounded-circle p-3 mx-1 border-light-custom bg-blue-custom">
+                                <Link to="">
+                                    <FontAwesomeIcon icon={faInstagram} size="lg" color="#D10024"/>
+                                </Link>
+                            </div>
+                            <div className="rounded-circle p-3 mx-1 border-light-custom bg-blue-custom">
+                                <Link to="">
+                                    <FontAwesomeIcon icon={faTwitter} size="lg" color="#D10024"/>
+                                </Link>
                             </div>
                         </div>
                     </div>

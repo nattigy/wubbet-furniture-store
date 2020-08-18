@@ -10,6 +10,8 @@ import {deleteFromCart, fetchFromCart} from "../../store/cartList/cart-list.util
 import {addItemToWishList} from "../../store/wishList/wish-list.utils";
 import Footer from "../../components/footer/footer.component";
 import Header from "../../components/header/header.component";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faArrowRight} from "@fortawesome/free-solid-svg-icons/faArrowRight";
 
 const ShoppingCart = props => {
 
@@ -51,7 +53,10 @@ const ShoppingCart = props => {
                         isFetchingFromDone &&
                         cartItems.length === 0 &&
                         <div className="text-center py-5">
-                            <h5 className="font-14">No Items In Your Cart!</h5>
+                            <h5 className="font-14 my-3">No Items In Your Wishlist!</h5>
+                            <button className="btn btn-danger">
+                                Go to shop <FontAwesomeIcon icon={faArrowRight} color="#fff"/>
+                            </button>
                         </div>
                     }
                     {

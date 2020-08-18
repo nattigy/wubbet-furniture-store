@@ -8,16 +8,7 @@ import PreLoader from "../pre-loader/pre-loader.component";
 import {addItem} from "../../store/item/item.utils";
 
 import "./addItem.style.sass"
-
-const sub_category = [
-    {category: "HOME_FURNITURE", sub_category: "Living room", value: "livingRoom"},
-    {category: "HOME_FURNITURE", sub_category: "Bed room", value: "bedRoom"},
-    {category: "HOME_FURNITURE", sub_category: "Dinning room/kitchen", value: "kitchen"},
-    {category: "COMMERCIAL_FURNITURE", sub_category: "Office", value: "office"},
-    {category: "FINISHING_MATERIALS", sub_category: "Decorations", value: "decorations"},
-    {category: "FINISHING_MATERIALS", sub_category: "Finishing materials", value: "finishingMaterials"},
-    {category: "Other", sub_category: "other", value: "other"},
-];
+import Categories from "../header/categories";
 
 const AddItemComponent = props => {
 
@@ -84,19 +75,20 @@ const AddItemComponent = props => {
                             >
                                 <option value="HOME_FURNITURE">Home furniture</option>
                                 <option value="COMMERCIAL_FURNITURE">Commercial furniture</option>
-                                <option value="FINISHING_MATERIALS">Finishing materials</option>
-                                <option value="OTHER">Other</option>
+                                <option value="FINISHING_AND_DECORATIONS">Finishing and Decorations</option>
                             </select>
                         </div>
                         <div className="my-3">
                             <label className="" htmlFor="category">Choose Sub-Category</label><br/>
                             <select className="w-100 form-control" name="sub_category" id="sub_category" required>
                                 {
-                                    sub_category.map(cat =>
-                                        cat.category === selected_category &&
-                                        <option value={cat.value} key={cat.sub_category}>
-                                            {cat.sub_category}
-                                        </option>
+                                    Categories.map(cat =>
+                                        cat.id === selected_category &&
+                                        cat.subCategory.map(sub =>
+                                            <option value={sub.value} key={sub.sub_category}>
+                                                {sub.name}
+                                            </option>
+                                        )
                                     )
                                 }
                             </select>

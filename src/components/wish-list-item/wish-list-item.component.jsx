@@ -3,10 +3,13 @@ import {Link} from "react-router-dom";
 
 import {faTrash} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import AddToCartButton from "../add-to-cart-button/add-to-cart-button"
+import {addItemToCart} from "../../store/cartList/cart-list.utils";
+import {connect} from "react-redux";
 
 const WishListItem = props => {
 
-    const {item, deleteFromWishList, user, credentials} = props;
+    const {item, deleteFromWishList, user, credentials, isAddingToCart, isLoggedIn, margin} = props;
 
     return (
         <div className="row mb-4 mx-0">
@@ -30,7 +33,15 @@ const WishListItem = props => {
                 </div>
                 <div className="col-12 row py-3 order-5">
                     <div className="col-6">
-                        <button>add-to-cart</button>
+                        <AddToCartButton
+                            credentials={{
+                                isAddingToCart,
+                                isLoggedIn,
+                                userId: user ? user.uid : "0",
+                                itemId: item.id,
+                                from: "new"
+                            }}
+                        />
                     </div>
                     <button className="text-right small col-6 text-nowrap btn border-0 font-14"
                             onClick={() => deleteFromWishList({
@@ -45,4 +56,20 @@ const WishListItem = props => {
     );
 };
 
-export default WishListItem;
+const mapStateToProps = state => {
+    return {
+        user: state.auth.user,
+        isLoggedIn: state.auth.isLoggedIn,
+        isAddingToCart: state.cartList.isAddingToCart,
+        isAddingToCartDone: state.cartList.isAddingToCartDone,
+        isAddingToCartError: state.cartList.isAddingToCartError,
+    };
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        addToCart: credentials => dispatch(addItemToCart(credentials)),
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(WishListItem);

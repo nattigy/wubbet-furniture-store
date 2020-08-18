@@ -2,7 +2,6 @@ import React, {useEffect} from "react";
 import {connect} from "react-redux";
 
 import SingleItem from "../../components/my-items/my-item.component";
-import PathIndicator from "../../components/path-indicator/path-indicator.component";
 import PreLoader from "../../components/pre-loader/pre-loader.component";
 
 import {fetchMyItems} from "../../store/item/item.utils";
@@ -20,11 +19,11 @@ const MyItems = props => {
     return (
         <div>
             <Header/>
-            <PathIndicator path={[
-                {currentPath: false, pathName: "HOME", pathLink: "/"},
-                {currentPath: false, pathName: "ACCOUNT", pathLink: "/"},
-                {currentPath: true, pathName: "MY ITEMS", pathLink: props.match.path},
-            ]}/>
+            {/*<PathIndicator path={[*/}
+            {/*    {currentPath: false, pathName: "HOME", pathLink: "/"},*/}
+            {/*    {currentPath: false, pathName: "ACCOUNT", pathLink: "/"},*/}
+            {/*    {currentPath: true, pathName: "MY ITEMS", pathLink: props.match.path},*/}
+            {/*]}/>*/}
             <div className="container-lg">
                 <div className="row text-center">
                     {

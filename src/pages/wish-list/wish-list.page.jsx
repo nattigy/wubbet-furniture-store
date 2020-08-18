@@ -8,6 +8,8 @@ import PathIndicator from "../../components/path-indicator/path-indicator.compon
 import {deleteFromWishList, fetchFromWishList} from "../../store/wishList/wish-list.utils";
 import Header from "../../components/header/header.component";
 import Footer from "../../components/footer/footer.component";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faArrowRight} from "@fortawesome/free-solid-svg-icons/faArrowRight";
 
 const WishList = props => {
 
@@ -46,7 +48,10 @@ const WishList = props => {
                         fetchingItemFromWishListDone &&
                         wishListItems.length === 0 &&
                         <div className="text-center py-5">
-                            <h5 className="font-14">No Items In Your Wishlist!</h5>
+                            <h5 className="font-14 my-3">No Items In Your Wishlist!</h5>
+                            <button className="btn btn-danger">
+                                Go to shop <FontAwesomeIcon icon={faArrowRight} color="#fff"/>
+                            </button>
                         </div>
                     }
                     {

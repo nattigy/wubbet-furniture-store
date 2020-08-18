@@ -6,7 +6,6 @@ import TopSelling from "../../components/top-selling/top-selling";
 
 import "./home.style.sass"
 import HotDeals from "../../components/hot-deals/hot-deals.component";
-import RecentView from "../../components/recent-view/recent-view";
 import ShopByCategory from "../../components/shop-by-category/shop-by-category";
 import Header from "../../components/header/header.component"
 import Footer from "../../components/footer/footer.component"
@@ -20,7 +19,7 @@ const HomePage = () => {
             <NewProducts/>
             <HotDeals/>
             <TopSelling/>
-            <RecentView/>
+            {/*<RecentView/>*/}
             <Footer/>
         </Fragment>
     );

@@ -5,7 +5,6 @@ import {faHeart, faStar} from "@fortawesome/free-solid-svg-icons";
 
 import AddToCartButton from "../add-to-cart-button/add-to-cart-button";
 import CircularProgress from "@material-ui/core/CircularProgress/CircularProgress";
-import {Link} from "react-router-dom";
 
 const ProductDescription = props => {
 
@@ -69,15 +68,15 @@ const ProductDescription = props => {
                     </div>
                 </div>
 
-                <ul className="list-unstyled my-4">
-                    <li className="d-inline-block">
-                        <Link className="text-dark">Home Furniture</Link>
-                    </li>
-                    <li className="d-inline-block mx-3"> ></li>
-                    <li className="d-inline-block">
-                        <Link className="text-dark">Living Room</Link>
-                    </li>
-                </ul>
+                {/*<ul className="list-unstyled my-4">*/}
+                {/*    <li className="d-inline-block">*/}
+                {/*        <Link className="text-dark">Home Furniture</Link>*/}
+                {/*    </li>*/}
+                {/*    <li className="d-inline-block mx-3"> ></li>*/}
+                {/*    <li className="d-inline-block">*/}
+                {/*        <Link className="text-dark">Living Room</Link>*/}
+                {/*    </li>*/}
+                {/*</ul>*/}
             </div>
         </div>
     );

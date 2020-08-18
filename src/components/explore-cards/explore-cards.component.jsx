@@ -21,7 +21,7 @@ const ExploreCards = () => {
                         </div>
                         <div className="shop-body">
                             <h3>Home<br/>Furniture</h3>
-                            <Link to="/cat/home-furniture" className="cta-btn">Shop now
+                            <Link to="/cat/HOME_FURNITURE" className="cta-btn">Shop now
                                 <FontAwesomeIcon
                                     icon={faArrowCircleRight}
                                     color="#fff"
@@ -38,7 +38,7 @@ const ExploreCards = () => {
                         </div>
                         <div className="shop-body">
                             <h3>Commercial<br/>Furniture</h3>
-                            <Link to="/cat/commercial-furniture" className="cta-btn">Shop now
+                            <Link to="/cat/COMMERCIAL_FURNITURE" className="cta-btn">Shop now
                                 <FontAwesomeIcon
                                     icon={faArrowCircleRight}
                                     color="#fff"
@@ -55,7 +55,7 @@ const ExploreCards = () => {
                         </div>
                         <div className="shop-body">
                             <h3>Decoration and<br/>Finishing</h3>
-                            <Link to="/cat/finishing-&-decorations" className="cta-btn">Shop now
+                            <Link to="/cat/FINISHING_AND_DECORATIONS" className="cta-btn">Shop now
                                 <FontAwesomeIcon
                                     icon={faArrowCircleRight}
                                     color="#fff"

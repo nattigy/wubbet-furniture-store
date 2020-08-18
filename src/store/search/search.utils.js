@@ -3,6 +3,12 @@ import {
     newProductSearchError,
     newProductSearchRequest,
     newProductSearchSuccess,
+    searchAllCatError,
+    searchAllCatRequest,
+    searchAllCatSuccess,
+    searchCatError,
+    searchCatRequest,
+    searchCatSuccess,
     searchItemError,
     searchItemRequest,
     searchItemSuccess
@@ -77,4 +83,31 @@ export const applyFilter = ({filterList}) => dispatch => {
             dispatch(searchItemSuccess(items))
         })
         .catch(error => dispatch(searchItemError(error)));
+};
+
+export const searchAllCategories = () => dispatch => {
+    let categories = [];
+    dispatch(searchAllCatRequest());
+    fbConfig.firestore().collection("categories")
+        .get()
+        .then(snapshot => {
+            snapshot.forEach(doc => {
+                let data = doc.data();
+                data.id = doc.id;
+                categories.push(data);
+            });
+            dispatch(searchAllCatSuccess(categories))
+        })
+        .catch(error => dispatch(searchAllCatError(error)))
+};
+
+export const searchCategory = ({category}) => dispatch => {
+    dispatch(searchCatRequest());
+    fbConfig.firestore().collection("categories")
+        .doc(category)
+        .get()
+        .then(snapshot => {
+            dispatch(searchCatSuccess(snapshot.data()))
+        })
+        .catch(error => dispatch(searchCatError(error)))
 };

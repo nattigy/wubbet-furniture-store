@@ -1,15 +1,22 @@
-import React from "react";
+import React, {useEffect} from "react";
 
 import PathIndicator from "../../components/path-indicator/path-indicator.component";
 import SingleItem from "../../components/single-item/single-item.component";
-import RecentView from "../../components/recent-view/recent-view";
 import Filters from "../../components/filters/filters";
-import CategoryGallery from "../../components/category-gallery/category-gallery";
 import Footer from "../../components/footer/footer.component";
 import Header from "../../components/header/header.component";
-import Categories from "../../components/header/categories";
+import {connect} from "react-redux";
+import {searchItems} from "../../store/search/search.utils";
+import PreLoader from "../../components/pre-loader/pre-loader.component";
 
 const SubCategory = props => {
+
+    const {isSearching, isSearchingDone, searchedItems} = props;
+
+    useEffect(() => {
+        props.searchItems({fieldPath: "sub_category", opStr: "==", value: props.match.params.subCategory})
+    }, []);
+
     return (
         <div>
             <Header/>
@@ -22,29 +29,46 @@ const SubCategory = props => {
                 <section>
                     <h1 className="mt-5 font-weight-bold text-break cat-title">
                         {
-                            Categories.map(cat => `/${props.match.params.category}` === cat.link && (
-                                cat.subCategory.map(sub =>
-                                    `${cat.link}/${props.match.params.subCategory}` === sub.link && sub.name
-                                )
-                            ))
+                            props.match.params.subCategory
                         }
                     </h1>
                 </section>
                 <Filters/>
-                <section className="row">
-                    <SingleItem/>
-                    <SingleItem/>
-                    <SingleItem/>
-                    <SingleItem/>
-                    <SingleItem/>
-                    <SingleItem/>
-                </section>
+                {
+                    isSearching &&
+                    <div className="preloading-cart text-center overflow-hidden-y">
+                        <PreLoader/>
+                    </div>
+                }
+                {
+                    isSearchingDone &&
+                    <section className="row my-5">
+                        {
+                            searchedItems.map(item => <SingleItem key={item.id} item={item}/>)
+                        }
+                    </section>
+                }
             </div>
-            <CategoryGallery/>
-            <RecentView/>
+            {/*<CategoryGallery/>*/}
+            {/*<RecentView/>*/}
             <Footer/>
         </div>
     );
 };
 
-export default SubCategory;
+const mapStateToProps = state => {
+    return {
+        isSearching: state.search.isSearching,
+        isSearchingDone: state.search.isSearchingDone,
+        isSearchError: state.search.isSearchError,
+        searchedItems: state.search.searchItems
+    }
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        searchItems: credentials => dispatch(searchItems(credentials))
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SubCategory);
