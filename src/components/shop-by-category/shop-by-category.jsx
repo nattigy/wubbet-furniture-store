@@ -10,8 +10,8 @@ import PreLoader from "../pre-loader/pre-loader.component";
 
 const Item = props => (
     <div className="col-6 col-md-4 col-lg-3 px-0 pr-3 mb-3">
-        <div className="position-relative overflow-hidden">
-            <img className="w-100" src={shopcat} alt=""/>
+        <div className="overflow-hidden w-100 shop-by-cat-img-cont">
+            <img className="shop-by-cat-img" src={shopcat} alt=""/>
             <div className="shop-cat-btn w-100 px-2 text-center">
                 <Link
                     to={`/cat${props.item.link}`}
@@ -33,7 +33,7 @@ const ShopByCategory = props => {
 
     return (
         <div className="container-xl px-3 my-5">
-            <h1 className="section-title">SHOP BY CATEGORY</h1>
+            <h3 className="section-title">SHOP BY CATEGORY</h3>
             <p className="p-max-width my-3">
                 Make your house a home, give life to your building and create an inviting environment for your property
                 by shopping with us. We have incredible collection waiting just for you. Find goods, compare prices and

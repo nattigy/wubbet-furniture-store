@@ -12,8 +12,8 @@ const CategoryItem = ({item}) => {
     return (
         <div className="col-12 col-sm-6 col-lg-4 my-4">
             <Link to={`/cat${item.link}`}>
-                <div className="overflow-hidden h-auto">
-                    <img className="w-100 cat-image" src={image} alt=""/>
+                <div className="overflow-hidden w-100 cat-img-cont">
+                    <img className="cat-img" src={image} alt=""/>
                 </div>
                 <div className="text-dark my-3">{item.name}</div>
                 <div>

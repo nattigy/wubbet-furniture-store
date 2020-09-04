@@ -2,7 +2,6 @@ import React, {useEffect} from "react";
 
 import PathIndicator from "../../components/path-indicator/path-indicator.component";
 import SingleItem from "../../components/single-item/single-item.component";
-import Filters from "../../components/filters/filters";
 import Footer from "../../components/footer/footer.component";
 import Header from "../../components/header/header.component";
 import {connect} from "react-redux";
@@ -33,7 +32,7 @@ const SubCategory = props => {
                         }
                     </h1>
                 </section>
-                <Filters/>
+                {/*<Filters/>*/}
                 {
                     isSearching &&
                     <div className="preloading-cart text-center overflow-hidden-y">

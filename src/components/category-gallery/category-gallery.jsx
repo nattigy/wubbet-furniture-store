@@ -5,8 +5,8 @@ import home2 from "../../assets/img/home2.webp"
 import home3 from "../../assets/img/home3.webp"
 import home4 from "../../assets/img/home4.webp"
 import home5 from "../../assets/img/home5.webp"
-import {faArrowRight} from "@fortawesome/free-solid-svg-icons";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+
+import "./category-gallery.style.sass"
 
 const CategoryGallery = () => {
     return (
@@ -17,34 +17,44 @@ const CategoryGallery = () => {
                 everything from napping, to playing and even studying, so make sure it’s a comfortable one.
             </p>
             <div className="row">
-                <div className="col-12 col-md-6 mb-3 mb-md-0 overflow-hidden">
-                    <img className="w-100" src={home1} alt=""/>
+                <div className="col-12 col-md-6 mb-3 px-2 mb-md-0 overflow-hidden">
+                    <div className="overflow-hidden w-100 cat-gallery-img-cont cat-gallery-img-cont1">
+                        <img className="cat-gallery-img" src={home1} alt=""/>
+                    </div>
                 </div>
                 <div className="col-12 col-md-6 px-0">
                     <div className="col-12 d-flex px-0">
-                        <div className="col-6">
-                            <div className="mb-3 overflow-hidden">
-                                <img className="w-100" src={home2} alt=""/>
+                        <div className="col-6 px-2">
+                            <div className="mb-3">
+                                <div className="overflow-hidden w-100 cat-gallery-img-cont cat-gallery-img-cont2">
+                                    <img className="cat-gallery-img" src={home2} alt=""/>
+                                </div>
                             </div>
-                            <div className="overflow-hidden">
-                                <img className="w-100" src={home3} alt=""/>
+                            <div className="">
+                                <div className="overflow-hidden w-100 cat-gallery-img-cont cat-gallery-img-cont3">
+                                    <img className="cat-gallery-img" src={home3} alt=""/>
+                                </div>
                             </div>
                         </div>
-                        <div className="col-6">
-                            <div className="mb-3 overflow-hidden">
-                                <img className="w-100" src={home4} alt=""/>
+                        <div className="col-6 px-2">
+                            <div className="mb-3">
+                                <div className="overflow-hidden w-100 cat-gallery-img-cont cat-gallery-img-cont4">
+                                    <img className="cat-gallery-img" src={home4} alt=""/>
+                                </div>
                             </div>
-                            <div className="overflow-hidden">
-                                <img className="w-100" src={home5} alt=""/>
+                            <div className="">
+                                <div className="overflow-hidden w-100 cat-gallery-img-cont cat-gallery-img-cont5">
+                                    <img className="cat-gallery-img" src={home5} alt=""/>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div className="col-12 py-5 w-100 text-right">
-                        <button className="mx-3 px-4 btn btn-danger rounded-pill">
-                            Explore more
-                            <FontAwesomeIcon className="ml-3" icon={faArrowRight} size="xs" color="#111"/>
-                        </button>
-                    </div>
+                    {/*<div className="col-12 py-5 w-100 text-right">*/}
+                    {/*    <button className="mx-3 px-4 btn btn-danger rounded-pill">*/}
+                    {/*        Explore more*/}
+                    {/*        <FontAwesomeIcon className="ml-3" icon={faArrowRight} size="xs" color="#111"/>*/}
+                    {/*    </button>*/}
+                    {/*</div>*/}
                 </div>
             </div>
         </div>

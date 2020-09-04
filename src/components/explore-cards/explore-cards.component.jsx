@@ -16,8 +16,8 @@ const ExploreCards = () => {
             <div className="row px-0 mx-0">
                 <div className="col-md-4 col-xs-6 px-3">
                     <div className="shop">
-                        <div className="shop-img">
-                            <img src={homeFurniture} alt=""/>
+                        <div className="overflow-hidden w-100 explore-card-img-cont">
+                            <img className="explore-card-img" src={homeFurniture} alt=""/>
                         </div>
                         <div className="shop-body">
                             <h3>Home<br/>Furniture</h3>
@@ -33,8 +33,8 @@ const ExploreCards = () => {
 
                 <div className="col-md-4 col-xs-6 px-3">
                     <div className="shop">
-                        <div className="shop-img">
-                            <img src={commercialFurniture} alt=""/>
+                        <div className="overflow-hidden w-100 explore-card-img-cont">
+                            <img className="explore-card-img" src={commercialFurniture} alt=""/>
                         </div>
                         <div className="shop-body">
                             <h3>Commercial<br/>Furniture</h3>
@@ -50,8 +50,8 @@ const ExploreCards = () => {
 
                 <div className="col-md-4 col-xs-6 px-3">
                     <div className="shop">
-                        <div className="shop-img">
-                            <img src={decorationAndFinishing} alt=""/>
+                        <div className="overflow-hidden w-100 explore-card-img-cont">
+                            <img className="explore-card-img" src={decorationAndFinishing} alt=""/>
                         </div>
                         <div className="shop-body">
                             <h3>Decoration and<br/>Finishing</h3>
