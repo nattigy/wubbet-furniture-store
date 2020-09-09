@@ -12,10 +12,10 @@ const Item = props => (
     <div className="col-6 col-md-4 col-lg-3 px-0 pr-3 mb-3">
         <div className="overflow-hidden w-100 shop-by-cat-img-cont">
             <img className="shop-by-cat-img" src={shopcat} alt=""/>
-            <div className="shop-cat-btn w-100 px-2 text-center">
+            <div className="shop-cat-btn-cont w-100 px-2 text-center">
                 <Link
                     to={`/cat${props.item.link}`}
-                    className="small btn btn-danger w-100 py-0 py-md-2 px-2 rounded-pill text-truncate text-nowrap shadow-sm-custom">
+                    className="small btn text-white shop-cat-btn w-100 py-0 py-md-2 px-2 rounded-pill text-truncate text-nowrap shadow-sm-custom">
                     {props.item.name}
                 </Link>
             </div>

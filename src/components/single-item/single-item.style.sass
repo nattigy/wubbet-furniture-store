@@ -5,7 +5,7 @@
 
 .shadow-sm-custom:hover
   transition: 0.5s
-  box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.2)
+  box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.13)
 
 @media screen and (min-width: 990px)
   .item-cont .item-btns
@@ -14,7 +14,11 @@
 .item-cont:hover .item-btns
   visibility: visible !important
 
+.item-cont:hover .quick-view
+  visibility: visible !important
+
 .add-to-wishlist
+  background-color: rgba(236, 236, 236, 0.4)
   position: absolute
   top: 0
   right: 0
@@ -42,3 +46,15 @@
   height: 100%
   object-fit: cover
   object-position: center
+
+.quick-view
+  visibility: hidden
+  background-color: rgba(236, 236, 236, 0.4)
+  position: absolute
+  top: 0
+  right: 40px
+  width: 35px
+  height: 35px
+  border-radius: 50%
+  transition: 0.1s
+  z-index: 1

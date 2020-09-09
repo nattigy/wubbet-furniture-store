@@ -1,6 +1,6 @@
 import React from "react";
 
-import {faHeart, faStar} from "@fortawesome/free-solid-svg-icons";
+import {faEye, faHeart, faStar} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 import AddToCartButton from "../add-to-cart-button/add-to-cart-button"
@@ -13,13 +13,13 @@ import {Link} from "react-router-dom";
 
 const SingleItem = (props) => {
 
-    const {item, user, isAddingToCart, isLoggedIn, margin} = props;
+    const {item, user, isAddingToCart, isLoggedIn} = props;
 
     return (
         <div className="col-6 col-md-4 col-lg-3 mb-4 item-cont">
             <div className="overflow-hidden w-100 single-item-img-cont">
                 <button
-                    className="border-0 text-center py-2 shadow-sm-custom bg-light add-to-wishlist m-2"
+                    className="border-0 text-center py-2 shadow-sm-custom add-to-wishlist m-2"
                     onClick={() => props.addItemToWishList({
                         userId: user.uid,
                         itemId: item.id
@@ -27,7 +27,15 @@ const SingleItem = (props) => {
                 >
                     <FontAwesomeIcon icon={faHeart} size="1x" color="#111"/>
                 </button>
-                <img className="single-item-img" src={item.picture0} alt=""/>
+                <Link
+                    className="border-0 text-center py-2 shadow-sm-custom quick-view m-2"
+                    to={`/item/${item.id}`}
+                >
+                    <FontAwesomeIcon icon={faEye} size="1x" color="#111"/>
+                </Link>
+                <Link to={`/item/${item.id}`}>
+                    <img className="single-item-img" src={item.picture0} alt=""/>
+                </Link>
             </div>
             <div className="mt-3 w-100">
                 <Link className="mb-2 text-dark font-weight-bold" to={`/item/${item.id}`}>
