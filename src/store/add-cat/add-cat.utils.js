@@ -1,4 +1,5 @@
 import fbConfig from "../../firebase/firebase";
+import {addSubCatError, addSubCatRequest, addSubCatSuccess} from "./add-cat.actions";
 
 export const addCategory = formData => dispatch => {
     fbConfig.storage().ref(`/cat_images/${formData.id}/${formData.image.name}`)
@@ -29,26 +30,34 @@ export const addCategory = formData => dispatch => {
 };
 
 export const addSubCategory = formData => dispatch => {
-    fbConfig.storage().ref(`/cat_images/${formData.parent}/${formData.name}/${formData.image.name}`)
-        .put(formData.image)
-        .on('state_changed',
-            (snapShot) => {
-                console.log(snapShot)
-            }, (err) => {
-                console.log(err)
-            }, () => {
-                fbConfig.storage().ref('cat_images')
-                    .child(`/${formData.parent}/${formData.name}/${formData.image.name}`)
-                    .getDownloadURL()
-                    .then(url => {
-                        formData.image = url;
-                        fbConfig.firestore().collection("categories")
-                            .doc(formData.parent)
-                            .update({
-                                subCategory: fbConfig.firestore.FieldValue.arrayUnion(formData)
-                            })
-                            .then(e => console.log("succ" + e))
-                            .catch(e => console.log("error" + e))
-                    })
-            })
+    dispatch(addSubCatRequest());
+    let urlList = [];
+    formData.images.map((image, index) => {
+        fbConfig.storage().ref(`/cat_images/${formData.parent}/${formData.name}/image${index}`)
+            .put(image)
+            .on('state_changed',
+                snapShot => {
+                    console.log(snapShot)
+                }, err => {
+                    dispatch(addSubCatError(err))
+                }, () => {
+                    fbConfig.storage().ref('cat_images')
+                        .child(`/${formData.parent}/${formData.name}/image${index}`)
+                        .getDownloadURL()
+                        .then(url => {
+                            urlList.push(url);
+                            if (++index === formData.images.length) {
+                                formData.images = urlList;
+                                fbConfig.firestore().collection("categories")
+                                    .doc(formData.parent)
+                                    .update({
+                                        subCategory: fbConfig.firestore.FieldValue.arrayUnion(formData)
+                                    })
+                                    .then(() => dispatch(addSubCatSuccess()))
+                                    .catch(err => dispatch(addSubCatError(err)))
+                            }
+                        })
+                }
+            )
+    })
 };

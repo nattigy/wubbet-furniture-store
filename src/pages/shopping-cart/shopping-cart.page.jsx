@@ -16,8 +16,8 @@ import {faArrowRight} from "@fortawesome/free-solid-svg-icons/faArrowRight";
 const ShoppingCart = props => {
 
     const {
-        isFetchingFromError, cartItems, totalPrice, newUser,
-        user, isFetchingFromCart, isLoggedIn, removingFromCartDone, isFetchingFromDone
+        cartItems, totalPrice, user, isFetchingFromCart,
+        removingFromCartDone, isFetchingFromDone
     } = props;
 
     useEffect(() => {
@@ -39,10 +39,12 @@ const ShoppingCart = props => {
                 {currentPath: true, pathName: "CART", pathLink: props.match.url},
             ]}/>
             <div className="container-sm px-3">
-                <Link className="checkout-btn btn bg-red text-nowrap" to="/checkout">
-                    Proceed to Checkout
-                </Link>
-                <div className="mt-5">
+                <div className="sticky-top bg-white p-2">
+                    <Link className="checkout-btn btn bg-red text-nowrap" to="/checkout">
+                        Proceed to Checkout
+                    </Link>
+                </div>
+                <div className="mt-3">
                     {
                         isFetchingFromCart &&
                         <div className="preloading-cart text-center overflow-hidden-y">

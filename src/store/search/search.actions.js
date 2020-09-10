@@ -67,6 +67,7 @@ export const searchCatRequest = () => {
 };
 
 export const searchCatSuccess = searchItems => {
+    console.log(searchItems);
     return {
         type: SearchTypes.SEARCH_CAT_SUCCESS,
         searchItems

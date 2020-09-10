@@ -36,7 +36,7 @@ const CategoryPage = props => {
                     <p className="my-3 p-max-width">
                         {
                             isSearchingCatDone &&
-                            category.description
+                            category && category.description
                         }
                     </p>
                 </section>
@@ -51,7 +51,7 @@ const CategoryPage = props => {
                         isSearchingCatDone &&
                         <div className="row">
                             {
-                                category.subCategory.map(cat => <CategoryItem key={cat.id} item={cat}/>)
+                                category && category.subCategory.map(cat => <CategoryItem key={cat.id} item={cat}/>)
                             }
                         </div>
                     }

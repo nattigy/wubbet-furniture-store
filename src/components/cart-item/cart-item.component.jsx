@@ -1,16 +1,22 @@
-import React from "react";
+import React, {useState} from "react";
 import {Link} from "react-router-dom";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faTrash} from "@fortawesome/free-solid-svg-icons";
+
+import "./cart-item.style.sass"
 
 const CartItem = props => {
 
     const {item, addItemToWishList, user} = props;
 
+    const [item_no, setItem_no] = useState(1);
+
     return (
         <div className="row mb-4 mx-0">
-            <div className="col-4 col-md-3 w-100 px-0 overflow-hidden h-auto">
-                <img className="w-100 h-auto" src={item.picture0} alt=""/>
+            <div className="col-4 col-md-3 px-0">
+                <div className="w-100 overflow-hidden cart-item-img-cont">
+                    <img className="cart-item-img" src={item.picture0} alt=""/>
+                </div>
             </div>
             <div className="col-8 col-md-9 row px-2">
                 <div className="col-12 row">
@@ -18,17 +24,25 @@ const CartItem = props => {
                         <Link to={`item/${item.id}`}>
                             <h1 className="item-name text-uppercase text-truncate">{item.name}</h1>
                         </Link>
-                        <p>
-                            size and other information
+                        <p className="w-100 text-truncate">
+                            {item.description}
                         </p>
                         <div>
-                            <select className="px-3 mb-3 py-2" name="" id="">
-                                {
-                                    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(number =>
-                                        <option key={number} value={number}>{number}</option>
-                                    )
-                                }
-                            </select>
+                            <div>
+                                <div className="d-flex text-nowrap">
+                                    <button onClick={() => {
+                                        let number = item_no;
+                                        setItem_no(number === 1 ? number : --number)
+                                    }} className="">-
+                                    </button>
+                                    <input value={item_no} style={{width: "50px"}} type="number"/>
+                                    <button onClick={() => {
+                                        let number = item_no;
+                                        setItem_no(++number)
+                                    }} className="">+
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div className="col-12 col-md-3 text-md-right text-nowrap small-font">

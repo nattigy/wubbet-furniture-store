@@ -36,16 +36,16 @@ const App = props => {
 
     const {isLoggedIn, isVerified} = props;
 
-    // if (isLoggedIn === undefined) {
-    //     return (
-    //         <div className="preloading-home overflow-hidden-y">
-    //             <PreLoader/>
-    //         </div>
-    //     );
-    // } else {
-    //     if (isLoggedIn === false && isVerified === false) {
-    //         props.anonymousSignIn();
-    //     }
+    if (isLoggedIn === undefined) {
+        return (
+            <div className="preloading-home overflow-hidden-y">
+                <PreLoader/>
+            </div>
+        );
+    } else {
+        if (isLoggedIn === false && isVerified === false) {
+            props.anonymousSignIn();
+        }
         return (
             <Router>
                 <Suspense fallback={renderLoader()}>
@@ -60,9 +60,6 @@ const App = props => {
                         <Route exact path="/cat/:category" component={CategoryPage}/>
                         <Route exact path="/cat/:category/:subCategory" component={SubCategory}/>
                         <Route exact path="/search/items/:item_name" component={ShoppingPage}/>
-                        {/*<Route exact path="/items/:category/:name/:sub_category" component={ShoppingPage}/>*/}
-                        {/*<Route exact path="/items/:category/_/:sub_category" component={ShoppingPage}/>*/}
-                        {/*<Route exact path="/category/:category" component={ShoppingPage}/>*/}
                         <Route exact path="/privacy_policy" component={PrivacyPolicy}/>
                         <Route exact path="/terms_and_conditions" component={TermsAndConditions}/>
                         <Route exact path="/return_policy" component={ReturnPolicy}/>
@@ -78,7 +75,7 @@ const App = props => {
                 </Suspense>
             </Router>
         );
-    // }
+    }
 };
 
 const mapStateToProps = state => {

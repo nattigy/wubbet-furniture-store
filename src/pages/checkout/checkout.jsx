@@ -5,13 +5,14 @@ import {connect} from "react-redux";
 import Dialog from "@material-ui/core/Dialog/Dialog";
 
 import PreLoader from "../../components/pre-loader/pre-loader.component";
-import PathIndicator from "../../components/path-indicator/path-indicator.component";
 
 import {orderFurniture} from "../../store/order/order.utils";
 import {fetchFromCart} from "../../store/cartList/cart-list.utils";
 
 import "./checkout.style.sass"
 import {updateUser} from "../../store/auth/auth.utils";
+import Header from "../../components/header/header.component";
+import Footer from "../../components/footer/footer.component";
 
 const Checkout = props => {
 
@@ -24,10 +25,11 @@ const Checkout = props => {
     const [user_id] = useState(user ? user.uid : 0);
     const [address, setAddress] = useState(newUser.address && newUser.address);
     const [city, setCity] = useState(newUser.city && newUser.city);
+    const [sub_city, setSub_city] = useState(newUser.sub_city ? newUser.sub_city : "");
+    const [woreda, setWoreda] = useState(newUser.woreda && newUser.woreda);
+    const [house_no, setHouse_no] = useState(newUser.house_no ? newUser.house_no : "");
     const [telephone, setTelephone] = useState(newUser.telephone && newUser.telephone);
     const [order_notes, setOrder_notes] = useState("");
-    const [total_price] = useState(0);
-    const [ordered_items] = useState([]);
     const [payment_method, setPayment_method] = useState("Direct Bank Transfer");
     const [orderSentConfirmation, setOrderSentConfirmation] = useState(true);
     const [direct_bank, setDirect_bank] = useState(true);
@@ -41,16 +43,14 @@ const Checkout = props => {
     const submitCheckout = e => {
         e.preventDefault();
 
-        const formData = `?&fullName=${fullName}&user_id=${user_id}&address=${address}&city=${city}&telephone=${telephone}&order_notes=${order_notes}&total_price=${totalPrice}&ordered_items=${newUser.cartList}&payment_method=${payment_method}`;
+        const formData = `?&fullName=${fullName}&user_id=${user_id}&address=${address}&city=${city}&sub_city=${sub_city}&woreda=${woreda}&house_no=${house_no}&telephone=${telephone}&order_notes=${order_notes}&total_price=${totalPrice}&ordered_items=${newUser.cartList}&payment_method=${payment_method}`;
 
         props.orderFurniture({
-            formData, user_id, fullName, address, city, telephone,
+            formData, user_id, fullName, address, city, sub_city, woreda, house_no, telephone,
             order_notes, total_price: totalPrice, ordered_items: cartItems, payment_method
         });
 
-        if (!newUser.address) {
-            props.updateUser({uid: user.uid, address, city, telephone})
-        }
+        props.updateUser({uid: user.uid, address, city, sub_city, woreda, house_no, telephone})
     };
 
     if (isLoggedIn === false) {
@@ -60,6 +60,7 @@ const Checkout = props => {
     } else {
         return (
             <Fragment>
+                <Header/>
                 {
                     isSending &&
                     <Dialog open={true}>
@@ -80,10 +81,10 @@ const Checkout = props => {
                     </Dialog>
                 }
                 <div>
-                    <PathIndicator path={[
-                        {currentPath: false, pathName: "HOME", pathLink: "/"},
-                        {currentPath: true, pathName: "CHECKOUT", pathLink: props.match.url},
-                    ]}/>
+                    {/*<PathIndicator path={[*/}
+                    {/*    {currentPath: false, pathName: "HOME", pathLink: "/"},*/}
+                    {/*    {currentPath: true, pathName: "CHECKOUT", pathLink: props.match.url},*/}
+                    {/*]}/>*/}
                     <div className="container-lg">
                         <form onSubmit={submitCheckout} id="order_furniture" name="order_furniture">
                             <div className="row">
@@ -107,7 +108,7 @@ const Checkout = props => {
                                                    id="address"
                                                    onChange={e => setAddress(e.target.value)}
                                                    defaultValue={newUser.address && newUser.address}
-                                                   placeholder="Address"
+                                                   placeholder="Address (Local name)"
                                                    required
                                             />
                                         </div>
@@ -115,8 +116,30 @@ const Checkout = props => {
                                             <input className="form-control w-100" type="text" name="city" id="city"
                                                    onChange={e => setCity(e.target.value)}
                                                    defaultValue={newUser.city && newUser.city}
-                                                   placeholder="City"
+                                                   placeholder="Region/City"
                                                    required
+                                            />
+                                        </div>
+                                        <div className="form-group">
+                                            <input className="form-control w-100" type="text" name="city" id="city"
+                                                   onChange={e => setSub_city(e.target.value)}
+                                                   defaultValue={newUser.sub_city && newUser.sub_city}
+                                                   placeholder="Sub-City(optional)"
+                                            />
+                                        </div>
+                                        <div className="form-group">
+                                            <input className="form-control w-100" type="text" name="city" id="city"
+                                                   onChange={e => setWoreda(e.target.value)}
+                                                   defaultValue={newUser.woreda && newUser.woreda}
+                                                   placeholder="Woreda"
+                                                   required
+                                            />
+                                        </div>
+                                        <div className="form-group">
+                                            <input className="form-control w-100" type="text" name="city" id="city"
+                                                   onChange={e => setHouse_no(e.target.value)}
+                                                   defaultValue={newUser.house_no && newUser.house_no}
+                                                   placeholder="House-Number(optional)"
                                             />
                                         </div>
                                         <div className="form-group">
@@ -286,6 +309,7 @@ const Checkout = props => {
                         </form>
                     </div>
                 </div>
+                <Footer/>
             </Fragment>
         );
     }

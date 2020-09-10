@@ -1,4 +1,4 @@
-import React, {Fragment, useEffect, useState} from "react";
+import React, {Fragment, useEffect} from "react";
 import {connect} from "react-redux";
 import PreLoader from "../../components/pre-loader/pre-loader.component";
 
@@ -12,19 +12,15 @@ import Filters from "../../components/filters/filters";
 
 const ShoppingPage = props => {
 
-    const [rerender, setRerender] = useState(undefined);
-    const [filterList, setFilterList] = useState([]);
-
-    const {item_name = "", category, sub_category = ""} = props.match.params;
+    // const {item_name = "", category, sub_category = ""} = props.match.params;
+    const {item_name = ""} = props.match.params;
     const {isSearching, searchItemsResult} = props;
-
-    let counter = 0;
 
     useEffect(() => {
         // if (rerender === undefined) {
         if (item_name === "all")
-                props.searchAllItems();
-            else
+            props.searchAllItems();
+        else
             props.searchItems({fieldPath: "name_array", opStr: "array-contains", value: item_name});
         // else if (category !== "all" && name === "all")
         //     props.searchItems({fieldPath: "category", opStr: "==", value: category});

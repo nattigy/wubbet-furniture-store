@@ -39,6 +39,14 @@ body {
     background: linear-gradient(to bottom, #e3e4ze6, #bdbfc2);
 }
 
+.bg-light-custom {
+    background-color: #eaebec;
+}
+
+.spacing {
+    letter-spacing: 10px;
+}
+
 .MuiCircularProgress-colorSecondary {
     color: #D10024 !important;
 }

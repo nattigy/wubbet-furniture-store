@@ -7,14 +7,18 @@ import AddToCartButton from "../add-to-cart-button/add-to-cart-button"
 import {addItemToCart} from "../../store/cartList/cart-list.utils";
 import {connect} from "react-redux";
 
+import "./wish-list.style.sass"
+
 const WishListItem = props => {
 
-    const {item, deleteFromWishList, user, credentials, isAddingToCart, isLoggedIn, margin} = props;
+    const {item, deleteFromWishList, user, isAddingToCart, isLoggedIn} = props;
 
     return (
         <div className="row mb-4 mx-0">
-            <div className="col-4 col-md-3 w-100 px-0 overflow-hidden h-auto">
-                <img className="w-100 h-auto" src={item.picture0} alt=""/>
+            <div className="col-4 col-md-3 px-0">
+                <div className="w-100 overflow-hidden wish-list-item-img-cont">
+                    <img className="wish-list-img" src={item.picture0} alt=""/>
+                </div>
             </div>
             <div className="col-8 col-md-9 row px-2">
                 <div className="col-12 row">
@@ -22,8 +26,8 @@ const WishListItem = props => {
                         <Link to={`item/${item.id}`}>
                             <h1 className="item-name text-uppercase text-truncate">{item.name}</h1>
                         </Link>
-                        <p>
-                            size and other information
+                        <p className="w-100 text-truncate">
+                            {item.description}
                         </p>
                     </div>
                     <div className="col-12 col-md-3 text-md-right text-nowrap small-font">

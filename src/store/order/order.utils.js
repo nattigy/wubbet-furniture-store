@@ -1,9 +1,16 @@
 import fbConfig from "../../firebase/firebase";
 
-import {sendOrderError, sendOrderRequest, sendOrderSuccess} from "./order.actions";
+import {
+    fetchOrderError,
+    fetchOrderRequest,
+    fetchOrderSuccess,
+    sendOrderError,
+    sendOrderRequest,
+    sendOrderSuccess
+} from "./order.actions";
 
 export const orderFurniture = ({
-                                   formData, user_id, fullName, address, city, telephone,
+                                   formData, user_id, fullName, address, city, sub_city, woreda, house_no, telephone,
                                    order_notes, total_price, ordered_items, payment_method
                                }) => dispatch => {
     dispatch(sendOrderRequest());
@@ -12,7 +19,7 @@ export const orderFurniture = ({
 
     fbConfig.firestore().collection("orders")
         .add({
-            user_id, fullName, address, city, telephone,
+            user_id, fullName, address, city, sub_city, woreda, house_no, telephone,
             order_notes, total_price, ordered_items, payment_method,
             order_date: new Date()
         })
@@ -22,4 +29,21 @@ export const orderFurniture = ({
                 .catch(error => dispatch(sendOrderError(error)))
         })
         .catch(error => console.log(error))
+};
+
+export const fetchOrders = ({user_id}) => dispatch => {
+    dispatch(fetchOrderRequest());
+    let items = [];
+    fbConfig.firestore().collection('orders')
+        .where("user_id", "==", user_id)
+        .get()
+        .then(snapshot => {
+            snapshot.forEach(doc => {
+                let data = doc.data();
+                data.id = doc.id;
+                items.push(data)
+            });
+            dispatch(fetchOrderSuccess(items))
+        })
+        .catch(error => dispatch(fetchOrderError(error.message)))
 };

@@ -25,6 +25,29 @@ const orderReducers = (state = {}, action) => {
                 sendingError: true,
                 errorMessage: action.error
             };
+        case OrderTypes.FETCH_ORDER_REQUEST:
+            return {
+                ...state,
+                isFetching: true,
+                fetchingSuccess: false,
+                fetchingError: false
+            };
+        case OrderTypes.FETCH_ORDER_SUCCESS:
+            return {
+                ...state,
+                isFetching: false,
+                fetchingSuccess: true,
+                fetchingError: false,
+                order: action.order
+            };
+        case OrderTypes.FETCH_ORDER_FAILURE:
+            return {
+                ...state,
+                isFetching: false,
+                fetchingSuccess: false,
+                fetchingError: true,
+                errorMessage: action.error
+            };
         default:
             return state;
     }

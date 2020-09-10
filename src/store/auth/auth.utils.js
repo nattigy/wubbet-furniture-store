@@ -98,11 +98,11 @@ export const registerUser = ({email, password, name, cartList, wishList}) => dis
         })
 };
 
-export const updateUser = ({uid, address, city, telephone}) => () => {
+export const updateUser = ({uid, address, city, sub_city, woreda, house_no, telephone}) => () => {
     fbConfig.firestore().collection("users")
         .doc(uid)
         .update({
-            address, city, telephone
+            address, city, sub_city, woreda, house_no, telephone
         })
         .then(() => console.log("Success")).catch(error => console.log(error));
 };

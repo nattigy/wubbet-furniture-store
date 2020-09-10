@@ -14,56 +14,56 @@ const ExploreCards = () => {
     return (
         <div className="container-xl my-3 my-md-5 px-0">
             <div className="row px-0 mx-0">
-                <div className="col-md-4 col-xs-6 px-3">
+                <Link to="/cat/HOME_FURNITURE" className="col-md-4 col-xs-6 px-3">
                     <div className="shop">
                         <div className="shop-img">
                             <img src={homeFurniture} alt=""/>
                         </div>
                         <div className="shop-body">
                             <h3>Home<br/>Furniture</h3>
-                            <Link to="/cat/home" className="cta-btn">Shop now
+                            <p className="cta-btn">Shop now
                                 <FontAwesomeIcon
                                     icon={faArrowCircleRight}
                                     color="#fff"
                                 />
-                            </Link>
+                            </p>
                         </div>
                     </div>
-                </div>
+                </Link>
 
-                <div className="col-md-4 col-xs-6 px-3">
+                <Link to="/cat/COMMERCIAL_FURNITURE" className="col-md-4 col-xs-6 px-3">
                     <div className="shop">
                         <div className="shop-img">
                             <img src={commercialFurniture} alt=""/>
                         </div>
                         <div className="shop-body">
                             <h3>Commercial<br/>Furniture</h3>
-                            <Link to="/cat/commercial" className="cta-btn">Shop now
+                            <p className="cta-btn">Shop now
                                 <FontAwesomeIcon
                                     icon={faArrowCircleRight}
                                     color="#fff"
                                 />
-                            </Link>
+                            </p>
                         </div>
                     </div>
-                </div>
+                </Link>
 
-                <div className="col-md-4 col-xs-6 px-3">
+                <Link to="/cat/FINISHING_AND_DECORATION" className="col-md-4 col-xs-6 px-3">
                     <div className="shop">
                         <div className="shop-img">
                             <img src={decorationAndFinishing} alt=""/>
                         </div>
                         <div className="shop-body">
                             <h3>Decoration and<br/>Finishing</h3>
-                            <Link to="/cat/finishing-and-decorations" className="cta-btn">Shop now
+                            <p className="cta-btn">Shop now
                                 <FontAwesomeIcon
                                     icon={faArrowCircleRight}
                                     color="#fff"
                                 />
-                            </Link>
+                            </p>
                         </div>
                     </div>
-                </div>
+                </Link>
             </div>
         </div>
     );

@@ -104,22 +104,22 @@ const Footer = () => {
                         <div className="d-flex py-3 px-0">
                             <div className="rounded-circle p-3 mx-1 border-light-custom bg-blue-custom">
                                 <Link to="">
-                                    <FontAwesomeIcon icon={faFacebook} size="lg" color="#D10024"/>
+                                    <FontAwesomeIcon icon={faFacebook} size="lg" color="#3b5998"/>
                                 </Link>
                             </div>
                             <div className="rounded-circle p-3 mx-1 border-light-custom bg-blue-custom">
                                 <Link to="">
-                                    <FontAwesomeIcon icon={faTelegram} size="lg" color="#D10024"/>
+                                    <FontAwesomeIcon icon={faTelegram} size="lg" color="#0088cc"/>
                                 </Link>
                             </div>
                             <div className="rounded-circle p-3 mx-1 border-light-custom bg-blue-custom">
                                 <Link to="">
-                                    <FontAwesomeIcon icon={faInstagram} size="lg" color="#D10024"/>
+                                    <FontAwesomeIcon icon={faInstagram} size="lg" color="#F56040"/>
                                 </Link>
                             </div>
                             <div className="rounded-circle p-3 mx-1 border-light-custom bg-blue-custom">
                                 <Link to="">
-                                    <FontAwesomeIcon icon={faTwitter} size="lg" color="#D10024"/>
+                                    <FontAwesomeIcon icon={faTwitter} size="lg" color="#00acee"/>
                                 </Link>
                             </div>
                         </div>

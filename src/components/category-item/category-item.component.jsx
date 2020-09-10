@@ -1,8 +1,6 @@
 import React from "react";
 import {Link} from "react-router-dom";
 
-import image from "./../../assets/img/living.webp"
-
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faArrowRight} from "@fortawesome/free-solid-svg-icons";
 
@@ -13,7 +11,7 @@ const CategoryItem = ({item}) => {
         <div className="col-12 col-sm-6 col-lg-4 my-4">
             <Link to={`/cat${item.link}`}>
                 <div className="overflow-hidden w-100 cat-img-cont">
-                    <img className="cat-img" src={image} alt=""/>
+                    <img className="cat-img" src={item.images[0]} alt=""/>
                 </div>
                 <div className="text-dark my-3">{item.name}</div>
                 <div>

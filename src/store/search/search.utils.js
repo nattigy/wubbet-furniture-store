@@ -102,6 +102,7 @@ export const searchAllCategories = () => dispatch => {
 };
 
 export const searchCategory = ({category}) => dispatch => {
+    console.log(category);
     dispatch(searchCatRequest());
     fbConfig.firestore().collection("categories")
         .doc(category)

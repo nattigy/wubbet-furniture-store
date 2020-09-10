@@ -1,64 +1,89 @@
-import React from "react";
-
-import home1 from "../../assets/img/home1.webp"
-import home2 from "../../assets/img/home2.webp"
-import home3 from "../../assets/img/home3.webp"
-import home4 from "../../assets/img/home4.webp"
-import home5 from "../../assets/img/home5.webp"
+import React, {useEffect} from "react";
 
 import "./category-gallery.style.sass"
+import {connect} from "react-redux";
+import {searchCategory} from "../../store/search/search.utils";
+import PreLoader from "../pre-loader/pre-loader.component";
 
-const CategoryGallery = () => {
+const CategoryGallery = props => {
+
+    const {isSearchingCat, isSearchingCatDone, newCategory, name} = props;
+
+    useEffect(() => {
+        props.searchCategory({category: props.category});
+    }, []);
+
     return (
         <div className="container-xl my-3 px-3">
-            <h1 className="section-title">Life chills out in the sofa</h1>
-            <p className="p-max-width">
-                Your sofa is where you let your guard down, put your feet up, and just relax. The perfect place for
-                everything from napping, to playing and even studying, so make sure it’s a comfortable one.
-            </p>
-            <div className="row">
-                <div className="col-12 col-md-6 mb-3 px-2 mb-md-0 overflow-hidden">
-                    <div className="overflow-hidden w-100 cat-gallery-img-cont cat-gallery-img-cont1">
-                        <img className="cat-gallery-img" src={home1} alt=""/>
-                    </div>
+            <h3 className="section-title mb-3">Some {name} inspirations for you</h3>
+            {
+                isSearchingCat &&
+                <div className="preloading-cart text-center overflow-hidden-y">
+                    <PreLoader/>
                 </div>
-                <div className="col-12 col-md-6 px-0">
-                    <div className="col-12 d-flex px-0">
-                        <div className="col-6 px-2">
-                            <div className="mb-3">
-                                <div className="overflow-hidden w-100 cat-gallery-img-cont cat-gallery-img-cont2">
-                                    <img className="cat-gallery-img" src={home2} alt=""/>
+            }
+            {
+                isSearchingCatDone &&
+                newCategory &&
+                newCategory.subCategory.map(sub => sub.link.split("/")[2] === name && <div className="row">
+                    <div className="col-12 col-md-6 mb-3 px-2 mb-md-0 overflow-hidden">
+                        <div className="overflow-hidden w-100 cat-gallery-img-cont cat-gallery-img-cont1">
+                            <img className="cat-gallery-img" src={sub.images[0]} alt=""/>
+                        </div>
+                    </div>
+                    <div className="col-12 col-md-6 px-0">
+                        <div className="col-12 d-flex px-0">
+                            <div className="col-6 px-2">
+                                <div className="mb-3">
+                                    <div className="overflow-hidden w-100 cat-gallery-img-cont cat-gallery-img-cont2">
+                                        <img className="cat-gallery-img" src={sub.images[1]} alt=""/>
+                                    </div>
+                                </div>
+                                <div className="">
+                                    <div className="overflow-hidden w-100 cat-gallery-img-cont cat-gallery-img-cont3">
+                                        <img className="cat-gallery-img" src={sub.images[2]} alt=""/>
+                                    </div>
                                 </div>
                             </div>
-                            <div className="">
-                                <div className="overflow-hidden w-100 cat-gallery-img-cont cat-gallery-img-cont3">
-                                    <img className="cat-gallery-img" src={home3} alt=""/>
+                            <div className="col-6 px-2">
+                                <div className="mb-3">
+                                    <div className="overflow-hidden w-100 cat-gallery-img-cont cat-gallery-img-cont4">
+                                        <img className="cat-gallery-img" src={sub.images[3] && sub.images[3]} alt=""/>
+                                    </div>
+                                </div>
+                                <div className="">
+                                    <div className="overflow-hidden w-100 cat-gallery-img-cont cat-gallery-img-cont5">
+                                        <img className="cat-gallery-img" src={sub.images[4] && sub.images[4]} alt=""/>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div className="col-6 px-2">
-                            <div className="mb-3">
-                                <div className="overflow-hidden w-100 cat-gallery-img-cont cat-gallery-img-cont4">
-                                    <img className="cat-gallery-img" src={home4} alt=""/>
-                                </div>
-                            </div>
-                            <div className="">
-                                <div className="overflow-hidden w-100 cat-gallery-img-cont cat-gallery-img-cont5">
-                                    <img className="cat-gallery-img" src={home5} alt=""/>
-                                </div>
-                            </div>
-                        </div>
+                        {/*<div className="col-12 py-5 w-100 text-right">*/}
+                        {/*    <button className="mx-3 px-4 btn btn-danger rounded-pill">*/}
+                        {/*        Explore more*/}
+                        {/*        <FontAwesomeIcon className="ml-3" icon={faArrowRight} size="xs" color="#111"/>*/}
+                        {/*    </button>*/}
+                        {/*</div>*/}
                     </div>
-                    {/*<div className="col-12 py-5 w-100 text-right">*/}
-                    {/*    <button className="mx-3 px-4 btn btn-danger rounded-pill">*/}
-                    {/*        Explore more*/}
-                    {/*        <FontAwesomeIcon className="ml-3" icon={faArrowRight} size="xs" color="#111"/>*/}
-                    {/*    </button>*/}
-                    {/*</div>*/}
-                </div>
-            </div>
+                </div>)
+            }
         </div>
     );
 };
 
-export default CategoryGallery;
+const mapStateToProps = state => {
+    return {
+        isSearchingCat: state.search.isSearchingCat,
+        isSearchingCatDone: state.search.isSearchingCatDone,
+        isSearchError: state.search.isSearchError,
+        newCategory: state.search.category
+    }
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        searchCategory: credentials => dispatch(searchCategory(credentials))
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(CategoryGallery);

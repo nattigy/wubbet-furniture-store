@@ -13,7 +13,7 @@ const AddCategory = props => {
     const [subCatName, setSubCatName] = useState("");
     const [catName, setCatName] = useState("");
     const [parent, setParent] = useState("HOME_FURNITURE");
-    const [subCatImage, setSubCatImage] = useState(null);
+    const [subCatImage, setSubCatImage] = useState([]);
     const [catImage, setCatImage] = useState(null);
 
     const handleAddSubCategory = e => {
@@ -25,7 +25,7 @@ const AddCategory = props => {
             link: formData.get("link"),
             id: formData.get("id"),
             parent: formData.get("parent"),
-            image: subCatImage,
+            images: subCatImage,
         };
         props.addSubCat(newSubCat);
     };
@@ -65,6 +65,7 @@ const AddCategory = props => {
                                 <input className="form-control"
                                        name="name" type="text"
                                        onChange={e => setSubCatName(e.target.value)}
+                                       required
                                 />
                             </div>
                             <input className="form-control" name="id"
@@ -77,6 +78,7 @@ const AddCategory = props => {
                                         name="parent" id=""
                                         defaultValue="HOME_FURNITURE"
                                         onChange={e => setParent(e.target.value)}
+                                        required
                                 >
                                     <option value="HOME_FURNITURE">HOME_FURNITURE</option>
                                     <option value="COMMERCIAL_FURNITURE">COMMERCIAL_FURNITURE</option>
@@ -87,18 +89,69 @@ const AddCategory = props => {
                                 <p className="mb-1">Sub-category Link</p>
                                 <input className="form-control"
                                        type="text" name="link"
+                                       required
                                        value={`/${parent}/${subCatName.replaceAll(" ", "-").toLowerCase()}`}
                                 />
                             </div>
                             <div className="mb-3 mt-2">
                                 <p className="mb-1">Sub-category Image</p>
                                 <input className="form-control"
-                                       name="subCatImage" type="file"
-                                       onChange={e => setSubCatImage(e.target.files[0])}
+                                       name="subCatImage1" type="file"
+                                       required
+                                       onChange={e => {
+                                           let temp = subCatImage;
+                                           temp.push(e.target.files[0]);
+                                           setSubCatImage(temp)
+                                       }}
+                                />
+                                <input className="form-control"
+                                       name="subCatImage2" type="file"
+                                       required
+                                       onChange={e => {
+                                           let temp = subCatImage;
+                                           temp.push(e.target.files[0]);
+                                           setSubCatImage(temp)
+                                       }}
+                                />
+                                <input className="form-control"
+                                       name="subCatImage3" type="file"
+                                       required
+                                       onChange={e => {
+                                           let temp = subCatImage;
+                                           temp.push(e.target.files[0]);
+                                           setSubCatImage(temp)
+                                       }}
+                                />
+                                <input className="form-control"
+                                       name="subCatImage4" type="file"
+                                       required
+                                       onChange={e => {
+                                           let temp = subCatImage;
+                                           temp.push(e.target.files[0]);
+                                           setSubCatImage(temp)
+                                       }}
+                                />
+                                <input className="form-control"
+                                       name="subCatImage5" type="file"
+                                       required
+                                       onChange={e => {
+                                           let temp = subCatImage;
+                                           temp.push(e.target.files[0]);
+                                           setSubCatImage(temp)
+                                       }}
+                                />
+                                <input className="form-control"
+                                       name="subCatImage6" type="file"
+                                       required
+                                       onChange={e => {
+                                           let temp = subCatImage;
+                                           temp.push(e.target.files[0]);
+                                           setSubCatImage(temp)
+                                       }}
                                 />
                             </div>
                             <div className="mb-3 mt-2">
-                                <button className="btn btn-success">Add</button>
+                                <button type="submit" className="btn btn-success">Add</button>
                             </div>
                         </form>
                     </div>
@@ -110,6 +163,7 @@ const AddCategory = props => {
                                 <input className="form-control"
                                        name="name" type="text"
                                        onChange={e => setCatName(e.target.value)}
+                                       required
                                 />
                             </div>
                             <input className="form-control" name="id"
@@ -121,17 +175,19 @@ const AddCategory = props => {
                                 <input className="form-control"
                                        name="link" type="text"
                                        value={`/${catName.replaceAll(" ", "-").toLowerCase()}`}
+                                       required
                                 />
                             </div>
                             <div className="mb-3 mt-2">
                                 <p className="mb-1">Category Description</p>
-                                <textarea className="form-control" name="description"/>
+                                <textarea className="form-control" required name="description"/>
                             </div>
                             <div className="mb-3 mt-2">
                                 <p className="mb-1">Category Image</p>
                                 <input className="form-control"
                                        name="image" type="file"
                                        onChange={e => setCatImage(e.target.files[0])}
+                                       required
                                 />
                             </div>
                             <div className="mb-3 mt-2">

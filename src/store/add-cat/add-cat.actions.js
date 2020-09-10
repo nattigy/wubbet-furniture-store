@@ -20,20 +20,20 @@ export const addCatError = errorMessage => {
     };
 };
 
-export const addCatSubRequest = () => {
+export const addSubCatRequest = () => {
     return {
         type: AddCatTypes.ADD_SUB_CATEGORY_REQUEST,
     };
 };
 
-export const addCatSubSuccess = items => {
+export const addSubCatSuccess = items => {
     return {
         type: AddCatTypes.ADD_SUB_CATEGORY_SUCCESS,
         items
     };
 };
 
-export const addCatSubError = errorMessage => {
+export const addSubCatError = errorMessage => {
     return {
         type: AddCatTypes.ADD_SUB_CATEGORY_ERROR,
         errorMessage
