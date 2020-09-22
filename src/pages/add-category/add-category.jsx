@@ -1,10 +1,10 @@
 import React, {Fragment, useState} from "react";
 import {connect} from "react-redux";
 import {addCategory, addSubCategory} from "../../store/add-cat/add-cat.utils";
-import PreLoader from "../pre-loader/pre-loader.component";
+import PreLoader from "../../components/pre-loader/pre-loader.component";
 import {Redirect} from "react-router-dom";
-import Header from "../header/header.component";
-import Footer from "../footer/footer.component";
+import Header from "../../components/header/header.component";
+import Footer from "../../components/footer/footer.component";
 
 const AddCategory = props => {
 
@@ -42,6 +42,14 @@ const AddCategory = props => {
             image: catImage,
         };
         props.addCat(newSubCat);
+    };
+
+    const onFileChange = e => {
+        for (let i = 0; i < e.target.files.length; i++) {
+            const newFile = e.target.files[i];
+            newFile["id"] = Math.random();
+            setSubCatImage(prevState => [...prevState, newFile]);
+        }
     };
 
     if (isLoggedIn === undefined) {
@@ -97,57 +105,7 @@ const AddCategory = props => {
                                 <p className="mb-1">Sub-category Image</p>
                                 <input className="form-control"
                                        name="subCatImage1" type="file"
-                                       required
-                                       onChange={e => {
-                                           let temp = subCatImage;
-                                           temp.push(e.target.files[0]);
-                                           setSubCatImage(temp)
-                                       }}
-                                />
-                                <input className="form-control"
-                                       name="subCatImage2" type="file"
-                                       required
-                                       onChange={e => {
-                                           let temp = subCatImage;
-                                           temp.push(e.target.files[0]);
-                                           setSubCatImage(temp)
-                                       }}
-                                />
-                                <input className="form-control"
-                                       name="subCatImage3" type="file"
-                                       required
-                                       onChange={e => {
-                                           let temp = subCatImage;
-                                           temp.push(e.target.files[0]);
-                                           setSubCatImage(temp)
-                                       }}
-                                />
-                                <input className="form-control"
-                                       name="subCatImage4" type="file"
-                                       required
-                                       onChange={e => {
-                                           let temp = subCatImage;
-                                           temp.push(e.target.files[0]);
-                                           setSubCatImage(temp)
-                                       }}
-                                />
-                                <input className="form-control"
-                                       name="subCatImage5" type="file"
-                                       required
-                                       onChange={e => {
-                                           let temp = subCatImage;
-                                           temp.push(e.target.files[0]);
-                                           setSubCatImage(temp)
-                                       }}
-                                />
-                                <input className="form-control"
-                                       name="subCatImage6" type="file"
-                                       required
-                                       onChange={e => {
-                                           let temp = subCatImage;
-                                           temp.push(e.target.files[0]);
-                                           setSubCatImage(temp)
-                                       }}
+                                       required multiple onChange={onFileChange}
                                 />
                             </div>
                             <div className="mb-3 mt-2">
@@ -174,7 +132,7 @@ const AddCategory = props => {
                                 <p className="mb-1">Category Link</p>
                                 <input className="form-control"
                                        name="link" type="text"
-                                       value={`/${catName.replaceAll(" ", "-").toLowerCase()}`}
+                                       value={`/${catName.replaceAll(" ", "_").toUpperCase()}`}
                                        required
                                 />
                             </div>

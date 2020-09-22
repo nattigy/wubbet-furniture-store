@@ -14,7 +14,7 @@ const PrivacyPolicy = lazy(() => import("./pages/privacy-policy-and-terms-of-con
 const ReturnPolicy = lazy(() => import("./pages/privacy-policy-and-terms-of-conditions/return-policy"));
 const ProductDetail = lazy(() => import("./pages/product-detail/product-detail.page"));
 const ShoppingCart = lazy(() => import("./pages/shopping-cart/shopping-cart.page"));
-const AddCategory = lazy(() => import("./components/add-category/add-category"));
+const AddCategory = lazy(() => import("./pages/add-category/add-category"));
 const ShoppingPage = lazy(() => import("./pages/shopping-page/shopping.page"));
 const AddItemPage = lazy(() => import("./pages/add-item/add-item.page"));
 const WishList = lazy(() => import("./pages/wish-list/wish-list.page"));

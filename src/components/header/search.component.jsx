@@ -7,7 +7,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 import ShoppingCartMini from "../cart-mini/cart-mini.component";
 
-import logo from "../../assets/img/mainLogo.jpg"
+import logo from "../../assets/img/darklogo.webp"
 
 const SearchSection = props => {
 

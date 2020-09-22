@@ -12,10 +12,7 @@ import Categories from "../header/categories";
 
 const AddItemComponent = props => {
 
-    const [frontPic, setFrontPic] = useState("");
-    const [leftSidePic, setLeftSidePic] = useState("");
-    const [rightSidePic, setRightSidePic] = useState("");
-    const [backPic, setBackPic] = useState("");
+    const [images, setImages] = useState("");
     const [selected_category, setSelected_category] = useState("HOME_FURNITURE");
 
     const {isAdding, addingError, addingSuccess, errorMessage, user} = props;
@@ -30,12 +27,17 @@ const AddItemComponent = props => {
             quantity: new FormData(form).get("quantity"),
             sub_category: new FormData(form).get("sub_category"),
             description: new FormData(form).get("description"),
-            frontPic: new FormData(form).get("frontPic"),
-            leftSidePic: new FormData(form).get("leftSidePic"),
-            rightSidePic: new FormData(form).get("rightSidePic"),
-            backPic: new FormData(form).get("backPic"),
+            images: images,
             uid: user ? user.uid : "0",
         });
+    };
+
+    const onFileChange = e => {
+        for (let i = 0; i < e.target.files.length; i++) {
+            const newFile = e.target.files[i];
+            newFile["id"] = Math.random();
+            setImages(prevState => [...prevState, newFile]);
+        }
     };
 
     return (
@@ -102,53 +104,14 @@ const AddItemComponent = props => {
                         <div className="my-3">
                             <h6 className="mt-5">Add Pictures</h6>
                             <div className="w-100 my-5">
-                                <div className="image-preview">
-                                    <img src={frontPic} alt="" className="w-100"/>
-                                </div>
+                                {/*<div className="image-preview">*/}
+                                {/*<img src={frontPic} alt="" className="w-100"/>*/}
+                                {/*</div>*/}
                                 <label className="pt-2" htmlFor="frontPic">Picture 1</label><br/>
-                                <input className="w-100 form-control" type="file" name="frontPic" id="frontPic"
-                                       onChange={e =>
-                                           e.target.files[0] && setFrontPic(URL.createObjectURL(e.target.files[0]))
-                                       } required
+                                <input className="w-100 form-control" type="file" name="image" id="image"
+                                       required multiple onChange={onFileChange}
                                 />
                             </div>
-
-                            <div className="w-100 my-5">
-                                <div className="image-preview">
-                                    <img src={leftSidePic} alt="" className="w-100"/>
-                                </div>
-                                <label className="" htmlFor="leftSidePic">Picture 2</label><br/>
-                                <input className="w-100 form-control" type="file" name="leftSidePic" id="leftSidePic"
-                                       onChange={e =>
-                                           e.target.files[0] && setLeftSidePic(URL.createObjectURL(e.target.files[0]))
-                                       } required
-                                />
-                            </div>
-
-                            <div className="w-100 my-5">
-                                <div className="image-preview">
-                                    <img src={rightSidePic} alt="" className="w-100"/>
-                                </div>
-                                <label className="" htmlFor="rightSidePic">Picture 3</label><br/>
-                                <input className="w-100 form-control" type="file" name="rightSidePic" id="rightSidePic"
-                                       onChange={e =>
-                                           e.target.files[0] && setRightSidePic(URL.createObjectURL(e.target.files[0]))
-                                       } required
-                                />
-                            </div>
-
-                            <div className="w-100 my-5">
-                                <div className="image-preview">
-                                    <img src={backPic} alt="" className="w-100"/>
-                                </div>
-                                <label className="" htmlFor="backPic">Picture 4</label><br/>
-                                <input className="w-100 form-control" type="file" name="backPic" id="backPic"
-                                       onChange={e =>
-                                           e.target.files[0] && setBackPic(URL.createObjectURL(e.target.files[0]))
-                                       } required
-                                />
-                            </div>
-
                         </div>
 
                         {

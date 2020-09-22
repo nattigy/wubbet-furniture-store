@@ -91,7 +91,7 @@ const Account = props => {
                                         </div>
                                         <div className="py-3">
                                             <p className="font-weight-bold">Region/City</p>
-                                            <p>Addis Ababa</p>
+                                            <p>{newUser.city && newUser.city}</p>
                                         </div>
                                         <div className="py-3">
                                             <p className="font-weight-bold">Sub-City</p>

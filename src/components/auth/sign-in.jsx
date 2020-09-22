@@ -8,7 +8,7 @@ import {loginUser} from "../../store/auth/auth.utils";
 
 import "./auth.style.sass"
 import {CopyRight} from "../footer/copy-right.component";
-import logo from "../../assets/img/purelogo.png";
+import logo from "../../assets/img/whitelogo.webp";
 
 const SignIn = props => {
 

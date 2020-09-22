@@ -65,7 +65,8 @@ const ShopByCategory = props => {
                         <div className="pt-3 d-flex overflow-auto">
                             {
                                 allCategories && allCategories.map(cat => cat.subCategory && cat.subCategory.map(sub => (
-                                    sub.link.split("/")[1] === 'FINISHING_MATERIALS' && <Item key={sub.id} item={sub}/>
+                                    sub.link.split("/")[1] === 'FINISHING_AND_DECORATIONS' &&
+                                    <Item key={sub.id} item={sub}/>
                                 )))
                             }
                         </div>

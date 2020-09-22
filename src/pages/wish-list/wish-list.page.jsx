@@ -10,6 +10,7 @@ import Header from "../../components/header/header.component";
 import Footer from "../../components/footer/footer.component";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faArrowRight} from "@fortawesome/free-solid-svg-icons/faArrowRight";
+import {Link} from "react-router-dom";
 
 const WishList = props => {
 
@@ -49,9 +50,9 @@ const WishList = props => {
                         wishListItems.length === 0 &&
                         <div className="text-center py-5">
                             <h5 className="font-14 my-3">No Items In Your Wishlist!</h5>
-                            <button className="btn btn-danger">
+                            <Link to="/search/items/all" className="btn btn-danger">
                                 Go to shop <FontAwesomeIcon icon={faArrowRight} color="#fff"/>
-                            </button>
+                            </Link>
                         </div>
                     }
                     {

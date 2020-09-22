@@ -34,7 +34,7 @@ const SingleItem = (props) => {
                     <FontAwesomeIcon icon={faEye} size="1x" color="#111"/>
                 </Link>
                 <Link to={`/item/${item.id}`}>
-                    <img className="single-item-img" src={item.picture0} alt=""/>
+                    <img className="single-item-img" src={item.images[0]} alt=""/>
                 </Link>
             </div>
             <div className="mt-3 w-100">

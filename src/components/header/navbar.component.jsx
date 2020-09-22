@@ -3,7 +3,7 @@ import React, {Fragment} from "react";
 import {Link} from "react-router-dom";
 
 import Categories from "./categories"
-import logo from "../../assets/img/mainLogo.jpg";
+import logo from "../../assets/img/darklogo.webp";
 
 const NavbarSection = props => {
     return (

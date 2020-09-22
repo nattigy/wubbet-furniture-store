@@ -46,24 +46,26 @@ const CategoryGallery = props => {
                                 </div>
                             </div>
                             <div className="col-6 px-2">
-                                <div className="mb-3">
-                                    <div className="overflow-hidden w-100 cat-gallery-img-cont cat-gallery-img-cont4">
-                                        <img className="cat-gallery-img" src={sub.images[3] && sub.images[3]} alt=""/>
+                                {
+                                    sub.images[3] &&
+                                    <div className="mb-3">
+                                        <div
+                                            className="overflow-hidden w-100 cat-gallery-img-cont cat-gallery-img-cont4">
+                                            <img className="cat-gallery-img" src={sub.images[3]} alt=""/>
+                                        </div>
                                     </div>
-                                </div>
-                                <div className="">
-                                    <div className="overflow-hidden w-100 cat-gallery-img-cont cat-gallery-img-cont5">
-                                        <img className="cat-gallery-img" src={sub.images[4] && sub.images[4]} alt=""/>
+                                }
+                                {
+                                    sub.images[4] &&
+                                    <div className="">
+                                        <div
+                                            className="overflow-hidden w-100 cat-gallery-img-cont cat-gallery-img-cont5">
+                                            <img className="cat-gallery-img" src={sub.images[4]} alt=""/>
+                                        </div>
                                     </div>
-                                </div>
+                                }
                             </div>
                         </div>
-                        {/*<div className="col-12 py-5 w-100 text-right">*/}
-                        {/*    <button className="mx-3 px-4 btn btn-danger rounded-pill">*/}
-                        {/*        Explore more*/}
-                        {/*        <FontAwesomeIcon className="ml-3" icon={faArrowRight} size="xs" color="#111"/>*/}
-                        {/*    </button>*/}
-                        {/*</div>*/}
                     </div>
                 </div>)
             }
