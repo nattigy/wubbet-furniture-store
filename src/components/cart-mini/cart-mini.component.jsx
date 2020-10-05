@@ -57,8 +57,8 @@ const CartMini = props => {
                 </p>
             </div>
             <div className="btn-group w-100">
-                <Link to="/cart" className="btn rounded-0 bg-dark-custom text-white">View Cart</Link>
-                <Link to="/checkout" className="btn rounded-0 bg-red text-white">
+                <Link to="/cart" className="btn rounded-0 bg-red-custom text-white">View Cart</Link>
+                <Link to="/checkout" className="btn rounded-0 text-white bg-red">
                     Checkout <FontAwesomeIcon icon={faArrowCircleRight} color="#fff"/>
                 </Link>
             </div>

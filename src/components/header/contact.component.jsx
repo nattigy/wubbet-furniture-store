@@ -17,16 +17,16 @@ const ContactSection = props => {
                 <div className="container-xl justify-content-between px-3">
                     <ul className="navbar-nav d-block px-0 mx-0">
                         <li className="contact-link nav-item nav-inline mr-2">
-                            <FontAwesomeIcon icon={faPhone} size="sm" color="#D10024"/>
-                            <a className="text-decoration-none small ml-2" href="/">+251924618131</a>
+                            <FontAwesomeIcon icon={faPhone} size="sm" color="#000"/>
+                            <a className="text-dark text-decoration-none small ml-2" href="/">+251924618131</a>
                         </li>
                         <li className="contact-link nav-item nav-inline mr-2">
-                            <FontAwesomeIcon icon={faEnvelope} size="sm" color="#D10024"/>
-                            <a className="text-decoration-none small ml-2" href="/">info@wubbet.com</a>
+                            <FontAwesomeIcon icon={faEnvelope} size="sm" color="#000"/>
+                            <a className="text-dark text-decoration-none small ml-2" href="/">info@wubbet.com</a>
                         </li>
                         <li className="contact-link nav-item nav-inline mr-2">
-                            <FontAwesomeIcon icon={faMapMarker} size="sm" color="#D10024"/>
-                            <a className="text-decoration-none small ml-2" href="/">Addis Ababa, Ethiopia</a>
+                            <FontAwesomeIcon icon={faMapMarker} size="sm" color="#000"/>
+                            <a className="text-dark text-decoration-none small ml-2" href="/">Addis Ababa, Ethiopia</a>
                         </li>
                     </ul>
                     <ul className="navbar-nav d-block px-0 mx-0">
@@ -36,14 +36,15 @@ const ContactSection = props => {
                                     (
                                         <Fragment>
                                             <li className="contact-link nav-item nav-inline ml-2">
-                                                <FontAwesomeIcon icon={faSignInAlt} size="sm" color="#D10024"/>
-                                                <Link className="text-decoration-none small ml-2" to="/login">
+                                                <FontAwesomeIcon icon={faSignInAlt} size="sm" color="#000"/>
+                                                <Link className="text-dark text-decoration-none small ml-2" to="/login">
                                                     Sign In
                                                 </Link>
                                             </li>
                                             <li className="contact-link nav-item nav-inline ml-2">
-                                                <FontAwesomeIcon icon={faSignInAlt} size="sm" color="#D10024"/>
-                                                <Link className="text-decoration-none small ml-2" to="/register">
+                                                <FontAwesomeIcon icon={faSignInAlt} size="sm" color="#000"/>
+                                                <Link className="text-dark text-decoration-none small ml-2"
+                                                      to="/register">
                                                     Sign Up
                                                 </Link>
                                             </li>
@@ -57,20 +58,22 @@ const ContactSection = props => {
                                             {/*        My Account</Link>*/}
                                             {/*</li>*/}
                                             <li className="contact-link nav-item nav-inline ml-2">
-                                                <FontAwesomeIcon icon={faSignOutAlt} size="sm" color="#D10024"/>
+                                                <FontAwesomeIcon icon={faSignOutAlt} size="sm" color="#000"/>
                                                 <span onClick={() => props.signOut()}
-                                                      className="logout-span small ml-2">Logout</span>
+                                                      className="text-dark logout-span small ml-2">Logout</span>
                                             </li>
                                         </Fragment>
                                     ) : (
                                     <Fragment>
                                         <li className="contact-link nav-item nav-inline ml-2">
-                                            <FontAwesomeIcon icon={faSignInAlt} size="sm" color="#D10024"/>
-                                            <Link className="text-decoration-none small ml-2" to="/login">Sign In</Link>
+                                            <FontAwesomeIcon icon={faSignInAlt} size="sm" color="#000"/>
+                                            <Link className="text-dark text-decoration-none small ml-2" to="/login">Sign
+                                                In</Link>
                                         </li>
                                         <li className="contact-link nav-item nav-inline ml-2">
-                                            <FontAwesomeIcon icon={faSignInAlt} size="sm" color="#D10024"/>
-                                            <Link className="text-decoration-none small ml-2" to="/register">Sign Up</Link>
+                                            <FontAwesomeIcon icon={faSignInAlt} size="sm" color="#000"/>
+                                            <Link className="text-dark text-decoration-none small ml-2" to="/register">Sign
+                                                Up</Link>
                                         </li>
                                     </Fragment>
                                 )

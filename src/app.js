@@ -5,9 +5,6 @@ import {connect} from "react-redux"
 import {anonymousSignIn} from "./store/auth/auth.utils"
 
 import PreLoader from "./components/pre-loader/pre-loader.component"
-import CategoryPage from "./pages/category-page/category-page";
-import SubCategory from "./pages/sub-category/sub-category.page";
-import Orders from "./pages/account/orders";
 
 const TermsAndConditions = lazy(() => import("./pages/privacy-policy-and-terms-of-conditions/terms-and-conditions"));
 const PrivacyPolicy = lazy(() => import("./pages/privacy-policy-and-terms-of-conditions/privacy-policy"));
@@ -25,6 +22,10 @@ const Account = lazy(() => import("./pages/account/account"));
 const HomePage = lazy(() => import("./pages/homepage/homepage"));
 const SignIn = lazy(() => import("./components/auth/sign-in"));
 const SignUp = lazy(() => import("./components/auth/sign-up"));
+const CategoryPage = lazy(() => import("./pages/category-page/category-page"));
+const SubCategory = lazy(() => import("./pages/sub-category/sub-category.page"));
+const Orders = lazy(() => import("./pages/account/orders"));
+const AboutUs = lazy(() => import("./pages/about-us/about-us."));
 
 const renderLoader = () => (
     <div className="preloading-home overflow-hidden-y">
@@ -62,6 +63,7 @@ const App = props => {
                         <Route exact path="/search/items/:item_name" component={ShoppingPage}/>
                         <Route exact path="/privacy_policy" component={PrivacyPolicy}/>
                         <Route exact path="/terms_and_conditions" component={TermsAndConditions}/>
+                        <Route exact path="/about-us" component={AboutUs}/>
                         <Route exact path="/return_policy" component={ReturnPolicy}/>
                         <Route exact path="/additem" component={AddItemPage}/>
                         <Route exact path="/my-account" component={Account}/>

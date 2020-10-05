@@ -7,7 +7,8 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 import ShoppingCartMini from "../cart-mini/cart-mini.component";
 
-import logo from "../../assets/img/darklogo.webp"
+// import logo from "../../assets/img/darklogo.webp";
+import logo from "../../assets/img/new wubbet logo with font.png";
 
 const SearchSection = props => {
 
@@ -75,12 +76,12 @@ const SearchSection = props => {
                         <ul className="navbar-nav d-block text-nowrap px-0 mx-0">
                             <li className="nav-item nav-inline px-0 ml-3 ml-md-4">
                                 <Link to="/my-account">
-                                    <FontAwesomeIcon icon={faUser} color="#fff"/>
+                                    <FontAwesomeIcon icon={faUser} color="#000"/>
                                 </Link>
                             </li>
                             <li className="contact-link nav-item position-relative text-center nav-inline px-0 ml-3 ml-md-4">
                                 <Link className="text-white d-block" to="/wishlist">
-                                    <FontAwesomeIcon icon={faHeart} color="#fff"/>
+                                    <FontAwesomeIcon icon={faHeart} color="#000"/>
                                 </Link>
                                 {
                                     wishListLength &&
@@ -94,7 +95,7 @@ const SearchSection = props => {
                                     <FontAwesomeIcon
                                         className="mini-cart"
                                         id="open-cart-btn"
-                                        icon={faShoppingCart} color="#fff"
+                                        icon={faShoppingCart} color="#000000"
                                     />
                                 </button>
                                 {
@@ -109,7 +110,7 @@ const SearchSection = props => {
                                 <button className="text-white bg-transparent border-0 closebtn"
                                         onClick={() => props.openNav()}
                                 >
-                                    <FontAwesomeIcon icon={faBars} color="#fff"/>
+                                    <FontAwesomeIcon icon={faBars} color="#000000"/>
                                 </button>
                             </li>
                         </ul>

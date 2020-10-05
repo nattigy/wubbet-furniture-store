@@ -8,18 +8,16 @@ import {connect} from "react-redux";
 import PreLoader from "../pre-loader/pre-loader.component";
 
 const Item = ({item}) => (
-    <div className="col-6 col-md-4 col-lg-3 px-0 pr-3 mb-3">
-        <div className="overflow-hidden w-100 shop-by-cat-img-cont">
+    <Link to={`/cat${item.link}`} className="col-5 col-md-4 col-lg-3 px-0 pr-3 mb-3">
+        <div className="overflow-hidden w-100 shop-by-cat-img-cont rounded-lg shadow-sm">
             <img className="shop-by-cat-img" src={item.images[0]} alt=""/>
-            <div className="shop-cat-btn-cont w-100 px-2 text-center">
-                <Link
-                    to={`/cat${item.link}`}
-                    className="small btn text-white shop-cat-btn w-100 py-0 py-md-2 px-2 rounded-pill text-truncate text-nowrap shadow-sm-custom">
-                    {item.name}
-                </Link>
+            <div className="w-100 item-overlay position-absolute"/>
+            <div
+                className="w-100 position-absolute py-3 text-center text-white text-nowrap overflow-hidden item-name-overlay">
+                {item.name}
             </div>
         </div>
-    </div>
+    </Link>
 );
 
 const ShopByCategory = props => {

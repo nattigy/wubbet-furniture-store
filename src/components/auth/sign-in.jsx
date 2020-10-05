@@ -8,7 +8,7 @@ import {loginUser} from "../../store/auth/auth.utils";
 
 import "./auth.style.sass"
 import {CopyRight} from "../footer/copy-right.component";
-import logo from "../../assets/img/whitelogo.webp";
+import logo from "../../assets/img/new wubbet logo with font.png";
 
 const SignIn = props => {
 
@@ -35,7 +35,7 @@ const SignIn = props => {
             <div className="">
                 <div className="my-5 mx-auto" style={{width: "200px"}}>
                     <Link to="/">
-                        <img src={logo} className="mx-auto w-100" style={{height: "50px"}} alt=""/>
+                        <img src={logo} className="mx-auto w-100" alt=""/>
                     </Link>
                 </div>
                 <div className="container-sm max-width mb-5 pb-5">
@@ -63,7 +63,7 @@ const SignIn = props => {
                             <p className="text-danger text-center">{errorMessage.message}</p>
                             }
                             <div className="my-3">
-                                <button type="submit" className="w-100 btn bg-red btn-danger">Sign In</button>
+                                <button type="submit" className="w-100 btn bg-red text-white">Sign In</button>
                             </div>
                         </form>
 

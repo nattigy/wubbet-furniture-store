@@ -28,12 +28,40 @@ body {
 }
 
 .bg-blue-custom {
-    background-color: #1E1F29;
+    background-color: #fff;
 }
 
-.bg-dark-custom {
-    background-color: #15161D;
+.bg-red-custom {
+    background-color: #E23056;
 }
+
+.bg-red {
+    background-color: #ff8c00;
+}
+
+.MuiCircularProgress-colorPrimary {
+    color: #ff8c00 !important;
+}
+
+.border-orange {
+    border-color: #ff8c00 !important
+}
+
+/*.bg-red {*/
+/*    background-color: #D10024;*/
+/*}*/
+
+/*.bg-blue-custom {*/
+/*    background-color: #1E1F29;*/
+/*}*/
+
+.bg-dark-custom {
+    background-color: #fff;
+}
+
+/*.bg-dark-custom {*/
+/*    background-color: #15161D;*/
+/*}*/
 
 .bg-grey {
     background: linear-gradient(to bottom, #e3e4ze6, #bdbfc2);
@@ -103,10 +131,6 @@ a:hover {
     color: #D10024 !important;
     text-decoration: none;
     transition: 0.3s;
-}
-
-.bg-red {
-    background-color: #D10024;
 }
 
 input, button, select, svg {

@@ -51,21 +51,21 @@ const Account = props => {
                         </div>
                         <div>
                             <div className="row">
-                                <div className={`col-4 ${!open && `border-bottom border-danger`}`}>
-                                    <button
+                                <div className={`col-4 ${!open && `border-bottom border-orange`}`}>
+                                    <span
                                         className="btn text-left px-0 border-0 py-2 font-weight-bold"
                                         onClick={() => setOpen(false)}
                                     >
                                         Account Info
-                                    </button>
+                                    </span>
                                 </div>
-                                <div className={`col-4 ${open && `border-bottom border-danger`}`}>
-                                    <button
+                                <div className={`col-4 ${open && `border-bottom border-orange`}`}>
+                                    <span
                                         className="btn text-left mx-3 px-0 border-0 py-2 font-weight-bold"
                                         onClick={() => setOpen(true)}
                                     >
                                         Address
-                                    </button>
+                                    </span>
                                 </div>
                             </div>
                             {

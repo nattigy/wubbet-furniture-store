@@ -3,7 +3,7 @@ import React, {Fragment} from "react";
 import {Link} from "react-router-dom";
 
 import Categories from "./categories"
-import logo from "../../assets/img/darklogo.webp";
+import logo from "../../assets/img/new wubbet logo with font.png";
 
 const NavbarSection = props => {
     return (
@@ -14,7 +14,7 @@ const NavbarSection = props => {
                     <Link to="/">
                         <img className="logo-img" src={logo} alt=""/>
                     </Link>
-                    <button className="closebtn flex-grow-1 text-right pr-5 btn-dark btn bg-transparent border-0"
+                    <button className="closebtn flex-grow-1 text-right pr-5 btn-light btn bg-transparent border-0"
                             onClick={() => props.closeNav()}>&times;
                     </button>
                 </div>
@@ -24,7 +24,7 @@ const NavbarSection = props => {
                             Categories.map(cat => (
                                 <Fragment key={cat.id}>
                                     <Link
-                                        className="px-0 font-weight-bolder font-18"
+                                        className="px-0 font-weight-bolder font-18 text-dark"
                                         to={`/cat${cat.link}`}
                                         onClick={() => props.closeNav()}
                                     >
@@ -38,6 +38,7 @@ const NavbarSection = props => {
                                                         key={sub.id}
                                                         onClick={() => props.closeNav()}
                                                         to={`/cat${sub.link}`}
+                                                        className="text-dark"
                                                     >{sub.name}
                                                     </Link>
                                                 ))

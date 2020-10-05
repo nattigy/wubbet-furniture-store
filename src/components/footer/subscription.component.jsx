@@ -17,7 +17,7 @@ export const Subscription = () => {
                                        type="email"
                                        placeholder="Enter Your Email"
                                 />
-                                <button className="btn bg-red btn-danger subscribe-btn">
+                                <button className="btn bg-red text-white subscribe-btn">
                                     <FontAwesomeIcon icon={faEnvelope} size="sm" color="#fff"/> Subscribe
                                 </button>
                             </form>

@@ -1,6 +1,4 @@
 import React, {useState} from "react";
-
-import ContactSection from "./contact.component";
 import SearchSection from "./search.component";
 import NavbarSection from "./navbar.component";
 
@@ -28,7 +26,7 @@ const Header = () => {
 
     return (
         <header>
-            <ContactSection/>
+            {/*<ContactSection/>*/}
             <SearchSection openNav={() => openNav()}/>
             <NavbarSection closeNav={() => closeNav()} isOpen={isOpen}/>
         </header>

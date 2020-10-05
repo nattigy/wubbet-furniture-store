@@ -18,7 +18,7 @@ export const searchNewProducts = ({category}) => dispatch => {
     let items = [];
     dispatch(newProductSearchRequest());
     fbConfig.firestore().collection("items")
-        .where("category", "==", category)
+        // .where("category", "==", category)
         .get()
         .then(snapshot => {
             snapshot.forEach(doc => {

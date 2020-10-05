@@ -218,10 +218,10 @@ const Checkout = props => {
                                                     <div className="d-table-cell font-14"><strong>TOTAL</strong></div>
                                                     <div className="d-table-cell text-right">
                                                         <strong
-                                                            className="order-total font-24 text-danger font-weight-bolder">
+                                                            className="order-total font-24 text-dark font-weight-bolder">
                                                             {totalPrice}
                                                         </strong>
-                                                        <span className="text-danger font-weight-bolder"> ETB</span>
+                                                        <span className="text-dark font-weight-bolder"> ETB</span>
                                                         <input type="hidden" name="total_price" id="total_price"
                                                                value={totalPrice}
                                                         />
@@ -299,7 +299,7 @@ const Checkout = props => {
                                                         <p>Agree to terms and conditions</p>
                                                     </div>
                                                 }
-                                                <button className="btn btn-danger bg-red w-100 my-3">Place order
+                                                <button className="btn bg-red text-white w-100 my-3">Place order
                                                 </button>
                                             </div>
                                         </Fragment>

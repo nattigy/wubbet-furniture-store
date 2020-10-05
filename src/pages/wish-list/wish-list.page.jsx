@@ -50,7 +50,7 @@ const WishList = props => {
                         wishListItems.length === 0 &&
                         <div className="text-center py-5">
                             <h5 className="font-14 my-3">No Items In Your Wishlist!</h5>
-                            <Link to="/search/items/all" className="btn btn-danger">
+                            <Link to="/search/items/all" className="btn bg-red text-white">
                                 Go to shop <FontAwesomeIcon icon={faArrowRight} color="#fff"/>
                             </Link>
                         </div>
