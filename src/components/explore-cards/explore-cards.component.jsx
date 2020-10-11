@@ -15,7 +15,7 @@ const ExploreCards = () => {
         <div className="container-xl my-3 my-md-5 px-0">
             <div className="row px-0 mx-0">
                 <Link to="/cat/HOME_FURNITURE" className="col-md-4 col-xs-6 px-3">
-                    <div className="shop">
+                    <div className="shop rounded-lg">
                         <div className="shop-img">
                             <img src={homeFurniture} alt=""/>
                         </div>
@@ -32,7 +32,7 @@ const ExploreCards = () => {
                 </Link>
 
                 <Link to="/cat/COMMERCIAL_FURNITURE" className="col-md-4 col-xs-6 px-3">
-                    <div className="shop">
+                    <div className="shop rounded-lg">
                         <div className="shop-img">
                             <img src={commercialFurniture} alt=""/>
                         </div>
@@ -49,7 +49,7 @@ const ExploreCards = () => {
                 </Link>
 
                 <Link to="/cat/FINISHING_AND_DECORATIONS" className="col-md-4 col-xs-6 px-3">
-                    <div className="shop">
+                    <div className="shop rounded-lg">
                         <div className="shop-img">
                             <img src={decorationAndFinishing} alt=""/>
                         </div>

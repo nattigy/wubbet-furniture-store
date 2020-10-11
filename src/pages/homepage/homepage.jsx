@@ -9,12 +9,14 @@ import HotDeals from "../../components/hot-deals/hot-deals.component";
 import ShopByCategory from "../../components/shop-by-category/shop-by-category";
 import Header from "../../components/header/header.component"
 import Footer from "../../components/footer/footer.component"
+import OurService from "../../components/our-service/our-service";
 
 const HomePage = () => {
     return (
         <Fragment>
             <Header/>
             <ExploreCards/>
+            <OurService/>
             <ShopByCategory/>
             <NewProducts/>
             <HotDeals/>

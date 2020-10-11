@@ -102,7 +102,7 @@ const Footer = () => {
                                 <div className="footer">
                                     <h3 className="title font-18">SERVICE</h3>
                                     <ul className="footer-links navbar-nav">
-                                        <li><Link to="/account">My Account</Link></li>
+                                        <li><Link to="/my-account">My Account</Link></li>
                                         <li><Link to="/cart">View Cart</Link></li>
                                         <li><Link to="/whishlist">Wish List</Link></li>
                                         {/*<li><Link to="/">Help</Link></li>*/}
