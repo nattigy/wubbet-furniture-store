@@ -71,6 +71,10 @@ body {
     background-color: #eaebec;
 }
 
+.MuiPaper-elevation6 {
+    box-shadow: rgba(1, 1, 1, 0.05) 0 0 10px 1px !important;
+}
+
 .spacing {
     letter-spacing: 10px;
 }
@@ -172,5 +176,4 @@ input, button, select, svg {
 
 .checkout-btn:hover {
     color: white !important;
-    background-color: rgba(209, 0, 36, 0.91);
 }

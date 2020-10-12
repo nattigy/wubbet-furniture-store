@@ -6,7 +6,6 @@ import {faArrowCircleRight} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 import CartItemMini from "../cart-item-mini/cart-item-mini.component";
-import PreLoader from "../pre-loader/pre-loader.component";
 
 import {deleteFromCart, fetchFromCart} from "../../store/cartList/cart-list.utils";
 
@@ -20,7 +19,7 @@ const CartMini = props => {
     } = props;
 
     useEffect(() => {
-        props.fetchFromCart({uid: props.user ? props.user.uid : "0"})
+        // props.fetchFromCart({uid: props.user ? props.user.uid : "0"})
     }, []);
 
     const delEvent = (e, index) => {
@@ -32,12 +31,10 @@ const CartMini = props => {
         <div className="overflow-hidden shadow-lg cart-popup bg-white mini-cart">
             <div className="w-100 cart-mini mini-cart">
                 {
-                    isFetchingFromCart ?
-                        <PreLoader/> :
-                        (cartItems.length === 0) || isFetchingFromError &&
-                        <div className="text-center py-5">
-                            <h5 className="font-12">No Items In Your Cart!</h5>
-                        </div>
+                    cartItems.length === 0 &&
+                    <div className="text-center py-5">
+                        <h5 className="font-12">No Items In Your Cart!</h5>
+                    </div>
                 }
                 {
                     cartItems.map((item, index) =>
@@ -67,6 +64,7 @@ const CartMini = props => {
 };
 
 const mapStateToProps = state => {
+    console.log(state.cartList.cartItems)
     return {
         user: state.auth.user,
         cartItems: state.cartList.cartItems,

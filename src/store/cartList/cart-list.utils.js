@@ -12,16 +12,47 @@ import {
     removeFromCartSuccess
 } from "./cart-list.actions";
 
-export const addItemToCart = ({userId, itemId}) => dispatch => {
+export const addItemToCart = ({userId, itemId, price}) => dispatch => {
     dispatch(addItemToCartRequest());
-    fbConfig.firestore().collection("users").doc(userId).update({
-        cartList: fbConfig.firestore.FieldValue.arrayUnion(itemId),
-    })
-        .then(() => {
-            dispatch(addItemToCartSuccess());
-            dispatch(checkCart(userId));
+    let oldCart = [];
+    let isHere = false;
+    console.log(price)
+    fbConfig.firestore().collection('users').doc(userId)
+        .get()
+        .then(snapshot => {
+            const cartList = snapshot.data().cartList;
+            oldCart = cartList;
+            if (cartList.length === 0) {
+                oldCart = [{itemId, quantity: 1, totalPrice: parseInt(price)}];
+            } else {
+                oldCart.forEach((item, i) => {
+                    if (item.itemId === itemId) {
+                        oldCart[i].quantity = oldCart[i].quantity + 1;
+                        oldCart[i].totalPrice = parseInt(oldCart[i].totalPrice) + parseInt(price);
+                        isHere = true
+                    }
+                })
+
+                if (!isHere) {
+                    oldCart.push({itemId, quantity: 1, totalPrice: parseInt(price)})
+                }
+            }
         })
-        .catch(error => dispatch(addItemToCartError(error)));
+        .then(() => {
+            fbConfig.firestore().collection("users").doc(userId)
+                .update({
+                    cartList: oldCart,
+                })
+                .then(() => {
+                    dispatch(addItemToCartSuccess());
+                    dispatch(checkCart(userId));
+                })
+                .catch(error => dispatch(addItemToCartError(error)));
+        })
+        .catch(error => {
+            console.log(error)
+            dispatch(addItemToCartError(error))
+        });
 };
 
 export const checkCart = (uid) => dispatch => {
@@ -31,17 +62,20 @@ export const checkCart = (uid) => dispatch => {
         .then(snapShot => {
             let cartItems;
             cartItems = snapShot.data().cartList;
+            console.log("here", cartItems)
             if (cartItems.length === 0) {
                 dispatch(fetchFromCartCheck(items));
                 return
             }
             for (let i = 0; i < cartItems.length; i++) {
-                fbConfig.firestore().collection("items").doc(cartItems[i])
+                fbConfig.firestore().collection("items").doc(cartItems[i].itemId)
                     .get()
                     .then(snapshot => {
                         if (snapshot.exists) {
                             let data = snapshot.data();
                             data.id = snapshot.id;
+                            data.quantity = cartItems[i].quantity;
+                            data.totalPrice = cartItems[i].totalPrice;
                             items.push(data);
                             if (i + 1 === cartItems.length) {
                                 dispatch(fetchFromCartCheck(items))
@@ -70,12 +104,14 @@ export const fetchFromCart = ({uid}) => dispatch => {
                 return
             }
             for (let i = 0; i < cartItems.length; i++) {
-                fbConfig.firestore().collection("items").doc(cartItems[i])
+                fbConfig.firestore().collection("items").doc(cartItems[i].itemId)
                     .get()
                     .then(snapshot => {
                         if (snapshot.exists) {
                             let data = snapshot.data();
                             data.id = snapshot.id;
+                            data.quantity = cartItems[i].quantity;
+                            data.totalPrice = cartItems[i].totalPrice;
                             items.push(data);
                             if (i + 1 === cartItems.length) {
                                 dispatch(fetchFromCartSuccess(items));
@@ -92,15 +128,48 @@ export const fetchFromCart = ({uid}) => dispatch => {
         .catch(error => dispatch(fetchFromCartError(error)));
 };
 
-export const deleteFromCart = ({userId, itemId}) => dispatch => {
+export const deleteFromCart = ({userId, itemId, isDecrease, price}) => dispatch => {
     dispatch(removeFromCartRequest());
+    let newCart = [];
     fbConfig.firestore().collection('users').doc(userId)
-        .update({
-            cartList: fbConfig.firestore.FieldValue.arrayRemove(itemId)
+        .get()
+        .then(snapshot => {
+            let cartList = snapshot.data().cartList;
+            newCart = cartList;
+
+            if (isDecrease) {
+                cartList.forEach((item, i) => {
+                    if (item.itemId === itemId) {
+                        if (newCart[i].quantity === 1) {
+                            cartList.forEach((item, i) => {
+                                if (item.itemId === itemId) {
+                                    newCart.splice(i, 1)
+                                }
+                            })
+                        } else {
+                            newCart[i].quantity = newCart[i].quantity - 1;
+                            newCart[i].totalPrice = parseInt(newCart[i].totalPrice) - parseInt(price);
+                        }
+                    }
+                })
+            } else {
+                cartList.forEach((item, i) => {
+                    if (item.itemId === itemId) {
+                        newCart.splice(i, 1)
+                    }
+                })
+            }
         })
         .then(() => {
-            dispatch(removeFromCartSuccess());
-            dispatch(checkCart(userId));
+            fbConfig.firestore().collection('users').doc(userId)
+                .update({
+                    cartList: newCart
+                })
+                .then(() => {
+                    dispatch(removeFromCartSuccess());
+                    dispatch(checkCart(userId));
+                })
+                .catch(error => dispatch(removeFromCartError(error.message)))
         })
         .catch(error => dispatch(removeFromCartError(error.message)));
 };

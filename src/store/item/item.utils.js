@@ -18,25 +18,25 @@ const create_name_array = name => {
     return name.split(" ");
 };
 
-const create_cat_name_combo = (category, name) => {
-    let name_array = name.split(" ");
-    let cat_name_combo = [];
-    name_array.map(name => {
-        cat_name_combo.push(name.toLowerCase() + "_" + category)
-    });
-    return cat_name_combo;
-};
+// const create_cat_name_combo = (category, name) => {
+//     let name_array = name.split(" ");
+//     let cat_name_combo = [];
+//     name_array.map(name => {
+//         cat_name_combo.push(name.toLowerCase() + "_" + category)
+//     });
+//     return cat_name_combo;
+// };
 
-export const addItem = ({category, name, price, description, sub_category, images, uid, quantity}) => dispatch => {
+export const addItem = ({name, price, description, size, sub_category, images, uid, quantity}) => dispatch => {
     dispatch(addItemRequest());
 
     const name_array = create_name_array(name.toLowerCase());
-    const cat_name_combo = create_cat_name_combo(category, name);
+    // const cat_name_combo = create_cat_name_combo(category, name);
     name_array.push(name)
 
     fbConfig.firestore().collection("items").add({
-        name_array, price, description, name: name.toLowerCase(),
-        cat_name_combo, sub_category, quantity, owner: uid, images: []
+        name_array, price, description, name: name.toLowerCase(), size,
+        sub_category, quantity, owner: uid, images: []
     })
         .then(item => {
             const promises = [];
@@ -135,14 +135,14 @@ export const fetchMyItems = ({uid}) => dispatch => {
         .catch(error => dispatch(fetchMyItemsError(error.message)))
 };
 
-export const editItem = ({itemId, category, name, price, description, subCategory, quantity}) => dispatch => {
+export const editItem = ({itemId, name, price, description, subCategory, quantity}) => dispatch => {
     dispatch(editMyItemsRequest());
     const name_array = create_name_array(name.toLowerCase());
-    const cat_name_combo = create_cat_name_combo(category, name);
+    // const cat_name_combo = create_cat_name_combo(category, name);
     fbConfig.firestore().collection("items").doc(itemId)
         .update({
-            category, name: name.toLowerCase(), price, description,
-            sub_category: subCategory, name_array, quantity, cat_name_combo
+            name: name.toLowerCase(), price, description,
+            sub_category: subCategory, name_array, quantity
         })
         .then(() => dispatch(editMyItemsSuccess()))
         .catch(error => dispatch(editMyItemsError(error)))

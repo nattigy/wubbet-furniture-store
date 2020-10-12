@@ -25,6 +25,7 @@ const AddItemComponent = props => {
             price: new FormData(form).get("price"),
             // category: new FormData(form).get("category"),
             quantity: new FormData(form).get("quantity"),
+            size: new FormData(form).get("size"),
             sub_category: sub_cat,
             description: new FormData(form).get("description"),
             images: images,
@@ -69,6 +70,10 @@ const AddItemComponent = props => {
                         <div className="my-3">
                             <label className="" htmlFor="quantity">Add Quantity</label><br/>
                             <input className="w-100 form-control" type="number" name="quantity" required id="quantity"/>
+                        </div>
+                        <div className="my-3">
+                            <label className="" htmlFor="quantity">Add Size</label><br/>
+                            <input className="w-100 form-control" type="text" name="size" required id="size"/>
                         </div>
                         {/*<div className="my-3">*/}
                         {/*    <label className="" htmlFor="category">Choose Category</label><br/>*/}

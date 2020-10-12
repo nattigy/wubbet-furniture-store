@@ -17,7 +17,7 @@ const WishListItem = props => {
         <div className="row mb-4 mx-0">
             <div className="col-4 col-md-3 px-0">
                 <div className="w-100 overflow-hidden wish-list-item-img-cont">
-                    <img className="wish-list-img" src={item.picture0} alt=""/>
+                    <img className="wish-list-img" src={item.images[0]} alt=""/>
                 </div>
             </div>
             <div className="col-8 col-md-9 row px-2">
@@ -43,7 +43,7 @@ const WishListItem = props => {
                                 isLoggedIn,
                                 userId: user ? user.uid : "0",
                                 itemId: item.id,
-                                from: "new"
+                                from: "old"
                             }}
                         />
                     </div>

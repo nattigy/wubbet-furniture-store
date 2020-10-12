@@ -38,7 +38,7 @@ const cartListReducers = (state = {cartItems: []}, action) => {
                 isFetchingFromDone: true,
                 isFetchingFromError: false,
                 cartItems: action.cartItems,
-                totalPrice: action.totalPrice
+                // totalPrice: action.totalPrice
             };
         case CartListTypes.FETCH_ITEM_FROM_CART_ERROR:
             return {
@@ -52,6 +52,7 @@ const cartListReducers = (state = {cartItems: []}, action) => {
             return {
                 ...state,
                 cartItems: action.cartItems,
+                totalPrice: action.totalPrice
             };
         case CartListTypes.REMOVE_FROM_CART_REQUEST:
             return {

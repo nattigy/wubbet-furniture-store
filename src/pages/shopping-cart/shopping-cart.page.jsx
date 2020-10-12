@@ -26,8 +26,10 @@ const ShoppingCart = props => {
 
     const delEvent = (e, index) => {
         props.deleteFromCart(e);
-        if (removingFromCartDone) {
-            cartItems.splice(index, 1)
+        if (!e.isDecrease) {
+            if (removingFromCartDone) {
+                cartItems.splice(index, 1)
+            }
         }
     };
 

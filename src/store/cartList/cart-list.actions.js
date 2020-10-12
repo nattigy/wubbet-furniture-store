@@ -20,9 +20,12 @@ export const addItemToCartError = error => {
 };
 
 export const fetchFromCartCheck = cartItems => {
+    let totalPrice = 0;
+    cartItems.forEach(item => totalPrice += parseInt(item.totalPrice));
     return {
         type: CartListTypes.FETCH_ITEM_FROM_CART_CHECK,
-        cartItems
+        cartItems,
+        totalPrice
     };
 };
 
@@ -34,7 +37,7 @@ export const fetchFromCartRequest = () => {
 
 export const fetchFromCartSuccess = cartItems => {
     let totalPrice = 0;
-    cartItems.forEach(item => totalPrice += parseInt(item.price));
+    cartItems.forEach(item => totalPrice += parseInt(item.totalPrice));
     return {
         type: CartListTypes.FETCH_ITEM_FROM_CART_SUCCESS,
         cartItems,

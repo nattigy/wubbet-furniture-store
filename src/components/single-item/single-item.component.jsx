@@ -1,6 +1,6 @@
 import React from "react";
 
-import {faEye, faHeart, faStar} from "@fortawesome/free-solid-svg-icons";
+import {faEye, faHeart} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 import AddToCartButton from "../add-to-cart-button/add-to-cart-button"
@@ -42,18 +42,18 @@ const SingleItem = (props) => {
                     {item.name}
                 </Link>
                 <p className="mb-2 small text-muted">
-                    size
+                    {item.size && item.size}
                 </p>
                 <p className="mb-2 font-weight-bold small">
                     <span className="font-18">{item.price}</span><sup>.99</sup> ETB
                 </p>
                 <div className="mb-2 d-flex w-100 flex-nowrap">
                     <div className="text-nowrap">
-                        <FontAwesomeIcon icon={faStar} size="xs" color="#111"/>
-                        <FontAwesomeIcon icon={faStar} size="xs" color="#111"/>
-                        <FontAwesomeIcon icon={faStar} size="xs" color="#111"/>
-                        <FontAwesomeIcon icon={faStar} size="xs" color="#111"/>
-                        <FontAwesomeIcon icon={faStar} size="xs" color="#111"/>
+                        {/*<FontAwesomeIcon icon={faStar} size="xs" color="#111"/>*/}
+                        {/*<FontAwesomeIcon icon={faStar} size="xs" color="#111"/>*/}
+                        {/*<FontAwesomeIcon icon={faStar} size="xs" color="#111"/>*/}
+                        {/*<FontAwesomeIcon icon={faStar} size="xs" color="#111"/>*/}
+                        {/*<FontAwesomeIcon icon={faStar} size="xs" color="#111"/>*/}
                     </div>
                     <div className="flex-grow-1 text-right item-btns">
                         <AddToCartButton
@@ -62,6 +62,7 @@ const SingleItem = (props) => {
                                 isLoggedIn,
                                 userId: user ? user.uid : "0",
                                 itemId: item.id,
+                                price: item.price,
                                 from: "new"
                             }}
                         />

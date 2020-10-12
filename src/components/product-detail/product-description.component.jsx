@@ -1,7 +1,7 @@
 import React from "react";
 
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faHeart, faStar} from "@fortawesome/free-solid-svg-icons";
+import {faHeart} from "@fortawesome/free-solid-svg-icons";
 
 import AddToCartButton from "../add-to-cart-button/add-to-cart-button";
 import CircularProgress from "@material-ui/core/CircularProgress/CircularProgress";
@@ -16,12 +16,12 @@ const ProductDescription = props => {
             <div>
                 <h3 className="title">{name}</h3>
                 <div className="my-3">
-                    <div className="d-inline-block mr-3">
-                        <FontAwesomeIcon icon={faStar} size="1x" color="#D10024"/>
-                        <FontAwesomeIcon icon={faStar} size="1x" color="#D10024"/>
-                        <FontAwesomeIcon icon={faStar} size="1x" color="#D10024"/>
-                        <FontAwesomeIcon icon={faStar} size="1x" color="#D10024"/>
-                    </div>
+                    {/*<div className="d-inline-block mr-3">*/}
+                    {/*    <FontAwesomeIcon icon={faStar} size="1x" color="#D10024"/>*/}
+                    {/*    <FontAwesomeIcon icon={faStar} size="1x" color="#D10024"/>*/}
+                    {/*    <FontAwesomeIcon icon={faStar} size="1x" color="#D10024"/>*/}
+                    {/*    <FontAwesomeIcon icon={faStar} size="1x" color="#D10024"/>*/}
+                    {/*</div>*/}
                     {/*<a className="text-dark" href="/">10 Review(s) | Add your review</a>*/}
                 </div>
                 <div className="my-2">
