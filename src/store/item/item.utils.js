@@ -15,7 +15,7 @@ import {
 } from "./item.actions";
 
 const create_name_array = name => {
-    return name.split(" ").push(name);
+    return name.split(" ");
 };
 
 const create_cat_name_combo = (category, name) => {
@@ -32,9 +32,10 @@ export const addItem = ({category, name, price, description, sub_category, image
 
     const name_array = create_name_array(name.toLowerCase());
     const cat_name_combo = create_cat_name_combo(category, name);
+    name_array.push(name)
 
     fbConfig.firestore().collection("items").add({
-        category, name_array, price, description, name: name.toLowerCase(),
+        name_array, price, description, name: name.toLowerCase(),
         cat_name_combo, sub_category, quantity, owner: uid, images: []
     })
         .then(item => {
@@ -42,7 +43,7 @@ export const addItem = ({category, name, price, description, sub_category, image
             let urlList = [];
             images.forEach((file, index) => {
                 const uploadTask = fbConfig.storage().ref()
-                    .child(`item_pictures/${category}/${sub_category}/${item.id}/image${index}`)
+                    .child(`item_pictures/${sub_category}/${item.id}/image${index}`)
                     .put(file);
 
                 promises.push(uploadTask);

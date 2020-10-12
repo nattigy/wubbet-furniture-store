@@ -13,7 +13,7 @@ import Categories from "../header/categories";
 const AddItemComponent = props => {
 
     const [images, setImages] = useState("");
-    const [selected_category, setSelected_category] = useState("HOME_FURNITURE");
+    const [sub_cat, setSub_cat] = useState([0]);
 
     const {isAdding, addingError, addingSuccess, errorMessage, user} = props;
 
@@ -23,9 +23,9 @@ const AddItemComponent = props => {
         props.addItem({
             name: new FormData(form).get("name"),
             price: new FormData(form).get("price"),
-            category: new FormData(form).get("category"),
+            // category: new FormData(form).get("category"),
             quantity: new FormData(form).get("quantity"),
-            sub_category: new FormData(form).get("sub_category"),
+            sub_category: sub_cat,
             description: new FormData(form).get("description"),
             images: images,
             uid: user ? user.uid : "0",
@@ -70,22 +70,28 @@ const AddItemComponent = props => {
                             <label className="" htmlFor="quantity">Add Quantity</label><br/>
                             <input className="w-100 form-control" type="number" name="quantity" required id="quantity"/>
                         </div>
-                        <div className="my-3">
-                            <label className="" htmlFor="category">Choose Category</label><br/>
-                            <select className="w-100 form-control" name="category" id="category" required
-                                    onChange={e => setSelected_category(e.target.value)}
-                            >
-                                <option value="HOME_FURNITURE">Home furniture</option>
-                                <option value="COMMERCIAL_FURNITURE">Commercial furniture</option>
-                                <option value="FINISHING_AND_DECORATIONS">Finishing and Decorations</option>
-                            </select>
-                        </div>
+                        {/*<div className="my-3">*/}
+                        {/*    <label className="" htmlFor="category">Choose Category</label><br/>*/}
+                        {/*    <select className="w-100 form-control" name="category" id="category" required*/}
+                        {/*            onChange={e => setSelected_category(e.target.value)}*/}
+                        {/*    >*/}
+                        {/*        <option value="HOME_FURNITURE">Home furniture</option>*/}
+                        {/*        <option value="COMMERCIAL_FURNITURE">Commercial furniture</option>*/}
+                        {/*        <option value="FINISHING_AND_DECORATIONS">Finishing and Decorations</option>*/}
+                        {/*    </select>*/}
+                        {/*</div>*/}
                         <div className="my-3">
                             <label className="" htmlFor="category">Choose Sub-Category</label><br/>
-                            <select className="w-100 form-control" name="sub_category" id="sub_category" required>
+                            <select className="w-100 form-control"
+                                    name="sub_category" id="sub_category"
+                                    required
+                                    multiple
+                                // onChange={e => setSub_cat(prevState => [...prevState, e.target.value])}
+                                    onChange={e => setSub_cat([...e.target.options].filter(({selected}) => selected).map(({value}) => value))}
+                            >
                                 {
                                     Categories.map(cat =>
-                                        cat.id === selected_category &&
+                                        // cat.id === selected_category &&
                                         cat.subCategory.map(sub =>
                                             <option value={sub.value} key={sub.sub_category}>
                                                 {sub.name}
@@ -107,7 +113,7 @@ const AddItemComponent = props => {
                                 {/*<div className="image-preview">*/}
                                 {/*<img src={frontPic} alt="" className="w-100"/>*/}
                                 {/*</div>*/}
-                                <label className="pt-2" htmlFor="frontPic">Picture 1</label><br/>
+                                <label className="pt-2" htmlFor="frontPic">Picture</label><br/>
                                 <input className="w-100 form-control" type="file" name="image" id="image"
                                        required multiple onChange={onFileChange}
                                 />

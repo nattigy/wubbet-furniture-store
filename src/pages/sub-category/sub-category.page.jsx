@@ -12,7 +12,7 @@ const SubCategory = props => {
     const {isSearching, isSearchingDone, searchedItems} = props;
 
     useEffect(() => {
-        props.searchItems({fieldPath: "sub_category", opStr: "==", value: props.match.params.subCategory})
+        props.searchItems({fieldPath: "sub_category", opStr: "array-contains", value: props.match.params.subCategory})
     }, []);
 
     return (

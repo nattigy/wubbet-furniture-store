@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import {Link, Redirect} from "react-router-dom";
 import {connect} from "react-redux";
 
-import {faBars, faHeart, faSearch, faShoppingBag, faUser} from "@fortawesome/free-solid-svg-icons";
+import {faBars, faHeart, faSearch, faShoppingBasket, faUser} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 import ShoppingCartMini from "../cart-mini/cart-mini.component";
@@ -95,7 +95,7 @@ const SearchSection = props => {
                                     <FontAwesomeIcon
                                         className="mini-cart"
                                         id="open-cart-btn"
-                                        icon={faShoppingBag} color="#000000"
+                                        icon={faShoppingBasket} color="#000000"
                                     />
                                 </button>
                                 {
