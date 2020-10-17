@@ -2,23 +2,24 @@ import React from "react";
 
 import {faEnvelope} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {connect} from "react-redux";
 
-export const Subscription = () => {
+const Subscription = ({localization}) => {
     return (
         <div id="newsletter" className="subscribe-section py-4 my-0">
             <div className="container-lg">
                 <div className="row">
                     <div className="col-md-12">
                         <div className="newsletter text-center">
-                            <p className="text-center">Sign Up for the <strong
-                                className="font-weight-bolder">NEWSLETTER</strong></p>
+                            <p className="text-center">{localization.sign_up_for_news_letter} <strong
+                                className="font-weight-bolder">{localization.news_letter}</strong></p>
                             <form className="d-flex text-nowrap">
                                 <input className="search-input subscription-input"
                                        type="email"
-                                       placeholder="Enter Your Email"
+                                       placeholder={localization.enter_your_email}
                                 />
                                 <button className="btn bg-red text-white subscribe-btn">
-                                    <FontAwesomeIcon icon={faEnvelope} size="sm" color="#fff"/> Subscribe
+                                    <FontAwesomeIcon icon={faEnvelope} size="sm" color="#fff"/> {localization.subscribe}
                                 </button>
                             </form>
                             <ul className="newsletter-follow navbar-nav">
@@ -42,3 +43,11 @@ export const Subscription = () => {
         </div>
     );
 };
+
+const mapStateToProps = state => {
+    return {
+        localization: state.localization.chosenLanguage
+    }
+}
+
+export default connect(mapStateToProps)(Subscription);

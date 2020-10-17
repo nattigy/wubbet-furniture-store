@@ -3,6 +3,7 @@ import SearchSection from "./search.component";
 import NavbarSection from "./navbar.component";
 
 import "./header.style.sass"
+import ContactSection from "./contact.component";
 
 const Header = () => {
 
@@ -26,7 +27,7 @@ const Header = () => {
 
     return (
         <header>
-            {/*<ContactSection/>*/}
+            <ContactSection/>
             <SearchSection openNav={() => openNav()}/>
             <NavbarSection closeNav={() => closeNav()} isOpen={isOpen}/>
         </header>

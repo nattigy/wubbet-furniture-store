@@ -24,7 +24,7 @@ const Item = ({item}) => (
 
 const ShopByCategory = props => {
 
-    const {isSearchingAllCat, isSearchingAllCatDone, allCategories} = props;
+    const {isSearchingAllCat, isSearchingAllCatDone, allCategories, localization} = props;
 
     const ref1 = useRef(null);
     const ref2 = useRef(null);
@@ -48,12 +48,9 @@ const ShopByCategory = props => {
 
     return (
         <div className="container-xl px-3 my-5">
-            <h3 className="section-title">SHOP BY CATEGORY</h3>
+            <h3 className="section-title">{localization.shop_by_category}</h3>
             <p className="p-max-width my-3">
-                Make your house a home, give life to your building and create an inviting environment for your property
-                by shopping with us. We have incredible collection waiting just for you. Find goods, compare prices and
-                choose your perfect offer. Spend less and buy more with Wubbet. Choose a category you want to browse
-                right here.
+                {localization.shop_by_text}
             </p>
             {
                 isSearchingAllCat &&
@@ -158,7 +155,8 @@ const mapStateToProps = state => {
         isSearchingAllCat: state.search.isSearchingAllCat,
         isSearchingAllCatDone: state.search.isSearchingAllCatDone,
         isSearchError: state.search.isSearchError,
-        allCategories: state.search.allCategories
+        allCategories: state.search.allCategories,
+        localization: state.localization.chosenLanguage
     }
 };
 

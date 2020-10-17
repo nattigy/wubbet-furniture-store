@@ -14,7 +14,7 @@ const NewProducts = props => {
     const [tab2, setTab2] = useState(false);
     const [tab3, setTab3] = useState(false);
 
-    const {isSearchingNewProducts, items} = props;
+    const {isSearchingNewProducts, items, localization} = props;
 
     useEffect(() => {
         props.searchItems({category: "HOME_FURNITURE"})
@@ -32,7 +32,7 @@ const NewProducts = props => {
     return (
         <div className="container-xl mt-5 px-3">
             <div className="mb-5">
-                <h3 className="section-title d-inline-block">NEW PRODUCTS</h3>
+                <h3 className="section-title d-inline-block">{localization.new_product}</h3>
                 <div className="section-nav d-inline-block float-right">
                     <ul className="nav nav-tabs d-inline-block border-bottom-0 section-tab-nav"
                         role="tablist">
@@ -147,6 +147,7 @@ const mapStateToProps = state => {
         isSearchingNewProductsError: state.search.isSearchingNewProductsError,
         items: state.search.newProducts,
         errorMessage: state.search.errorMessage,
+        localization: state.localization.chosenLanguage
     };
 };
 

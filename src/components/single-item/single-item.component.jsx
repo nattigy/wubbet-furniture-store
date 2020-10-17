@@ -42,7 +42,7 @@ const SingleItem = (props) => {
                     {item.name}
                 </Link>
                 <p className="mb-2 small text-muted">
-                    {item.size && item.size}
+                    {item.quantity} IN STOCK
                 </p>
                 <p className="mb-2 font-weight-bold small">
                     <span className="font-18">{item.price}</span><sup>.99</sup> ETB

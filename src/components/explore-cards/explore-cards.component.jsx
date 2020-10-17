@@ -9,8 +9,9 @@ import commercialFurniture from "../../assets/img/commercialFurnitures.webp"
 import decorationAndFinishing from "../../assets/img/decorationAndFinishing.webp"
 
 import "./explore-card.style.sass"
+import {connect} from "react-redux";
 
-const ExploreCards = () => {
+const ExploreCards = ({localization}) => {
     return (
         <div className="container-xl my-3 my-md-5 px-0">
             <div className="row px-0 mx-0">
@@ -20,8 +21,8 @@ const ExploreCards = () => {
                             <img src={homeFurniture} alt=""/>
                         </div>
                         <div className="shop-body">
-                            <h3>Home<br/>Furniture</h3>
-                            <p className="cta-btn">Shop now
+                            <h3>{localization.home_furniture}</h3>
+                            <p className="cta-btn">{localization.shop_now}
                                 <FontAwesomeIcon
                                     icon={faArrowCircleRight}
                                     color="#fff"
@@ -37,8 +38,8 @@ const ExploreCards = () => {
                             <img src={commercialFurniture} alt=""/>
                         </div>
                         <div className="shop-body">
-                            <h3>Commercial<br/>Furniture</h3>
-                            <p className="cta-btn">Shop now
+                            <h3>{localization.commercial_furniture}</h3>
+                            <p className="cta-btn">{localization.shop_now}
                                 <FontAwesomeIcon
                                     icon={faArrowCircleRight}
                                     color="#fff"
@@ -54,8 +55,8 @@ const ExploreCards = () => {
                             <img src={decorationAndFinishing} alt=""/>
                         </div>
                         <div className="shop-body">
-                            <h3>Decoration and<br/>Finishing</h3>
-                            <p className="cta-btn">Shop now
+                            <h3>{localization.decoration_and_finishing}</h3>
+                            <p className="cta-btn">{localization.shop_now}
                                 <FontAwesomeIcon
                                     icon={faArrowCircleRight}
                                     color="#fff"
@@ -69,4 +70,11 @@ const ExploreCards = () => {
     );
 };
 
-export default ExploreCards;
+const mapStateToProps = state => {
+    return {
+        localization: state.localization.chosenLanguage
+    }
+}
+
+export default connect(mapStateToProps)(ExploreCards);
+

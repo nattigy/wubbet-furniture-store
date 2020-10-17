@@ -13,12 +13,13 @@ import "./checkout.style.sass"
 import {updateUser} from "../../store/auth/auth.utils";
 import Header from "../../components/header/header.component";
 import Footer from "../../components/footer/footer.component";
+import PathIndicator from "../../components/path-indicator/path-indicator.component";
 
 const Checkout = props => {
 
     const {
         isFetchingFromError, cartItems, newUser, isLoggedIn, isAnonymous,
-        user, isFetchingFromCart, totalPrice, isSending, sendingSuccess
+        user, isFetchingFromCart, totalPrice, isSending, sendingSuccess, localization
     } = props;
 
     const [fullName, setFullName] = useState(newUser.name);
@@ -30,10 +31,9 @@ const Checkout = props => {
     const [house_no, setHouse_no] = useState(newUser.house_no ? newUser.house_no : "");
     const [telephone, setTelephone] = useState(newUser.telephone && newUser.telephone);
     const [order_notes, setOrder_notes] = useState("");
-    const [payment_method, setPayment_method] = useState("Direct Bank Transfer");
     const [orderSentConfirmation, setOrderSentConfirmation] = useState(true);
     const [direct_bank, setDirect_bank] = useState(true);
-    const [amole, setAmole] = useState(false);
+    const [method, setMethod] = useState("");
     const [agreeToTerms, setAgreeToTerms] = useState(false);
 
     useEffect(() => {
@@ -43,11 +43,11 @@ const Checkout = props => {
     const submitCheckout = e => {
         e.preventDefault();
 
-        const formData = `?&fullName=${fullName}&user_id=${user_id}&address=${address}&city=${city}&sub_city=${sub_city}&woreda=${woreda}&house_no=${house_no}&telephone=${telephone}&order_notes=${order_notes}&total_price=${totalPrice}&ordered_items=${newUser.cartList}&payment_method=${payment_method}`;
+        const formData = `?&fullName=${fullName}&user_id=${user_id}&address=${address}&city=${city}&sub_city=${sub_city}&woreda=${woreda}&house_no=${house_no}&telephone=${telephone}&order_notes=${order_notes}&total_price=${totalPrice}&ordered_items=${newUser.cartList}&payment_method=${method}`;
 
         props.orderFurniture({
             formData, user_id, fullName, address, city, sub_city, woreda, house_no, telephone,
-            order_notes, total_price: totalPrice, ordered_items: cartItems, payment_method
+            order_notes, total_price: totalPrice, ordered_items: cartItems, method
         });
 
         props.updateUser({uid: user.uid, address, city, sub_city, woreda, house_no, telephone})
@@ -81,24 +81,24 @@ const Checkout = props => {
                     </Dialog>
                 }
                 <div>
-                    {/*<PathIndicator path={[*/}
-                    {/*    {currentPath: false, pathName: "HOME", pathLink: "/"},*/}
-                    {/*    {currentPath: true, pathName: "CHECKOUT", pathLink: props.match.url},*/}
-                    {/*]}/>*/}
+                    <PathIndicator path={[
+                        {currentPath: false, pathName: "HOME", pathLink: "/"},
+                        {currentPath: true, pathName: "CHECKOUT", pathLink: props.match.url},
+                    ]}/>
                     <div className="container-lg">
                         <form onSubmit={submitCheckout} id="order_furniture" name="order_furniture">
                             <div className="row">
                                 <div className="col-md-7 mb-5">
                                     <div className="py-4">
                                         <div className="mb-5">
-                                            <h3 className="title">ADDRESS</h3>
+                                            <h3 className="title">{localization.user_address}</h3>
                                         </div>
                                         <div className="form-group">
                                             <input className="form-control w-100" type="text" id="fullname"
                                                    name="fullname"
                                                    onChange={e => setFullName(e.target.value)}
                                                    defaultValue={newUser.name}
-                                                   placeholder="Full Name"
+                                                   placeholder={localization.your_name}
                                                    required
                                             />
                                             <input type="hidden" name="user_id" id="user_id" value={user.uid}/>
@@ -108,7 +108,7 @@ const Checkout = props => {
                                                    id="address"
                                                    onChange={e => setAddress(e.target.value)}
                                                    defaultValue={newUser.address && newUser.address}
-                                                   placeholder="Address (Local name)"
+                                                   placeholder={localization.address_local_name}
                                                    required
                                             />
                                         </div>
@@ -116,7 +116,7 @@ const Checkout = props => {
                                             <input className="form-control w-100" type="text" name="city" id="city"
                                                    onChange={e => setCity(e.target.value)}
                                                    defaultValue={newUser.city && newUser.city}
-                                                   placeholder="Region/City"
+                                                   placeholder={localization.region}
                                                    required
                                             />
                                         </div>
@@ -124,14 +124,14 @@ const Checkout = props => {
                                             <input className="form-control w-100" type="text" name="city" id="city"
                                                    onChange={e => setSub_city(e.target.value)}
                                                    defaultValue={newUser.sub_city && newUser.sub_city}
-                                                   placeholder="Sub-City(optional)"
+                                                   placeholder={localization.sub_city}
                                             />
                                         </div>
                                         <div className="form-group">
                                             <input className="form-control w-100" type="text" name="city" id="city"
                                                    onChange={e => setWoreda(e.target.value)}
                                                    defaultValue={newUser.woreda && newUser.woreda}
-                                                   placeholder="Woreda"
+                                                   placeholder={localization.woreda}
                                                    required
                                             />
                                         </div>
@@ -139,7 +139,7 @@ const Checkout = props => {
                                             <input className="form-control w-100" type="text" name="city" id="city"
                                                    onChange={e => setHouse_no(e.target.value)}
                                                    defaultValue={newUser.house_no && newUser.house_no}
-                                                   placeholder="House-Number(optional)"
+                                                   placeholder={localization.house_number}
                                             />
                                         </div>
                                         <div className="form-group">
@@ -156,19 +156,22 @@ const Checkout = props => {
                                         <textarea
                                             className="form-control w-100" name="order_notes" id="order_notes"
                                             onChange={e => setOrder_notes(e.target.value)}
-                                            placeholder="Order Notes"
+                                            placeholder={localization.order_notes}
                                         />
                                     </div>
                                 </div>
 
                                 <div className="col-md-5 mb-5 border-light-custom p-4">
                                     <div className="text-center mb-5">
-                                        <h5 className="title">YOUR ORDER</h5>
+                                        <h5 className="title">{localization.your_order}</h5>
                                     </div>
                                     <div className="order-summary">
                                         <div className="d-table w-100 my-4">
-                                            <div className="d-table-cell font-14"><strong>PRODUCT</strong></div>
-                                            <div className="d-table-cell font-14 text-right"><strong>TOTAL</strong>
+                                            <div className="d-table-cell font-14">
+                                                <strong>{localization.ordered_product}</strong>
+                                            </div>
+                                            <div className="d-table-cell font-14 text-right">
+                                                <strong>{localization.total}</strong>
                                             </div>
                                         </div>
                                         {
@@ -180,14 +183,14 @@ const Checkout = props => {
                                                 ) : (
                                                     cartItems.length === 0 &&
                                                     <div className="text-center py-5">
-                                                        <h5 className="font-14">No Items In Your Cart!</h5>
+                                                        <h5 className="font-14">{localization.no_items_bag}</h5>
                                                     </div>
                                                 )
                                         }
                                         {
                                             isFetchingFromError &&
                                             <div className="text-center py-5">
-                                                <h5 className="font-14">No Items In Your Cart!</h5>
+                                                <h5 className="font-14">{localization.no_items_bag}</h5>
                                             </div>
                                         }
                                         <div className="order-products my-3">
@@ -215,7 +218,8 @@ const Checkout = props => {
                                                     </div>
                                                 </div>
                                                 <div className="d-table w-100 my-3">
-                                                    <div className="d-table-cell font-14"><strong>TOTAL</strong></div>
+                                                    <div className="d-table-cell font-14">
+                                                        <strong>{localization.total}</strong></div>
                                                     <div className="d-table-cell text-right">
                                                         <strong
                                                             className="order-total font-24 text-dark font-weight-bolder">
@@ -240,20 +244,153 @@ const Checkout = props => {
                                                                value="Direct Bank Transfer"
                                                                className="custom-control-input"
                                                                checked={direct_bank}
-                                                               onChange={e => {
-                                                                   setPayment_method(e.target.value);
-                                                                   setDirect_bank(!direct_bank);
-                                                                   setAmole(!amole);
-                                                               }}
+                                                               onChange={() => setDirect_bank(!direct_bank)}
                                                         />
                                                         <label className="custom-control-label font-14"
                                                                htmlFor="customRadio1">
-                                                            Direct Bank Transfer</label>
+                                                            Direct Bank Transfer
+                                                        </label>
                                                     </div>
                                                     <div className={`pl-4 my-2 ${direct_bank ? `d-block` : `d-none`}`}>
-                                                        <p className="font-14">Lorem ipsum dolor sit amet, consectetur
-                                                            adipisicing elit, sed do eiusmod tempor incididunt ut labore
-                                                            et dolore magna aliqua.</p>
+                                                        <div>
+                                                            <ul className="list-unstyled">
+                                                                <li>
+                                                                    <input className="mr-2" type="radio"
+                                                                           id="Commercial_Bank_of_Ethiopia"
+                                                                           name="payment_method"
+                                                                           value="Commercial Bank of Ethiopia"
+                                                                           onChange={e => {
+                                                                               setMethod(e.target.value);
+                                                                           }}
+                                                                    />
+                                                                    <label htmlFor="Commercial_Bank_of_Ethiopia">
+                                                                        Commercial Bank of Ethiopia
+                                                                    </label>
+                                                                    <div className={`pl-4 my-2 ${
+                                                                        method === "Commercial Bank of Ethiopia" ? `d-block` : `d-none`
+                                                                    }`}>
+                                                                        <p className="font-14">
+                                                                            Transfer
+                                                                            <span
+                                                                                className="font-18 font-weight-bolder"> {totalPrice} ETB </span>
+                                                                            to CBE bank account 1000229957019, Beiment
+                                                                            Zebene.
+                                                                        </p>
+                                                                    </div>
+                                                                </li>
+                                                                <li>
+                                                                    <input className="mr-2" type="radio"
+                                                                           id="Dashen_Bank"
+                                                                           name="payment_method"
+                                                                           value="Dashen Bank"
+                                                                           onChange={e => {
+                                                                               setMethod(e.target.value)
+                                                                           }}
+                                                                    />
+                                                                    <label htmlFor="Dashen_Bank">Dashen Bank</label>
+                                                                    <div className={`pl-4 my-2 ${
+                                                                        method === "Dashen Bank" ? `d-block` : `d-none`
+                                                                    }`}>
+                                                                        <p className="font-14">
+                                                                            Transfer
+                                                                            <span
+                                                                                className="font-18 font-weight-bolder"> {totalPrice} ETB </span>
+                                                                            to Dashen Bank, bank account 5084197055011,
+                                                                            Beiment Zebene.
+                                                                        </p>
+                                                                    </div>
+                                                                </li>
+                                                                <li>
+                                                                    <input className="mr-2" type="radio"
+                                                                           id="Bank_of_Abyssinia"
+                                                                           name="payment_method"
+                                                                           value="Bank of Abyssinia"
+                                                                           onChange={e => {
+                                                                               setMethod(e.target.value)
+                                                                           }}
+                                                                    />
+                                                                    <label htmlFor="Bank_of_Abyssinia">Bank of
+                                                                        Abyssinia</label>
+                                                                    <div className={`pl-4 my-2 ${
+                                                                        method === "Bank of Abyssinia" ? `d-block` : `d-none`
+                                                                    }`}>
+                                                                        <p className="font-14">
+                                                                            Transfer
+                                                                            <span
+                                                                                className="font-18 font-weight-bolder"> {totalPrice} ETB </span>
+                                                                            to Bank of Abyssinia, bank account 19598462,
+                                                                            Beiment Zebene.
+                                                                        </p>
+                                                                    </div>
+                                                                </li>
+                                                                <li>
+                                                                    <input className="mr-2" type="radio"
+                                                                           id="Awash_Bank"
+                                                                           name="payment_method"
+                                                                           value="Awash Bank"
+                                                                           onChange={e => {
+                                                                               setMethod(e.target.value)
+                                                                           }}
+                                                                    />
+                                                                    <label htmlFor="Awash_Bank">Awash Bank</label>
+                                                                    <div className={`pl-4 my-2 ${
+                                                                        method === "Awash Bank" ? `d-block` : `d-none`
+                                                                    }`}>
+                                                                        <p className="font-14">
+                                                                            Transfer
+                                                                            <span
+                                                                                className="font-18 font-weight-bolder"> {totalPrice} ETB </span>
+                                                                            to Awash Bank, bank account 01320152672700,
+                                                                            Beiment Zebene.
+                                                                        </p>
+                                                                    </div>
+                                                                </li>
+                                                                <li>
+                                                                    <input className="mr-2" type="radio"
+                                                                           id="United_Bank"
+                                                                           name="payment_method"
+                                                                           value="United Bank"
+                                                                           onChange={e => {
+                                                                               setMethod(e.target.value)
+                                                                           }}
+                                                                    />
+                                                                    <label htmlFor="United_Bank">United Bank</label>
+                                                                    <div className={`pl-4 my-2 ${
+                                                                        method === "United Bank" ? `d-block` : `d-none`
+                                                                    }`}>
+                                                                        <p className="font-14">
+                                                                            Transfer
+                                                                            <span
+                                                                                className="font-18 font-weight-bolder"> {totalPrice} ETB </span>
+                                                                            to United Bank, bank account
+                                                                            1560411349655012, Beiment Zebene.
+                                                                        </p>
+                                                                    </div>
+                                                                </li>
+                                                                <li>
+                                                                    <input className="mr-2" type="radio"
+                                                                           id="Wegagen_Bank"
+                                                                           name="payment_method"
+                                                                           value="Wegagen Bank"
+                                                                           onChange={e => {
+                                                                               setMethod(e.target.value)
+                                                                           }}
+                                                                    />
+                                                                    <label htmlFor="Wegagen_Bank">Wegagen Bank</label>
+                                                                    <div className={`pl-4 my-2 ${
+                                                                        method === "Wegagen Bank" ? `d-block` : `d-none`
+                                                                    }`}>
+                                                                        <p className="font-14">
+                                                                            Transfer
+                                                                            <span
+                                                                                className="font-18 font-weight-bolder"> {totalPrice} ETB </span>
+                                                                            to Wegagen Bank, bank account
+                                                                            08443405-30101, Beiment Zebene.
+                                                                        </p>
+                                                                    </div>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div className="input-radio py-2">
@@ -261,20 +398,77 @@ const Checkout = props => {
                                                         <input type="radio" id="customRadio2" name="customRadio"
                                                                value="Cheque Payment"
                                                                className="custom-control-input"
-                                                               onChange={e => {
-                                                                   setPayment_method(e.target.value);
-                                                                   setAmole(!amole);
-                                                                   setDirect_bank(!direct_bank);
-                                                               }}
+                                                               onChange={() => setDirect_bank(!direct_bank)}
                                                         />
                                                         <label className="custom-control-label font-14"
                                                                htmlFor="customRadio2">
-                                                            Cheque Payment</label>
+                                                            Mobile Payments
+                                                        </label>
                                                     </div>
-                                                    <div className={`pl-4 my-2 ${amole ? `d-block` : `d-none`}`}>
-                                                        <p className="font-14">Lorem ipsum dolor sit amet, consectetur
-                                                            adipisicing elit, sed do eiusmod tempor incididunt ut labore
-                                                            et dolore magna aliqua.</p>
+                                                    <div className={`pl-4 my-2 ${!direct_bank ? `d-block` : `d-none`}`}>
+                                                        <ul className="list-unstyled">
+                                                            <li>
+                                                                <input className="mr-2" type="radio"
+                                                                       id="Amole"
+                                                                       name="payment_method"
+                                                                       value="Amole"
+                                                                       onChange={e => {
+                                                                           setMethod(e.target.value)
+                                                                       }}
+                                                                />
+                                                                <label htmlFor="Amole">Amole</label>
+                                                                <div className={`pl-4 my-2 ${
+                                                                    method === "Amole" ? `d-block` : `d-none`
+                                                                }`}>
+                                                                    <p className="font-14">
+                                                                        Go to Transfer within Dashen and transfer amount
+                                                                        <span
+                                                                            className="font-18 font-weight-bolder"> {totalPrice} ETB </span>
+                                                                        to account no 5084197055011, Beiment Zebene.
+                                                                    </p>
+                                                                </div>
+                                                            </li>
+                                                            {/*<li>*/}
+                                                            {/*    <input className="mr-2" type="radio"*/}
+                                                            {/*           id="Yene_Pay"*/}
+                                                            {/*           name="payment_method"*/}
+                                                            {/*           value="Yene Pay"*/}
+                                                            {/*           onChange={e => {*/}
+                                                            {/*               setMethod(e.target.value)*/}
+                                                            {/*           }}*/}
+                                                            {/*    />*/}
+                                                            {/*    <label htmlFor="Yene_Pay">Yene Pay</label>*/}
+                                                            {/*    <div className={`pl-4 my-2 ${*/}
+                                                            {/*        method === "Yene Pay" ? `d-block` : `d-none`*/}
+                                                            {/*    }`}>*/}
+                                                            {/*        <p className="font-14">*/}
+                                                            {/*            Lorem ipsum dolor sit amet, consectetur*/}
+                                                            {/*            adipisicing elit, sed do eiusmod tempor*/}
+                                                            {/*            incididunt ut labore*/}
+                                                            {/*        </p>*/}
+                                                            {/*    </div>*/}
+                                                            {/*</li>*/}
+                                                            <li>
+                                                                <input className="mr-2" type="radio"
+                                                                       id="CBE_birr"
+                                                                       name="payment_method"
+                                                                       value="CBE birr"
+                                                                       onChange={e => {
+                                                                           setMethod(e.target.value)
+                                                                       }}
+                                                                />
+                                                                <label htmlFor="CBE_birr">CBE birr</label>
+                                                                <div className={`pl-4 my-2 ${
+                                                                    method === "CBE birr" ? `d-block` : `d-none`
+                                                                }`}>
+                                                                    <p className="font-14">
+                                                                        Lorem ipsum dolor sit amet, consectetur
+                                                                        adipisicing elit, sed do eiusmod tempor
+                                                                        incididunt ut labore
+                                                                    </p>
+                                                                </div>
+                                                            </li>
+                                                        </ul>
                                                     </div>
                                                 </div>
                                             </div>
@@ -286,9 +480,10 @@ const Checkout = props => {
                                                     />
                                                     <label className="custom-control-label font-14"
                                                            htmlFor="customControlInline">
-                                                        I've read and accept the
-                                                        <Link className="text-muted" to="/terms_and_conditions"> terms &
-                                                            conditions</Link>
+                                                        {localization.ive_read_and_accept}
+                                                        <Link className="text-muted ml-1" to="/terms_and_conditions">
+                                                            {localization.terms_and_conditions}
+                                                        </Link>
                                                     </label>
                                                 </div>
                                             </div>
@@ -299,8 +494,8 @@ const Checkout = props => {
                                                         <p>Agree to terms and conditions</p>
                                                     </div>
                                                 }
-                                                <button className="btn bg-red text-white w-100 my-3">Place order
-                                                </button>
+                                                <button
+                                                    className="btn bg-red text-white w-100 my-3">{localization.place_order}</button>
                                             </div>
                                         </Fragment>
                                     }
@@ -328,6 +523,7 @@ const mapStateToProps = state => {
         totalPrice: state.cartList.totalPrice,
         isSending: state.order.isSending,
         sendingSuccess: state.order.sendingSuccess,
+        localization: state.localization.chosenLanguage
     };
 };
 

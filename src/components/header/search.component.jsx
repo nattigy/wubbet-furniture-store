@@ -16,7 +16,7 @@ const SearchSection = props => {
     const [name, setName] = useState("all");
     const [openCart, setOpenCart] = useState(false);
 
-    const {user, wishListLength, cartLength} = props;
+    const {user, wishListLength, cartLength, localization} = props;
 
     useEffect(() => {
         window.onclick = function (event) {
@@ -60,7 +60,7 @@ const SearchSection = props => {
                                 {/*    <option value="FINISHING_MATERIALS">Finishing Materials</option>*/}
                                 {/*</select>*/}
                                 <input className="search-input" type="search" name="name"
-                                       placeholder="What are you looking for?"
+                                       placeholder={localization.search}
                                        onChange={e => setName(e.target.value)}
                                 />
                                 <Link
@@ -126,6 +126,7 @@ const mapStateToProps = state => {
         user: state.auth.user,
         wishListLength: state.wishList.wishListItems,
         cartLength: state.cartList.cartItems,
+        localization: state.localization.chosenLanguage
     };
 };
 

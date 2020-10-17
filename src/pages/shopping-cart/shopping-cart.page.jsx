@@ -17,7 +17,7 @@ const ShoppingCart = props => {
 
     const {
         cartItems, totalPrice, user, isFetchingFromCart,
-        removingFromCartDone, isFetchingFromDone
+        removingFromCartDone, isFetchingFromDone, localization
     } = props;
 
     useEffect(() => {
@@ -43,7 +43,7 @@ const ShoppingCart = props => {
             <div className="container-sm px-3">
                 <div className="sticky-top bg-white p-2">
                     <Link className="checkout-btn btn bg-red text-nowrap" to="/checkout">
-                        Proceed to Checkout
+                        {localization.proceed_to_checkout}
                     </Link>
                 </div>
                 <div className="mt-3">
@@ -96,6 +96,7 @@ const mapStateToProps = state => {
         isFetchingFromError: state.cartList.isFetchingFromError,
         removingFromCartDone: state.cartList.removingFromCartDone,
         totalPrice: state.cartList.totalPrice,
+        localization: state.localization.chosenLanguage
     };
 };
 

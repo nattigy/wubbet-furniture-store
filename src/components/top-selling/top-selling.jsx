@@ -9,11 +9,11 @@ import SingleItem from "../single-item/single-item.component";
 
 const TopSelling = props => {
 
-    const {isSearchingNewProducts, items} = props;
+    const {isSearchingNewProducts, items, localization} = props;
 
     return (
         <div className="container-xl overflow-hidden px-3">
-            <h3 className="section-title">TOP SELLING</h3>
+            <h3 className="section-title">{localization.top_selling}</h3>
             <div className="d-flex overflow-auto mt-5">
                 {
                     isSearchingNewProducts || isSearchingNewProducts === undefined ?
@@ -42,6 +42,7 @@ const mapStateToProps = state => {
         isSearchingNewProductsError: state.search.isSearchingNewProductsError,
         items: state.search.newProducts,
         errorMessage: state.search.errorMessage,
+        localization: state.localization.chosenLanguage
     };
 };
 

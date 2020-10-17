@@ -5,14 +5,15 @@ import {faEnvelope, faMapMarker, faPhone} from "@fortawesome/free-solid-svg-icon
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 import {CopyRight} from "./copy-right.component";
-import {Subscription} from "./subscription.component";
+import Subscription from "./subscription.component";
 
 import "./footer.style.sass"
 import {faFacebook, faInstagram, faTwitter} from "@fortawesome/free-brands-svg-icons";
 import {faTelegram} from "@fortawesome/free-brands-svg-icons/faTelegram";
 import Button from "@material-ui/core/Button";
+import {connect} from "react-redux";
 
-const Footer = () => {
+const Footer = ({localization}) => {
     return (
         <Fragment>
             <Subscription/>
@@ -22,17 +23,14 @@ const Footer = () => {
                         <div className="row">
                             <div className="col-md-3 col-sm-6 mb-5">
                                 <div className="footer">
-                                    <h3 className="title font-18 mb-3">ABOUT US</h3>
+                                    <h3 className="title font-18 mb-3 text-uppercase">{localization.about_us}</h3>
                                     <div>
                                         <p className="footer-links" id="about">
-                                            We aim to create the larges database of furniture, finishing materials and
-                                            decorations in Ethiopia to allow our customers to find products, compare
-                                            prices, and get the product that suit their style.
+                                            {localization.about_text}
                                             <p>
-
                                                 <Link to="/about-us">
                                                     <Button className="bg-transparent">
-                                                        LEARN MORE
+                                                        {localization.learn_more}
                                                     </Button>
                                                 </Link>
                                             </p>
@@ -44,7 +42,7 @@ const Footer = () => {
                                                         icon={faMapMarker}
                                                         size="sm"
                                                         color="#ff8c00"
-                                                    /> Addis Ababa, Ethiopia
+                                                    /> {localization.address}
                                                 </a>
                                             </li>
                                             <li>
@@ -54,6 +52,15 @@ const Footer = () => {
                                                         size="sm"
                                                         color="#ff8c00"
                                                     /> +251-924-61-81-31
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    <FontAwesomeIcon
+                                                        icon={faPhone}
+                                                        size="sm"
+                                                        color="#ff8c00"
+                                                    /> +251-946-62-52-64
                                                 </a>
                                             </li>
                                             <li>
@@ -72,13 +79,17 @@ const Footer = () => {
 
                             <div className="col-md-3 col-sm-6 mb-5">
                                 <div className="footer">
-                                    <h3 className="title font-18">CATEGORIES</h3>
+                                    <h3 className="title font-18">{localization.categories_footer}</h3>
                                     <ul className="footer-links navbar-nav">
-                                        <li><Link to="#">Hot deals</Link></li>
-                                        <li><Link to="/new_items">New Items</Link></li>
-                                        <li><Link to="/cat/HOME_FURNITURE">Home Furniture</Link></li>
-                                        <li><Link to="/cat/COMMERCIAL_FURNITURE">Commercial Furniture</Link></li>
-                                        <li><Link to="/cat/FINISHING_MATERIALS">Finishing Materials</Link></li>
+                                        <li><Link to="#">{localization.hot_deals}</Link></li>
+                                        <li><Link to="/new_items">{localization.new_product}</Link></li>
+                                        <li><Link to="/cat/HOME_FURNITURE">{localization.home_furniture}</Link></li>
+                                        <li><Link
+                                            to="/cat/COMMERCIAL_FURNITURE">{localization.commercial_furniture}</Link>
+                                        </li>
+                                        <li><Link
+                                            to="/cat/FINISHING_MATERIALS">{localization.decoration_and_finishing}</Link>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
@@ -87,24 +98,25 @@ const Footer = () => {
 
                             <div className="col-md-3 col-sm-6 mb-5">
                                 <div className="footer">
-                                    <h3 className="title font-18">INFORMATION</h3>
+                                    <h3 className="title font-18 text-uppercase">{localization.information}</h3>
                                     <ul className="footer-links navbar-nav">
-                                        <li><Link to="/about-us">About Us</Link></li>
-                                        <li><Link to="#about">Contact Us</Link></li>
-                                        <li><Link to="/privacy_policy">Privacy Policy</Link></li>
-                                        <li><Link to="/return_policy">Orders and Returns</Link></li>
-                                        <li><Link to="/terms_and_conditions">Terms & Conditions</Link></li>
+                                        <li><Link to="/about-us">{localization.about_us}</Link></li>
+                                        <li><Link to="#about">{localization.contact_us}</Link></li>
+                                        <li><Link to="/privacy_policy">{localization.privacy_policy}</Link></li>
+                                        <li><Link to="/return_policy">{localization.orders_and_returns}</Link></li>
+                                        <li><Link to="/terms_and_conditions">{localization.terms_and_conditions}</Link>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
 
                             <div className="col-md-3 col-sm-6 mb-5">
                                 <div className="footer">
-                                    <h3 className="title font-18">SERVICE</h3>
+                                    <h3 className="title font-18 text-uppercase">{localization.service}</h3>
                                     <ul className="footer-links navbar-nav">
-                                        <li><Link to="/my-account">My Account</Link></li>
-                                        <li><Link to="/cart">View Cart</Link></li>
-                                        <li><Link to="/whishlist">Wish List</Link></li>
+                                        <li><Link to="/my-account">{localization.my_account}</Link></li>
+                                        <li><Link to="/cart">{localization.view_bag}</Link></li>
+                                        <li><Link to="/whishlist">{localization.favourites}</Link></li>
                                         {/*<li><Link to="/">Help</Link></li>*/}
                                     </ul>
                                 </div>
@@ -140,4 +152,10 @@ const Footer = () => {
     )
 };
 
-export default Footer;
+const mapStateToProps = state => {
+    return {
+        localization: state.localization.chosenLanguage
+    }
+}
+
+export default connect(mapStateToProps)(Footer);

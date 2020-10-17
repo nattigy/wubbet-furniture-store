@@ -6,7 +6,8 @@ import searchReducers from "./search/search.reducers";
 import orderReducers from "./order/order.reducers";
 import cartListReducers from "./cartList/cart-list.reducers";
 import wishListReducers from "./wishList/wish-list.reducers";
-import addCatReducers from "./add-cat/add-cat.reducers"
+import addCatReducers from "./add-cat/add-cat.reducers";
+import {localizationReducers} from "./language/localization";
 
 export default combineReducers({
     auth: authReducers,
@@ -15,5 +16,6 @@ export default combineReducers({
     order: orderReducers,
     cartList: cartListReducers,
     wishList: wishListReducers,
-    addCat: addCatReducers
+    addCat: addCatReducers,
+    localization: localizationReducers
 });

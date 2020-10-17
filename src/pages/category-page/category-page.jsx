@@ -9,10 +9,11 @@ import Categories from "../../components/header/categories";
 import {connect} from "react-redux";
 import {searchCategory} from "../../store/search/search.utils";
 import PreLoader from "../../components/pre-loader/pre-loader.component";
+import PathIndicator from "../../components/path-indicator/path-indicator.component";
 
 const CategoryPage = props => {
 
-    const {isSearchingCat, isSearchingCatDone, category} = props;
+    const {isSearchingCat, isSearchingCatDone, category, localization} = props;
 
     useEffect(() => {
         props.searchCategory({category: props.match.params.category});
@@ -21,10 +22,15 @@ const CategoryPage = props => {
     return (
         <div>
             <Header/>
-            {/*<PathIndicator path={[*/}
-            {/*    {currentPath: false, pathName: "Home", pathLink: "/"},*/}
-            {/*    {currentPath: true, pathName: props.match.pathName, pathLink: props.match.url},*/}
-            {/*]}/>*/}
+            <PathIndicator path={[
+                {currentPath: false, pathName: "Home", pathLink: "/"},
+                {currentPath: false, pathName: "CATEGORY", pathLink: props.match.url},
+                {
+                    currentPath: true,
+                    pathName: Categories.map(cat => cat.id === props.match.params.category && ` ${cat.name}`),
+                    pathLink: props.match.url
+                },
+            ]}/>
             <div className="container-xl px-3">
                 <section>
                     <h1 className="mt-5 font-weight-bold text-break cat-title">
@@ -68,7 +74,8 @@ const mapStateToProps = state => {
         isSearchingCat: state.search.isSearchingCat,
         isSearchingCatDone: state.search.isSearchingCatDone,
         isSearchError: state.search.isSearchError,
-        category: state.search.category
+        category: state.search.category,
+        localization: state.localization.chosenLanguage
     }
 };
 

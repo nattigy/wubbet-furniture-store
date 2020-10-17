@@ -15,7 +15,7 @@ const CartMini = props => {
 
     const {
         isFetchingFromError, cartItems, user,
-        isFetchingFromCart, totalPrice
+        isFetchingFromCart, totalPrice, localization
     } = props;
 
     useEffect(() => {
@@ -33,7 +33,7 @@ const CartMini = props => {
                 {
                     cartItems.length === 0 &&
                     <div className="text-center py-5">
-                        <h5 className="font-12">No Items In Your Cart!</h5>
+                        <h5 className="font-12">{localization.no_items_bag}</h5>
                     </div>
                 }
                 {
@@ -54,9 +54,10 @@ const CartMini = props => {
                 </p>
             </div>
             <div className="btn-group w-100">
-                <Link to="/cart" className="btn rounded-0 bg-red-custom text-white">View Cart</Link>
+                <Link to="/cart"
+                      className="btn rounded-0 bg-red-custom text-white">{localization.my_shopping_bag}</Link>
                 <Link to="/checkout" className="btn rounded-0 text-white bg-red">
-                    Checkout <FontAwesomeIcon icon={faArrowCircleRight} color="#fff"/>
+                    {localization.checkout} <FontAwesomeIcon icon={faArrowCircleRight} color="#fff"/>
                 </Link>
             </div>
         </div>
@@ -64,7 +65,6 @@ const CartMini = props => {
 };
 
 const mapStateToProps = state => {
-    console.log(state.cartList.cartItems)
     return {
         user: state.auth.user,
         cartItems: state.cartList.cartItems,
@@ -73,6 +73,7 @@ const mapStateToProps = state => {
         isFetchingFromError: state.cartList.isFetchingFromError,
         removingFromCartDone: state.cartList.removingFromCartDone,
         totalPrice: state.cartList.totalPrice,
+        localization: state.localization.chosenLanguage
     };
 };
 
