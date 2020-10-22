@@ -1,15 +1,16 @@
 import React from "react";
+import {connect} from "react-redux";
+import {Link} from "react-router-dom";
 
 import {faEye, faHeart} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 import AddToCartButton from "../add-to-cart-button/add-to-cart-button"
 
-import "./single-item.style.sass"
 import {addItemToCart} from "../../store/cartList/cart-list.utils";
 import {addItemToWishList} from "../../store/wishList/wish-list.utils";
-import {connect} from "react-redux";
-import {Link} from "react-router-dom";
+
+import "./single-item.style.sass"
 
 const SingleItem = (props) => {
 

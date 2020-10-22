@@ -26,7 +26,6 @@ const SimilarItems = props => {
                         ) :
                         items && items.length !== 0 ? items.map(item =>
                                 <SingleItem key={item.id} item={item}/>
-                            // <SingleProduct key={item.id} margin="mx-3" item={item}/>
                         ) : (
                             <div className="text-center my-5">
                                 <h6>No Items To Display</h6>

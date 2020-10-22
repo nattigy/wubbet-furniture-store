@@ -7,12 +7,10 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 import ShoppingCartMini from "../cart-mini/cart-mini.component";
 
-// import logo from "../../assets/img/darklogo.webp";
 import logo from "../../assets/img/new wubbet logo with font.png";
 
 const SearchSection = props => {
 
-    const [category, setCategory] = useState("all");
     const [name, setName] = useState("all");
     const [openCart, setOpenCart] = useState(false);
 
@@ -42,33 +40,16 @@ const SearchSection = props => {
                             <img className="logo-img" src={logo} alt=""/>
                         </Link>
                     </div>
-                    <div
-                        className="search-input-cont overflow-hidden w-100 order-7 order-md-4 flex-sm-grow-1 px-3 mx-0 mt-3 mt-md-0">
-                        {/*<input className="w-100 search-input" type="search" name="name"*/}
-                        {/*       placeholder="What are you looking for?"*/}
-                        {/*       onChange={e => setName(e.target.value)}*/}
-                        {/*/>*/}
+                    <div className="search-input-cont overflow-hidden w-100 order-7 order-md-4 flex-sm-grow-1 px-3 mx-0 mt-3 mt-md-0">
                         <div className="text-nowrap w-100 text-center px-0 mx-0">
                             <form onSubmit={handleSubmit}>
-                                {/*<select name="category" id=""*/}
-                                {/*        className="custom-select"*/}
-                                {/*        onChange={e => setCategory(e.target.value)}*/}
-                                {/*>*/}
-                                {/*    <option value="all">All Category</option>*/}
-                                {/*    <option value="HOME_FURNITURE">Home Furniture</option>*/}
-                                {/*    <option value="COMMERCIAL_FURNITURE">Commercial Furniture</option>*/}
-                                {/*    <option value="FINISHING_MATERIALS">Finishing Materials</option>*/}
-                                {/*</select>*/}
                                 <input className="search-input" type="search" name="name"
                                        placeholder={localization.search}
                                        onChange={e => setName(e.target.value)}
                                 />
-                                <Link
-                                    to={`/search/items/${name}`}
-                                    className="bg-red btn search-btn" type="submit"
-                                >
+                                <button className="bg-red btn search-btn" type="submit">
                                     <FontAwesomeIcon icon={faSearch} color="#fff"/>
-                                </Link>
+                                </button>
                             </form>
                         </div>
                     </div>

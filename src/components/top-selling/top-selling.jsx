@@ -2,10 +2,8 @@ import React from "react";
 import {connect} from "react-redux";
 
 import PreLoader from "../pre-loader/pre-loader.component";
-
-import {searchNewProducts} from "../../store/search/search.utils";
-
 import SingleItem from "../single-item/single-item.component";
+import {searchNewProducts} from "../../store/search/search.utils";
 
 const TopSelling = props => {
 
@@ -24,7 +22,6 @@ const TopSelling = props => {
                         ) :
                         items && items.length !== 0 ? items.map(item =>
                                 <SingleItem key={item.id} item={item}/>
-                            // <SingleProduct key={item.id} margin="mx-3" item={item}/>
                         ) : (
                             <div className="text-center my-5">
                                 <h6>No Items To Display</h6>

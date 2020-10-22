@@ -1,4 +1,5 @@
 import React, {useEffect} from "react";
+import {connect} from "react-redux";
 
 import CategoryItem from "../../components/category-item/category-item.component";
 
@@ -6,10 +7,10 @@ import "./category-page.style.sass"
 import Header from "../../components/header/header.component";
 import Footer from "../../components/footer/footer.component";
 import Categories from "../../components/header/categories";
-import {connect} from "react-redux";
-import {searchCategory} from "../../store/search/search.utils";
 import PreLoader from "../../components/pre-loader/pre-loader.component";
 import PathIndicator from "../../components/path-indicator/path-indicator.component";
+
+import {searchCategory} from "../../store/search/search.utils";
 
 const CategoryPage = props => {
 
@@ -63,7 +64,6 @@ const CategoryPage = props => {
                     }
                 </section>
             </div>
-            {/*<RecentView/>*/}
             <Footer/>
         </div>
     );

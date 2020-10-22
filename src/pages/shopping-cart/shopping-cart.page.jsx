@@ -1,17 +1,16 @@
 import React, {useEffect} from "react";
 import {Link} from "react-router-dom";
 import {connect} from "react-redux";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faArrowRight} from "@fortawesome/free-solid-svg-icons/faArrowRight";
 
+import Footer from "../../components/footer/footer.component";
+import Header from "../../components/header/header.component";
 import CartItem from "../../components/cart-item/cart-item.component";
 import PreLoader from "../../components/pre-loader/pre-loader.component";
 import PathIndicator from "../../components/path-indicator/path-indicator.component";
-
 import {deleteFromCart, fetchFromCart} from "../../store/cartList/cart-list.utils";
 import {addItemToWishList} from "../../store/wishList/wish-list.utils";
-import Footer from "../../components/footer/footer.component";
-import Header from "../../components/header/header.component";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faArrowRight} from "@fortawesome/free-solid-svg-icons/faArrowRight";
 
 const ShoppingCart = props => {
 

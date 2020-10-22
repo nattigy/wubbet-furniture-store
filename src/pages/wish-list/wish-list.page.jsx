@@ -1,16 +1,15 @@
 import React, {useEffect} from "react";
 import {connect} from "react-redux";
+import {Link} from "react-router-dom";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faArrowRight} from "@fortawesome/free-solid-svg-icons/faArrowRight";
 
 import PreLoader from "../../components/pre-loader/pre-loader.component";
 import WishListItem from "../../components/wish-list-item/wish-list-item.component";
 import PathIndicator from "../../components/path-indicator/path-indicator.component";
-
-import {deleteFromWishList, fetchFromWishList} from "../../store/wishList/wish-list.utils";
 import Header from "../../components/header/header.component";
 import Footer from "../../components/footer/footer.component";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faArrowRight} from "@fortawesome/free-solid-svg-icons/faArrowRight";
-import {Link} from "react-router-dom";
+import {deleteFromWishList, fetchFromWishList} from "../../store/wishList/wish-list.utils";
 
 const WishList = props => {
 

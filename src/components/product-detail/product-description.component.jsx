@@ -15,15 +15,6 @@ const ProductDescription = props => {
         <div className="col-md-5">
             <div>
                 <h3 className="title">{name}</h3>
-                <div className="my-3">
-                    {/*<div className="d-inline-block mr-3">*/}
-                    {/*    <FontAwesomeIcon icon={faStar} size="1x" color="#D10024"/>*/}
-                    {/*    <FontAwesomeIcon icon={faStar} size="1x" color="#D10024"/>*/}
-                    {/*    <FontAwesomeIcon icon={faStar} size="1x" color="#D10024"/>*/}
-                    {/*    <FontAwesomeIcon icon={faStar} size="1x" color="#D10024"/>*/}
-                    {/*</div>*/}
-                    {/*<a className="text-dark" href="/">10 Review(s) | Add your review</a>*/}
-                </div>
                 <div className="my-2">
                     <h4 className="mr-3 d-inline-block">
                         <span className="font-weight-bold">{price}</span> ETB
@@ -67,16 +58,6 @@ const ProductDescription = props => {
                         </button>
                     </div>
                 </div>
-
-                {/*<ul className="list-unstyled my-4">*/}
-                {/*    <li className="d-inline-block">*/}
-                {/*        <Link className="text-dark">Home Furniture</Link>*/}
-                {/*    </li>*/}
-                {/*    <li className="d-inline-block mx-3"> ></li>*/}
-                {/*    <li className="d-inline-block">*/}
-                {/*        <Link className="text-dark">Living Room</Link>*/}
-                {/*    </li>*/}
-                {/*</ul>*/}
             </div>
         </div>
     );

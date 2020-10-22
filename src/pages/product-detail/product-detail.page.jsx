@@ -1,16 +1,17 @@
 import React, {Fragment, useEffect} from "react";
 import {connect} from "react-redux";
+
+import Header from "../../components/header/header.component";
+import Footer from "../../components/footer/footer.component";
+import ProductImages from "../../components/product-detail/product-images.component";
+import ProductDescription from "../../components/product-detail/product-description.component";
 import PreLoader from "../../components/pre-loader/pre-loader.component";
 import PathIndicator from "../../components/path-indicator/path-indicator.component";
 
 import {getItemDetail} from "../../store/item/item.utils";
 import {addItemToWishList} from "../../store/wishList/wish-list.utils";
 
-import "./product-detail.style.sass"
-import Header from "../../components/header/header.component";
-import Footer from "../../components/footer/footer.component";
-import ProductImages from "../../components/product-detail/product-images.component";
-import ProductDescription from "../../components/product-detail/product-description.component";
+import "./product-detail.style.sass";
 
 const ProductDetail = props => {
 

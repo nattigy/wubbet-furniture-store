@@ -23,8 +23,7 @@ const Account = props => {
                         <h1 className="section-title">Hello {newUser.name}</h1>
                         <p className="p-max-width">
                             Welcome to your private corner of Wubbet Furniture Store. You can manage your orders,
-                            returns
-                            and account info right here.
+                            returns and account info right here.
                         </p>
                         <div className="row my-5">
                             <div className="col-12 col-md-4 my-2">

@@ -73,7 +73,7 @@ const Checkout = props => {
                     sendingSuccess &&
                     <Dialog open={orderSentConfirmation}>
                         <div className="w-100 px-5 py-3 text-center text-success" color="red">
-                            Your order is sent!
+                            {localization.purchase_confirmation}
                         </div>
                         <div className="text-center px-3 pb-2">
                             <button className="btn" onClick={() => setOrderSentConfirmation(false)}>ok</button>
@@ -212,9 +212,9 @@ const Checkout = props => {
                                             cartItems.length !== 0 &&
                                             <Fragment>
                                                 <div className="d-table w-100 my-3">
-                                                    <div className="d-table-cell text-muted font-14">Shiping</div>
+                                                    <div className="d-table-cell text-muted font-14">{localization.shipping}</div>
                                                     <div className="d-table-cell text-right font-14">
-                                                        <strong>FREE</strong>
+                                                        <strong className="text-uppercase">{localization.free}</strong>
                                                     </div>
                                                 </div>
                                                 <div className="d-table w-100 my-3">
@@ -248,7 +248,7 @@ const Checkout = props => {
                                                         />
                                                         <label className="custom-control-label font-14"
                                                                htmlFor="customRadio1">
-                                                            Direct Bank Transfer
+                                                            {localization.direct_bank_transfer}
                                                         </label>
                                                     </div>
                                                     <div className={`pl-4 my-2 ${direct_bank ? `d-block` : `d-none`}`}>
@@ -264,17 +264,15 @@ const Checkout = props => {
                                                                            }}
                                                                     />
                                                                     <label htmlFor="Commercial_Bank_of_Ethiopia">
-                                                                        Commercial Bank of Ethiopia
+                                                                        {localization.cbe}
                                                                     </label>
                                                                     <div className={`pl-4 my-2 ${
                                                                         method === "Commercial Bank of Ethiopia" ? `d-block` : `d-none`
                                                                     }`}>
                                                                         <p className="font-14">
-                                                                            Transfer
-                                                                            <span
-                                                                                className="font-18 font-weight-bolder"> {totalPrice} ETB </span>
-                                                                            to CBE bank account 1000229957019, Beiment
-                                                                            Zebene.
+                                                                            {localization.cbe_text1}
+                                                                            <span className="font-18 font-weight-bolder"> {totalPrice} ETB </span>
+                                                                            {localization.cbe_text2}
                                                                         </p>
                                                                     </div>
                                                                 </li>
@@ -287,16 +285,17 @@ const Checkout = props => {
                                                                                setMethod(e.target.value)
                                                                            }}
                                                                     />
-                                                                    <label htmlFor="Dashen_Bank">Dashen Bank</label>
+                                                                    <label htmlFor="Dashen_Bank">
+                                                                        {localization.dashen_bank}
+                                                                    </label>
                                                                     <div className={`pl-4 my-2 ${
                                                                         method === "Dashen Bank" ? `d-block` : `d-none`
                                                                     }`}>
                                                                         <p className="font-14">
-                                                                            Transfer
+                                                                            {localization.dashen_bank_text1}
                                                                             <span
                                                                                 className="font-18 font-weight-bolder"> {totalPrice} ETB </span>
-                                                                            to Dashen Bank, bank account 5084197055011,
-                                                                            Beiment Zebene.
+                                                                            {localization.dashen_bank_text2}
                                                                         </p>
                                                                     </div>
                                                                 </li>
@@ -309,17 +308,17 @@ const Checkout = props => {
                                                                                setMethod(e.target.value)
                                                                            }}
                                                                     />
-                                                                    <label htmlFor="Bank_of_Abyssinia">Bank of
-                                                                        Abyssinia</label>
+                                                                    <label htmlFor="Bank_of_Abyssinia">
+                                                                        {localization.abyssinia_bank}
+                                                                    </label>
                                                                     <div className={`pl-4 my-2 ${
                                                                         method === "Bank of Abyssinia" ? `d-block` : `d-none`
                                                                     }`}>
                                                                         <p className="font-14">
-                                                                            Transfer
+                                                                            {localization.abyssinia_bank_text1}
                                                                             <span
                                                                                 className="font-18 font-weight-bolder"> {totalPrice} ETB </span>
-                                                                            to Bank of Abyssinia, bank account 19598462,
-                                                                            Beiment Zebene.
+                                                                            {localization.abyssinia_bank_text2}
                                                                         </p>
                                                                     </div>
                                                                 </li>
@@ -332,16 +331,15 @@ const Checkout = props => {
                                                                                setMethod(e.target.value)
                                                                            }}
                                                                     />
-                                                                    <label htmlFor="Awash_Bank">Awash Bank</label>
+                                                                    <label htmlFor="Awash_Bank">{localization.awash_bank}</label>
                                                                     <div className={`pl-4 my-2 ${
                                                                         method === "Awash Bank" ? `d-block` : `d-none`
                                                                     }`}>
                                                                         <p className="font-14">
-                                                                            Transfer
+                                                                            {localization.awash_bank_text1}
                                                                             <span
                                                                                 className="font-18 font-weight-bolder"> {totalPrice} ETB </span>
-                                                                            to Awash Bank, bank account 01320152672700,
-                                                                            Beiment Zebene.
+                                                                            {localization.awash_bank_text2}
                                                                         </p>
                                                                     </div>
                                                                 </li>
@@ -354,16 +352,17 @@ const Checkout = props => {
                                                                                setMethod(e.target.value)
                                                                            }}
                                                                     />
-                                                                    <label htmlFor="United_Bank">United Bank</label>
+                                                                    <label htmlFor="United_Bank">
+                                                                        {localization.united_bank}
+                                                                    </label>
                                                                     <div className={`pl-4 my-2 ${
                                                                         method === "United Bank" ? `d-block` : `d-none`
                                                                     }`}>
                                                                         <p className="font-14">
-                                                                            Transfer
+                                                                            {localization.united_bank_text1}
                                                                             <span
                                                                                 className="font-18 font-weight-bolder"> {totalPrice} ETB </span>
-                                                                            to United Bank, bank account
-                                                                            1560411349655012, Beiment Zebene.
+                                                                            {localization.united_bank_text2}
                                                                         </p>
                                                                     </div>
                                                                 </li>
@@ -376,16 +375,17 @@ const Checkout = props => {
                                                                                setMethod(e.target.value)
                                                                            }}
                                                                     />
-                                                                    <label htmlFor="Wegagen_Bank">Wegagen Bank</label>
+                                                                    <label htmlFor="Wegagen_Bank">
+                                                                        {localization.wegagen_bank}
+                                                                    </label>
                                                                     <div className={`pl-4 my-2 ${
                                                                         method === "Wegagen Bank" ? `d-block` : `d-none`
                                                                     }`}>
                                                                         <p className="font-14">
-                                                                            Transfer
+                                                                            {localization.wegagen_bank_text1}
                                                                             <span
                                                                                 className="font-18 font-weight-bolder"> {totalPrice} ETB </span>
-                                                                            to Wegagen Bank, bank account
-                                                                            08443405-30101, Beiment Zebene.
+                                                                            {localization.wegagen_bank_text2}
                                                                         </p>
                                                                     </div>
                                                                 </li>
@@ -402,7 +402,7 @@ const Checkout = props => {
                                                         />
                                                         <label className="custom-control-label font-14"
                                                                htmlFor="customRadio2">
-                                                            Mobile Payments
+                                                            {localization.mobile_payment}
                                                         </label>
                                                     </div>
                                                     <div className={`pl-4 my-2 ${!direct_bank ? `d-block` : `d-none`}`}>
@@ -416,15 +416,15 @@ const Checkout = props => {
                                                                            setMethod(e.target.value)
                                                                        }}
                                                                 />
-                                                                <label htmlFor="Amole">Amole</label>
+                                                                <label htmlFor="Amole">{localization.amole}</label>
                                                                 <div className={`pl-4 my-2 ${
                                                                     method === "Amole" ? `d-block` : `d-none`
                                                                 }`}>
                                                                     <p className="font-14">
-                                                                        Go to Transfer within Dashen and transfer amount
+                                                                        {localization.amole_text1}
                                                                         <span
                                                                             className="font-18 font-weight-bolder"> {totalPrice} ETB </span>
-                                                                        to account no 5084197055011, Beiment Zebene.
+                                                                        {localization.amole_text2}
                                                                     </p>
                                                                 </div>
                                                             </li>
@@ -448,26 +448,26 @@ const Checkout = props => {
                                                             {/*        </p>*/}
                                                             {/*    </div>*/}
                                                             {/*</li>*/}
-                                                            <li>
-                                                                <input className="mr-2" type="radio"
-                                                                       id="CBE_birr"
-                                                                       name="payment_method"
-                                                                       value="CBE birr"
-                                                                       onChange={e => {
-                                                                           setMethod(e.target.value)
-                                                                       }}
-                                                                />
-                                                                <label htmlFor="CBE_birr">CBE birr</label>
-                                                                <div className={`pl-4 my-2 ${
-                                                                    method === "CBE birr" ? `d-block` : `d-none`
-                                                                }`}>
-                                                                    <p className="font-14">
-                                                                        Lorem ipsum dolor sit amet, consectetur
-                                                                        adipisicing elit, sed do eiusmod tempor
-                                                                        incididunt ut labore
-                                                                    </p>
-                                                                </div>
-                                                            </li>
+                                                            {/*<li>*/}
+                                                            {/*    <input className="mr-2" type="radio"*/}
+                                                            {/*           id="CBE_birr"*/}
+                                                            {/*           name="payment_method"*/}
+                                                            {/*           value="CBE birr"*/}
+                                                            {/*           onChange={e => {*/}
+                                                            {/*               setMethod(e.target.value)*/}
+                                                            {/*           }}*/}
+                                                            {/*    />*/}
+                                                            {/*    <label htmlFor="CBE_birr">{localization.cbe_birr}</label>*/}
+                                                            {/*    <div className={`pl-4 my-2 ${*/}
+                                                            {/*        method === "CBE birr" ? `d-block` : `d-none`*/}
+                                                            {/*    }`}>*/}
+                                                            {/*        <p className="font-14">*/}
+                                                            {/*            Lorem ipsum dolor sit amet, consectetur*/}
+                                                            {/*            adipisicing elit, sed do eiusmod tempor*/}
+                                                            {/*            incididunt ut labore*/}
+                                                            {/*        </p>*/}
+                                                            {/*    </div>*/}
+                                                            {/*</li>*/}
                                                         </ul>
                                                     </div>
                                                 </div>

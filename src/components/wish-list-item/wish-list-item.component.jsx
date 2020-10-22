@@ -1,13 +1,13 @@
 import React from "react";
+import {connect} from "react-redux";
 import {Link} from "react-router-dom";
 
 import {faTrash} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import AddToCartButton from "../add-to-cart-button/add-to-cart-button"
 import {addItemToCart} from "../../store/cartList/cart-list.utils";
-import {connect} from "react-redux";
+import AddToCartButton from "../add-to-cart-button/add-to-cart-button";
 
-import "./wish-list.style.sass"
+import "./wish-list.style.sass";
 
 const WishListItem = props => {
 

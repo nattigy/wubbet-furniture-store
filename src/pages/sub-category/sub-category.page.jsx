@@ -1,10 +1,13 @@
 import React, {useEffect} from "react";
+import {connect} from "react-redux";
+
 import SingleItem from "../../components/single-item/single-item.component";
 import Footer from "../../components/footer/footer.component";
 import Header from "../../components/header/header.component";
-import {connect} from "react-redux";
-import {searchItems} from "../../store/search/search.utils";
 import PreLoader from "../../components/pre-loader/pre-loader.component";
+import PathIndicator from "../../components/path-indicator/path-indicator.component";
+import {searchItems} from "../../store/search/search.utils";
+
 import CategoryGallery from "../../components/category-gallery/category-gallery";
 
 const SubCategory = props => {
@@ -18,11 +21,11 @@ const SubCategory = props => {
     return (
         <div>
             <Header/>
-            {/*<PathIndicator path={[*/}
-            {/*    {currentPath: false, pathName: "Home", pathLink: "/"},*/}
-            {/*    {currentPath: false, pathName: "Home Furniture", pathLink: "/cat/home"},*/}
-            {/*    {currentPath: true, pathName: "Living Room", pathLink: props.match.url},*/}
-            {/*]}/>*/}
+            <PathIndicator path={[
+                {currentPath: false, pathName: "Home", pathLink: "/"},
+                {currentPath: false, pathName: "Home Furniture", pathLink: "/cat/home"},
+                {currentPath: true, pathName: "Living Room", pathLink: props.match.url},
+            ]}/>
             <div className="container-xl px-3">
                 <section>
                     <h1 className="mt-5 font-weight-bold text-break cat-title">
@@ -31,7 +34,6 @@ const SubCategory = props => {
                         }
                     </h1>
                 </section>
-                {/*<Filters/>*/}
                 {
                     isSearching &&
                     <div className="preloading-cart text-center overflow-hidden-y">
@@ -48,7 +50,6 @@ const SubCategory = props => {
                 }
             </div>
             <CategoryGallery category={props.match.params.category} name={props.match.params.subCategory}/>
-            {/*<RecentView/>*/}
             <Footer/>
         </div>
     );

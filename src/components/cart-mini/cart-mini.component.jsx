@@ -13,14 +13,7 @@ import "./cart-mini.style.sass"
 
 const CartMini = props => {
 
-    const {
-        isFetchingFromError, cartItems, user,
-        isFetchingFromCart, totalPrice, localization
-    } = props;
-
-    useEffect(() => {
-        // props.fetchFromCart({uid: props.user ? props.user.uid : "0"})
-    }, []);
+    const {cartItems, user,totalPrice, localization} = props;
 
     const delEvent = (e, index) => {
         props.deleteFromCart(e);
